@@ -1,0 +1,8 @@
+baseURL: https://tech.cloudmt.co.kr/
+disablePathToLower: true
+languageCode: ko-kr
+title: CloudMate Tech
+theme:
+  - github.com/theNewDynamic/gohugo-theme-ananke
+permalinks: 
+  post: /:2006/:01/:02/:filename
