@@ -6,3 +6,7 @@ theme:
   - github.com/theNewDynamic/gohugo-theme-ananke
 permalinks: 
   post: /:2006/:01/:02/:filename
+params:
+  site_logo: /assets/images/logo-tech.png
+  featured_image: /assets/images/img4.jpg
+  background_color_class: bg-grey
