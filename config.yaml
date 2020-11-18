@@ -1,12 +1,16 @@
 baseURL: https://tech.cloudmt.co.kr/
 disablePathToLower: true
 languageCode: ko-kr
-title: CloudMate Tech
+title: CloudMate 기술 블로그
+hasCJKLanguage: true
 theme:
   - github.com/theNewDynamic/gohugo-theme-ananke
 permalinks: 
   post: /:2006/:01/:02/:filename
 params:
+  description: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
   site_logo: /assets/images/logo-tech.png
   featured_image: /assets/images/img4.jpg
-  background_color_class: bg-grey
+  background_color_class: bg-moon-gray
+  facebook: https://fb.me/cloudmatekr
+  github: https://github.com/mate365
