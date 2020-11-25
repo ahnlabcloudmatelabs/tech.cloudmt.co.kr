@@ -38,10 +38,11 @@ params:
         Content: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
   description: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
   label:
-        text: "|"
-        icon: /assets/images/mo/CLOUDMATE_LOGO.png
-        iconHeight: 45
-  site_logo: /assets/images/logo-tech.png
+        text: " "
+        icon: /assets/images/CMLOGO_SHADOW.png
+        iconHeight: 50
+  assets:
+        favicon: /assets/favicon.ico
   ShowShareButtons: true
   DateFormat: 2006. 01. 02.
   socialIcons:
