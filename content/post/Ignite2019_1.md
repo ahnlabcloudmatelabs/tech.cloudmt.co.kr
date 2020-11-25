@@ -1,5 +1,6 @@
 ---
-author: sejun kim
+authors:
+- sejun kim
 date: "2019-11-29T00:00:00Z"
 tags:
 - Microsoft

@@ -1,5 +1,6 @@
 ---
-author: sangyeop park
+authors:
+- sangyeop park
 date: "2020-05-11T00:00:00Z"
 tags:
 - Azure Active Directory
