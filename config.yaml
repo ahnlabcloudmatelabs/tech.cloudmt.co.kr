@@ -43,6 +43,7 @@ params:
         iconHeight: 45
   site_logo: /assets/images/logo-tech.png
   ShowShareButtons: true
+  DateFormat: 2006. 01. 02.
   socialIcons:
     - name: github
       url: "https://github.com/mate365"
@@ -50,3 +51,4 @@ params:
       url: https://fb.me/cloudmatekr
     - name: email
       url: mailto:contact@cloudmt.co.kr
+
