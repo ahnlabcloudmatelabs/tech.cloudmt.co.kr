@@ -1,4 +1,4 @@
-baseURL: https://cloudmatelabs.github.io # 추후 수정 필요
+baseURL: https://tech.cloudmt.co.kr # 추후 수정 필요
 title: CLOUDMATE Tech
 theme:
   - github.com/adityatelange/hugo-PaperMod
