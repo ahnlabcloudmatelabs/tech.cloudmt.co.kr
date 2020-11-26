@@ -1,4 +1,4 @@
-baseURL: https://tech.cloudmt.co.kr/
+baseURL: https://cloudmatelabs.github.io # 추후 수정 필요
 disablePathToLower: true
 languageCode: ko-kr
 title: CLOUDMATE Tech
