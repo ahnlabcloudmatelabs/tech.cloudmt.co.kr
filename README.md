@@ -1,3 +1,4 @@
+![Build Website](https://github.com/mate365/mate365.github.io/workflows/Build%20Website/badge.svg)
 # 클라우드메이트 기술 블로그
 
 [Hugo](https://gohugo.io)및 [PaperMod](https://github.com/adityatelange/hugo-PaperMod) 테마 기반으로 만든 기술 블로그 입니다.
