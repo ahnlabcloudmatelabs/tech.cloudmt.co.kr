@@ -1,6 +1,2 @@
-github.com/adityatelange/hugo-PaperMod v0.0.0-20201124174617-678b5d82fc5d h1:x91cFBhVjw/MrFSB9nIS8Xa/UaKnEHCxHu60iUDGc/o=
-github.com/adityatelange/hugo-PaperMod v0.0.0-20201124174617-678b5d82fc5d/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
-github.com/forestryio/hugo-theme-novela v0.0.0-20201101151107-bf0968127178 h1:S6wAmIdqLU9uwEUahQTjakeGru+186UtgpU4f/b+xHo=
-github.com/forestryio/hugo-theme-novela v0.0.0-20201101151107-bf0968127178/go.mod h1:3Ys8HSILJdxqFw6mOtBAEaDmI/MyhGJhNyvlpMt0oTY=
-github.com/theNewDynamic/gohugo-theme-ananke v2.6.7+incompatible h1:7c+NVmojLSbkk3F0GjCvEgWRI8oZh++vtR9VbNZJuMY=
-github.com/theNewDynamic/gohugo-theme-ananke v2.6.7+incompatible/go.mod h1:RlzLLao82tupbQFWEZtV9ibVqr9+2WYw31sCghz3n3Y=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20201126034024-b301d60f0328 h1:/ZQIReLnm7AZdhowx5A9n9CR3dQ2j1VWaqHZoP0yp+E=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20201126034024-b301d60f0328/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
