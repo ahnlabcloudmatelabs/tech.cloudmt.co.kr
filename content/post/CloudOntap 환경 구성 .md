@@ -27,7 +27,7 @@ AWS DX와 같이 전용선 서비스를 사용하여 AWS 와 Azure 사이에 대
 
 ## 1. 환경
 
-![AWS-Azure Arch](/files\blog\CVO\CVO-Architechure.png)
+![AWS-Azure Arch](/files/blog/CVO/CVO-Architechure.png)
 
 - 구성정보
 	- Network 정보
@@ -54,10 +54,10 @@ Vnet은 이미 생성하였다는 가정하에 진행합니다. <br>
 ( Cloudmanager 생성 단원에서 생성한 Vnet을 활용합니다.)
 
 - 에저 포탈에 "가상 네트워크 게이트웨이 서비스"를 검색합니다.<br><br>
-![VNG1](/files\blog\CVO\VNG1.png)
+![VNG1](/files/blog/CVO/VNG1.png)
 
 - 가상 네트워크 게이트웨이를 생성합니다.<br><br>
-![VNG2](/files\blog\CVO\VNG2.png)
+![VNG2](/files/blog/CVO/VNG2.png)
 
 	VPN 설정에서 정책기반과 경로기반이 있습니다.<br> 
 	AWS는 경로기반으로 만 설정할 수 있습니다.<br>
@@ -70,7 +70,7 @@ Q: 현재 터널당 설정할 수 있는 IPsec 보안 연결(SA)의 수는 어�
 A: AWS VPN 서비스는 라우팅 기반 솔루션입니다. 따라서 라우팅 기반 구성을 사용하는 경우에는 SA 한도가 적용되지 않습니다. 또한, AWS VPN 서비스가 라우팅 기반 솔루션이므로, 정책 기반 솔루션을 사용하는 경우에는 단일 SA로 제한해야 합니다.
 ~~~
 - BGP 구성 "사용안함"을 체크합니다.<br>
-![VNG3](/files\blog\CVO\VNG3.png)
+![VNG3](/files/blog/CVO/VNG3.png)
 
 **주의 스크린샷은 BGP 구성이 사용으로 되어 있지만 사용하지 않음으로 변경해야 합니다.**<br>
 AWS-Azure VPN 구성에서는 169.254.X.X 대역 제약사항 이슈로 BGP 피어를 맺을 수 없었습니다.<br> 
@@ -95,31 +95,31 @@ https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/VPNTunnels.html
 ~~~
 
 - 체크한 상태로 만들었다면 구성에서 변경 가능합니다.<br>
-![VNG6](/files\blog\CVO\VNG6.png)
-![VNG4](/files\blog\CVO\VNG4.png)
+![VNG6](/files/blog/CVO/VNG6.png)
+![VNG4](/files/blog/CVO/VNG4.png)
 
 - 공용 IP를 주소를 복사하여 메모장에 기록합니다.<br>
 (만들어지는데 생각보다 오래걸립니다. 기다리지 말고 AWS콘솔로 넘어갑시다.) 
-![VNG5](/files\blog\CVO\VNG5.png)<br>
+![VNG5](/files/blog/CVO/VNG5.png)<br>
 
 ## AWS TGW 생성
 - 웹콘솔에서 VPC > TGW 를 선택합니다.<br>
-![VGW1](/files\blog\CVO\VGW1.png){: width="100"}<br>
+![VGW1](/files/blog/CVO/VGW1.png){: width="100"}<br>
 - 기본값으로 생성합니다. (옵션설명은 생락한다!)<br><br>
-![VGW2](/files\blog\CVO\VGW2.png)
+![VGW2](/files/blog/CVO/VGW2.png)
 
 - TGW 연결 생성 메뉴로 이동하여 연결생성 버튼을 누릅니다.<br>
 - 스크린샷에 나와있지 않지만 CGW(고객게이트웨이)가 없다면 NEW 라디오 박스를 체크 후 에저콘솔에서 생성된 가상 게이트웨이 IP를 등록해줍니다.
 
 - "Static" Check<br>
-![VGW3](/files\blog\CVO\VGW3.png)
+![VGW3](/files/blog/CVO/VGW3.png)
 
 - TGW의 VPN Connection이 생성되는지 확인!<br>
-![VGW4](/files\blog\CVO\VGW4.png)
+![VGW4](/files/blog/CVO/VGW4.png)
 
 - 상단 구성에서 pfSense를 선택하고 다운로드 받습니다.<br>
 (익숙한 장비가 conf가 있다면 그걸로 선택하셔도 무관합니다.)<br>
-![VGW5](/files\blog\CVO\VGW5.png)
+![VGW5](/files/blog/CVO/VGW5.png)
 
 - 텍스트 문서가 다운로드되면 문서안의 각 터널 1 터널 2 에대한 Pre-shard Key 값을 기억합니다. 
 
@@ -162,11 +162,11 @@ IPsec VPN 연결에서 해당 키값이 있어야 터널연결이 가능합니�
 
 ## Azure connection 생성 설정
 - Azure 콘솔에서 연결을 검색하여 연결을 생성합니다.<br>
-![AZ-Con1](/files\blog\CVO\AZ-Con1.png)
+![AZ-Con1](/files/blog/CVO/AZ-Con1.png)
 - 로컬게이트웨이가 등록이 안되있을 것이기 때문에 게이트웨이 생성 버튼을 선택합니다. 
 - AWS VPN TXT 파일에 있던 Phase 1 의 Remote Gateway IP 값을 적어줍니다.
 - IP 주소는 AWS 네트워크 대역을 적어줍니다.
-![AZ-Con2](/files\blog\CVO\AZ-Con2.png)<br>
+![AZ-Con2](/files/blog/CVO/AZ-Con2.png)<br>
 - 공유키에 너굴맨이 처리한 그것을 넣어줍니다.(상단 사진 참조)
 - 생성 버튼을 누르고 바로 Phase2도 연결합니다.(방법은 1과동일 값은 2로!)
 
@@ -177,26 +177,26 @@ AWS IPsec 터널이 무적이 아닙니다. <br>
 
 - 라우팅 테이블 생성하여 AZure 서브넷에 적용해줍니다.
 - 경로전파는 사용으로 해야합니다.( 안하면 수동으로 입력해야 되니까요 )<br>
-![AZ-Con4](/files\blog\CVO\AZ-Con4.png)
+![AZ-Con4](/files/blog/CVO/AZ-Con4.png)
 
 - 여기까지 완료하셨다면 아래와 같이 두개의 커넥션이 생성됩니다.<br>
-![AZ-Con5](/files\blog\CVO\AZ-Con5.png)
+![AZ-Con5](/files/blog/CVO/AZ-Con5.png)
 
 ## AWS 라우팅 설정
 - 잠시 두 장비가 맺어지는 시간이 필요하기때문에 커피한잔 내라고 와서 아래와 같이 보면 성공입니다.<br>
-![AZ-Con6](/files\blog\CVO\AZ-Con6.png)
+![AZ-Con6](/files/blog/CVO/AZ-Con6.png)
 
 - TGW 라우팅테이블 메뉴 <br>
 (Azure 쪽 네트워크 대역을 알려주는 라우팅설정을 진행합니다.)<br>
-![TGW1](/files\blog\CVO\TGW1.png)
+![TGW1](/files/blog/CVO/TGW1.png)
 - CIDR에 Azure 쪽 네트워크 대역을 적어줍니다.<br>
-![TGW2](/files\blog\CVO\TGW2.png)
+![TGW2](/files/blog/CVO/TGW2.png)
 
 - 아래와 같이 TGW가 VPN과 VPC 연결설정이 보인다면 성공입니다.
 (VPC와 TGW 연결 설정은 생략하였음 AWS TGW 문서를 참조해주세요)
 
 - VPC 서브넷에 할당되어 있는 라우팅테이블을 변경합니다. (VPC 웹콘솔 - 라우팅테이블) <br>
-![TGW3](/files\blog\CVO\TGW3.png)
+![TGW3](/files/blog/CVO/TGW3.png)
 
 모든 설정이 끝났습니다.<br>
 이제 연결 TEST 를 진행해야합니다.<br>
@@ -204,14 +204,14 @@ Azure 쪽에 클라우드매니저 VM을 배포하고 AWS 측에 TEST용 EC2를 
 
 과연 잘됬을까요?
 
-![어림없는 소리!](/files\blog\CVO\어림도없지.png)
+![어림없는 소리!](/files/blog/CVO/어림도없지.png)
 
 트러블 슈팅을 해본 결과 <br>
 우리의 클라우드매니저가 Docker 이미지가 돌고 있는것이 확인됩니다.<br>
-![Trapcard](/files\blog\CVO\Trapcard.png)
+![Trapcard](/files/blog/CVO/Trapcard.png)
 
 그리고 잘 해결했습니다.<br>
-![Trapcard](/files\blog\CVO\Trapcard2.png)
+![Trapcard](/files/blog/CVO/Trapcard2.png)
 
 어떻게 해결했는지 궁금하시다면 <br>
 다음 포스팅 "클라우드 매니저 배포 및 볼륨생성" 을 읽어주세요
