@@ -1,10 +1,6 @@
 baseURL: https://cloudmatelabs.github.io # 추후 수정 필요
-disablePathToLower: true
-languageCode: ko-kr
 title: CLOUDMATE Tech
-hasCJKLanguage: true
 theme:
-  # - github.com/theNewDynamic/gohugo-theme-ananke
   - github.com/adityatelange/hugo-PaperMod
 permalinks: 
   post: /:2006/:01/:02/:filename
