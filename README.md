@@ -25,16 +25,17 @@ hugo new --kind author authors/gildong-hong/_index.md
 ```yaml
 ---
 name: Author # 화면에 표시될 저자 이름
-photo: /files/authors/Author.jpg # 저자 프로필 이미지 경로. static/files/authors 폴더에 이미지를 넣고 사용합니다.
+photo: Author.jpg # 저자 프로필 이미지 경로. index.md 와 같은 폴더에 이미지를 넣고 사용합니다.
 ---
 저자에 대한 소개 여기에 입력. 없는 경우 지우고 비워두면 됩니다.
 ```
 
 ## 글 작성하기
-아래 명령으로 새로운 게시물 파일을 생성하고 작성을 시작합니다.
+아래 명령을 실행하여, 게시물용 디렉터리를 생성하고 그 아래에 글 본문이 담길 `index.md`파일을 생성합니다.
+그리고 이 `index.md` 파일을 열어 글을 작성합니다. 사진을 첨부하는 경우 `index.md` 와 같은 폴더에 이미지 파일을 넣고 본문에 삽입합니다.
 ```bash
-# hugo new --kind post post/원하는-게시물-주소.md
-hugo new --kind post post/path-to-post.md
+# hugo new --kind post post/원하는-게시물-주소/index.md
+hugo new --kind post post/path-to-post/index.md
 ```
 
 아래와 같은 파일이 생성됩니다. `authors`의 경우, 앞서 생성한 저자 프로필 폴더 이름을 사용합니다. 저자가 여러명인 경우 리스트 형태로 여러명 넣어줍니다.
@@ -53,8 +54,6 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 ---
 ...
 ```
-
-글 작성 중 들어가는 이미지는, `static/files/blog` 에 넣으면 됩니다. 폴더를 만들어 정리하면 좋습니다.
 
 ## 작성 글 미리보기
 
