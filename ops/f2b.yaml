@@ -1,0 +1,107 @@
+# to run me, you need pypyr. https://github.com/pypyr/pypyr
+#
+# run from the root of your hugo repo.
+#
+# put this file in ./ops/flat-to-bundle.yaml
+#
+# use a glob to specify a bunch of files to process in one go:
+# $ pypyr ops/flat-to-bundle in='content/posts/post*.md'
+#
+# process a single file:
+# $ pypyr ops/flat-to-bundle in='content/posts/post1.md'
+#
+# set out directory (default is content/posts/out):
+# $ pypyr ops/flat-to-bundle in='content/posts/post*.md' out=content/out
+#
+# set image destination sub-directory in the bundle:
+# $ pypyr ops/flat-to-bundle in='content/posts/post*.md' out=content/out out_img=img
+#
+# set image source root directory (default is 'static'):
+# $ pypyr ops/flat-to-bundle in='content/posts/post*.md' out=content/out in_img=assets out_img=img
+context_parser: pypyr.parser.keyvaluepairs
+steps:
+  - name: pypyr.steps.default
+    comment: default in/out dirs if not specified
+    in:
+      defaults:
+        in: content/posts/*.md # glob for input file or files.
+        out: content/posts/out # create bundles in this root directory
+        in_img: static # in images root dir
+        out_img: images # dest images sub-dir in bundle
+  - name: pypyr.steps.contextsetf
+    in:
+      contextSetf:
+        processed_images: !py set()
+  - name: pypyr.steps.glob
+    description: '--> processing this path: {in}'
+    in:
+      glob: '{in}'
+  - name: pypyr.steps.call
+    comment: iterate over each file found for path glob
+    foreach: '{globOut}'
+    in:
+      call: do_file
+  - name: pypyr.steps.echo
+    description: --> processed images
+    foreach: '{processed_images}'
+    in:
+      echoMe: "{i}"
+  - name: pypyr.steps.echo
+    in:
+      echoMe: done!
+
+do_file:
+  - name: pypyr.steps.py
+    description: '--> processing file: {i}'
+    in:
+      pycode: |
+        from pathlib import Path
+        current_path = Path(context['i'])
+        context['current_file'] = current_path.stem
+        current_out_dir = Path(context['out']).joinpath(current_path.stem)
+        context['current_out_dir'] = current_out_dir
+        context['current_out_file'] = current_out_dir.joinpath('index.md')
+  - name: pypyr.steps.py
+    comment: parse current .md for ![]() image tags
+    in:
+      pycode: |
+        imgs_in_md = set()
+        from pathlib import Path, PosixPath
+        from urllib.parse import urlparse
+        import re
+        with open(context['i']) as f:
+          imgs_in_md.update(re.findall(r'(?:!\[.*?\]\()(.+?)(?:\))',f.read()))
+
+        img_path_prefix = PosixPath(context['out_img'])
+        img_replace_str = ']({})'
+        img_in_root = Path(context['in_img'])
+        out_dir = context['current_out_dir']
+        img_out_dir = out_dir.joinpath(context['out_img'])
+        replace_pairs = {}
+        images = {}
+        
+        if imgs_in_md:
+          img_out_dir.mkdir(parents=True, exist_ok=True)
+
+        for img in imgs_in_md:
+          basename = PosixPath(img).name
+          replace_pairs[img_replace_str.format(img)] = img_replace_str.format(img_path_prefix.joinpath(basename))
+          img_in_path = img_in_root.joinpath(urlparse(img).path.strip('/'))
+          images[img_in_path] = out_dir.joinpath(context['out_img'], basename)
+          context['processed_images'].add(str(img_in_path))
+
+        context['replacePairs'] = replace_pairs
+        context['images'] = images
+  - name: pypyr.steps.filereplace
+    description: '--> writing to: {current_out_file}'
+    in:
+      fileReplace:
+        in: '{i}'
+        out: '{current_out_file}'
+        replacePairs: '{replacePairs}'
+  - name: pypyr.steps.cmd
+    comment: cp instead of mv, in case there are duplicates
+    foreach: !py images.items()
+    swallow: True
+    in:
+      cmd: cp -f {i[0]} {i[1]} 

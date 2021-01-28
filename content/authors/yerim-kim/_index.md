@@ -1,4 +1,4 @@
 ---
 name: 김예림
-photo: /files/authors/김예림.jpg
+photo: 김예림.jpg
 ---

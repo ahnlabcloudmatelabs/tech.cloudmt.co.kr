@@ -1,4 +1,4 @@
 ---
 name: 이승윤
-photo: /files/authors/이승윤.jpg
+photo: 이승윤.jpg
 ---

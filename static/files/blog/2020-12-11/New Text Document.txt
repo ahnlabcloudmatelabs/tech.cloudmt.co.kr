@@ -1,8 +1,0 @@
-https://54.184.73.164:8443/ng/system/dashboard/1
-
-id : admin
-pw : ddorai8712
-
-
-
-https://docs.fortinet.com/document/fortigate/6.2.0/new-features/606609/cloud-connector-aws-iam-support

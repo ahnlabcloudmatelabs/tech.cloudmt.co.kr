@@ -1,4 +1,4 @@
 ---
 name: 정진철
-photo: /files/authors/정진철.jpg
+photo: 정진철.jpg
 ---

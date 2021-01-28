@@ -1,5 +1,5 @@
 ---
 name: 한영빈
-photo: /files/authors/한영빈.jpg
+photo: 한영빈.jpg
 ---
 Hello, **World**

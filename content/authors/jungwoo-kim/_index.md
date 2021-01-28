@@ -1,4 +1,4 @@
 ---
 name: 김정우
-photo: /files/authors/김정우.jpg
+photo: 김정우.jpg
 ---
