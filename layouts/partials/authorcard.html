@@ -1,7 +1,7 @@
 {{- range .Params.authors }}
   {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
   <div style="display: flex; flex-direction: row; margin: 10px;">
-    <div style="background: url({{.Params.photo}}) no-repeat center; 
+    <div style="background: url({{ .Permalink }}{{ .Params.photo }}) no-repeat center; 
         background-size: cover; width: 80px; height: 80px; 
         border-radius: 100%;">
     </div>
