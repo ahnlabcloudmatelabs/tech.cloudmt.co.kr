@@ -36,7 +36,7 @@ title: 적절한 Azure 운영으로 비용을 최적화하시면 됩니다.
 전개된 구성에 대한 매니지먼트와 거버넌트를 다시 확인 하는것이 비용을 최적화 시킬 수 있는 방법이다.<br/>
 <br/>
 
-![screensh](images/pathwaytosave.png)
+![Table 1: Save The Cost!](images/pathwaytosave.png)
 
 사람에 따라서 기업에 따라서 부르는 용어는 모두 다를 수 있지만<br/>
 클라우드 기업들의 대부분은 세 팀으로 나눠져 있음을 알 수 있었다.<br/>
