@@ -8,7 +8,7 @@ tags:
 - Cloud Service
 - Expenses
 - Budget
-title: 적절한 Azure 운영으로 비용을<br/> 최적화하시면 됩니다. 
+title: 적절한 Azure 운영으로 비용을 최적화하시면 됩니다. 
 ---
 
 우선 방금의 문장에서 어떠한 인물을 떠올렸다면...<br/>
