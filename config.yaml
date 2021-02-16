@@ -40,6 +40,7 @@ params:
   assets:
         favicon: /assets/favicon.ico
   ShowShareButtons: true
+  ShowPostNavLinks: true
   DateFormat: 2006. 01. 02.
   socialIcons:
     - name: github
