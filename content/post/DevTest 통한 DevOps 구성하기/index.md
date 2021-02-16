@@ -1,7 +1,7 @@
 ---
 authors:
 - jiyoung-Sung
-date: ""
+date: "2021-02-16T00:00:00Z"
 tags:
 - Azure
 - DevOps
@@ -10,7 +10,7 @@ tags:
 title: DevTest 통한 DevOps 구성하기
 ---
 
-# 1. DevOps 정의
+## 1. DevOps 정의
 
 DevOps란 개발(Development)과 운영(Operation)을 결합한 혼성어로 소프트웨어 개발 방법론의 하나이다.
 
