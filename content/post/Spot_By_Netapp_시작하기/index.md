@@ -13,7 +13,7 @@ title: Spot By NetApp 시작하기
 Spot by NetApp은 3사 클라우드의 Spot Instance를 더욱 비용 효율적으로 사용하고, 비점유형 인스턴스 사용 시 발생할 수 있는 서비스 다운타임을 최소화하기 위한 기능을 제공합니다. 
 
 
-> ***spot Instance란?*** 스팟 인스턴스(spot Instance)는 온디맨드 가격보다 저렴한 비용으로 사용할 수 있는 미사용 컴퓨팅 인스턴스입니다. AWS와 Azure는 Spot Instance, GCP는 Preemptible VM 으로 제공됩니다. 매우 저렴한 대신 항상 이용 가능한 자원은 아니며, 각 클라우드 업체마다 제약 사항이 존재합니다. 따라서 단기간 작업을 요구하는 배치(Batch)성 작업이나 갑작스러운 중단에 영향을 받지 않는 작업에 이용하는 것을 권장합니다. 
+> ***spot Instance란?*** 스팟 인스턴스(spot Instance)는 온디맨드 가격보다 저렴한 비용으로 사용할 수 있는 미사용 컴퓨팅 인스턴스입니다. AWS와 Azure는 Spot Instance, GCP는 Preemptible VM 으로 제공됩니다. 매우 저렴한 대신 항상 이용 가능한 자원은 아니며, 각 클라우드 업체마다 제한 사항이 존재합니다. 따라서 단기간 작업을 요구하는 배치(Batch)성 작업이나 갑작스러운 중단에 영향을 받지 않는 작업에 이용하는 것을 권장합니다. 
  
 우선, Spot by NetApp에 계정을 연결하는 방법을 알아보도록 하겠습니다. Free Plan에서는 20개 노드까지 제공하므로 Spot by NetApp의 기능을 직접 확인하실 수 있습니다. 
 
