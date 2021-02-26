@@ -22,7 +22,7 @@ languages:
           url: /tags/
           weight: 10
         - name: Careers
-          url: https://www.wanted.co.kr/company/14239
+          url: https://www.notion.so/6f61c6afd2c240dba246149428408207
           weight: 15
         - name: cloudmt.co.kr
           url: https://cloudmt.co.kr
