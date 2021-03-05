@@ -21,8 +21,8 @@ languages:
         - name: Tags
           url: /tags/
           weight: 10
-        - name: Careers
-          url: https://www.notion.so/6f61c6afd2c240dba246149428408207
+        - name: Recruit
+          url: https://recruit.cloudmt.co.kr
           weight: 15
         - name: cloudmt.co.kr
           url: https://cloudmt.co.kr
