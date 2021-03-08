@@ -28,6 +28,8 @@ languages:
           url: https://cloudmt.co.kr
           weight: 20
 
+googleAnalytics: UA-146594086-2
+
 params:
   homeInfoParams:
         Title: 클라우드메이트 기술 블로그
@@ -49,4 +51,3 @@ params:
       url: https://fb.me/cloudmatekr
     - name: email
       url: mailto:contact@cloudmt.co.kr
-
