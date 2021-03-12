@@ -29,22 +29,28 @@ $accent-color: #00CECE;
 }
 
 .tag-button{
-    display: block;
-    padding: 5px;
-    border: 1px solid $accent-color;
-    color: $accent-color;
-    font-size: 1.2rem;
-    line-height: 1em;
+    display: inline-block;
     border-radius: 10px;
-    opacity: 0.8;
-    margin: 5px;
-    margin-bottom: 10px
+    color: white;
+    background-color: $primary-color;
+    padding: 5px;
+    .name {
+        padding: 5px;
+    }
+    .badge {
+        background-color: $accent-color;
+        border-radius: 5px;
+        padding: 3px;
+    }
+    &:hover{
+        opacity: 0.5;
+        text-decoration: none;
+    }
 }
-.tag-button {
-    text-decoration: none;
-    opacity: 1;
+.tag-list{
+    padding: 0;
+    list-style: none;
 }
-
 .post-content > div {
     width: 100%;
 }
