@@ -2,6 +2,8 @@
 authors:
 - Youngbin Han
 date: "2020-11-15T00:00:00Z"
+categories:
+- Post
 tags:
 - Azure
 - Microsoft Azure
@@ -181,7 +183,9 @@ info:
 paths:
   "/Students":
     get:
-      tags:
+      categories:
+- Post
+tags:
       - Students
       responses:
         '200':
@@ -193,7 +197,9 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Student"
     post:
-      tags:
+      categories:
+- Post
+tags:
       - Students
       requestBody:
         content:
@@ -209,7 +215,9 @@ paths:
                 "$ref": "#/components/schemas/Student"
   "/Students/{id}":
     get:
-      tags:
+      categories:
+- Post
+tags:
       - Students
       parameters:
       - name: id
@@ -226,7 +234,9 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Student"
     put:
-      tags:
+      categories:
+- Post
+tags:
       - Students
       parameters:
       - name: id
@@ -248,7 +258,9 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Student"
     delete:
-      tags:
+      categories:
+- Post
+tags:
       - Students
       parameters:
       - name: id

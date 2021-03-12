@@ -2,6 +2,8 @@
 authors:
 - seungyoon lee
 date: "2020-08-07T00:00:00Z"
+categories:
+- Post
 tags:
 - Cloud
 - Devops

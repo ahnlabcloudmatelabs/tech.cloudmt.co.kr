@@ -1,16 +1,16 @@
 {{ with .Params.categories }}
-    {{ $category := (index . 0) }}
+{{ $category := (index . 0) }}
     <article class="read-next-card">
         <header class="read-next-card-header">
             <h3><span>More in</span> <a href="{{ "/categories/" | relLangURL }}{{ $category | urlize }}">{{ $category }}</a></h3>
         </header>
         <div class="read-next-card-content">
             <ul>
-                {{ range first 3 (where (index $.Site.Taxonomies.tags $category).Pages "Section" "post") }}
+                {{ range first 3 (where (index $.Site.Taxonomies.categories ($category | urlize)).Pages "Section" "post") }}
                 <li>
                     <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
                     <div class="read-next-card-meta">
-                            <p><time datetime="{{.Date.Format "2006-31-01"}}">{{.Date.Format "01 Jan 2006"}}</time> 
+                            <p><time datetime="{{.Date.Format $.Site.Params.DateFormat}}">{{.Date.Format $.Site.Params.DateFormat}}</time> 
                                 {{ if .Params.reading_time }} – {{ .Params.reading_time }} {{ end }}
                             </p>
                     </div>

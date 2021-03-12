@@ -2,6 +2,8 @@
 authors:
 - youngjin park
 date: "2020-06-01T00:00:00Z"
+categories:
+- Post
 tags:
 - Microsoft
 - Microsoft Azure

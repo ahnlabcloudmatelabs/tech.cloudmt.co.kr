@@ -2,6 +2,8 @@
 authors:
 - sangyeop park
 date: "2020-01-09T00:00:00Z"
+categories:
+- Post
 tags:
 - Microsoft
 - Microsoft Azure

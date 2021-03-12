@@ -2,6 +2,8 @@
 authors: 
 - seongjin kim
 date: "2020-12-11T00:00:00Z"
+categories:
+- Post
 tags:
 - AWS
 - AWS Re:Invent

@@ -3,6 +3,8 @@ title: "AWS DMS를 활용하여 Oracle에서 MySQL로 DB 마이그레이션 하�
 authors: 
 - jungwoo kim
 date: "2020-11-16T00:00:00Z"
+categories:
+- Post
 tags:
 - DB Migration
 - On-premise

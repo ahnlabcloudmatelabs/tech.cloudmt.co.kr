@@ -18,6 +18,15 @@ languages:
         - name: cloudmt.co.kr
           url: https://cloudmt.co.kr
           weight: 20
+related:
+  includeNewer: false
+  indices:
+  - category: categories
+    weight: 100
+  - name: date
+    weight: 10
+  threshold: 80
+  toLower: false
 
 googleAnalytics: UA-146594086-2
 hasCJKLanguage: true

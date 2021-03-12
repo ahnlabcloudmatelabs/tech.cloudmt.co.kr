@@ -2,6 +2,8 @@
 authors:
 - yerim kim
 date: "2020-10-15T00:00:00Z"
+categories:
+- Post
 tags:
 - Azure
 - Microsoft Azure
