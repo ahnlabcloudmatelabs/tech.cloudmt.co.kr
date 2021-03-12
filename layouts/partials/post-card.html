@@ -6,7 +6,7 @@
 
         {{ if .context.Param "feature_image" }}
             <a class="post-card-image-link" href="{{ .context.Permalink }}">
-                <img class="post-card-image"src="{{ .context.Param "feature_image" }}" alt="{{ .context.Title }}"/>
+                <img class="post-card-image"src="{{ .context.Permalink }}{{ .context.Param "feature_image" }}" alt="{{ .context.Title }}"/>
             </a>
         {{ end }}
     
@@ -38,7 +38,7 @@
                     </ul>
                     <div class="post-card-byline-content">
                         <span>{{ .context.Param "author" }}</span>
-                        <span class="post-card-byline-date"><time datetime="{{ .context.Date.Format "2006-31-01" }}">{{ .context.Date.Format "2 January 2006" }}</time>
+                        <span class="post-card-byline-date"><time datetime="{{ .context.Date.Format "2006-31-01" }}">{{ .context.Date.Format "2006. 01. 02." }}</time>
                             <span class="bull">&bull;</span> {{ .context.ReadingTime }} min read</span>
                     </div>
                 </footer>
