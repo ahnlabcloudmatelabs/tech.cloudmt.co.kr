@@ -29,7 +29,7 @@
         <div class="post-feed" >
             {{ $pages := where .Paginator.Pages "Type" "in" site.Params.mainSections }}
             {{ range $index, $element := $pages }}
-                {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) -}}
+                {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) . -}}
             {{ end }}
             <div class="paginator">
                 {{- partial "pagination.html" . -}}

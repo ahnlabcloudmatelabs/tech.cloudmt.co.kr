@@ -32,18 +32,17 @@
             <footer class="post-card-meta">
                     <ul class="author-list">
                         <li class="author-list-item">
-                            <div class="author-name-tooltip">{{ .context.Param "author" }}</div>
+                            <div class="author-name-tooltip">{{ .context.Params.authors }}</div>
                             <a href="#" class="static-avatar author-profile-image">{{- partial "icons/avatar.html" -}}</a>
                         </li>
                     </ul>
                     <div class="post-card-byline-content">
-                        <span>{{ .context.Param "author" }}</span>
-                        {{ with .context.Param "authors" }}
+                        {{ with .context.Params.authors }}
                             {{ $author := (index . 0) }}
-                            {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize $author)) }}
-                            {{.name}}
-                            <h4 class="author-name">{{ .Params.name }}</h4>
-                            {{- end }}
+                            {{ with $.context.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize $author)) }}
+                            
+                            <span>{{ .Params.name }}</span>
+                            {{ end }}
                         {{ end }}
                         <span class="post-card-byline-date"><time datetime="{{ .context.Date.Format "2006-31-01" }}">{{ .context.Date.Format "2006. 01. 02." }}</time>
                             <span class="bull">&bull;</span> {{ .context.ReadingTime }} min read</span>
