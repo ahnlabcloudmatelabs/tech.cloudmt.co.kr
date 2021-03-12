@@ -29,26 +29,34 @@
     
             </a>
 
-            <footer class="post-card-meta">
+            {{ with .context.Params.authors }}
+                {{ $author := (index . 0) }}
+                {{ with $.context.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize $author)) }}
+                <footer class="post-card-meta">
                     <ul class="author-list">
                         <li class="author-list-item">
-                            <div class="author-name-tooltip">{{ .context.Params.authors }}</div>
-                            <a href="#" class="static-avatar author-profile-image">{{- partial "icons/avatar.html" -}}</a>
+                            <div class="author-name-tooltip"><b>{{ .Params.name }}</b>님의 글 모두 보기</div>
+                            <a href="{{.Permalink}}" class="static-avatar author-profile-image">
+                            {{ if .Params.photo }}
+                                <div class="author-profile"
+                                    style="background: url({{.Permalink}}{{.Params.photo}}) no-repeat center; 
+                                    background-size: cover; width: 30px; height: 30px; 
+                                    border-radius: 100%; margin-bottom: 10px;">
+                                </div>
+                            {{ else }}
+                                {{- partial "icons/avatar.html" -}}
+                            {{ end }}
+                            </a>
                         </li>
                     </ul>
                     <div class="post-card-byline-content">
-                        {{ with .context.Params.authors }}
-                            {{ $author := (index . 0) }}
-                            {{ with $.context.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize $author)) }}
-                            
-                            <span>{{ .Params.name }}</span>
-                            {{ end }}
-                        {{ end }}
-                        <span class="post-card-byline-date"><time datetime="{{ .context.Date.Format "2006-31-01" }}">{{ .context.Date.Format "2006. 01. 02." }}</time>
-                            <span class="bull">&bull;</span> {{ .context.ReadingTime }} min read</span>
+                        <span>{{ .Params.name }}</span>
+                        <span class="post-card-byline-date"><time datetime="{{ $.context.Date.Format "2006-31-01" }}">{{ $.context.Date.Format "2006. 01. 02." }}</time>
+                            <span class="bull">&bull;</span> {{ $.context.ReadingTime }} min read</span>
                     </div>
                 </footer>
-    
+                {{ end }}
+            {{ end }}
         </div>
 
 </article>

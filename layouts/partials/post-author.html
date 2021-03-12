@@ -10,7 +10,17 @@
                 </div>
             </div>
         </div>
-        <a href="{{ .Permalink }}" class="author-avatar author-profile-image">{{- partial "icons/avatar.html" -}}</a>
+        <a href="{{.Permalink}}" class="static-avatar author-profile-image">
+            {{ if .Params.photo }}
+                <div class="author-profile"
+                    style="background: url({{.Permalink}}{{.Params.photo}}) no-repeat center; 
+                    background-size: cover; width: 30px; height: 30px; 
+                    border-radius: 100%; margin-bottom: 10px;">
+                </div>
+            {{ else }}
+                {{- partial "icons/avatar.html" -}}
+            {{ end }}
+        </a>
     </li>
   {{ end }}
 {{ end }}
