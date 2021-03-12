@@ -21,33 +21,23 @@ languages:
         - name: Tags
           url: /tags/
           weight: 10
-        - name: Recruit
-          url: https://recruit.cloudmt.co.kr
-          weight: 15
         - name: cloudmt.co.kr
           url: https://cloudmt.co.kr
           weight: 20
 
 googleAnalytics: UA-146594086-2
-
+hasCJKLanguage: true
 params:
-  homeInfoParams:
-        Title: 클라우드메이트 기술 블로그
-        Content: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
   description: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
-  label:
-        text: " "
-        icon: /assets/images/CMLOGO_SHADOW.png
-        iconHeight: 50
+  logo: /assets/images/CMLOGO_WHITE.png
   assets:
         favicon: /assets/favicon.ico
-  ShowShareButtons: true
-  ShowPostNavLinks: true
+  
   DateFormat: 2006. 01. 02.
-  socialIcons:
-    - name: github
-      url: "https://github.com/mate365"
-    - name: facebook
-      url: https://fb.me/cloudmatekr
-    - name: email
-      url: mailto:contact@cloudmt.co.kr
+  facebook: https://fb.me/cloudmatekr
+  github: https://github.com/mate365
+  mainSections:
+    - post
+  mainButtons:
+    - name: 채용 정보 보기
+      url: https://recruit.cloudmt.co.kr
