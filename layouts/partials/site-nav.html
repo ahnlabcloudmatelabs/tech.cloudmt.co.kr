@@ -8,6 +8,9 @@
         
         <div class="site-nav-content">
             <ul class="nav" role="menu">
+                {{ range $.Site.Params.mainCategories }}
+                <li class="nav-home" role="menuitem"><a href="{{ urlize (printf "categories/%s" . ) | relURL }}">{{- . -}}</a></li>
+                {{ end }}
                 {{ range $.Site.Menus.main }}
                 <li class="nav-home" role="menuitem"><a href="{{ .URL }}">{{- .Name -}}</a></li>
                 {{ end }}
