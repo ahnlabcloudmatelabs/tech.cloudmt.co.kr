@@ -29,13 +29,16 @@
                 <div class="post-full-byline">
                     <section class="post-full-byline-content">
 
-                        {{ if .Param "author" }}
+                        {{ if .Param "authors" }}
                             {{- partial "post-author.html" . -}}
                         {{ end }}
 
                         <section class="post-full-byline-meta">
-                            {{ if .Param "author" }}
-                                <h4 class="author-name">{{ .Param "author" }}</h4>
+                            {{ with .Param "authors" }}
+                                {{ $author := (index . 0) }}
+                                {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize $author)) }}
+                                <h4 class="author-name">{{ .Params.name }}</h4>
+                                {{ end }}
                             {{ end }}
                             <div class="byline-meta-content">
                                 <time class="byline-meta-date" datetime="{{.Date.Format "2006-31-01"}}">{{.Date.Format .Site.Params.DateFormat}}</time>

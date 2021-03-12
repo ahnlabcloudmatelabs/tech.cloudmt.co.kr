@@ -1,0 +1,43 @@
+
+{{ define "body_class" }} tag-template  {{ end }}
+
+{{ define "main" }}
+
+<header class="site-header">
+    {{- partial "site-header.html" $ -}}
+
+    {{- partial "header-background.html" $ -}}
+        <div class="inner site-header-content">
+          
+            <h1 class="site-title">
+              <div class="author-profile"
+                style="background: url({{.Params.photo}}) no-repeat center; 
+                background-size: cover; width: 150px; height: 150px; 
+                border-radius: 100%; margin-bottom: 10px;">
+              </div>
+              {{ .Params.name }}
+            </h1>
+            <h2 class="site-description">
+                {{.Content}}
+            </h2>
+        </div>
+    </div>
+</header>
+
+<main id="site-main" class="site-main outer">
+    <div class="inner posts">
+        <div class="post-feed">
+            {{ range $index, $element := .Paginator.Pages }}
+                {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) -}}
+            {{ end }}
+            <div class="paginator">
+                {{- partial "pagination.html" . -}}
+            </div>
+        </div>
+    </div>
+</main>
+
+{{ end }}
+
+
+

@@ -1,4 +1,4 @@
-# baseURL: https://tech.cloudmt.co.kr # 추후 수정 필요
+baseURL: /
 title: CLOUDMATE Tech
 theme:
   - github.com/jonathanjanssens/hugo-casper3
