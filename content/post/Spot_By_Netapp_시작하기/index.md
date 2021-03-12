@@ -2,6 +2,8 @@
 authors:
 - Yerim kim
 date: "2021-02-17T00:00:00Z"
+categories:
+- Cloud
 tags:
 - Spot
 - Netapp

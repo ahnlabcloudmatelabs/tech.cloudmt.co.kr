@@ -15,12 +15,6 @@ languages:
     weight: 1
     menu:
       main:
-        - name: Archives
-          url: /archives/
-          weight: 5
-        - name: Tags
-          url: /tags/
-          weight: 10
         - name: cloudmt.co.kr
           url: https://cloudmt.co.kr
           weight: 20
