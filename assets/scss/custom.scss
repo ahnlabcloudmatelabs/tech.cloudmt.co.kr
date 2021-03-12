@@ -8,6 +8,10 @@ $accent-color: #00CECE;
     padding: 5px;
 }
 
+.site-description {
+    margin: 5px;
+}
+
 .site-header-content a{
     display: block;
     padding: 10px;
@@ -17,8 +21,26 @@ $accent-color: #00CECE;
     line-height: 1em;
     border-radius: 10px;
     opacity: 0.8;
+    margin: 5px;
 }
 .site-header-content a:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.tag-button{
+    display: block;
+    padding: 5px;
+    border: 1px solid $accent-color;
+    color: $accent-color;
+    font-size: 1.2rem;
+    line-height: 1em;
+    border-radius: 10px;
+    opacity: 0.8;
+    margin: 5px;
+    margin-bottom: 10px
+}
+.tag-button {
     text-decoration: none;
     opacity: 1;
 }

@@ -27,8 +27,9 @@ languages:
 
 googleAnalytics: UA-146594086-2
 hasCJKLanguage: true
+paginate: 3
 params:
-  description: 클라우드메이트는 고객의 비즈니스 환경을 우선으로 생각하고, 사용자로서의 직접 경험을 공유합니다.
+  description: CLOUDMATE Tech Blog
   logo: /assets/images/CMLOGO_WHITE.png
   assets:
         favicon: /assets/favicon.ico
@@ -39,5 +40,5 @@ params:
   mainSections:
     - post
   mainButtons:
-    - name: 채용 정보 보기
+    - name: We Are Hiring!
       url: https://recruit.cloudmt.co.kr
