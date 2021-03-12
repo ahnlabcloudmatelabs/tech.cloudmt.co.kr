@@ -30,7 +30,7 @@ related:
 
 googleAnalytics: UA-146594086-2
 hasCJKLanguage: true
-paginate: 3
+paginate: 10
 params:
   description: CLOUDMATE Tech Blog
   logo: /assets/images/CMLOGO_WHITE.png

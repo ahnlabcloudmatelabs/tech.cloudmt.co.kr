@@ -54,3 +54,34 @@ $accent-color: #00CECE;
 .post-content > div {
     width: 100%;
 }
+
+.paginator{
+    width: 100%;
+    text-align: center;
+    ul{
+        text-decoration: none;
+        list-style: none;
+        li{
+            display: inline-block;
+            a{
+                padding: 10px;
+                text-decoration: none;
+                font-size: 2rem;
+                color: $accent-color;
+                &:hover{
+                    border-radius: 5px;
+                    text-decoration: none;
+                    background-color: $accent-color;
+                    color: white;
+                }
+                
+            }
+            a.active{
+                font-weight: bold;
+            }
+            a.disabled{
+                opacity: 0.3;
+            }
+        }
+    }
+}
