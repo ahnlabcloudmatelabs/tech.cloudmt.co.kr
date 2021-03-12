@@ -1,7 +1,7 @@
 baseURL: https://tech.cloudmt.co.kr # 추후 수정 필요
 title: CLOUDMATE Tech
 theme:
-  - github.com/adityatelange/hugo-PaperMod
+  - github.com/jonathanjanssens/hugo-casper3
 permalinks: 
   post: /:2006/:01/:02/:filename
 taxonomies:
