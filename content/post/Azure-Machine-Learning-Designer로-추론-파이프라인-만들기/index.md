@@ -1,5 +1,4 @@
 ---
-featured_image: images/endpoint.PNG
 authors:
 - yerim kim
 date: "2020-08-25T00:00:00Z"

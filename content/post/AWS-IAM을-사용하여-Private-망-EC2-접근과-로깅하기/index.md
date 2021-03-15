@@ -1,5 +1,4 @@
 ---
-featured_image: images/image1.png
 authors: 
 - seongjin kim
 date: "2020-12-10T00:00:00Z"

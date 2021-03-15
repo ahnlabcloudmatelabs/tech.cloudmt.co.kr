@@ -1,5 +1,4 @@
 ---
-featured_image: images/2020-06-30-14-28-00.png
 authors:
 - youngjin park
 date: "2020-07-10T00:00:00Z"

@@ -1,5 +1,4 @@
 ---
-featured_image: images/blog.jpg
 title: Azure Pipeline을 이용한 Django 앱 Azure Web App 배포
 authors:
 - youngbin-han # 저자 프로필 페이지 경로 입력

@@ -1,5 +1,4 @@
 ---
-featured_image: images/Add_Exclusion_Filter.png
 authors:
 - junha hwang
 date: "2020-12-10T19:12:00+09:00"

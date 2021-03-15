@@ -1,5 +1,4 @@
 ---
-featured_image: images/architecture.png
 title: "AWS DMS를 활용하여 Oracle에서 MySQL로 DB 마이그레이션 하기"
 authors: 
 - jungwoo kim

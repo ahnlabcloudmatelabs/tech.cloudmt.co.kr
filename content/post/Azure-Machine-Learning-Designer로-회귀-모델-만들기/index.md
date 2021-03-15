@@ -1,5 +1,4 @@
 ---
-featured_image: images/after.png
 authors:
 - yerim kim
 date: "2020-08-24T00:00:00Z"
