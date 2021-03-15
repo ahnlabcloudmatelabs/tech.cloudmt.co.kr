@@ -30,7 +30,15 @@
 
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> &copy; {{ .Date.Format "2006" }}</section>
+                <section class="copyright">
+                    <a href="{{ .Site.BaseURL }}">
+                    {{ if .Site.Params.copyright }}
+                    {{ .Site.Params.copyright }}
+                    {{ else }}
+                    {{ .Site.Title }} &copy; {{ .Date.Format "2006" }}
+                    {{ end }}
+                    </a>
+                </section>
                 <nav class="site-footer-nav">
                     <a href="{{ .Site.BaseURL }}">Latest Posts</a>
                     {{ if .Site.Params.facebook }}<a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook</a>{{ end }}

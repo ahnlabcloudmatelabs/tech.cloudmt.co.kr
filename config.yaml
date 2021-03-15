@@ -8,7 +8,6 @@ taxonomies:
   author: authors
   tag: tags
   category: categories
-
 languages:
   en:
     languageName: "English"
@@ -33,6 +32,7 @@ hasCJKLanguage: true
 paginate: 10
 params:
   description: tech.cloudmt.co.kr
+  copyright: © 2019-Present CLOUDMATE Corp
   logo: /assets/images/CMLOGO_WHITE.png
   logoLink: https://cloudmt.co.kr
   assets:
