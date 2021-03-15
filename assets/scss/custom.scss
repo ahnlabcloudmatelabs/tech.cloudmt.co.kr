@@ -115,9 +115,11 @@ a, div.post-card-primary-tag{
 }
 
 img.post-card-image{
-    border: 1px solid $accent-color;
+    border: 1px solid grey;
 }
-
+.site-nav-logo img{
+    height: 30px;
+}
 @include mobile{
     .tags.desktop {
         display: none;
