@@ -33,8 +33,7 @@
             {{ if .Term }}
             {{ $tagURL := printf "tags/%s" .Term | relURL }}
             <a class="tag-button" href="{{ $tagURL }}">
-                <span class="name">{{ .Term }}</span>
-                <span class="badge">{{ .Count }}</span>
+                {{ .Term }}<sup>{{ .Count }}</sup>
             </a>
             {{ end }}
             {{ end }}
@@ -65,8 +64,7 @@
             {{ $tagURL := printf "tags/%s" .Term | relURL }}
             <li>
             <a class="tag-button" href="{{ $tagURL }}">
-                <span class="name">{{ .Term }}</span>
-                <span class="badge">{{ .Count }}</span>
+                {{ .Term }}<sup>{{ .Count }}</sup>
             </a>
             </li>
             {{ end }}
