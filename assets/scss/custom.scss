@@ -1,6 +1,11 @@
 $primary-color: #030303;
 $accent-color: #00CECE;
 
+a,
+div.post-card-primary-tag{
+    color: $accent-color;
+}
+
 .author-profile{
     margin-left: auto;
     margin-right: auto;
