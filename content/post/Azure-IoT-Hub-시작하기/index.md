@@ -1,4 +1,5 @@
 ---
+featured_image: images/hubmsg.png
 authors:
 - yerim kim
 date: "2020-07-30T00:00:00Z"

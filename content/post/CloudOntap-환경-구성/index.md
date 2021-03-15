@@ -1,4 +1,5 @@
 ---
+featured_image: images/AZ-Con1.png
 authors:
 - wooyeoung ahn
 date: "2020-07-13T00:00:00Z"

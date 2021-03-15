@@ -1,4 +1,5 @@
 ---
+featured_image: images/81523738-bf72dd00-9389-11ea-8270-aeef3b303d40.png
 authors:
 - sangyeop park
 date: "2020-05-11T00:00:00Z"
