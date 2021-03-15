@@ -12,7 +12,6 @@
         <article class="post-full post {{ if not (.Param "feature_image") }} no-image {{ end }}">
 
             <header class="post-full-header">
-
                 
                     <section class="post-full-tags">
                     {{ with .Params.categories }}
@@ -24,10 +23,6 @@
                     {{ end }}
                     </section>
                 
-                
-                    
-                
-
                 <h1 class="post-full-title">{{ .Title }}</h1>
 
                 {{ if .Param "summary" }}

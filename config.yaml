@@ -46,4 +46,7 @@ params:
     - name: We Are Hiring!
       url: https://recruit.cloudmt.co.kr
   mainCategories:
-    - Post
+    - Hands On
+    - Tech
+    - Column
+    - Mate Story
