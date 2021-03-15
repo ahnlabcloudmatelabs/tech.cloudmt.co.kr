@@ -117,9 +117,17 @@ a, div.post-card-primary-tag{
 img.post-card-image{
     border: 1px solid grey;
 }
-.site-nav-logo img{
-    height: 30px;
+.site-nav-logo{
+    padding: 0;
+    img{
+        height: 40px;
+    }
 }
+
+.site-home-header .site-nav-logo{
+    display: block;
+}
+
 @include mobile{
     .tags.desktop {
         display: none;

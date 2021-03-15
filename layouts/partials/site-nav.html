@@ -1,13 +1,14 @@
 <nav class="site-nav">
     <div class="site-nav-left">
         {{ if $.Site.Params.logo }}
-            <a class="site-nav-logo" href="{{ $.Site.BaseURL }}"><img src="{{ $.Site.Params.logo }}" alt="{{ $.Site.Title }}" /></a>
+            <a class="site-nav-logo" href="{{ $.Site.Params.logoLink }}"><img src="{{ $.Site.Params.logo }}" alt="{{ $.Site.Title }}" /></a>
         {{ else }}
-            <a class="site-nav-logo" href="{{ $.Site.BaseURL }}">{{ $.Site.Title }}</a>
+            <a class="site-nav-logo" href="{{ $.Site.Params.logoLink }}">{{ $.Site.Title }}</a>
         {{ end }}
         
         <div class="site-nav-content">
             <ul class="nav" role="menu">
+                <li class="nav-home" role="menuitem"><a href="{{ $.Site.BaseURL }}"><b>🏠Tech Home</b></a></li>
                 {{ range $.Site.Params.mainCategories }}
                 <li class="nav-home" role="menuitem"><a href="{{ urlize (printf "categories/%s" . ) | relURL }}">{{- . -}}</a></li>
                 {{ end }}

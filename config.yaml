@@ -32,8 +32,9 @@ googleAnalytics: UA-146594086-2
 hasCJKLanguage: true
 paginate: 10
 params:
-  description: CLOUDMATE Tech Blog
+  description: tech.cloudmt.co.kr
   logo: /assets/images/CMLOGO_WHITE.png
+  logoLink: https://cloudmt.co.kr
   assets:
         favicon: /assets/favicon.ico
   

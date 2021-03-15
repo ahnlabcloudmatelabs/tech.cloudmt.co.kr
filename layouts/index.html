@@ -9,7 +9,7 @@
             {{- partial "site-nav.html" . -}}
             <div class="site-header-content">
                 <h1 class="site-title">
-                    {{ if $.Site.Params.logo }}
+                    {{ if not $.Site.Params.logo }}
                         <img class="site-logo" src="{{ $.Site.Params.logo }}" alt="{{ .Site.Title }}" />
                     {{ else }}
                         {{ $.Site.Title }}
