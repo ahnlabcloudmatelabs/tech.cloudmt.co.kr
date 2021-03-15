@@ -1,5 +1,18 @@
 $primary-color: #030303;
 $accent-color: #00CECE;
+$breakpoint-desktop: 1024px;
+
+@mixin mobile {
+    @media (max-width: #{$breakpoint-desktop - 1px}) {
+      @content;
+    }
+  }
+  
+  @mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+      @content;
+    }
+  }
 
 a,
 div.post-card-primary-tag{
@@ -88,5 +101,25 @@ div.post-card-primary-tag{
                 opacity: 0.3;
             }
         }
+    }
+}
+@include mobile{
+    .tags.desktop {
+        display: none;
+    }
+    .tags.mobile {
+        margin-top: 5px;
+    }
+    .site-main.home{
+        flex-direction: column;
+    }
+}
+
+@include desktop{
+    .site-main.home{
+        flex-direction: row;
+    }
+    .tags.mobile {
+        display: none;
     }
 }
