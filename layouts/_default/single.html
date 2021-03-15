@@ -19,7 +19,7 @@
                         <a href="{{ "/categories/" | relLangURL }}{{ $category | urlize }}"><b>{{ $category }}</b></a>
                     {{ end }}
                     {{ range .Params.tags }}
-                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" style="margin-left: 10px">#{{ . }}</a>
+                        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="tag">#{{ . }}</a>
                     {{ end }}
                     </section>
                 
