@@ -40,20 +40,25 @@ a, div.post-card-primary-tag{
     margin: 5px;
 }
 
-.site-header-content a{
-    display: block;
-    padding: 10px;
-    border: 2px solid $accent-color;
-    color: $accent-color;
-    font-size: 2.5rem;
-    line-height: 1em;
-    border-radius: 10px;
-    margin: 5px;
-    font-weight: bold;
-}
-.site-header-content a:hover {
-    text-decoration: none;
-    opacity: 1;
+.site-header-content{
+     a{
+        display: block;
+        padding: 10px;
+        border: 2px solid $accent-color;
+        color: $accent-color;
+        font-size: 2.5rem;
+        line-height: 1em;
+        border-radius: 10px;
+        margin: 5px;
+        font-weight: bold;
+        &:hover{
+            text-decoration: none;
+            opacity: 0.7;
+        }
+    }
+    .site-title{
+        font-size: 5rem;
+    }
 }
 
 .tag-button{
