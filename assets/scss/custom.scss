@@ -2,6 +2,13 @@ $primary-color: #030303;
 $accent-color: #00CECE;
 $breakpoint-desktop: 1024px;
 
+@font-face {
+    font-family: 'D2Coding';
+    src: url('../fonts/D2Coding.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @mixin mobile {
     @media (max-width: #{$breakpoint-desktop - 1px}) {
       @content;
@@ -14,8 +21,11 @@ $breakpoint-desktop: 1024px;
     }
   }
 
-a,
-div.post-card-primary-tag{
+pre, code, kbd, samp {
+    font-family: 'D2Coding', 'Courier New', Courier, monospace;
+}
+
+a, div.post-card-primary-tag{
     color: $accent-color;
 }
 
