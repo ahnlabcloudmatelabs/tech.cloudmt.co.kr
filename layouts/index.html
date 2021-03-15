@@ -17,7 +17,7 @@
                 </h1>
                 <h2 class="site-description">{{ $.Site.Params.description }}</h2>
                 {{ range $buttonItem := $.Site.Params.mainButtons }}
-                    <a href="{{ $buttonItem.url }}">{{ $buttonItem.name }}</a>
+                    <a href="{{ $buttonItem.url }}" target="_blank">{{ $buttonItem.name }}</a>
                 {{ end }}
             </div>
         </div>
