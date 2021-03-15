@@ -113,6 +113,11 @@ a, div.post-card-primary-tag{
         }
     }
 }
+
+img.post-card-image{
+    border: 1px solid $accent-color;
+}
+
 @include mobile{
     .tags.desktop {
         display: none;
