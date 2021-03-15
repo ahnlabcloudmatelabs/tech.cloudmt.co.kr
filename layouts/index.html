@@ -27,9 +27,9 @@
 <main id="site-main" class="site-main outer home" style="display: flex">
     <div class="tags mobile">
       {{ $tags := $.Site.Taxonomies.tags.ByCount }}
-            {{ $v1 := where $tags "Count" ">=" 3 }}
+            {{ $v1 := where $tags "Count" ">=" 5 }}
             {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
-            {{ range $v2 }}
+            {{ range first 5 $v2 }}
             {{ if .Term }}
             {{ $tagURL := printf "tags/%s" .Term | relURL }}
             <a class="tag-button" href="{{ $tagURL }}">
