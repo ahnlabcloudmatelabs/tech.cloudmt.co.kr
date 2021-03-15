@@ -1,4 +1,5 @@
 ---
+feature_image: images/analyzer.png
 authors:
 - Yerim kim
 date: "2021-02-17T00:00:00Z"
@@ -12,7 +13,6 @@ tags:
 - AWS
 - Budget
 title: Spot By NetApp 시작하기
-feature_image: "images/aws.png"
 ---
 
 Spot by NetApp은 3사 클라우드의 Spot Instance를 더욱 비용 효율적으로 사용하고, 비점유형 인스턴스 사용 시 발생할 수 있는 서비스 다운타임을 최소화하기 위한 기능을 제공합니다. 

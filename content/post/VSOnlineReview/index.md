@@ -1,4 +1,5 @@
 ---
+feature_image: images/(new)first_main.png
 authors:
 - youngjin park
 date: "2020-04-22T00:00:00Z"

@@ -1,4 +1,5 @@
 ---
+feature_image: images/Architecture.png
 authors:
 - chansung park
 date: "2020-06-09T00:00:00Z"
