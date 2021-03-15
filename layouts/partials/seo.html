@@ -1,0 +1,10 @@
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+{{ range .Params.authors }}
+{{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
+<meta property="article:author" content="{{ .Params.name }}"/>
+{{ end }}
+{{ end }}
+{{ with .Params.feature_image }}
+<meta property="og:image" content="{{$.Permalink}}{{.}}" />
+{{ end }}
