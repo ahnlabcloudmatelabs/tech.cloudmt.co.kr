@@ -1,150 +1,196 @@
-$primary-color: #030303;
-$accent-color: #00CECE;
+$primary-color     : #030303;
+$accent-color      : #00CECE;
 $breakpoint-desktop: 1024px;
 
 @font-face {
     font-family: 'D2Coding';
-    src: url('../fonts/D2Coding.ttf');
+    src        : url('../fonts/D2Coding.ttf');
     font-weight: normal;
-    font-style: normal;
+    font-style : normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style : normal;
+    font-weight: 400;
+    src        : url('../fonts/noto-sans-kr-v13-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src        : local(''),
+        url('../fonts/noto-sans-kr-v13-latin-regular.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/noto-sans-kr-v13-latin-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/noto-sans-kr-v13-latin-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/noto-sans-kr-v13-latin-regular.otf') format('opentype'),
+        /* Safari, Android, iOS */
+        url('../fonts/noto-sans-kr-v13-latin-regular.svg#NotoSansKR') format('svg');
+    /* Legacy iOS */
 }
 
 @mixin mobile {
     @media (max-width: #{$breakpoint-desktop - 1px}) {
-      @content;
+        @content;
     }
-  }
-  
-  @mixin desktop {
-    @media (min-width: #{$breakpoint-desktop}) {
-      @content;
-    }
-  }
+}
 
-pre, code, kbd, samp {
+@mixin desktop {
+    @media (min-width: #{$breakpoint-desktop}) {
+        @content;
+    }
+}
+
+pre,
+code,
+kbd,
+samp {
     font-family: 'D2Coding', 'Courier New', Courier, monospace;
 }
 
-a, div.post-card-primary-tag{
+body,
+.post-full-content,
+.post-card-excerpt{
+    font-family: 'Noto Sans KR';
+}
+
+a,
+div.post-card-primary-tag {
     color: $accent-color;
 }
 
-.author-profile{
-    margin-left: auto;
+.author-profile {
+    margin-left : auto;
     margin-right: auto;
-    text-align: center;
-    padding: 5px;
+    text-align  : center;
+    padding     : 5px;
 }
 
 .site-description {
     margin: 5px;
 }
 
-.site-header-content{
-     a{
-        display: block;
-        padding: 10px;
-        border: 2px solid $accent-color;
-        color: $accent-color;
-        font-size: 2.5rem;
-        line-height: 1em;
+.site-header-content {
+    a {
+        display      : block;
+        padding      : 10px;
+        border       : 2px solid $accent-color;
+        color        : $accent-color;
+        font-size    : 2.5rem;
+        line-height  : 1em;
         border-radius: 10px;
-        margin: 5px;
-        font-weight: bold;
-        &:hover{
+        margin       : 5px;
+        font-weight  : bold;
+
+        &:hover {
             text-decoration: none;
-            opacity: 0.7;
+            opacity        : 0.7;
         }
     }
-    .site-title{
+
+    .site-title {
         font-size: 5rem;
     }
 }
 
-.tag-button{
-    display: inline-block;
-    border-radius: 10px;
-    color: black;
+.tag-button {
+    display         : inline-block;
+    border-radius   : 10px;
+    color           : black;
     background-color: #F0F0F0;
-    padding: 5px;
-    &:hover{
-        opacity: 0.5;
+    padding         : 5px;
+
+    &:hover {
+        opacity        : 0.5;
         text-decoration: none;
     }
-    sup{
-        color: $accent-color;
+
+    sup {
+        color      : $accent-color;
         margin-left: 5px;
     }
 }
-.tag-list{
-    padding: 0;
+
+.tag-list {
+    padding   : 0;
     list-style: none;
 }
-.post-content > div {
+
+.post-content>div {
     width: 100%;
 }
 
-.paginator{
-    width: 100%;
+.paginator {
+    width     : 100%;
     text-align: center;
-    ul{
+
+    ul {
         text-decoration: none;
-        list-style: none;
-        li{
+        list-style     : none;
+
+        li {
             display: inline-block;
-            a{
-                padding: 10px;
+
+            a {
+                padding        : 10px;
                 text-decoration: none;
-                font-size: 2rem;
-                color: $accent-color;
-                &:hover{
-                    border-radius: 5px;
-                    text-decoration: none;
+                font-size      : 2rem;
+                color          : $accent-color;
+
+                &:hover {
+                    border-radius   : 5px;
+                    text-decoration : none;
                     background-color: $accent-color;
-                    color: white;
+                    color           : white;
                 }
-                
+
             }
-            a.active{
+
+            a.active {
                 font-weight: bold;
             }
-            a.disabled{
+
+            a.disabled {
                 opacity: 0.3;
             }
         }
     }
 }
 
-img.post-card-image{
+img.post-card-image {
     border: 1px solid grey;
 }
-.site-nav-logo{
+
+.site-nav-logo {
     padding: 0;
-    img{
+
+    img {
         height: 40px;
     }
 }
 
-.site-home-header .site-nav-logo{
+.site-home-header .site-nav-logo {
     display: block;
 }
 
-@include mobile{
+@include mobile {
     .tags.desktop {
         display: none;
     }
+
     .tags.mobile {
         margin-top: 5px;
     }
-    .site-main.home{
+
+    .site-main.home {
         flex-direction: column;
     }
 }
 
-@include desktop{
-    .site-main.home{
+@include desktop {
+    .site-main.home {
         flex-direction: row;
     }
+
     .tags.mobile {
         display: none;
     }
