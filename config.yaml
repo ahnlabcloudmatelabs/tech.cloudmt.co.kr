@@ -38,7 +38,7 @@ params:
     link: https://cloudmt.co.kr
   assets:
         favicon: /assets/favicon.ico
-  background: /assets/images/cover.png
+  background: /assets/images/triangles.png
   default_feature_image: /assets/images/default_post_cover.jpg
   DateFormat: 2006. 01. 02.
   facebook: https://fb.me/cloudmatekr
