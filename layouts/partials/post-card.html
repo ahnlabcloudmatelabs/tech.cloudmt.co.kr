@@ -8,7 +8,13 @@
             <a class="post-card-image-link" href="{{ .context.Permalink }}">
                 <img class="post-card-image"src="{{ .context.Permalink }}{{ .context.Param "feature_image" }}" alt="{{ .context.Title }}"/>
             </a>
+        {{ else if $.context.Site.Params.default_feature_image }}
+            <a class="post-card-image-link" href="{{ .context.Permalink }}">
+                <img class="post-card-image" src="{{ $.context.Site.Params.default_feature_image }}" alt="{{ .context.Title }}"/>
+            </a>
+        {{ else }}
         {{ end }}
+        
     
         <div class="post-card-content">
     
