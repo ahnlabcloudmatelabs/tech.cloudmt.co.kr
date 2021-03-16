@@ -38,7 +38,7 @@ params:
     link: https://cloudmt.co.kr
   assets:
         favicon: /assets/favicon.ico
-  
+  feature_image: /assets/images/default_post_cover.png
   DateFormat: 2006. 01. 02.
   facebook: https://fb.me/cloudmatekr
   github: https://github.com/mate365
