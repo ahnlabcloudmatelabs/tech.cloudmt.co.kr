@@ -33,8 +33,9 @@ paginate: 10
 params:
   # description: tech.cloudmr.co.kr
   copyright: © 2019-Present CLOUDMATE Corp
-  logo: /assets/images/CMLOGO_WHITE.png
-  logoLink: https://cloudmt.co.kr
+  footLogo: 
+    path: /assets/images/CMLOGO_WHITE.png
+    link: https://cloudmt.co.kr
   assets:
         favicon: /assets/favicon.ico
   

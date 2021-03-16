@@ -45,6 +45,11 @@
                     {{ if .Site.Params.twitter }}<a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>{{ end }}
                     {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>{{ end }}
                     <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                    {{ if .Site.Params.footLogo }}
+                    <a href="{{ .Site.Params.footLogo.link }}" target="_blank" rel="noopener">
+                    <img src="{{- .Site.Params.footLogo.path | absURL -}}" style="height: 40px"/>
+                    </a>
+                    {{ end }}
                 </nav>
             </div>
         </footer>
