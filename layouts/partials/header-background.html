@@ -1,10 +1,6 @@
 {{ if $.Site.Params.background }}
-    <style type="text/css">
-        .responsive-header-img {
-            background-image: url('{{ $.Site.Params.background }}');
-        }
-    </style>
-    <div class="outer site-header-background responsive-header-img">
+    <div class="outer site-header-background responsive-header-img"
+        style="background-image: url('{{ $.Site.Params.background }}');">
 {{ else }}
     <div class="outer site-header-background no-image">
 {{ end }}

@@ -14,10 +14,12 @@
                         {{ $.Site.Title }}
                     {{ end }}
                 </h1>
-                <h2 class="site-description">{{ $.Site.Params.description }}</h2>
+                <h2 class="site-description">{{ $.Site.Params.description }}
+                <h2 class="site-description">
                 {{ range $buttonItem := $.Site.Params.mainButtons }}
                     <a href="{{ $buttonItem.url }}" target="_blank">{{ $buttonItem.name }}</a>
                 {{ end }}
+                </h2>
             </div>
         </div>
     </div>
