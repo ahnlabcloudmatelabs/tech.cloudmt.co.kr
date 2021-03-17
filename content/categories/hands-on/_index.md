@@ -1,4 +1,4 @@
 ---
-title: Hands On
-description: 클라우드 기술 함께 톺아보기
+title: Hands-On
+description: 클라우드 전문가와 함께하는 실습
 ---
