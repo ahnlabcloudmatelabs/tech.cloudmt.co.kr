@@ -4,7 +4,8 @@ authors:
 - chansung park
 date: "2020-06-09T00:00:00Z"
 categories:
-- Post
+- Hands on
+
 tags:
 - CDN
 - Azure CDN

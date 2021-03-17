@@ -4,7 +4,8 @@ authors:
 - wooyeoung ahn
 date: "2020-07-13T00:00:00Z"
 categories:
-- Post
+- Tech
+
 tags:
 - AWS
 - Azure

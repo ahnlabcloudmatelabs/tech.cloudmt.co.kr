@@ -4,7 +4,8 @@ authors:
 - junha hwang
 date: "2020-12-10T16:12:00+09:00"
 categories:
-- Post
+- Hands on
+
 tags:
 - AWS
 - Datadog

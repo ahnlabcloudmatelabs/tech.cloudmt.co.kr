@@ -4,7 +4,8 @@ authors:
 - youngjin park
 date: "2020-07-22T00:00:00Z"
 categories:
-- Post
+- Hands on
+
 tags:
 - Azure Devops
 - AKS

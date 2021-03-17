@@ -4,7 +4,8 @@ authors:
 - sangyeop park
 date: "2020-05-11T00:00:00Z"
 categories:
-- Post
+- Hands on
+
 tags:
 - Azure Active Directory
 - Azure AD

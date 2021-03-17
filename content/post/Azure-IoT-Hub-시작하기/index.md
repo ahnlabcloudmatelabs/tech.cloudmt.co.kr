@@ -4,7 +4,8 @@ authors:
 - yerim kim
 date: "2020-07-30T00:00:00Z"
 categories:
-- Post
+- Hands on
+
 tags:
 - Azure
 - IoT

@@ -5,6 +5,7 @@ authors:
 date: "2020-11-15T00:00:00Z"
 categories:
 - Tech
+
 tags:
 - Azure
 - Microsoft Azure
@@ -184,8 +185,7 @@ info:
 paths:
   "/Students":
     get:
-      categories:
-- Post
+      
 tags:
       - Students
       responses:
@@ -198,8 +198,7 @@ tags:
                 items:
                   "$ref": "#/components/schemas/Student"
     post:
-      categories:
-- Post
+      
 tags:
       - Students
       requestBody:
@@ -216,8 +215,7 @@ tags:
                 "$ref": "#/components/schemas/Student"
   "/Students/{id}":
     get:
-      categories:
-- Post
+      
 tags:
       - Students
       parameters:
@@ -235,8 +233,7 @@ tags:
               schema:
                 "$ref": "#/components/schemas/Student"
     put:
-      categories:
-- Post
+      
 tags:
       - Students
       parameters:
@@ -259,8 +256,7 @@ tags:
               schema:
                 "$ref": "#/components/schemas/Student"
     delete:
-      categories:
-- Post
+      
 tags:
       - Students
       parameters:

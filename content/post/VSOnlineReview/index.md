@@ -4,7 +4,8 @@ authors:
 - youngjin park
 date: "2020-04-22T00:00:00Z"
 categories:
-- Post
+- Hands on
+
 tags:
 - Microsoft
 - Microsoft Azure

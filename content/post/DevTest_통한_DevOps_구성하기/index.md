@@ -4,7 +4,7 @@ authors:
 - jiyoung-Sung
 date: "2021-02-16T00:00:00Z"
 categories:
-- Post
+- Tech
 tags:
 - Azure
 - DevOps
