@@ -1,5 +1,6 @@
 <article class="post-card post
-{{ if not (.context.Param "feature_image") }} no-image
+{{ if and (not $.context.Site.Params.default_feature_image) (not (.context.Param "feature_image")) }} 
+no-image
 {{ else }}
 {{ if (eq (mod .index 6) 0) }} post-card-large {{ end }}
 {{ end }} ">
@@ -30,7 +31,7 @@
                 </header>
     
                 <section class="post-card-excerpt">
-                    <p>{{ .context.Summary }}</p>
+                    <p>{{ .context.Summary }}&#8230;</p>
                 </section>
     
             </a>
