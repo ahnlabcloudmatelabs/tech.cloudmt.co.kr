@@ -40,6 +40,11 @@ $breakpoint-desktop: 1024px;
     }
 }
 
+.post-full-title,
+.post-card-title {
+    line-height: 1.5em;
+}
+
 pre,
 code,
 kbd,
@@ -49,7 +54,7 @@ samp {
 
 body,
 .post-full-content,
-.post-card-excerpt{
+.post-card-excerpt {
     font-family: 'Noto Sans KR';
 }
 
@@ -58,24 +63,28 @@ div.post-card-primary-tag {
     color: $accent-color;
 }
 
-.post-full-header{
+.post-full-header {
     padding: 70px 0px 50px;
+
     .post-full-tags {
         display: block;
-        a{
+
+        a {
             margin-left: 10px;
             font-weight: bolder;
         }
-        a.tag{
+
+        a.tag {
             font-weight: lighter;
         }
     }
-    .post-full-title{
+
+    .post-full-title {
         font-size: 4rem;
     }
 }
 
-.post-full-content{
+.post-full-content {
     padding: 0 0px 6vw
 }
 
@@ -119,7 +128,7 @@ div.post-card-primary-tag {
     color           : black;
     background-color: #F0F0F0;
     padding         : 5px;
-    margin: 5px;
+    margin          : 5px;
 
     &:hover {
         opacity        : 0.5;
@@ -137,15 +146,18 @@ div.post-card-primary-tag {
     list-style: none;
 }
 
-.post-content{
+.post-content {
+
     p,
-    blockquote p{
+    blockquote p {
         font-size: 18px;
     }
-    div{
+
+    div {
         width: 100%;
     }
 }
+
 .paginator {
     width     : 100%;
     text-align: center;
