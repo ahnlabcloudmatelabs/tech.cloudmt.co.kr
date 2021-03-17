@@ -202,11 +202,6 @@ img.post-card-image {
     border: 1px solid grey;
 }
 
-
-// .site-home-header .site-nav-logo {
-//     display: block;
-// }
-
 @include mobile {
     .tags.desktop {
         display: none;
@@ -229,4 +224,8 @@ img.post-card-image {
     .tags.mobile {
         display: none;
     }
+}
+
+.site-home-header .site-nav-logo {
+    display: block;
 }
