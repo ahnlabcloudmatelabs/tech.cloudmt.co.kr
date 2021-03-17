@@ -144,6 +144,9 @@ div.post-card-primary-tag {
 .tag-list {
     padding   : 0;
     list-style: none;
+    li {
+        margin: 0;
+    }
 }
 
 .post-content {
