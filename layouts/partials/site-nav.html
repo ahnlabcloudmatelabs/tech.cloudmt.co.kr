@@ -3,7 +3,7 @@
             {{ if $.Site.Params.logo }}
                 <a class="site-nav-logo" href="{{ $.Site.BaseURL }}"><img src="{{ $.Site.Params.logo }}" alt="{{ $.Site.Title }}" /></a>
             {{ else }}
-                <a class="site-nav-logo" href="{{ $.Site.BaseURL }}">{{ $.Site.Title }}</a>
+                <a class="site-nav-logo" href="{{ $.Site.BaseURL }}">{{if $.Site.Params.nav_title}}{{$.Site.Params.nav_title}}{{else}}{{ $.Site.Title }}{{end}}</a>
             {{ end }}
             <div class="site-nav-content">
                     <ul class="nav" role="menu">
