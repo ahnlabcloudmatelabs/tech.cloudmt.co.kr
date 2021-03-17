@@ -1,7 +1,11 @@
 ---
+feature_image: images/apidoc.png
 authors:
 - Youngbin Han
 date: "2020-11-15T00:00:00Z"
+categories:
+- Tech
+
 tags:
 - Azure
 - Microsoft Azure
@@ -181,7 +185,8 @@ info:
 paths:
   "/Students":
     get:
-      tags:
+      
+tags:
       - Students
       responses:
         '200':
@@ -193,7 +198,8 @@ paths:
                 items:
                   "$ref": "#/components/schemas/Student"
     post:
-      tags:
+      
+tags:
       - Students
       requestBody:
         content:
@@ -209,7 +215,8 @@ paths:
                 "$ref": "#/components/schemas/Student"
   "/Students/{id}":
     get:
-      tags:
+      
+tags:
       - Students
       parameters:
       - name: id
@@ -226,7 +233,8 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Student"
     put:
-      tags:
+      
+tags:
       - Students
       parameters:
       - name: id
@@ -248,7 +256,8 @@ paths:
               schema:
                 "$ref": "#/components/schemas/Student"
     delete:
-      tags:
+      
+tags:
       - Students
       parameters:
       - name: id

@@ -1,0 +1,78 @@
+{{ define "body_class" }} home-template {{ end }}
+
+{{ define "main" }}
+
+<header class="site-home-header">
+    {{- partial "header-background.html" . -}}
+        <div class="inner">
+            {{- partial "site-nav.html" . -}}
+            <div class="site-header-content">
+                <h1 class="site-title">
+                    {{ if $.Site.Params.logo }}
+                        <img class="site-logo" src="{{ $.Site.Params.logo }}" alt="{{ .Site.Title }}" />
+                    {{ else }}
+                        {{ $.Site.Title }}
+                    {{ end }}
+                </h1>
+                <h2 class="site-description">{{ $.Site.Params.description }}
+                <h2 class="site-description">
+                {{ range $buttonItem := $.Site.Params.mainButtons }}
+                    <a href="{{ $buttonItem.url }}" target="_blank">{{ $buttonItem.name }}</a>
+                {{ end }}
+                </h2>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main id="site-main" class="site-main outer home" style="display: flex">
+    <div class="tags mobile">
+      {{ $tags := $.Site.Taxonomies.tags.ByCount }}
+      {{ $v1 := where $tags "Count" ">=" 5 }}
+      {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
+      {{ range first 5 $v2 }}
+      {{ if .Term }}
+      {{ $tagURL := printf "tags/%s" .Term | relURL }}
+      <a class="tag-button" href="{{ $tagURL }}">
+          {{ .Term }}<sup>{{ .Count }}</sup>
+      </a>
+      {{ end }}
+      {{ end }}
+      <a class="tag-button" href="/tags">
+          <span class="name">More tags</span>
+      </a>
+    </div>
+    <div class="inner posts">
+        <div class="post-feed" >
+            {{ $pages := where .Paginator.Pages "Type" "in" site.Params.mainSections }}
+            {{ range $index, $element := $pages }}
+                {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) . -}}
+            {{ end }}
+            <div class="paginator">
+                {{- partial "pagination.html" . -}}
+            </div>
+        </div>
+        
+    </div>
+    <div class="tags desktop">
+        <h2>Tags</h2>
+        <ul class="tag-list">
+            {{ $tags := $.Site.Taxonomies.tags.ByCount }}
+            {{ $v1 := where $tags "Count" ">=" 3 }}
+            {{ $v2 := where $v1 "Term" "not in" (slice "hugo" "tags" "rss") }}
+            {{ range $v2 }}
+            {{ if .Term }}
+            {{ $tagURL := printf "tags/%s" .Term | relURL }}
+            <li>
+            <a class="tag-button" href="{{ $tagURL }}">
+                {{ .Term }}<sup>{{ .Count }}</sup>
+            </a>
+            </li>
+            {{ end }}
+            {{ end }}
+        </ul>
+        <a href="/tags">More tags</a>
+    </div>
+</main>
+
+{{ end }}

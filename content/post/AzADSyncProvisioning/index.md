@@ -1,7 +1,11 @@
 ---
+feature_image: images/71649059-eae81a00-2d4e-11ea-8e05-abb00066b946.png
 authors:
 - sangyeop park
 date: "2020-01-09T00:00:00Z"
+categories:
+- Tech
+
 tags:
 - Microsoft
 - Microsoft Azure

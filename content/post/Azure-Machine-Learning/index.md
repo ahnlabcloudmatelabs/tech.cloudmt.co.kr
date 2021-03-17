@@ -1,7 +1,11 @@
 ---
+feature_image: images/p1.jpg
 authors:
 - yerim kim
 date: "2020-08-19T00:00:00Z"
+categories:
+- Hands on
+
 tags:
 - Azure
 - Microsoft Azure

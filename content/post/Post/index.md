@@ -2,6 +2,9 @@
 authors:
 - sejun kim
 date: "2019-08-09T00:00:00Z"
+
+categories:
+- Tech
 tags:
 - AWS
 - Azure

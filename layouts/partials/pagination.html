@@ -1,0 +1,55 @@
+{{ $pag := $.Paginator }}
+{{ if gt $pag.TotalPages 1 -}}
+<ul class="p-pagination">
+  {{ with $pag.First -}}
+  <li>
+    <a href="{{ .URL }}" title="Previous page">
+        <span>《</span>
+    </a>
+  </li>
+  {{ end -}}
+  <li>
+    <a class="{{ if not $pag.HasPrev }} disabled{{ end }}" 
+        {{ if $pag.HasPrev }}href="{{ $pag.Prev.URL }}"{{ end }} title="Previous page">
+        <span>◁</span>
+    </a>
+  </li>
+  {{- $ellipsed := false -}}
+  {{- $shouldEllipse := false -}}
+  {{- range $pag.Pagers -}}
+  {{- $right := sub .TotalPages .PageNumber -}}
+  {{- $showNumber := or (le .PageNumber 3) (eq $right 0) -}}
+  {{- $showNumber := or $showNumber (le .TotalPages 5) -}}{{/* Issue #7523 */}}
+  {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2))) -}}
+  {{- if $showNumber -}}
+    {{- $ellipsed = false -}}
+    {{- $shouldEllipse = false -}}
+  {{- else -}}
+    {{- $shouldEllipse = not $ellipsed -}}
+    {{- $ellipsed = true -}}
+  {{- end -}}
+  {{- if $showNumber }}
+  <li>
+    <a class="p-pagination__link {{ if eq . $pag }} active{{ end }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+  </li>
+  {{- else if $shouldEllipse }}
+  <li class="p-pagination__item p-pagination__item--truncation">
+    …
+  </li>
+  {{- end -}}
+  {{- end }}
+  <li>
+    <a class="{{ if not $pag.HasNext }} disabled{{ end }}"
+        {{ if $pag.HasNext }}href="{{ $pag.Next.URL }}"{{ end }} title="Next page">
+        <span>▷</span>
+    </a>
+  </li>
+  {{- with $pag.Last }}
+  <li>
+    <a href="{{ .URL }}" title="Last page">
+        <span>》</span>
+    </a>
+  </li>
+  {{- end }}
+</ul>
+{{ end }}

@@ -2,6 +2,9 @@
 authors:
 - sejun kim
 date: "2019-11-28T00:00:00Z"
+
+categories:
+- Mate Story
 tags:
 - NetApp
 - NetApp Insight

@@ -1,72 +1,43 @@
 
-{{- define "main" }}
+{{ define "body_class" }} tag-template  {{ end }}
 
-{{- if (and .Site.Params.profileMode.enabled .IsHome) }}
-{{- partial "index_profile.html" . }}
-{{- else }} {{/* if not profileMode */}}
+{{ define "main" }}
 
-{{- if not .IsHome | and .Params.name }}
-<header class="page-header">
-  <div class="author-profile"
-    style="background: url({{.Params.photo}}) no-repeat center; 
-      background-size: cover; width: 150px; height: 150px; 
-      border-radius: 100%;">
-  </div>
-  <h2 class="author-profile">{{ .Params.name }}</h2>
-  <div class="author-profile">
-    {{.Content}}
-  </div>
+<header class="site-header">
+    {{- partial "site-header.html" $ -}}
+
+    {{- partial "header-background.html" $ -}}
+        <div class="inner site-header-content">
+          
+            <h1 class="site-title">
+              <div class="author-profile"
+                style="background: url({{.Params.photo}}) no-repeat center; 
+                background-size: cover; width: 150px; height: 150px; 
+                border-radius: 100%; margin-bottom: 10px;">
+              </div>
+              {{ .Params.name }}
+            </h1>
+            <h2 class="site-description">
+                {{.Content}}
+            </h2>
+        </div>
+    </div>
 </header>
-{{- end }}
 
-{{- $pages := union .RegularPages .Sections }}
+<main id="site-main" class="site-main outer">
+    <div class="inner posts">
+        <div class="post-feed">
+            {{ range $index, $element := .Paginator.Pages }}
+                {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) . -}}
+            {{ end }}
+            <div class="paginator">
+                {{- partial "pagination.html" . -}}
+            </div>
+        </div>
+    </div>
+</main>
+
+{{ end }}
 
 
-{{ $paginator := .Paginate $pages }}
-{{ $term := .Data.Term}}
-{{- range $index, $page := $paginator.Pages }}
 
-{{- $class := "post-entry" }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0)) }}
-{{- if .Site.Params.homeInfoParams | or .Site.Params.disableSpecial1stPost}}
-{{- partial "home_info.html" . }}
-{{- else}}
-{{- $class = "first-entry" }}
-{{- end }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
-<article class="{{ $class }}">
-  {{- partial "cover.html" (dict "cxt" . "IsHome" true) }}
-  <header class="entry-header">
-    <h2>
-      {{ .Title }}
-      {{- if .Draft }}<div class="entry-isdraft"><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
-    </h2>
-  </header>
-  {{- if (ne .Site.Params.hideSummary true)}}
-  <section class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}...</p>
-  </section>
-  {{- end }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
-
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL }}">« {{ i18n "prev_page" }}</a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL }}">{{ i18n "next_page" }} »</a>
-    {{- end }}
-  </nav>
-</footer>
-{{- end }}
-{{end}}{{/* end profileMode */}}
-{{- end  }}{{- /* end main */ -}}

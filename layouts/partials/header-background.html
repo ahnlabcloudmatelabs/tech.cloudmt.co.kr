@@ -1,0 +1,6 @@
+{{ if $.Site.Params.background }}
+    <div class="outer site-header-background responsive-header-img"
+        style="background-image: url('{{ $.Site.Params.background }}');">
+{{ else }}
+    <div class="outer site-header-background no-image">
+{{ end }}
