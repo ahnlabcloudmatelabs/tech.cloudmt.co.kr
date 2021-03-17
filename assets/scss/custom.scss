@@ -59,6 +59,7 @@ div.post-card-primary-tag {
 }
 
 .post-full-header{
+    padding: 70px 0px 50px;
     .post-full-tags {
         display: block;
         a{
@@ -72,6 +73,10 @@ div.post-card-primary-tag {
     .post-full-title{
         font-size: 4rem;
     }
+}
+
+.post-full-content{
+    padding: 0 0px 6vw
 }
 
 .author-profile {
