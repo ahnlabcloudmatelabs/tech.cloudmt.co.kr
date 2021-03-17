@@ -36,6 +36,12 @@
                     <img src="{{- .Site.Params.footLogo.path | absURL -}}" style="height: 40px"/>
                     </a>
                     {{ end }}
+                </section>
+                <nav class="site-footer-nav">
+                    {{ if .Site.Params.facebook }}<a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook</a>{{ end }}
+                    {{ if .Site.Params.twitter }}<a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>{{ end }}
+                    {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>{{ end }}
+                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3</a>
                     <a href="{{ .Site.BaseURL }}">
                     {{ if .Site.Params.copyright }}
                     {{ .Site.Params.copyright }}
@@ -43,13 +49,6 @@
                     {{ .Site.Title }} &copy; {{ .Date.Format "2006" }}
                     {{ end }}
                     </a>
-                </section>
-                <nav class="site-footer-nav">
-                    <a href="{{ .Site.BaseURL }}">Latest Posts</a>
-                    {{ if .Site.Params.facebook }}<a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook</a>{{ end }}
-                    {{ if .Site.Params.twitter }}<a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>{{ end }}
-                    {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>{{ end }}
-                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
                 </nav>
             </div>
         </footer>
