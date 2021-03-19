@@ -36,34 +36,34 @@ IaaS는 클라우드 공급자가 가상화 된 컴퓨팅 리소스 즉, 서버�
    
 ![IaaS Architecture](images/image1-1.png)
 
-#### 1) 개발자는 Azure DevTest Labs에서 제공하는 라이브러리, 도구 및 런타임 등 적절한 Windows Virtual Desktop 이미지를 사용하여 **개발 환경을 보다 쉽게 구축한다.**
-#### 2) GitHub 리포지토리는 Azure DevOps와 호환이 되어 오픈 소스 코드를 끌어와 Visual Studio에서 개발을 진행한다.
-#### 3) **Azure Pipeline**를 통해 GitHub 리포지토리에서 **자동으로 CI를 수행**하고 DevTest 환경으로 전달한다. 이때, Azure Key Vault를 사용하여 비밀에 대한 접근을 제어한다.
-#### 4-5) 개발자들과 운영자들이 Azure Board에서 생성된 코드와 업무, 빌드나 배포 오류에 대한 버그를 **보고** 서로 소통하여 **개발 주기를 반복한다.**
-#### 6) Azure Pipeline을 통해서 구축한 환경 안에서 개발자들은 VM을 빠르게 배포하고 테스터들은 빠르게 테스트를 실행할 수 있다.
-#### 7) 테스트가 완료되면 Azure Pipeline은 이미지를 일반화하여 자동으로 테스트 환경에서 프로덕션 환경으로 변경한다. 
+1) 개발자는 Azure DevTest Labs에서 제공하는 라이브러리, 도구 및 런타임 등 적절한 Windows Virtual Desktop 이미지를 사용하여 **개발 환경을 보다 쉽게 구축한다.**
+2) GitHub 리포지토리는 Azure DevOps와 호환이 되어 오픈 소스 코드를 끌어와 Visual Studio에서 개발을 진행한다.
+3) **Azure Pipeline**를 통해 GitHub 리포지토리에서 **자동으로 CI를 수행**하고 DevTest 환경으로 전달한다. 이때, Azure Key Vault를 사용하여 비밀에 대한 접근을 제어한다.
+4-5) 개발자들과 운영자들이 Azure Board에서 생성된 코드와 업무, 빌드나 배포 오류에 대한 버그를 **보고** 서로 소통하여 **개발 주기를 반복한다.**
+6) Azure Pipeline을 통해서 구축한 환경 안에서 개발자들은 VM을 빠르게 배포하고 테스터들은 빠르게 테스트를 실행할 수 있다.
+7) 테스트가 완료되면 Azure Pipeline은 이미지를 일반화하여 자동으로 테스트 환경에서 프로덕션 환경으로 변경한다. 
 
-#### - Azure Policy는 표준 및 규정 준수를 충족하기 위해 DevTest VM의 수와 비용을 제한할 수도 있다.
-#### - Azure AD가 프로덕션과 DevTest에서 각각 사용되는 액세스 관리 서비스이다.
-#### - Azure Monitor은 프로덕션과 DevTest 환경에서 모니터링하여 로그 데이터를 모으고 이를 Azure Security Center에서 보여준다.
+- Azure Policy는 표준 및 규정 준수를 충족하기 위해 DevTest VM의 수와 비용을 제한할 수도 있다.
+- Azure AD가 프로덕션과 DevTest에서 각각 사용되는 액세스 관리 서비스이다.
+- Azure Monitors는 프로덕션과 DevTest 환경에서 모니터링하여 로그 데이터를 모으고 이를 Azure Security Center에서 보여준다.
 
 ## 3. PaaS에서의 Architecture
 PaaS는 클라우드 공급자가 개발에 필요한 플랫폼을 제공하는 서비스로 개발자가 더 편하게 앱을 개발하고 실행 및 관리할 수 있도록 돕는다. 물리장비 이외에도 미들웨어, 운영체제 등을 제공하며 가상 머신, 가상 네트워크, 디스크 등 리소스 배포 시에 생기는 오버헤드를 줄여 효율적으로 개발이 가능하다.
 
 ![PaaS Architecture](images/image1-2.png)
 
-#### 1-2) 개발자는 개발환경이 **미리 구성된** GitHub 코드스페이스를 공급자에게 제공받아 Azure DevOps에서 사용 가능한 GitHub 소스 코드를 이용하여 개발을 진행한다.
-#### 3) GitHub Actions로 **자동화된** 빌드를 설정하고 릴리즈 워크플로우를 실행한다.
-#### 4-5) 운영자와 개발자가 Azure Boards를 통해 작업 항목을 만들고 전반적인 개발 작업을 보면서 진행 상황을 **공유한다.** 또, 개발 스프린턴이나 작업 항목을 통해 분기를 수정하며 개발 주기를 유지한다.
-#### 6) Azure Pipeline은 Web app과 같은 PaaS	리소스를 지원하고 VM 어플리케이션 이미지와 VM 리소스를 배포한다.
-#### 7) Azure Pipeline을 통해 GitHub Actions에서 업데이트 사항을 연속적으로 개발 환경에 배포하고 테스트 상태에 따라 환경을 설정하고 스테이징 시킨다.
-#### 8) 솔루션이 프로덕션 상태에 이르면 프로덕션을 릴리즈하고 배포를 최소한의 수로 제한한다.
+1-2) 개발자는 개발환경이 **미리 구성된** GitHub 코드스페이스를 공급자에게 제공받아 Azure DevOps에서 사용 가능한 GitHub 소스 코드를 이용하여 개발을 진행한다.
+3) GitHub Actions로 **자동화된** 빌드를 설정하고 릴리즈 워크플로우를 실행한다.
+4-5) 운영자와 개발자가 Azure Boards를 통해 작업 항목을 만들고 전반적인 개발 작업을 보면서 진행 상황을 **공유한다.** 또, 개발 스프린턴이나 작업 항목을 통해 분기를 수정하며 개발 주기를 유지한다.
+6) Azure Pipeline은 Web app과 같은 PaaS	리소스를 지원하고 VM 어플리케이션 이미지와 VM 리소스를 배포한다.
+7) Azure Pipeline을 통해 GitHub Actions에서 업데이트 사항을 연속적으로 개발 환경에 배포하고 테스트 상태에 따라 환경을 설정하고 스테이징 시킨다.
+8) 솔루션이 프로덕션 상태에 이르면 프로덕션을 릴리즈하고 배포를 최소한의 수로 제한한다.
 
 PaaS에서는 IaaS에서와 같이 기존 Azure Key Vault, Azure Policy, Azure AD, Azure Monitor의 기능은 동일하게 가지지만 추가적으로 미들웨어, 운영체제를 지원하므로 Terraform을 통하여 Azure에서 제공되는 Azure App Service, Azure Cache for Redis, Azure SQL database을 프로비전한다.
 
-#### - Azure App Service를 통해서 다양한 서비스를 제공하고, 특히나 Linux, Window 기반에서 언어로 애플리케이션을 쉽게 실행, 확장할 수 있는 환경과 OS 및 언어 프레임워크에 대한 유지, 보수도 지원한다.   
-#### - Azure SQL Database는 PaaS 데이터베이스 엔진으로 사용자의 관여없이 대부분의 데이터 베이스 관리 함수를 처리한다.
-#### - Azure Cache for Redis는 Redis를 기반한 데이터 저장소를 제공해 어플리케이션의 성능을 향상시키고 독립 실행형으로 배포하거나 다른 데이터베이스와 함께 배포할 수 있다.
+- Azure App Service를 통해서 다양한 서비스를 제공하고, 특히나 Linux, Window 기반에서 언어로 애플리케이션을 쉽게 실행, 확장할 수 있는 환경과 OS 및 언어 프레임워크에 대한 유지, 보수도 지원한다.   
+- Azure SQL Database는 PaaS 데이터베이스 엔진으로 사용자의 관여없이 대부분의 데이터 베이스 관리 함수를 처리한다.
+- Azure Cache for Redis는 Redis를 기반한 데이터 저장소를 제공해 어플리케이션의 성능을 향상시키고 독립 실행형으로 배포하거나 다른 데이터베이스와 함께 배포할 수 있다.
 이러한 서비스들을 통해서 IaaS에서는 개발 환경 설정에 고민하던 시간들을 애플리케이션 개발에 쏟을 수 있다.
 
 ---------
