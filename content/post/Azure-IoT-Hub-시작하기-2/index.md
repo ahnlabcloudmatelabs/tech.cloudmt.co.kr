@@ -9,7 +9,7 @@ categories:
 tags:
 - Azure
 - IoT
-- Microsoft Azure
+- Architecture Center
 title: Azure IoT Hub 시작하기 -2
 ---
 

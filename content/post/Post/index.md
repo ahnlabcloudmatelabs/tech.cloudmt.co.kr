@@ -9,13 +9,8 @@ tags:
 - AWS
 - Azure
 - VPN
-- VPC
-- vNet
 - Peering
 - Terraform
-- VGW
-- HOL
-- Hands on Lab
 title: Azure와 AWS간 VPN 연결하기 (Terraform)
 ---
 

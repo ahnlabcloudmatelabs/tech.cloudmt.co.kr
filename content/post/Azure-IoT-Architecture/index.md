@@ -8,8 +8,8 @@ categories:
 
 tags:
 - Azure
-- Architecture
 - IoT
+- Architecture Center
 title: Azure IoT Architecture
 ---
 

@@ -8,8 +8,8 @@ categories:
 
 tags:
 - Azure
-- Microsoft Azure
 - Dev Test Labs
+- VM
 title: 해커톤 참가자들에게 VM 77개 배포하기- DevTest Labs 사용기
 ---
 

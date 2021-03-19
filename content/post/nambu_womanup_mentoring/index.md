@@ -7,9 +7,9 @@ categories:
 - Mate Story
 
 tags:
-- Cloud
-- Devops
-title: 남부여성발전센터 멘토링데이 강연 후기
+- 후기
+- 멘토링데이
+title: 남부 여성발전센터 멘토링데이 강연 후기
 ---
 
 ## 강연 제의

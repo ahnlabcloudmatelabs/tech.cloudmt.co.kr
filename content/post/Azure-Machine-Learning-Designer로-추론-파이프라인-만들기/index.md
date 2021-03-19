@@ -8,9 +8,8 @@ categories:
 
 tags:
 - Azure
-- Microsoft Azure
-- Data Science
 - Machine Learning
+- Data Science
 title: 데린이의 Azure Machine Learning Designer로 유추 파이프라인 만들기
 ---
 

@@ -8,8 +8,8 @@ categories:
 tags:
 - Azure
 - DevOps
-- DevTest
-- Architecture
+- Dev Test Labs
+- Architecture center
 title: DevTest 통한 DevOps 구성하기
 ---
 

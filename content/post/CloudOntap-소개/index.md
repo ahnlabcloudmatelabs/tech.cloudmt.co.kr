@@ -7,10 +7,9 @@ categories:
 - Tech
 
 tags:
-- AWS
-- Azure
 - NetApp
-- CVO
+- Cloud Volume Ontap
+- Data Migration
 title: Cloud Volume Ontap으로 AWS-Azure data migration 하기 (1편 CVO 소개)
 ---
 

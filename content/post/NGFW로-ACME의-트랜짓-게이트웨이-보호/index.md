@@ -8,11 +8,10 @@ categories:
 
 tags:
 - AWS
-- AWS Re:Invent
-- AWS Jams
-- Fortinet
-- FortiGate
+- Re:Invent
 - Transit Gateway
+- Fortinet
+- 네트워크 보안
 
 title: "AWS Re:Invent 2020 JAM으로 알아보는 NGFW로 네트워크 보안 강화하기"
 ---

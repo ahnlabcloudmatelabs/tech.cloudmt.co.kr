@@ -6,14 +6,9 @@ date: "2019-11-29T00:00:00Z"
 categories:
 - Mate Story
 tags:
-- Microsoft
-- Microsoft Azure
-- Cloud
 - Azure
-- 후기
-- Microsoft Ignite 2019
-- Ignite 2019
 - Microsoft Ignite
+- 후기
 title: Microsoft Ignite 2019 후기(1/3 - 준비하기)
 ---
 

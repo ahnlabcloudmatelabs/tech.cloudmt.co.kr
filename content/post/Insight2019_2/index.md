@@ -8,14 +8,7 @@ categories:
 tags:
 - NetApp
 - NetApp Insight
-- NetApp Insight 2019
 - Data Fabric
-- Service Fabric
-- tip
-- Cloud
-- Azure
-- AWS
-- GCP
 - 후기
 title: NetApp Insight 2019 후기(2/2)
 ---

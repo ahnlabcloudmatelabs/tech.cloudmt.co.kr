@@ -10,7 +10,6 @@ tags:
 - Azure Devops
 - AKS
 - Devops
-- Monitoring
 title: Azure Devops와 AKS배포 관리 1편 - 프로젝트 생성부터 Docker 빌드
 ---
 

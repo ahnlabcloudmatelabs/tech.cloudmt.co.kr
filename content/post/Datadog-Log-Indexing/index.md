@@ -9,6 +9,8 @@ categories:
 tags:
 - Datadog
 - Logs
+- 비용 최적화
+
 title: Datadog에 Indexing 되는 로그에 대한 비용 최적화 하는 방법
 ---
 

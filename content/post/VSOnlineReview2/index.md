@@ -7,15 +7,9 @@ categories:
 - Hands on
 
 tags:
-- Microsoft
-- Microsoft Azure
-- Cloud
 - Azure
 - Visual Studio
-- VScode
-- VSonline
 - VSCodespace
-- codespace
 title: Visual Studio Online 리뷰2 - 협업(Live Share)
 ---
 

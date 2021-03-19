@@ -8,10 +8,10 @@ categories:
 
 
 tags:
-- Spot
 - Netapp
+- Spot by Netapp
 - AWS
-- Budget
+- 비용 최적화
 title: Spot By NetApp 시작하기
 ---
 

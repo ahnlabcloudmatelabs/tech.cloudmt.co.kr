@@ -8,8 +8,8 @@ categories:
 
 tags:
 - Azure
-- Microsoft Azure
 - Azure DevOps
+- Pipeline
 - App Service
 title: ASP.NET앱 개발과 Azure 관리형 서비스로 배포하기 - 2. 관리형 서비스로 빠르게 구축하고 배포하기
 ---

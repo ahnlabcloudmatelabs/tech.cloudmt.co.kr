@@ -7,10 +7,9 @@ categories:
 - Tech
 
 tags:
-- Microsoft
 - Microsoft 365
 - Compliance Center
-- Compliance Score
+- 보안 규정 준수
 title: Microsoft 365 규정 준수 센터의 규정 준수 점수
 ---
 

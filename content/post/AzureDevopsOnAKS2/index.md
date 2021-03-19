@@ -10,7 +10,6 @@ tags:
 - Azure Devops
 - AKS
 - Devops
-- Monitoring
 title: Azure Devops와 AKS배포 관리 2편 - Docker 이미지의 AKS 배포
 ---
 

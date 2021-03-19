@@ -8,8 +8,8 @@ categories:
 
 tags:
 - Azure
-- Microsoft Azure
 - Azure DevOps
+- Pipeline
 - App Service
 title: ASP.NET앱 개발과 Azure 관리형 서비스로 배포하기 - 1. 코드 자동 생성을 통한 개발시간 단축
 

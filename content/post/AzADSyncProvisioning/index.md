@@ -7,11 +7,9 @@ categories:
 - Tech
 
 tags:
-- Microsoft
-- Microsoft Azure
-- Azure AD
-- Provisioning
-- Sync
+- Azure
+- Azure Active Directory
+- Azure AD Sync
 title: Azure AD Cloud Provisioning
 ---
 Azure AD Cloud Provisioning은 Azure AD에 대 한 사용자, 그룹 및 연락처의 동기화를 위해 하이브리드 id 목표를 충족 하 고 달성 하기 위해 설계 된 새로운 Microsoft 에이전트입니다. 

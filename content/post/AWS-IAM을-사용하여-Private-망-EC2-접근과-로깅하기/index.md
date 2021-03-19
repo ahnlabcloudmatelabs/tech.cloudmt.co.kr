@@ -9,9 +9,10 @@ categories:
 tags:
 - AWS
 - IAM
-- Session Manager
+- Access control
 - Systems Manager
-- EC2]
+- Session Manager
+
 title: "AWS IAM을 사용한 Private 망 EC2 인스턴스 접근과 로깅"
 ---
 

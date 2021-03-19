@@ -9,15 +9,10 @@ date: "2020-11-16T00:00:00Z"
 
 tags:
 - DB Migration
-- On-premise
+- AWS DMS
+- AWS SCT
 - Oracle
 - MySQL
-- Cloud
-- Amazon Web Services
-- AWS
-- EC2
-- DMS
-- SCT
 ---
 
 ## 시작하기 전에

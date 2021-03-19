@@ -7,7 +7,7 @@ categories:
 - Hands on
 
 tags:
-- CDN
+- Multi CDN
 - Azure CDN
 - AWS Cloudfront
 title: Azure CDN과 AWS CloudFront를 이용한 Multi CDN 구성 방법

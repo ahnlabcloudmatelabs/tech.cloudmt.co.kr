@@ -8,7 +8,6 @@ categories:
 
 tags:
 - Azure Active Directory
-- Azure AD
 - G Suite
 title: Azure Active Directory와 G Suite간의 계정 연동
 ---

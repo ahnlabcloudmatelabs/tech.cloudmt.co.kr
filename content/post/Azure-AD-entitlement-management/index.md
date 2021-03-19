@@ -7,12 +7,9 @@ categories:
 - Tech
 
 tags:
-- Microsoft
 - Azure
-- Microsoft Azure
 - Azure Active Directory
-- Entitlement management
-- Access Package
+- Azure AD Premium
 title: Azure AD Identity Governance를 통한 리소스 접근 제어
 ---
 

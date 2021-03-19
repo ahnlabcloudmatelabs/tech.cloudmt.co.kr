@@ -7,14 +7,10 @@ categories:
 - Hands on
 
 tags:
-- Microsoft
-- Microsoft Azure
-- Cloud
+- Monitoring
 - Azure
 - logic App
 - Microsoft 365
-- Office 365
-- teams
 - microsoft teams
 title: Logic App을 이용하여 Website 모니터링 하기
 ---

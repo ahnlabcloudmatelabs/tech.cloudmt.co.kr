@@ -8,10 +8,8 @@ categories:
 
 tags:
 - Azure
-- Microsoft
-- Cloud Service
-- Expenses
-- Budget
+- 비용 최적화
+
 title: 적절한 Azure 운영으로 비용을 최적화하시면 됩니다. 
 ---
 
