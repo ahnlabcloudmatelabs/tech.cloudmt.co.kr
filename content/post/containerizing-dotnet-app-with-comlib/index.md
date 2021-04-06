@@ -4,11 +4,7 @@ authors:
 - youngbin-han # 저자 프로필 페이지 경로 입력
 date: 2021-04-06T09:51:53+09:00
 categories:
-# 아래 4가지 카테고리 중 하나만 선택하여 남겨두고, 나머지는 지우고 글을 계속 작성하세요.
-# - Hands On # 실습 위주의 글
 - Tech # 새로운 기술 소개 또는 Hands On 이외 기술 관련 글
-# - Column # 엔지니어가 아니여도 쉽게 읽을 수 있는 글
-# - Mate Story # 클라우드메이트 소식, 일하는 방식 소개 등
 tags:
 - Windows Container
 - Container
@@ -16,9 +12,6 @@ tags:
 - MSBuild
 - COM Library
 feature_image: 'images/nanosyswow64.png' # 포스트 커버 이미지 경로 (포스트에 포함된 이미지 중 하나 지정. 필드 제거하면 기본 이미지가 나옵니다.)
-ShowToc: false # 글 개요 보여줄지 여부
-TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
-draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
 ---
 
 최근 통합 클라우드 빌링 서비스인 mateBilling 에서 사용하는 SOAP API 기반 카드결제 API 서버를 RESTful API 서버로 다시 개발하는 작업을 하고 있습니다.
@@ -28,7 +21,7 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 결제 API 앱은 .Net(C#) 으로 작성되어 있고, API 호출이 들어오면 PG사에서 제공한 결제 클라이언트 라이브러리를 참조하여 호출하고, 그 결과를 다시 전달해 주는 방식으로 구성되어 있습니다. 
 PG사에서 제공한 결제 클라이언트 라이브러리가 `*.dll` 확장자의 COM 라이브러리 형식으로 되어있는데, 때문에 아래와 같은 사항을 고려해야 했습니다.
 
-- 빌드 및 빌드된 앱 실행 전 `regsvr32.exe` 명령으로 COM 라이브러리를 시스템에 등록해야 합니다. (컨테이너화 하는 경우 Windows Container 에서만 가능)
+- 빌드 및 빌드된 앱 실행 전 [`regsvr32.exe` 명령으로 COM 라이브러리를 시스템에 등록](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/regsvr32)해야 합니다. (컨테이너화 하는 경우 Windows Container 에서만 가능)
 - .Net CLI 는 COM 라이브러리 참조가 있는 앱을 빌드하지 못하기 때문에, MSBuild 를 사용하여 빌드해야 합니다.
 
 ## 컨테이너에서의 MSBuild 사용
