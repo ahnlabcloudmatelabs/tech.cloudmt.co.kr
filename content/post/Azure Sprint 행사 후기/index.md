@@ -12,8 +12,6 @@ tags:
 ---
 
 
-# Azure Sprint 해커톤 행사 후기(DevOps+GitHub)
-
 지난 3월 30일~31일 이틀간 Azure Sprint 행사를 진행하였습니다.
 사내에 DevOps를 성공적으로 도입할 수 있도록 지원하는 해커톤 형식의 행사로, 클라우드메이트는 Microsoft CSP 파트너 및 GitHub Indirect 채널파트너로써 기술 코치를 맡았습니다.
 
