@@ -12,6 +12,7 @@ categories:
 tags:
 - 태그1
 - 태그2
+feature_image: 'images/cover.png' # 포스트 커버 이미지 경로 (포스트에 포함된 이미지 중 하나 지정. 필드 제거하면 기본 이미지가 나옵니다.)
 ShowToc: false # 글 개요 보여줄지 여부
 TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
