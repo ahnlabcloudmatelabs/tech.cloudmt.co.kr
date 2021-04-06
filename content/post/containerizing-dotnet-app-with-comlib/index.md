@@ -385,7 +385,7 @@ docker build -t payapi:latest -f app.Dockerfile
 
 지금까지 다룬 내용을 정리해 보면 아래와 같습니다.
 - COM 라이브러리를 참조하는 .Net 앱 빌드에는 MSBuild 가 필요하므로, 컨테이너화 하려면 컨테이너 내부에 Visual Studio Build Tools 설치가 필요합니다.
-- 64bit COM 라이브러리가 있다면, 이미지 크기가 약 100MB 인 Windows Nano Server 로 작은 사이즈의 컨테이너 빌드가 가능하며, 떄문에 탄력적으로 컨테이너를 운용할 수 있습니다.
+- 64bit COM 라이브러리가 있다면, 이미지 크기가 약 100MB 인 Windows Nano Server 로 작은 사이즈의 컨테이너 빌드가 가능하며, 때문에 탄력적으로 컨테이너를 운용할 수 있습니다.
 - 32bit COM 라이브러리만 있다면, Windows Nano Server 에서는 32bit 지원이 없어 등록이 불가능 하므로, 이미지 크기가 약 3~4GB 인 Windows Server Core 를 사용해야 합니다. 
 - Windows Server Core 를 베이스 이미지로 빌드한 컨테이너는 이미지 사이즈가 커서(기본 3~4GB) 탄력적인 컨테이너 운용에는 적합하지 않을 수 있습니다.
 - Visual Studio Build Tools 설치는 Windows Server Core 컨테이너 이미지 다운로드처럼 시간이 오래 소요되지만, 미리 해당 도구가 설치된 컨테이너 이미지를 만들고 이를 베이스 이미지로 앱 컨테이너 이미지를 빌드하여, 컨테이너 빌드 시간을 단축할 수 있습니다.
