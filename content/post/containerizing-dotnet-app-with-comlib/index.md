@@ -185,7 +185,7 @@ RUN C:\Windows\SysWOW64\regsvr32.exe /s com_lib_32bit.dll
 여기서는 사진처럼 아래와 같은 사항을 설정했습니다.
 - 구성: Release - x86
 - 대상 프레임워크: net5.0
-- 배포 모드: 자체 포함(Self Contained)
+- 배포 모드: 자체 포함(Self Contained) - 실행 파일에 .Net 런타임에 포함되어 빌드 되도록 하는 옵션입니다.
 - 대상 런타임: win-x86
 - 파일 게시 옵션
   - 단일 파일 생성(켬)
