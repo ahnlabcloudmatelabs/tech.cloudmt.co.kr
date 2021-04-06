@@ -9,13 +9,8 @@ categories:
 tags:
 - Azure Devops
 - GitHub
-- 
-
-ShowToc: true # 글 개요 보여줄지 여부
-TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 ---
 
-아래 내용은 마크다운 문법입니다. 확인 후, 모두 지우고 마크다운 문법으로 내용을 작성하세요.
 
 # Azure Sprint 해커톤 행사 후기(DevOps+GitHub)
 
