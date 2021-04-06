@@ -24,32 +24,37 @@ tags:
 
 
 
-#### Challenge 1. GitHub 및 Azure DevOps 소개
+**Challenge 1. GitHub 및 Azure DevOps 소개**
+
 팀과 협업하기 위한 환경 구성하기
 - GitHub 계정 설정
 - Azure DevOps를 위한 Agile Planning 구성
 - Agile 개발 방법론을 적용하기 위한 Board 구성
 
 
-#### Challenge 2. 빌드 워크플로우 만들기
+**Challenge 2. 빌드 워크플로우 만들기**
+
 코드를 [빌드-컴파일-테스트-패키지-릴리즈]하는 연속 통합(CI) 워크플로우 구축하기
 - GitHub Actions를 통한 빌드 자동화
 - GitHub flow를 통한 배포 통합
 - CI/CD 발생시 알람을 받는 방법
 
-#### Challenge 3. 배포 워크플로우 만들기
+**Challenge 3. 배포 워크플로우 만들기**
+
 Test 및 Prod 환경을 구축하여 컴파일된 자산을 배포하기
 - 배포 워크플로우 구성을 위한 Azure 서비스 구성
 - Slot 배포 등을 제공하기 위한 Azure App Service 구성
 - Secure Ops를 위한 Azure Key Vault 구성
 
 
-#### Challenge 4. 솔루션 모니터링
+**Challenge 4. 솔루션 모니터링**
+
 모니터링 설정 및 인사이트 구현하기
 - 서비스를 모니터링 하기 위한 Azure Monitor 구성
 - 어플리케이션의 부하 측정을 위한 Application Insights 구성
 
-#### Challenge 5. 컨테이너 구축 및 배포
+**Challenge 5. 컨테이너 구축 및 배포**
+
 코드를 컨테이너 이미지로 빌드하고 인스턴스화하기
 - Dockerize 기반의 프로젝트 운영 방법론
 - Azure Container Registry를 활용한 Docker 버전 관리
