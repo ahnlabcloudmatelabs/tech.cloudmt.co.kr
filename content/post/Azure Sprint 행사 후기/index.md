@@ -1,5 +1,5 @@
 ---
-feature_image: images/Azure Sprint(1).png
+feature_image: images/AzureSprint(1).jpg
 title: Azure Sprint 해커톤 행사 후기(DevOps+GitHub)
 authors:
 - junhyun-bae
