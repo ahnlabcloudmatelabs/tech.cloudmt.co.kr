@@ -298,7 +298,7 @@ docker build -t payapi:latest .
    - `build` Stage 와 `runtime` Stage 이미지가 다르므로, 두 이미지 모두 다 받아야 하는데 두 이미지 모두 Windows Server Core 기반이고, 기반 OS 버전이 다르면 별도로 받아야 해서 더 긴 시간 소요.
 - Visual Studio Build Tools 설치에도 오랜 시간 소요
 
-아래 사진은 Azure Pipelines 를 사용하여 위에서 작성한 Dockerfile 에 의한 컨테이너 이미지 빌드와, 이미지를 컨테이너 레지스트리에 푸시하는 과정을 자동화 한 결과인데요. 총 16분 8초, 그 중 이미지 빌드에 15분 58초로 컨테이너 이미지 빌드에 정말 긴 시간이 소요된 것을 볼 수 있습니다.
+아래 사진은 Azure Pipelines 를 사용하여 위에서 작성한 Dockerfile 에 의한 컨테이너 이미지 빌드와, 이미지를 컨테이너 레지스트리에 푸시하는 과정을 자동화 한 결과인데요. 총 16분 8초, 그 중 이미지 빌드에 15분 58초로 컨테이너 이미지 빌드에 정말 긴 시간이 소요된 것을 볼 수 있습니다. 기존 결제 API 서버는 단순히 Windows VM 에 직접 파일을 넣어서 배포하는 형태인데, 오히려 이 방법이 더 간편하지 않을까라는 생각이 들기도 합니다.
 ![](images/azpipe.png)
 
 # Visual Studio Build Tools 설치된 컨테이너 이미지 분리
@@ -381,4 +381,13 @@ docker build -t payapi:latest -f app.Dockerfile
 
 # 결론 
 ![](images/result.png)
-빌드 시간은 단축 했지만, 여전히 이미지 크기가 3~4GB에 육박하는 Windows Server Core 이미지를 베이스 이미지를 사용하기 때문에, 최종 컨테이너 이미지 또한 이에 비례하게 나오는 것을 확인할 수 있습니다.
+빌드 시간은 단축 했지만, 여전히 이미지 크기가 3~4GB에 육박하는 Windows Server Core 이미지를 베이스 이미지를 사용하기 때문에, 최종 컨테이너 이미지 또한 이에 비례하게 나오는 것을 확인할 수 있습니다. 
+
+지금까지 다룬 내용을 정리해 보면 아래와 같습니다.
+- COM 라이브러리를 참조하는 .Net 앱 빌드에는 MSBuild 가 필요하므로, 컨테이너화 하려면 컨테이너 내부에 Visual Studio Build Tools 설치가 필요합니다.
+- 64bit COM 라이브러리가 있다면, 이미지 크기가 약 100MB 인 Windows Nano Server 로 작은 사이즈의 컨테이너 빌드가 가능하며, 떄문에 탄력적으로 컨테이너를 운용할 수 있습니다.
+- 32bit COM 라이브러리만 있다면, Windows Nano Server 에서는 32bit 지원이 없어 등록이 불가능 하므로, 이미지 크기가 약 3~4GB 인 Windows Server Core 를 사용해야 합니다. 
+- Windows Server Core 를 베이스 이미지로 빌드한 컨테이너는 이미지 사이즈가 커서(기본 3~4GB) 탄력적인 컨테이너 운용에는 적합하지 않을 수 있습니다.
+- Visual Studio Build Tools 설치는 Windows Server Core 컨테이너 이미지 다운로드처럼 시간이 오래 소요되지만, 미리 해당 도구가 설치된 컨테이너 이미지를 만들고 이를 베이스 이미지로 앱 컨테이너 이미지를 빌드하여, 컨테이너 빌드 시간을 단축할 수 있습니다.
+
+이렇게 지금까지 COM 라이브러리를 참조하는 .Net 앱을 컨테이너화 한 경험을 정리해 보았습니다. 이 글과 비슷한 형태의 앱을 컨테이너화 하시는 분들께 많은 도움이 되었으면 좋겠습니다.
