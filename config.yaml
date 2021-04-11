@@ -43,7 +43,7 @@ params:
   default_feature_image: /assets/images/post_cover.png
   DateFormat: 2006. 01. 02.
   facebook: https://fb.me/cloudmatekr
-  github: https://github.com/mate365
+  github: https://github.com/cloudmatelabs
   mainSections:
     - post
   mainButtons:
