@@ -1,5 +1,5 @@
 ---
-feature_image: images/sprint.png
+feature_image:
 authors:
 - jungwoo-kim
 date: "2021-04-19T00:00:00Z"
