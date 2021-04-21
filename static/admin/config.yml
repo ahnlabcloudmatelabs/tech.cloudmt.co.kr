@@ -1,0 +1,5 @@
+
+backend:
+  name: github
+  branch: main
+  repo: cloudmatelabs/tech.cloudmt.co.kr
