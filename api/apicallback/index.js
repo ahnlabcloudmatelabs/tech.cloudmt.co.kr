@@ -71,7 +71,7 @@ module.exports = async function (context, req) {
     window.onload = function(){
       window.addEventListener("message", function(e){
         console.log("recieveMessage %o", e)
-        if (e.origin !== ${JSON.stringify(originPattern)}) {
+        if (!e.origin.match(${JSON.stringify(originPattern)})) {
           console.log('Invalid origin: %s', e.origin);
           return;
         }

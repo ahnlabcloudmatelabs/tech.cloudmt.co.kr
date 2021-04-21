@@ -2,7 +2,8 @@ backend:
   name: github
   branch: main
   repo: cloudmatelabs/tech.cloudmt.co.kr
-  base_url:  https://tech.cloudmt.co.kr/api
+  base_url:  https://tech.cloudmt.co.kr
+  auth_endpoint: /api/auth
 
 media_folder: static/img
 
