@@ -1,5 +1,20 @@
-
 backend:
   name: github
   branch: main
   repo: cloudmatelabs/tech.cloudmt.co.kr
+  base_url:  https://tech.cloudmt.co.kr/api
+
+media_folder: static/img
+
+collections:
+  - label: "post"
+    name: "post"
+    folder: "content/post"
+    create: true
+    editor:
+      preview: true
+    fields:
+      - {label: "제목", name: "title", widget: "string"}
+      - {label: "글 작성 일시", name: "date", widget: "datetime"}
+      - {label: "커버 이미지", name: "feature_image", widget: "image"}
+      - {label: "내용", name: "body", widget: "markdown"}
