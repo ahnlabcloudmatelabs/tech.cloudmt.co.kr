@@ -88,5 +88,6 @@ module.exports = async function (context, req) {
     })()
     </script>`;
   context.log(script);
-  return { body: script, headers: { "Content-Type": "text/html" } };
+  res = { status: 200, body: script, headers: { 'content-type': 'text/html; charset=utf-8'} };
+  context.done(null, res);   
 };
