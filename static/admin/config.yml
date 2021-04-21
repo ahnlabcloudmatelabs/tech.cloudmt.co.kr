@@ -13,7 +13,7 @@ collections:
   - label: "저자"
     name: "author"
     folder: "content/authors"
-    media_folder: "images"
+    media_folder: ""
     public_folder: ""
     path: "{{slug}}/index"
     create: true
@@ -54,7 +54,7 @@ collections:
         widget: "string"
       - label: "작성자 ID"
         hint: "공백 없는 영문, 숫자, 하이픈 및 언더스코어로 작성. 예: gildong-hong"
-        name: "author"
+        name: "authors"
         widget: "list"
         min: 1
         max: 1
