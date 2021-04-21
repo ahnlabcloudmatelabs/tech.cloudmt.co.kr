@@ -15,7 +15,7 @@ collections:
     folder: "content/authors"
     media_folder: ""
     public_folder: ""
-    path: "{{slug}}/index"
+    path: "{{slug}}/_index"
     create: true
     editor:
       preview: true
