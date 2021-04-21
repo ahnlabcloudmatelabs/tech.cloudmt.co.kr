@@ -6,16 +6,41 @@ backend:
   auth_endpoint: /api/auth
 
 media_folder: static/img
+locale: 'ko'
 
 collections:
-  - label: "post"
+  - label: "게시물"
     name: "post"
     folder: "content/post"
+    media_folder: "images"
+    public_folder: ""
+    path: "{{title}}/index"
     create: true
     editor:
       preview: true
     fields:
-      - {label: "제목", name: "title", widget: "string"}
-      - {label: "글 작성 일시", name: "date", widget: "datetime"}
-      - {label: "커버 이미지", name: "feature_image", widget: "image"}
-      - {label: "내용", name: "body", widget: "markdown"}
+      - label: "제목"
+        name: "title"
+        widget: "string"
+      - label: "작성자 ID"
+        name: "title"
+        widget: "string"
+      - label: "글 작성 일시"
+        name: "date"
+        widget: "datetime"
+      - label: "커버 이미지"
+        name: "feature_image"
+        widget: "image"
+      - label: "카테고리 (하나만 선택)"
+        name: "categories"
+        widget: "select"
+        options: ["Hands On", "Tech", "Column", "Mate Story"]
+        multiple: true
+        min: 1
+        max: 1
+      - label: "태그 (쉼표로 구분)"
+        name: tags
+        widget: "list"
+      - label: "내용"
+        name: "body"
+        widget: "markdown"
