@@ -5,10 +5,27 @@ backend:
   base_url:  https://tech.cloudmt.co.kr
   auth_endpoint: /api/auth
 
+publish_mode: editorial_workflow
 media_folder: static/img
 locale: 'ko'
 
 collections:
+  - label: "저자"
+    name: "author"
+    folder: "content/authors"
+    media_folder: "images"
+    public_folder: ""
+    path: "{{slug}}/index"
+    slug: "{{slug_input}}"
+    create: true
+    editor:
+      preview: true
+    fields:
+      - label: "작성자ID"
+        name: "slug_input"
+        widget: "string"
+        pattern: ['^[A-Za-z0-9-]+$', "공백 없이 영문, 숫자 및 하이픈만 허용"]
+
   - label: "게시물"
     name: "post"
     folder: "content/post"
