@@ -32,14 +32,13 @@ collections:
     media_folder: "images"
     public_folder: ""
     path: "{{slug}}/index"
-    slug: "{{slug_input}}"
     create: true
     editor:
       preview: true
     fields:
       - label: "게시물ID"
         hint: "공백 없는 영문, 숫자, 하이픈 및 언더스코어로 작성. 예: hello_blog_post"
-        name: "slug_input"
+        name: "slug"
         widget: "string"
         pattern: ['^[A-Za-z0-9-_]+$', "공백 없이 영문, 숫자, 하이픈 및 언더스코어로만 허용"]
       - label: "제목"
@@ -56,6 +55,7 @@ collections:
       - label: "커버 이미지"
         name: "feature_image"
         widget: "image"
+        required: false
       - label: "카테고리"
         hint: 하나만 선택
         name: "categories"
