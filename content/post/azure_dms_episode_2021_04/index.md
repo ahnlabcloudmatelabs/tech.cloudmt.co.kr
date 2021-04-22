@@ -6,7 +6,7 @@ authors:
 categories:
 - Tech
 date: "2021-04-21T00:00:00Z"
-draft: true
+#draft: true
 tags:
 - DB Migration
 - Azure Database Migration Service
