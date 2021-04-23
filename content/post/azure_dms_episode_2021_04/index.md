@@ -67,7 +67,7 @@ Azure 안에서 소개된 내용은,
 
 ### 사전 준비
 
-1. 네트워크 연결
+#### 1. 네트워크 연결
 - Azure DMS 에서 원본DB에 접속할 수 있도록 네트워크를 구성합니다.
 - 원본DB 내에서 백업파일(.bak)을 생성할 공유폴더를 생성하고, SQL Server 서비스의 시작계정이 해당 공유폴더에 대한 모든 권한을 갖도록 설정합니다.
 - `\\public_ip\Shared_folder` 로 접근할 수 있도록 네트워크 어댑터 안에 IPv4 항목에 DHCP 가 아닌 현재 부여받은 internal ip, public ip 를 입력합니다.  
@@ -75,7 +75,7 @@ Azure 안에서 소개된 내용은,
 > *모든 제어판 항목 > 네트워크 연결 > 특정 ethernet adapter (우클릭) 속성 > 인터넷 프로토콜 버전 4(TCP/IPv4) 속성 > 다음 IP/DNS 주소 사용에서 IP 입력 > 고급 > IP 설정 탭 > IP 주소 "추가" > public ip 입력 후 확인 > 확인 > 확인*
 ![ethernet adapter에 internal ip, public ip 고정](images/ip_fix2.png)
 
-1. **DMS**와 **migration project** 생성
+#### 2. **DMS**와 **migration project** 생성
 - DMS 리소스는 생성이 완료되는 데까지 시간이 오래 걸리니 미리 생성해놓으시는 것을 추천드립니다. (아주 오~래 걸립니다ㅠ)  
 
 > DMS 이름 입력 > 계층은 **프리미엄** (4vCore) 선택 > vnet 선택 > 태그 입력 > 검토 + 만들기
@@ -89,19 +89,22 @@ Azure 안에서 소개된 내용은,
 
 - DMP를 생성한 다음, 바로 이어서 migration wizard 가 나옵니다.  
 1) Select source: 원본DB에 대한 접속 정보 입력  
-1) Select target: 대상DB에 대한 접속 정보 입력  
+2) Select target: 대상DB에 대한 접속 정보 입력  
+
 ![원본DB, 대상DB에 대한 접속 정보 입력](images/task_01.png)  
 
-1) Select databases: migration 할 catalog를 선택  
-1) Select logins: migration 할 SQL로그인을 선택  
+3) Select databases: migration 할 catalog를 선택  
+4) Select logins: migration 할 SQL로그인을 선택  
+
 ![migration할 catalog, sql로그인 선택](images/task_015.png)  
 
-
-1) Configure migrations settings: 백업경로, 계정, SAS (share access signature) URI 입력  
+5) Configure migrations settings: 백업경로, 계정, SAS (share access signature) URI 입력  
 ※ 가장 까다로운 부분입니다.  
+
 ![Configure migrations settings](images/task_02.png)  
 
-1. Azure blob storage account
+
+#### 3. Azure blob storage account
 - 원본DB 의 백업파일(*.bak)을 만들어서 Azure 영역 안으로 가져올 때 사용될 storage account 를 생성하고 그 하위에 blob container를 생성합니다. **Large file shares** 는 **Enabled**로 설정합니다.  
 
 ![storage account 및 blob container 생성](images/storage_account_create.png)
