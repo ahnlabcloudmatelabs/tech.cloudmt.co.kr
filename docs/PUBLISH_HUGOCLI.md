@@ -1,13 +1,13 @@
-[![Azure Static Web Apps CI/CD](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml/badge.svg)](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml)
+# Hugo CLI 를 활용한 글 작성 및 게시
 
-![](docs/cmtech.png)
-# 클라우드메이트 기술 블로그
+## 글 게시 권한 획득 
 
-[Hugo](https://gohugo.io)및 [Casper3](https://github.com/jonathanjanssens/hugo-casper3) 테마 기반으로 만든 기술 블로그 입니다.
+저장소에 커밋을 직접 푸시하려면, 클라우드메이트 GitHub Organization 의 구성원 이여야 합니다.
+클라우드팀에 문의하여 본인 GitHub 계정 정보 전달 후, GitHub Organization 구성원 초대를 먼저 받으시기 바랍니다.
 
 ## 글 작성 준비
 
-Hugo, Git이 먼저 설치되어 있어야 합니다. [이 문서](https://gohugo.io/getting-started/installing/)를 참고하여 Hugo 를 먼저 설치합니다. 
+Hugo, Git, Go가 먼저 설치되어 있어야 합니다. [이 문서](https://gohugo.io/getting-started/installing/)를 참고하여 Hugo 를 먼저 설치합니다. 
 Mac, Linux 의 경우 Homebrew, Windows 의 경우 Chocolately, Scoop 활용하여 설치하는 것을 권장합니다. Git 또한 동일한 도구로 설치 가능합니다.
 
 저장소를 복제한 후, 의존성을 받습니다.
@@ -80,7 +80,3 @@ hugo serve
 게시물 파일의 Front Matter 의 `draft`가 `false` 이거나, 지워져 있는지 확인 후 `main` 브랜치에 커밋하여 푸시합니다.
 푸시되면 GitHub Actions 에 의해 자동을 빌드 및 배포가 진행됩니다.
 
-저장소에 커밋을 직접 푸시하려면, 커밋 권한을 먼저 받아야 합니다. 
-클라우드팀에 문의하여 본인 GitHub 계정 정보 전달 후, 저장소 커밋 권한을 먼저 받으시기 바랍니다.
-
-사내 기술 블로그는 양식이 따로 없습니다. 자유롭게 작성하셔서 올려주세요.

@@ -1,36 +1,39 @@
-[![Azure Static Web Apps CI/CD](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml/badge.svg)](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml)
+# Netlify CMS 를 활용한 글 작성 및 게시
 
-![](docs/cmtech.png)
-# 클라우드메이트 기술 블로그
+## 글 게시 권한 획득 
 
-[Hugo](https://gohugo.io)및 [Casper3](https://github.com/jonathanjanssens/hugo-casper3) 테마 기반으로 만든 기술 블로그 입니다.
+저장소에 커밋을 직접 푸시하려면, 클라우드메이트 GitHub Organization 의 구성원 이여야 합니다.
+클라우드팀에 문의하여 본인 GitHub 계정 정보 전달 후, GitHub Organization 구성원 초대를 먼저 받으시기 바랍니다.
 
-## 글 작성 준비
+## Netlify CMS 접속
 
-Hugo, Git이 먼저 설치되어 있어야 합니다. [이 문서](https://gohugo.io/getting-started/installing/)를 참고하여 Hugo 를 먼저 설치합니다. 
-Mac, Linux 의 경우 Homebrew, Windows 의 경우 Chocolately, Scoop 활용하여 설치하는 것을 권장합니다. Git 또한 동일한 도구로 설치 가능합니다.
+https://tech.cloudmt.co.kr/admin/ 으로 접속합니다. 화만 중앙의 `GitHub로 로그인` 버튼을 클릭하여 GitHub 계정으로 로그인 합니다.
+![](cms1.png)
+![](cms2.png)
 
-저장소를 복제한 후, 의존성을 받습니다.
-```bash
-git clone https://github.com/mate365/mate365.github.io.git
-cd mate365.github.io
-hugo mod get
-```
+블로그 CMS에 처음 로그인 한 경우 아래와 같은 권한 허가 화면이 나타납니다. `cloudmatelabs` 에 체크표가 붙어 있는지 확인 후 `Authorize cloudmatelabs` 를 클릭하여 계속합니다.
+![](cms3.png)
+
+`저장`을 눌러 저장 후, `준비됨` 상태로 설정합니다. 그리고 `게시` 버튼에서 `지금 게시` 를 클릭하여 저자 등록을 마칩니다.
 
 ## 저자 등록
-저자 등록을 하지 않았다면 먼저 합니다. 본인 이름의 로마자 표기에 공백 대신`-`를 사용한 표기법으로 폴더를 만들고 그 안에, `_index.md` 를 생성합니다.
-```bash
-# 이름이 "홍길동" 이고, 로마자 표기가 Gildong Hong 인 경우, 아래처럼 gildong-hong 으로 사용.
-hugo new --kind author authors/gildong-hong/_index.md
-```
-생성된 `_index.md` 파일을 열어. 해당 프로필 파일의 안내에 따라 프로필 이미지를 넣고 프로필 파일을 수정합니다.
-```yaml
----
-name: Author # 화면에 표시될 저자 이름
-photo: Author.jpg # 저자 프로필 이미지 경로. index.md 와 같은 폴더에 이미지를 넣고 사용합니다.
----
-저자에 대한 소개 여기에 입력. 없는 경우 지우고 비워두면 됩니다.
-```
+저자 등록을 하지 않았다면 먼저 합니다. 상단 메뉴에서 `콘텐츠` 를 선택 후, 좌측 `컬렉션` 에서 `저자` 를 선택합니다. 그리고 `새 저자 항목` 버튼을 클릭합니다.
+![](cms4.png)
+
+저자 정보를 입력합니다.
+![](cms4.png)
+
+- 저자 ID: 본인 이름의 로마자 표시 (로마자 소문자로, 공백 대신 `-`로 입력)
+  - 예: 홍길동 -> `gildong-hong`
+- 저자 이름: 블로그에 실제로 표시되는 이름 입력 (예: `홍길동`)
+- 저자 사진: 본인 프로필 사진 업로드. 
+- 저자 소개: 간단한 자기소개를 입력합니다.
+
+![](cms5.png)
+
+작성 완료 후, 저장 버튼을 눌러 저장합니다. `상태 설정`을 `준비됨`으로 설정하여 저장한 후, `게시`에서 `지금 게시`를 눌러 저자 정보를 게시합니다.
+![](cms6.png)
+
 
 ## 글 작성하기
 아래 명령을 실행하여, 게시물용 디렉터리를 생성하고 그 아래에 글 본문이 담길 `index.md`파일을 생성합니다.
@@ -80,7 +83,3 @@ hugo serve
 게시물 파일의 Front Matter 의 `draft`가 `false` 이거나, 지워져 있는지 확인 후 `main` 브랜치에 커밋하여 푸시합니다.
 푸시되면 GitHub Actions 에 의해 자동을 빌드 및 배포가 진행됩니다.
 
-저장소에 커밋을 직접 푸시하려면, 커밋 권한을 먼저 받아야 합니다. 
-클라우드팀에 문의하여 본인 GitHub 계정 정보 전달 후, 저장소 커밋 권한을 먼저 받으시기 바랍니다.
-
-사내 기술 블로그는 양식이 따로 없습니다. 자유롭게 작성하셔서 올려주세요.
