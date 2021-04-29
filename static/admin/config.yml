@@ -15,7 +15,8 @@ collections:
     folder: "content/authors"
     media_folder: ""
     public_folder: ""
-    path: "{{field.slug}}/_index"
+    path: "{{slug}}/_index"
+    slug: "{{fields.slug}}"
     create: true
     editor:
       preview: true
@@ -40,7 +41,7 @@ collections:
     folder: "content/post"
     media_folder: "images"
     public_folder: ""
-    path: "{{field.slug}}/index"
+    path: "{{slug}}/index"
     create: true
     editor:
       preview: true

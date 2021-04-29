@@ -70,6 +70,9 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 
 작성한 글을 로컬에서 미리 보려면, 아래 명령을 이용합니다.
 ```bash
+scoop install git go hugo-extended
+# Hugo 종속성을 설치
+
 hugo serve
 # 수정 하면서 미리보기 하려면 -w 옵션 사용
 # hugo serve -w
