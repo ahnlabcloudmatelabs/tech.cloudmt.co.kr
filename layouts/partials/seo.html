@@ -5,6 +5,8 @@
 <meta property="article:author" content="{{ .Params.name }}"/>
 {{ end }}
 {{ end }}
-{{ with .Params.feature_image }}
-<meta property="og:image" content="{{$.Permalink}}{{.}}" />
+{{ if .Params.feature_image }}
+<meta property="og:image" content="{{$.Permalink}}{{.Params.feature_image}}" />
+{{ else }}
+<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/render?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
 {{ end }}
