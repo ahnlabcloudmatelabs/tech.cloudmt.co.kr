@@ -6,8 +6,7 @@
 {{ end }}
 {{ end }}
 {{ if .Params.feature_image }}
-<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/article?
-    title={{ .Title }}&authors={{ .Params.name }}&sitename={{ .Site.Params.title }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}&logoimgurl={{"/assets/images/cmtech.png"| absURL }}' />
+<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/article?title={{ .Title }}&authors={{ .Params.name }}&sitename={{ .Site.Params.title }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}&logoimgurl={{"/assets/images/cmtech.png"| absURL }}' />
 
 {{ else }}
 <meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
