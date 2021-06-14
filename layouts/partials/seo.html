@@ -1,13 +1,16 @@
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+
+{{ $str_authors := "" }}
 {{ range .Params.authors }}
 {{- with $.Site.GetPage "taxonomyTerm" (printf "authors/%s" (urlize .)) }}
 <meta property="article:author" content="{{ .Params.name }}"/>
+{{ $str_authors = print $str_authors .Params.name   }}
 {{ end }}
 {{ end }}
-{{ if .Params.feature_image }}
-<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/article?title={{ .Title }}&authors={{ .Params.name }}&sitename={{ .Site.Params.title }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}&logoimgurl={{"/assets/images/cmtech.png"| absURL }}' />
 
+{{ if .Params.feature_image }}
+<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/article?title={{ .Title }}&authors={{ $str_authors }}&sitename={{ .Site.Title }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}&logoimgurl={{"/assets/images/cmtech.png"| absURL }}' />
 {{ else }}
 <meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
 {{ end }}
