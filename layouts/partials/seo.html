@@ -10,7 +10,7 @@
 {{ end }}
 
 {{ if .Params.feature_image }}
-<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/CMLOGO_WHITE.png"| absURL }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}' />
+<meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}' />
 {{ else }}
 <meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
 {{ end }}
