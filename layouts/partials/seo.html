@@ -1,5 +1,8 @@
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title:title" content="{{ .Title }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
+<meta property="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}" />
 
 {{ $str_authors := "" }}
 {{ range .Params.authors }}
@@ -11,6 +14,9 @@
 
 {{ if .Params.feature_image }}
 <meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}' />
+<meta property="twitter:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}&bgimgurl={{$.Permalink}}{{.Params.feature_image}}' />
+
 {{ else }}
 <meta property="og:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
+<meta property="twitter:image" content='https://cmsrvogimg.azurewebsites.net/api/basic?text={{ .Title }}&imgurl={{"/assets/images/cmtech.png"| absURL }}' />
 {{ end }}
