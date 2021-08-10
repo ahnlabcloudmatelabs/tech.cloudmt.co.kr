@@ -10,7 +10,6 @@ categories:
 
 # 소개
 
-
 ## SonarQube
 
 ![](images/sonarqube-logo-white-256-px.png)
@@ -44,39 +43,36 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 ![](images/image-20210810164656411.png)
 
-저희는 VPN 구성을 해야하는 상황이었기에, VPC Peering Connection을 먼저 구성하고,  실습을 진행해야 했었습니다. 실습에 필요한 일반적인 네트워크에 필요한 리소스는 다음과 같습니다.
+저희는 VPN 구성을 해야하는 상황이었기에, VPC Peering Connection을 먼저 구성하고 실습을 진행해야 했었습니다. 실습에 필요한 일반적인 네트워크에 필요한 리소스는 다음과 같습니다.
 
 * CodeBuild VPC : 10.1.0.0/16
+
   * Private subnet
   * Public subnet
+
     * NAT Gateway 
   * Internet Gateway
-
 * SonarQube VPC : 10.0.0.0/16
-  * Private subnet
 
+  * Private subnet
 * VPC Peering Connection
 
----
+- - -
 
 * CodeBuild VPC - Public Subnet Route Table
 
 | Destination | Target                 |
 | ----------- | ---------------------- |
 | 10.1.0.0/16 | local                  |
-| 0.0.0.0/0   | igw-인터넷 게이트웨이  |
+| 0.0.0.0/0   | igw-인터넷 게이트웨이          |
 | 10.0.0.0/16 | pcx-Peering Connection |
-
-
 
 * CodeBuild VPC - Private Subnet Route Table
 
-| Destination | Target             |
-| ----------- | ------------------ |
-| 10.1.0.0/16 | local              |
+| Destination | Target        |
+| ----------- | ------------- |
+| 10.1.0.0/16 | local         |
 | 0.0.0.0/0   | nat-NAT 게이트웨이 |
-
-
 
 * SonarQube VPC - Private Subnet Route Table
 
@@ -85,33 +81,25 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 | 10.0.0.0/16 | local                  |
 | 10.1.0.0/0  | pcx-Peering Connection |
 
-
-
-
-
 CodeBuild Agent는 반드시 Private subnet에 위치되어야 합니다. 
 
 SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 놓여도 상관없지만, Private subnet에 놓이는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
 
-
-
 **현재 실습에 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
 
 * SonarQube VPC : 10.0.0.0/16
+
   * Public subnet
 * Internet Gateway 
-
 * SonarQube VPC - Public Subnet Route Table
 
 | Destination | Target                 |
 | ----------- | ---------------------- |
 | 10.0.0.0/16 | local                  |
-| 0.0.0.0/0   | igw-인터넷 게이트웨이  |
+| 0.0.0.0/0   | igw-인터넷 게이트웨이          |
 | 10.1.0.0/0  | pcx-Peering Connection |
 
 CodeBuild Agent --> SonarQube Instance 통신은 <private IPv4 주소>:9000 으로, 유저 --> 아웃바운드 통신은 <Public IPv4 주소>:9000 으로 접속하여 가입 및 코드 정적 분석 내역 확인을 합니다.
-
-
 
 - - -
 
@@ -163,7 +151,7 @@ admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성
 
 ## 테스트 리소스 구성
 
-<img src="/Users/sanghyeok.lim/Library/Mobile Documents/com\\\~apple\\\~CloudDocs/Documents/images/template1-designer (1).png" alt="template1-designer (1)" style="zoom: 50%;" />
+<img src="/Users/sanghyeok.lim/Library/Mobile Documents/com\\\\~apple\\\\~CloudDocs/Documents/images/template1-designer (1).png" alt="template1-designer (1)" style="zoom: 50%;" />
 
 * CodeCommit repository
 * Secrets Manager secret (to store and manage your SonarQube user credentials)
