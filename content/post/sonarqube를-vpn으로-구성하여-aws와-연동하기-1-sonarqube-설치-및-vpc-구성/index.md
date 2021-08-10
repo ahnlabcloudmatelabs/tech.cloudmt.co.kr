@@ -10,6 +10,7 @@ categories:
 
 # 소개
 
+
 ## SonarQube
 
 ![](images/sonarqube-logo-white-256-px.png)
@@ -40,6 +41,8 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 # 환경 구성
 
 ## VPC 및 VPC Peering
+
+![](images/image-20210810164656411.png)
 
 - - -
 
