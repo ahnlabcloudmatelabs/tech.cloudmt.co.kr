@@ -1,5 +1,5 @@
 ---
-title: SonarQube를 VPN으로 구성하여 AWS와 연동하기 - 1. SonarQube 설치 및 VPC 구성
+title: SonarQube를 VPN으로 구성하여 AWS와 연동 - 1. SonarQube 설치 및 VPC 구성
 authors:
   - dongwook-kim
 date: 2021-08-09T08:44:30.241Z
