@@ -1,5 +1,5 @@
 ---
-title: SonarQube를 VPN으로 구성하여 AWS와 연동 - 1. SonarQube 설치 및 VPC 구성
+title: AWS VPC를 활용한 SonarQube와 AWS 연동 - 1
 authors:
   - sanghyeok-lim
 date: 2021-08-09T08:44:30.241Z
@@ -10,30 +10,28 @@ categories:
 
 ## SonarQube
 
-![](images/sonarqube-logo-white-256-px.png)
+![img](images/sonarqube-logo-white-256-px.png)
 
 SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜, 보안 취약점을 발견할 목적으로 정적 코드 분석으로 자동 리뷰를 수행하기 위한 지속적인 코드 품질 검사용 오픈 소스 플랫폼입니다. 중복 코드, 코딩 표준, 유닛 테스트, 코드 커버리지 등 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다.
 
-이 포스팅에서는 Private Zone에 위치하는 SonarQube의 코드정적분석결과를 통해 안전한 지속배포환경을 구축하고자 합니다.  
+이 포스팅에서는 Private Zone에 위치하는 SonarQube의 코드 정적분석 결과를 통해 안전한 CI/CD 환경을 구축하고자 합니다.
 
 ## 상황
 
-> SonarQube가 On-premises Private Zone에 있고, AWS CodeCommit을 사용하여 AWS에서 개발중입니다. 하지만, SonarQube가 AWS CodeCommit을 정식 지원하지 않고, Private Zone에 있어 코드 정적 분석이 어렵습니다.
+> SonarQube가 On-premises Private Zone에 있고, AWS CodeCommit을 사용하여 AWS에서 개발중입니다. 하지만, SonarQube가 AWS CodeCommit을 정식 지원하지 않고, Private Zone에 있어 코드 정적 분석이 어렵습니다.  
 
 ## 해결방안
 
 1. AWS CodeCommit에 Commit
 2. AWS CodePipeline에서 설정된 CloudWatch Event Role에 의해 AWS CodeBuild 호출
 3. AWS CodeBuild의 buildspec.yaml을 통해 pre-build에서 SonarQube에 Source Code를 전달하여 정적 분석
-4. SonarQube에서 분석된 내용을 기반으로 AWS CodeCommit에 메시지를 추가하여 Commit 혹은 AWS CodePipeline 에 의해 지속적인 배포 진행
+4. SonarQube에서 분석된 내용을 기반으로 AWS CodeCommit에 메시지를 추가하여 Commit 혹은 AWS CodePipeline에 의해 지속적인 배포 진행
 
-이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이 때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.
+이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이 때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.  
 
 ## 구성도
 
-![image-20210810124902765](images/image-20210810124902765.png)
-
-예시 다이어그램 (바꿔야됨)
+![image-20210810124902765](blob:https://tech.cloudmt.co.kr/c240b4f0-f30b-49f1-86ed-7d133ec0ee3f)
 
 - - -
 
@@ -41,9 +39,9 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 ## VPC 및 VPC Peering
 
-![](images/image-20210810164656411.png)
+![img](blob:https://tech.cloudmt.co.kr/2c744fd3-b2aa-4cb2-adf6-5653e6c482ce)
 
-저희는 VPN 구성을 해야하는 상황이었기에, VPC Peering Connection을 먼저 구성하고 실습을 진행해야 했었습니다. 실습에 필요한 일반적인 네트워크에 필요한 리소스는 다음과 같습니다.
+저희는 VPN 구성을 해야하는 상황이었기에, VPC Peering Connection을 먼저 구성하고 실습을 진행했습니다. 실습에 필요한 일반적인 네트워크에 필요한 리소스는 다음과 같습니다.
 
 * CodeBuild VPC : 10.1.0.0/16
 
@@ -83,9 +81,9 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 CodeBuild Agent는 반드시 Private subnet에 위치되어야 합니다. 
 
-SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 놓여도 상관없지만, Private subnet에 놓이는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
+SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
 
-**현재 실습에 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
+**현재 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
 
 * SonarQube VPC : 10.0.0.0/16
 
@@ -99,7 +97,7 @@ SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디�
 | 0.0.0.0/0   | igw-인터넷 게이트웨이          |
 | 10.1.0.0/0  | pcx-Peering Connection |
 
-CodeBuild Agent --> SonarQube Instance 통신은 <private IPv4 주소>:9000 으로, 유저 --> 아웃바운드 통신은 <Public IPv4 주소>:9000 으로 접속하여 가입 및 코드 정적 분석 내역 확인을 합니다.
+CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적 분석 내역 확인을 합니다.
 
 - - -
 
@@ -107,23 +105,23 @@ CodeBuild Agent --> SonarQube Instance 통신은 <private IPv4 주소>:9000 으�
 
 테스트 환경을 위해 SonarQube를 EC2 인스턴스로 구성합니다.
 
-> AMI: Amazon Linux 2 AMI Instance 
+> AMI: Amazon Linux 2 AMI Instance
 > Type: t2.medium 
 > VPC: \[VPN 환경을 위한 VPC] 
 > Auto-assign Public IP: Enable 
 > Security Group: SSH, TCP 9000 port Open
 
-![instance-1](images/instance-1.png)
+![instance-1](blob:https://tech.cloudmt.co.kr/19b28440-140a-41d0-8232-10d2beb12a80)
 
-![instance-2](images/instance-2.png)
+![instance-2](blob:https://tech.cloudmt.co.kr/4d399a82-661c-432d-a9a4-97941cdab69d)
 
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
 또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
 
-![instance-3](images/instance-3.png)
+![instance-3](blob:https://tech.cloudmt.co.kr/6939ae50-6444-46b3-aa67-34aef66e9414)
 
-SonarQube 웹서버 접속을 위해 9000번 포트를 허용한 구성입니다.
+SonarQube 웹서버 접속을 위해 9000번 포트를 허용합니다.
 
 ### SonarQube 설치 및 실행
 
@@ -141,22 +139,22 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 
 다운로드 받은 SonarQube 압축을 풀고 실행합니다.
 
-![sonarqube-1](images/sonarqube-1.png)
+![sonarqube-1](blob:https://tech.cloudmt.co.kr/7bbd51b5-b2e8-4898-85a6-68b8220e3b05)
 
 초기 ID/PW는 admin/admin입니다.
 
-![sonarqube-2](images/sonarqube-2.png)
+![sonarqube-2](blob:https://tech.cloudmt.co.kr/d6739d45-7755-4796-a8d7-26e7cb03d097)
 
 admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성하여 테스트를 진행합니다.
 
 ## 테스트 리소스 구성
 
-![](images/template1-designer-1-.png)
+![img](blob:https://tech.cloudmt.co.kr/2848744e-89b2-429e-b77e-4377abcf9c9c)
 
 * CodeCommit repository
-* Secrets Manager secret (to store and manage your SonarQube user credentials)
+* Secrets Manager secret
 * CodeBuild project
-* CloudWatch Events rule (to trigger builds when pull requests are created or updated)
+* CloudWatch Events rule
 * IAM role (for CodeBuild to assume)
 * IAM role (for CloudWatch Events to assume and invoke CodeBuild)
 
@@ -184,9 +182,9 @@ Parameters:
     NoEcho: true
 ```
 
-CloudFormation Stack에서 사용될 파라미터 값들입니다. 리포지토리 이름, 설명과 앞서 만든 SonarQube Test 계정의 ID와 PW값을 입력 받습니다.
+CloudFormation 스택에서 사용될 파라미터 값들입니다. 리포지토리 이름, 설명과 앞서 만든 SonarQube Test 계정의 ID와 PW값을 입력 받습니다.
 
-### Secrets Manager secret (to store and manage your SonarQube user credentials)
+### Secrets Manager secret
 
 ```yaml
 SonarQubeUserSecret:
@@ -196,7 +194,7 @@ SonarQubeUserSecret:
       SecretString: !Sub '{"username":"${SonarQubeUserName}","password":"${SonarQubePassword}"}'
 ```
 
-CloudFormation Stack 생성시 입력받은 SonarQube username과 password로 Secrets Manager 리소스를 만드는 구문입니다.
+Secrets Manager는 SonarQube 사용자 자격 증명을 저장 및 관리를 위해 사용합니다. CloudFormation 스택 생성시 입력받은 SonarQube username과 password로 Secrets Manager 리소스를 생성합니다.
 
 ```yaml
 SonarQubeUserSecretResourcePolicy:
@@ -250,7 +248,7 @@ CodeCommit의 리포지토리를 생성하기 위한 구문입니다.
 CodeBuildProject:
     Type: 'AWS::CodeBuild::Project'
     Properties:
-			...
+            ...
       Description: !Sub 'SonarQube analysis for repository ${CodeCommitRepositoryName}'
       Environment:
         ComputeType: BUILD_GENERAL1_MEDIUM
@@ -269,7 +267,7 @@ CodeBuild 프로젝트를 생성하기 위한 구문입니다. CodeBuild에서 �
 
 > `GetAtt` 함수는 템플릿의 리소스에서 특성값을 반환합니다.
 
-### IAM role (for CodeBuild to assume)
+### CodeBuild IAM role
 
 ```yaml
 CodeBuildRole:
@@ -297,9 +295,9 @@ CodeBuildRole:
                 Resource: !Ref SonarQubeUserSecret
 ```
 
-STS는 CodeCommit 승인규칙 템플릿의 임시자격을 위해 설정합니다. Policy 부분은 CodeCommit에서 작성된 승인규칙에 따라 승인여부와 메시지 작성 Action, Pull Action, 다음에서 설명 할 Secret Manager에 저장된 Value값들을 가져오는 것을 허용해주는 구문입니다.
+CodeBuild IAM Role을 생성합니다. Policy 부분은 CodeCommit에서 작성된 승인규칙에 따라 승인여부와 메시지 작성 Action, Pull Action, 다음에서 설명 할 Secret Manager에 저장된 Value값들을 가져오는 것을 허용합니다.
 
-### CloudWatch Events rule (to trigger builds when pull requests are created or updated)
+### CloudWatch Events rule
 
 ```yaml
 PullRequestTriggerCodeBuildRule:
@@ -364,9 +362,9 @@ PullRequestTriggerCodeBuildRule:
               revisionId: "$.detail.revisionId"
 ```
 
-CodeCommit의 Pull Request를 트리거할 Rule을 생성하는 구문입니다. CodeCommit의 Pull Request 상태변화인 Pull Request 생성과 브랜치의 업데이트가 있을 때 이벤트가 발생합니다. 이벤트 발생 후 `Targets`인 CodeBuild 프로젝트에 빌드에 필요한 환경변수들을 전달합니다.
+CloudWatch Events rule은 CodeCommit의 Pull Request를 트리거할 Rule을 생성하기위해 사용합니다. CodeCommit의 Pull Request 생성과 브랜치의 업데이트가 있을 때 이벤트가 발생합니다. 이벤트 발생 후 `Targets`인 CodeBuild 프로젝트에 빌드에 필요한 환경변수들을 전달합니다.
 
-### IAM role (for CloudWatch Events to assume and invoke CodeBuild)
+### CloudWatch Event IAM role
 
 ```yaml
 CloudWatchEventsCodeBuildRole:
@@ -387,3 +385,17 @@ CloudWatchEventsCodeBuildRole:
 Pull Request 트리거로부터 이벤트가 발생되면, CodeBuild가 빌드를 시작하게 해주는 Role입니다. 대상 리소스는 CloudFormation에서 생성된 CodeBuild Project입니다.
 
 - - -
+
+## 테스트 리소스 생성
+
+![image-20210811093829980](images/image-20210811093829980.png)
+
+앞서 작성한 CloudFormation 템플릿을 사용해 스택을 생성하여 리소스들을 생성합니다.
+
+![image-20210811094606263](images/image-20210811094606263.png)
+
+Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력하고, 스택을 생성합니다.
+
+![image-20210811095019365](images/image-20210811095019365.png)
+
+테스트에서 사용할 리소스들이 모두 생성되었습니다.
