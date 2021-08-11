@@ -121,7 +121,7 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 
 ![instance-3](blob:https://tech.cloudmt.co.kr/6939ae50-6444-46b3-aa67-34aef66e9414)
 
-SonarQube 웹서버 접속을 위해 9000번 포트를 허용합니다.
+SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.
 
 ### SonarQube 설치 및 실행
 
@@ -141,7 +141,7 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 
 ![sonarqube-1](blob:https://tech.cloudmt.co.kr/7bbd51b5-b2e8-4898-85a6-68b8220e3b05)
 
-초기 ID/PW는 admin/admin입니다.
+초기 ID/PW는 `admin/admin`입니다.
 
 ![sonarqube-2](blob:https://tech.cloudmt.co.kr/d6739d45-7755-4796-a8d7-26e7cb03d097)
 
@@ -149,7 +149,7 @@ admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성
 
 ## 테스트 리소스 구성
 
-![img](blob:https://tech.cloudmt.co.kr/2848744e-89b2-429e-b77e-4377abcf9c9c)
+![](images/template1-designer-1-.png){: width="200" height="200"}
 
 * CodeCommit repository
 * Secrets Manager secret
@@ -392,10 +392,12 @@ Pull Request 트리거로부터 이벤트가 발생되면, CodeBuild가 빌드�
 
 앞서 작성한 CloudFormation 템플릿을 사용해 스택을 생성하여 리소스들을 생성합니다.
 
+
 ![image-20210811094606263](images/image-20210811094606263.png)
 
 Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력하고, 스택을 생성합니다.
 
+
 ![image-20210811095019365](images/image-20210811095019365.png)
 
-테스트에서 사용할 리소스들이 모두 생성되었습니다.
+이상으로 테스트에서 사용할 리소스들이 모두 생성되었습니다. 본격적인 SonarQube의 정적 분석결과를 토대로 CodeCommit 승인규칙과 소스 업데이트, 배포는 다음편에서 이어집니다. 읽어주셔서 감사합니다.
