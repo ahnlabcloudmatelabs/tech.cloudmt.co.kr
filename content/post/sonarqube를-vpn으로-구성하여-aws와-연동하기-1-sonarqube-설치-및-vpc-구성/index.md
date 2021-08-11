@@ -6,8 +6,6 @@ date: 2021-08-09T08:44:30.241Z
 categories:
   - Hands On
 ---
-# On-Premises 환경 SonarQube와 AWS VPC 연동
-
 # 소개
 
 ## SonarQube
@@ -15,6 +13,8 @@ categories:
 ![](images/sonarqube-logo-white-256-px.png)
 
 SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜, 보안 취약점을 발견할 목적으로 정적 코드 분석으로 자동 리뷰를 수행하기 위한 지속적인 코드 품질 검사용 오픈 소스 플랫폼입니다. 중복 코드, 코딩 표준, 유닛 테스트, 코드 커버리지 등 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다.
+
+이 포스팅에서는 Private Zone에 위치하는 SonarQube의 코드정적분석결과를 통해 안전한 지속배포환경을 구축하고자 합니다.  
 
 ## 상황
 
@@ -113,15 +113,15 @@ CodeBuild Agent --> SonarQube Instance 통신은 <private IPv4 주소>:9000 으�
 > Auto-assign Public IP: Enable 
 > Security Group: SSH, TCP 9000 port Open
 
-![instance-1](/Users/sanghyeok.lim/Library/Mobile Documents/com~apple~CloudDocs/Documents/images/instance-1.png)
+![instance-1](images/instance-1.png)
 
-![instance-2](/Users/sanghyeok.lim/Library/Mobile Documents/com~apple~CloudDocs/Documents/images/instance-2.png)
+![instance-2](images/instance-2.png)
 
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
 또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
 
-![instance-3](/Users/sanghyeok.lim/Library/Mobile Documents/com~apple~CloudDocs/Documents/images/instance-3.png)
+![instance-3](images/instance-3.png)
 
 SonarQube 웹서버 접속을 위해 9000번 포트를 허용한 구성입니다.
 
@@ -141,17 +141,17 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 
 다운로드 받은 SonarQube 압축을 풀고 실행합니다.
 
-![sonarqube-1](/Users/sanghyeok.lim/Library/Mobile Documents/com~apple~CloudDocs/Documents/images/sonarqube-1.png)
+![sonarqube-1](images/sonarqube-1.png)
 
 초기 ID/PW는 admin/admin입니다.
 
-![sonarqube-2](/Users/sanghyeok.lim/Library/Mobile Documents/com~apple~CloudDocs/Documents/images/sonarqube-2.png)
+![sonarqube-2](images/sonarqube-2.png)
 
 admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성하여 테스트를 진행합니다.
 
 ## 테스트 리소스 구성
 
-<img src="/Users/sanghyeok.lim/Library/Mobile Documents/com\\\\~apple\\\\~CloudDocs/Documents/images/template1-designer (1).png" alt="template1-designer (1)" style="zoom: 50%;" />
+![](images/template1-designer-1-.png)
 
 * CodeCommit repository
 * Secrets Manager secret (to store and manage your SonarQube user credentials)
