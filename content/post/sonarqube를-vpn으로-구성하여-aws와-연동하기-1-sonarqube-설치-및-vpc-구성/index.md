@@ -35,7 +35,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 ## 구성도
 
-![image-20210810124902765](blob:https://tech.cloudmt.co.kr/c240b4f0-f30b-49f1-86ed-7d133ec0ee3f)
+![image-20210810124902765](images/image-20210810124902765.png)
 
 - - -
 
@@ -43,7 +43,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 ## 1. VPC 및 VPC Peering
 
-![img](blob:https://tech.cloudmt.co.kr/2c744fd3-b2aa-4cb2-adf6-5653e6c482ce)
+![img](images/image-20210810164656411.png)
 
 저희는 VPN 구성을 해야 하는 상황이었기에, VPC Peering Connection을 먼저 구성하고 실습을 진행했습니다. 실습에 필요한 일반적인 네트워크에 필요한 리소스는 다음과 같습니다.
 
@@ -115,15 +115,15 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 > Auto-assign Public IP: Enable 
 > Security Group: SSH, TCP 9000 port Open
 
-![instance-1](blob:https://tech.cloudmt.co.kr/19b28440-140a-41d0-8232-10d2beb12a80)
+![instance-1](images/instance-1.png)
 
-![instance-2](blob:https://tech.cloudmt.co.kr/4d399a82-661c-432d-a9a4-97941cdab69d)
+![instance-2](images/instance-2.png)
 
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
 또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
 
-![instance-3](blob:https://tech.cloudmt.co.kr/6939ae50-6444-46b3-aa67-34aef66e9414)
+![instance-3](images/instance-3.png)
 
 SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.
 
@@ -143,17 +143,17 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 
 다운로드 받은 SonarQube 압축을 풀고 실행합니다.
 
-![sonarqube-1](blob:https://tech.cloudmt.co.kr/7bbd51b5-b2e8-4898-85a6-68b8220e3b05)
+![sonarqube-1](images/sonarqube-1.png)
 
 초기 ID/PW는 `admin/admin`입니다.
 
-![sonarqube-2](blob:https://tech.cloudmt.co.kr/d6739d45-7755-4796-a8d7-26e7cb03d097)
+![sonarqube-2](images/sonarqube-2.png)
 
 admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성하여 테스트를 진행합니다.
 
 ## 3. 테스트 리소스 구성
 
-![](images/template1-designer-1-.png){: width="200" height="200"}
+![](images/template1-designer-1-.png)
 
 * CodeCommit repository
 * Secrets Manager secret
@@ -396,15 +396,12 @@ Pull Request 트리거로부터 이벤트가 발생면, CodeBuild가 빌드를 �
 
 앞서 작성한 CloudFormation 템플릿을 사용해 스택을 생성하여 리소스들을 생성합니다.
 
-
 ![image-20210811094606263](images/image-20210811094606263.png)
 
 Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력하고, 스택을 생성합니다.
 
-
 ![image-20210811095019365](images/image-20210811095019365.png)
 
 이상으로 테스트에서 사용할 리소스들이 작성한 CloudFormation 템플릿에 의해 모두 성공적으로 생성되었습니다.
- 
 
 이번 포스팅에서는 테스트 환경을 구성을 완료했습니다. 다음 포스팅에서는 앞서 만든 리소스들을 사용하여, CodeCommit의 소스 업데이트가 발생 시, SonarQube 정적분석 결과로 CodeDeploy를 이용한 지속적인 서비스 배포를 다뤄보겠습니다.
