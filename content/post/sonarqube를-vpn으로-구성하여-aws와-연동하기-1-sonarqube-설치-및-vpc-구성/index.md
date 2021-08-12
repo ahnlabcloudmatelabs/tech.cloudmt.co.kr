@@ -170,7 +170,7 @@ admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성
 Parameters:
   CodeCommitRepositoryName:
     Type: String
-    Default: Sanghyeok-SQ-PullRequestApprover
+    Default: sonarqube-repo-test
   CodeCommitRepositoryDescription:
     Type: String
     Default: A Maven Java project with a SonarQube analysis integration
@@ -233,8 +233,8 @@ CodeCommitRepository:
       RepositoryDescription: !Ref CodeCommitRepositoryDescription
       Code:
         S3:
-          Bucket: sanghyeok-sq-bucket
-          Key: sanghyeok-sq-repository.zip
+          Bucket: sonarqube-repo-test
+          Key: sonarqube-repo-test.zip
 ```
 
 CodeCommit의 리포지토리를 생성하기 위한 구문입니다. 
