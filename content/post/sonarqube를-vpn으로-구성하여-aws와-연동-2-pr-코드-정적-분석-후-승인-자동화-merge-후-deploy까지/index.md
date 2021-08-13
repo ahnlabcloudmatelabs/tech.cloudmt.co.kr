@@ -8,27 +8,24 @@ categories:
 ---
 이번 포스팅에서는 본격적으로 소스 업로드부터 코드 정적 분석을 거쳐 배포하는 과정의 자동화를 구성해보도록 하겠습니다. 목차는 다음과 같습니다.
 
-1. **개요 구성도**
+1. 개요 구성도
 2. CI 구성하기
-
-   1. **Approval Rule 생성** 및 **테스트 브랜치 생성** 및 **PR 요청**
-   2. CodeBuild - 빌드 진행 확인,  분석 결과 확인, Merge 하기
-   3. Approval Rule 생성
-   4. 테스트 브랜치 생성
-   5. PR 요청
-   6.
+   a. Approval Rule 생성 및 테스트 브랜치 생성 및 PR 요청
+   b. CodeBuild - 빌드 진행 확인,  분석 결과 확인, Merge 하기
+   c. Approval Rule 생성
+   d. 테스트 브랜치 생성
+   e. PR 요청
 3. CD 구성하기
+   a. CodePipeline으로 배포 자동화 구성하기 이전에 배포할 환경 구성하기
+   b. Merge 하여 CodePipeline으로 배포하기
 
-   1. CodePipeline으로 배포 자동화 구성하기 이전에 배포할 환경 구성하기
-   2. Merge 하여 CodePipeline으로 배포하기
-
-들어가기 전 
+# 들어가기 전 
 
 본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 : <URL>
 
 본 실습은 AWS 콘솔에서 진행되며, 콘솔의 언어는 영어로 진행됩니다. 콘솔 웹페이지 좌측 하단에서 언어를 변경하실 수 있습니다. 
 
-1. 개요 구성도
+# 1. 개요 구성도
 
    ![](images/image-20210810124902765.png)
 
@@ -57,15 +54,15 @@ categories:
    | **Open**                 | **사람이 승인해주기 이전에, 애초에 코드 분석 단계부터 Failed 한 상황입니다.**                                                | **SonarQube가 승인해주었지만, 유저가 Merge를 하지 않은 상태입니다.**                           |
    | **Closed**               | SonarQube가 통과되지 못하여, 테스트 브랜치에 한번 더 git push하게 되면 이전 Pull Request에서 보실 수 있습니다.                    | 소나큐브의 분석은 통과되었지만, Merge를 하지 않고 git push하게 되면 이전 Pull Request에서 보실 수 있습니다. |
    | **Merged**               | SonarQube가 통과시키지 않았는데, 특별한 이유로 유저가 강제로 Merge 한 경우입니다. (**Override approval rules**를 한 경우 가능합니다.) | **SonarQube가 승인해주고, 유저도 Merge 시킨 상황입니다.** 테스트 브랜치의 코드가 마스터 브랜치로 이동될 것입니다. |
-2. CI 구성하기
+## 2. CI 구성하기
 
    먼저 Cloudformation - Stacks - <본인 스택 이름> - Resources 를 보시면 한눈에 리소스를 보실 수 있습니다.
 
-   ![](images/03-cf-resource.png)
+   ![03](images/03-cf-resource.png)
 
    {사진 3. 클라우드포메이션 리소스}
 
-   a-1. Approval Rule 생성하기
+### a. Approval Rule 생성하기
 
    CI/CD 구성을 위한 핵심적인 역할입니다. 브랜치 코드가 SonarQube가 담당하는 조건에 부합하는지 판단하기 위한 룰을 추가해야 합니다. 담당자는 사람이 아닌 Codebuild Role이 되겠습니다. 
 
@@ -101,7 +98,7 @@ categories:
 
    Approver pool member의 Value : arn:aws:sts::<Account>:assumed-role/<Role name>/*
 
-   a-2. 테스트 브랜치 생성
+###   b. 테스트 브랜치 생성
 
    새로운 브랜치를 하나 생성합니다. CodeCommit - <생성된 레포지토리> 로 접근하면 좌측 네비게이션 메뉴에 Branches로 접근이 가능합니다. 이곳에서 Create branch를 눌러 브랜치 이름(e.g. test)을 입력 후, Branch from은 main으로 설정합니다. 
 
@@ -109,7 +106,7 @@ categories:
 
    {사진 4. 브랜치 생성}
 
-   a-3. 테스트 브랜치 코드 수정
+###   c. 테스트 브랜치 코드 수정
 
    위의 흐름대로 잘 진행되는지 확인하기 위해, 테스트 브랜치의 코드를 수정하여 push하는 간단한 테스트를 해보겠습니다. Codecommit - Repositories - <본인의 테스트 브랜치> 를 선택하여 buildspec.yaml 파일에 접근합니다.
 
@@ -125,11 +122,11 @@ categories:
 
    그 후 github에서 커밋 작성하는 것 처럼, 사용자의 이름과 이메일 주소, 적절한 커밋 메시지(e.g. `Modified: buildspec.yml`)를 작성 후 저장합니다.
 
-   a-4. Pull Request 생성
+###   d. Pull Request 생성
 
-   a-2에 이어서 좌측 네비게이션 메뉴에서 Pull Request를 들어가 Create pull request를 클릭합니다. Destination은 main, Source는 <본인의 테스트 브랜치 e.g. test> 로 선택 후 Compare 합니다.
+   b에 이어서 좌측 네비게이션 메뉴에서 Pull Request를 들어가 Create pull request를 클릭합니다. Destination은 main, Source는 <본인의 테스트 브랜치 e.g. test> 로 선택 후 Compare 합니다.
 
-   ![](images/06-createpullrequest.png)
+   ![06](images/06-createpullrequest.png)
 
    {사진 6. 풀리퀘 생성}
 
