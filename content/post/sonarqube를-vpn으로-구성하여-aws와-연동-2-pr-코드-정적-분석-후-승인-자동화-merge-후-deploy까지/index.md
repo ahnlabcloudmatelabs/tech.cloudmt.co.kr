@@ -30,9 +30,11 @@ categories:
 
 1. 개요 구성도
 
-   ![01](images/01-flowchart.png)
+   ![](images/image-20210810124902765.png)
 
    {사진 0. AWS 플로우차트}
+
+   ![01](images/01-flowchart.png)
 
    {사진 1. GIT 플로우차트}
 
@@ -90,8 +92,6 @@ categories:
    `arn:aws:sts::<Your AccountId>:assumed-role/<Your CodeBuild IAM role name>/*`
 
    \[테이블 2. IAM ARN과 STS ARN 값 비교] 
-
-
 
    | Role ARN                        | arn:aws:iam::<Account>:role/<Role name>               |
    | ------------------------------- | ----------------------------------------------------- |
