@@ -19,7 +19,7 @@ categories:
    a. CodePipeline으로 배포 자동화 구성하기 이전에 배포할 환경 구성하기
    b. Merge 하여 CodePipeline으로 배포하기
 
-# 들어가기 전 
+# 들어가기 전
 
 본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 : <URL>
 
@@ -27,40 +27,33 @@ categories:
 
 # 1. 개요 구성도
 
-   ![](images/image-20210810124902765.png)
-
-   {사진 0. AWS 플로우차트}
+   ![00](images/image-20210810124902765.png)
 
    ![01](images/01-flowchart.png)
 
-   {사진 1. GIT 플로우차트}
-
-   1. 최초 CodeCommit의 레포지토리에 코드가 저장되어 있습니다.
-   2. 임의의 유저가 테스트 브랜치를 만들어 코드를 git push 합니다.
-   3. CodeBuild의 타겟 브랜치에 대해 CodeBuild가 실행되어 SonarQube를 설치하는 도커 컨테이너를 통해 코드 정적 분석이 진행됩니다.
-   4. 끝내 코드 분석이 통과되면, 승인자가 테스트 브랜치에서 메인 브랜치로 Merge 합니다.
-   5. 메인 브랜치의 변화가 일어났으므로 CodePipeline을 통해 CodeDeploy가 진행되어 배포 환경에 배포됩니다.
+1. 최초 CodeCommit의 레포지토리에 코드가 저장되어 있습니다.
+2. 임의의 유저가 테스트 브랜치를 만들어 코드를 git push 합니다.
+3. CodeBuild의 타겟 브랜치에 대해 CodeBuild가 실행되어 SonarQube를 설치하는 도커 컨테이너를 통해 코드 정적 분석이 진행됩니다.
+4. 끝내 코드 분석이 통과되면, 승인자가 테스트 브랜치에서 메인 브랜치로 Merge 합니다.
+5. 메인 브랜치의 변화가 일어났으므로 CodePipeline을 통해 CodeDeploy가 진행되어 배포 환경에 배포됩니다.
 
    SonarQube가 테스트 브랜치의 코드 분석이 승인하면, Pull Request의 Approval Status가 Approved됩니다. 이후 승인된 코드에 대해 유저가 Merge 시킬지 말지를 결정합니다.유저가 Merge 하면 테스트 브랜치의 코드가 메인 브랜치로 코드가 복사됩니다.
 
    ![02](images/02-prstatus.png)
 
-   {사진 2. PR status 설명}
+\[테이블 1. 풀리퀘스트 Status와 Approval status]
 
-   \[테이블 1. 풀리퀘스트 Status와 Approval status]
+| Status \ Approval Status | 0 of 1 rules satisfied                                                                           | Approved                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| **Open**                 | **사람이 승인해주기 이전에, 애초에 코드 분석 단계부터 Failed 한 상황입니다.**                                                | **SonarQube가 승인해주었지만, 유저가 Merge를 하지 않은 상태입니다.**                           |
+| **Closed**               | SonarQube가 통과되지 못하여, 테스트 브랜치에 한번 더 git push하게 되면 이전 Pull Request에서 보실 수 있습니다.                    | 소나큐브의 분석은 통과되었지만, Merge를 하지 않고 git push하게 되면 이전 Pull Request에서 보실 수 있습니다. |
+| **Merged**               | SonarQube가 통과시키지 않았는데, 특별한 이유로 유저가 강제로 Merge 한 경우입니다. (**Override approval rules**를 한 경우 가능합니다.) | **SonarQube가 승인해주고, 유저도 Merge 시킨 상황입니다.** 테스트 브랜치의 코드가 마스터 브랜치로 이동될 것입니다. |
 
-   | Status \ Approval Status | 0 of 1 rules satisfied                                                                           | Approved                                                                  |
-   | ------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-   | **Open**                 | **사람이 승인해주기 이전에, 애초에 코드 분석 단계부터 Failed 한 상황입니다.**                                                | **SonarQube가 승인해주었지만, 유저가 Merge를 하지 않은 상태입니다.**                           |
-   | **Closed**               | SonarQube가 통과되지 못하여, 테스트 브랜치에 한번 더 git push하게 되면 이전 Pull Request에서 보실 수 있습니다.                    | 소나큐브의 분석은 통과되었지만, Merge를 하지 않고 git push하게 되면 이전 Pull Request에서 보실 수 있습니다. |
-   | **Merged**               | SonarQube가 통과시키지 않았는데, 특별한 이유로 유저가 강제로 Merge 한 경우입니다. (**Override approval rules**를 한 경우 가능합니다.) | **SonarQube가 승인해주고, 유저도 Merge 시킨 상황입니다.** 테스트 브랜치의 코드가 마스터 브랜치로 이동될 것입니다. |
 ## 2. CI 구성하기
 
    먼저 Cloudformation - Stacks - <본인 스택 이름> - Resources 를 보시면 한눈에 리소스를 보실 수 있습니다.
 
    ![03](images/03-cf-resource.png)
-
-   {사진 3. 클라우드포메이션 리소스}
 
 ### a. Approval Rule 생성하기
 
@@ -88,31 +81,25 @@ categories:
 
    `arn:aws:sts::<Your AccountId>:assumed-role/<Your CodeBuild IAM role name>/*`
 
-   \[테이블 2. IAM ARN과 STS ARN 값 비교] 
+\[테이블 2. IAM ARN과 STS ARN 값 비교] 
 
-   | Role ARN                        | arn:aws:iam::<Account>:role/<Role name>               |
-   | ------------------------------- | ----------------------------------------------------- |
-   | **Approver pool member의 Value** | **arn:aws:sts::<Account>:assumed-role/<Role name>/*** |
+| Role ARN                        | arn:aws:iam::<Account>:role/<Role name>               |
+| ------------------------------- | ----------------------------------------------------- |
+| **Approver pool member의 Value** | **arn:aws:sts::<Account>:assumed-role/<Role name>/*** |
 
-   Role ARN : arn:aws:iam::<Account>:role/<Role name>
 
-   Approver pool member의 Value : arn:aws:sts::<Account>:assumed-role/<Role name>/*
 
-###   b. 테스트 브랜치 생성
+### b. 테스트 브랜치 생성
 
    새로운 브랜치를 하나 생성합니다. CodeCommit - <생성된 레포지토리> 로 접근하면 좌측 네비게이션 메뉴에 Branches로 접근이 가능합니다. 이곳에서 Create branch를 눌러 브랜치 이름(e.g. test)을 입력 후, Branch from은 main으로 설정합니다. 
 
    ![04](images/04-createbranch.png)
 
-   {사진 4. 브랜치 생성}
-
-###   c. 테스트 브랜치 코드 수정
+### c. 테스트 브랜치 코드 수정
 
    위의 흐름대로 잘 진행되는지 확인하기 위해, 테스트 브랜치의 코드를 수정하여 push하는 간단한 테스트를 해보겠습니다. Codecommit - Repositories - <본인의 테스트 브랜치> 를 선택하여 buildspec.yaml 파일에 접근합니다.
 
    ![05](images/05-testbranch-buildspec.yaml.png)
-
-   {사진 5. testBranch-buildspec.yaml}
 
    SonarQube 입장에서는, EC2 Instance에 설치된 SonarQube가 호스트 서버가 될것이고, Codebuild의 docker container가 SonarQube 클라이언트가 될 것입니다. 따라서 build 시 SonarQube 호스트에 접근할 수 있는 URL을 buildspec.yml 파일에 정의해야 합니다.
 
@@ -122,13 +109,11 @@ categories:
 
    그 후 github에서 커밋 작성하는 것 처럼, 사용자의 이름과 이메일 주소, 적절한 커밋 메시지(e.g. `Modified: buildspec.yml`)를 작성 후 저장합니다.
 
-###   d. Pull Request 생성
+### d. Pull Request 생성
 
    b에 이어서 좌측 네비게이션 메뉴에서 Pull Request를 들어가 Create pull request를 클릭합니다. Destination은 main, Source는 <본인의 테스트 브랜치 e.g. test> 로 선택 후 Compare 합니다.
 
    ![06](images/06-createpullrequest.png)
-
-   {사진 6. 풀리퀘 생성}
 
    b-1. Codebuild 결과 확인하기
 
@@ -138,15 +123,12 @@ categories:
 
    ![07](images/07-eventbridge.png)
 
-   {사진 7. EventBridge}
-
    CodeBuild - Build projects 메뉴로 들어가게 되면, 생성된 프로젝트가 뱅글뱅글 돌아가게 됩니다. 잠시 후 Build status가 Succeeded 로 바뀌게 되면 CodeCommit - Pull Request로 돌아가서 Approved 되는 것을 보실 수 있습니다. 
 
    Pull Request - Activity 탭으로 들어가보면 Quality Gate Passed 라는 코멘트가 남겨졌고, Approved 되었고 유저가 Merge할 수 있도록 Merge 버튼이 활성화 되었습니다.
 
    ![08](images/08-prapproved.png)
 
-   {사진 8. PRApproved}
 3. CD 구성하기
 
    CodePipeline은 AWS에서 제공하는 완전관리형 지속적 전달 (CD ; Continuous Delivery) 서비스입니다.  이번 섹션에서는 테스트 브랜치에서 메인 브랜치로 Merge되어 변경된 메인 브랜치로부터, CodePipeline을 이용해 배포하는 과정을 소개합니다.
@@ -158,9 +140,7 @@ categories:
       1. AWS 콘솔에서 Elastic Beanstalk - Environments 메뉴에서 Create a new environment를 클릭합니다. 
       2. Select environment tier는 Web server environment를 적용하고, Application name를 적절하게 입력하시고 다른 영역은 그대로 두시고 Platform으로 내려갑니다. 이 부분에서 여러분의 코드에 알맞는 플랫폼을 적용하시면 됩니다. 본 테스트는 Tomcat 8.5 with Corretto 11 running on 64bit Amazon Linux 2 환경으로 진행합니다.
 
-         ![](images/09-beanstalk.png)
-
-         {사진 9. Beanstalk}
+         ![09](images/09-beanstalk.png)
    2. 이제 배포 환경이 갖추어졌으니 CodePipeline을 이용하여 CodeCommit → CodeDeploy를 전달해줄 환경이 완성되었습니다. 
 
       1. CodePipelines - Pipelines 메뉴에서 Create pipeline를 클릭합니다.
@@ -173,18 +153,12 @@ categories:
       1. CodeCommit 레포지토리 선택 후 Pull Requests로 들어가 Merge 버튼을 클릭합니다. 상황에 맞게 Merge 후 branch를 삭제할 것인지 남겨놓을 것인지 옵션으로 결정한 후, Merge pull request를 클릭합니다.
 
          ![10](images/10-mergepullrequest.png)
-
-         {사진 10. merge pull request}
       2. Pull Request의 Status가 Open에서 Merged로 바뀐 것을 확인한 후, CodePipeline-Pipelines에서 생성한 파이프라인으로 들어가 Source → Deploy가 차례로 진행되는 과정을 확인합니다.
 
          ![11](images/11-pipelineprogress.png)
 
-         {사진 11. Pipeline progress}
-      3. Deploy까지 성공적으로 마무리 되었을 것입니다, 실습에 따라 Beanstalk 환경을 구성하였다면, Deploy 스테이지에 있는 AWS Elastic Beanstalk 링크로 들어가서 본인의 Environment 링크를 엽니다. 테스트 코드는 /src/main/webapp/index.jsp 경로에 위치해 있습니다.
-
-         ![](images/12-environment.png)
-
-         {사진 12. EB environment}
+         Deploy까지 성공적으로 마무리 되었을 것입니다, 실습에 따라 Beanstalk 환경을 구성하였다면, Deploy 스테이지에 있는 AWS Elastic Beanstalk 링크로 들어가서 본인의 Environment 링크를 엽니다. 테스트 코드는 /src/main/webapp/index.jsp 경로에 위치해 있습니다.
+      3. ![](images/12-environment.png)
 
    마무리
 
