@@ -26,7 +26,6 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 ## 상황
 > SonarQube가 On-premises Private Zone에 있고, AWS CodeCommit을 사용하여 AWS에서 개발 중입니다. 하지만, SonarQube가 AWS CodeCommit을 정식 지원하지 않고, Private Zone에 있어 코드 정적 분석이 어렵습니다.
 <br>
-<br>
 
 ## 해결방안
 1. AWS CodeCommit에 Commit
@@ -35,6 +34,8 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 4. SonarQube에서 분석된 내용을 기반으로 AWS CodeCommit에 메시지를 추가하여 Commit 혹은 AWS CodePipeline에 의해 지속적인 배포 진행
 
 이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.
+<br>
+<br>
 <br>
 <br>
 
