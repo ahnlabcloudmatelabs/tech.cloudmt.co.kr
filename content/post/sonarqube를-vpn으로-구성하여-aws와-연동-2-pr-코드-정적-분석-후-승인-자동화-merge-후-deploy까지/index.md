@@ -8,16 +8,19 @@ categories:
 ---
 이번 포스팅에서는 본격적으로 소스 업로드부터 코드 정적 분석을 거쳐 배포하는 과정의 자동화를 구성해보도록 하겠습니다. 목차는 다음과 같습니다.
 
+```
 1. 개요 구성도
 2. CI 구성하기
    a. Approval Rule 생성 및 테스트 브랜치 생성 및 PR 요청
-   b. CodeBuild - 빌드 진행 확인,  분석 결과 확인, Merge 하기
+   b. CodeBuild - 빌드 진행 확인, 분석 결과 확인, Merge 하기
    c. Approval Rule 생성
    d. 테스트 브랜치 생성
    e. PR 요청
 3. CD 구성하기
    a. CodePipeline으로 배포 자동화 구성하기 이전에 배포할 환경 구성하기
-   b. Merge 하여 CodePipeline으로 배포하기
+   b. CodePipeline 구성하기
+   c. Merge 하여 메인 브랜치로부터 Deploy하는 과정 확인 하기
+```
 
 # 들어가기 전
 
@@ -27,7 +30,11 @@ categories:
 
 # 1. 개요 구성도
 
+실습에 대한 구성은 다음과 같습니다.
+
 ![00](images/image-20210810124902765.png)
+
+실습 시나리오는 다음과 같습니다.
 
 ![01](images/01-flowchart.png)
 
@@ -37,17 +44,17 @@ categories:
 4. 끝내 코드 분석이 통과되면, 승인자가 테스트 브랜치에서 메인 브랜치로 Merge 합니다.
 5. 메인 브랜치의 변화가 일어났으므로 CodePipeline을 통해 CodeDeploy가 진행되어 배포 환경에 배포됩니다.
 
-SonarQube가 테스트 브랜치의 코드 분석이 승인하면, Pull Request의 Approval Status가 Approved됩니다. 이후 승인된 코드에 대해 유저가 Merge 시킬지 말지를 결정합니다.유저가 Merge 하면 테스트 브랜치의 코드가 메인 브랜치로 코드가 복사됩니다.
+SonarQube가 테스트 브랜치의 코드 분석이 승인하면, Pull Request의 Approval Status가 Approved됩니다. 이후 승인된 코드에 대해 유저가 Merge 시킬지 말지를 결정합니다. 유저가 Merge 하면 테스트 브랜치의 코드가 메인 브랜치로 코드가 복사됩니다.
 
-   ![02](images/02-prstatus.png)
+![02](images/02-prstatus.png)
 
 \[테이블 1. 풀리퀘스트 Status와 Approval status]
 
-| Status \ Approval Status | 0 of 1 rules satisfied                                                                           | Approved                                                                  |
-| ------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| **Open**                 | **사람이 승인해주기 이전에, 애초에 코드 분석 단계부터 Failed 한 상황입니다.**                                                | **SonarQube가 승인해주었지만, 유저가 Merge를 하지 않은 상태입니다.**                           |
-| **Closed**               | SonarQube가 통과되지 못하여, 테스트 브랜치에 한번 더 git push하게 되면 이전 Pull Request에서 보실 수 있습니다.                    | 소나큐브의 분석은 통과되었지만, Merge를 하지 않고 git push하게 되면 이전 Pull Request에서 보실 수 있습니다. |
-| **Merged**               | SonarQube가 통과시키지 않았는데, 특별한 이유로 유저가 강제로 Merge 한 경우입니다. (**Override approval rules**를 한 경우 가능합니다.) | **SonarQube가 승인해주고, 유저도 Merge 시킨 상황입니다.** 테스트 브랜치의 코드가 마스터 브랜치로 이동될 것입니다. |
+| Status \ Approval Status | **0 of 1 rules satisfied**                                                                       | **Approved**                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| **Open**                 | **사람이 승인해주기 이전에, 애초에 코드 분석 단계부터 Revoked 된 상황입니다.**                                               | **SonarQube가 승인해주었지만, 유저가 Merge를 하지 않은 상태입니다.**                                 |
+| **Closed**               | SonarQube가 통과되지 못하여, 테스트 브랜치에 한번 더 git push하게 되면 이전 Pull Request에서 보실 수 있습니다.                    | SonarQube의 분석은 통과되었지만, Merge를 하지 않고 한번 더 코드 수정이 되면 이전 Pull Request에서 보실 수 있습니다. |
+| **Merged**               | SonarQube가 통과시키지 않았는데, 특별한 이유로 유저가 강제로 Merge 한 경우입니다. (**Override approval rules**를 한 경우 가능합니다.) | **SonarQube가 승인해주고, 유저도 Merge 시킨 상황입니다.** 테스트 브랜치의 코드가 마스터 브랜치로 이동될 것입니다.       |
 
 # 2. CI 구성하기
 
@@ -138,6 +145,7 @@ CodeDeploy를 구성하기 위해서는 배포할 환경이 갖추어져 있어�
 ![09](images/09-beanstalk.png)
 
 ## 2. CodePipeline을 이용해 CodeCommit - CodeDeploy 파이프라인 구축하기
+
 이제 배포 환경이 갖추어졌으니 CodePipeline을 이용하여 CodeCommit에서 → CodeDeploy로 전달하는 파이프라인을 구축해보겠습니다.
 
 * CodePipelines - Pipelines 메뉴에서 Create pipeline를 클릭합니다.
@@ -147,6 +155,7 @@ CodeDeploy를 구성하기 위해서는 배포할 환경이 갖추어져 있어�
 * Step 4 : Deploy provider를 AWS Elastic Beanstalk 혹은 개인 환경에 맞게 선택한 후에 Deploy 합니다. 
 
 ## 3. 잘 구축되었는지 Merge하여 배포해보기
+
 앞서 만들었던 CodeCommit 레포지토리의 SonarQube로 부터 승인된 Pull Request를 Merge 하여 배포가 잘 이루어지는지 확인해 보겠습니다.
 
 * CodeCommit 레포지토리 선택 후 Pull Requests로 들어가 Merge 버튼을 클릭합니다. 상황에 맞게 Merge 후 branch를 삭제할 것인지 남겨놓을 것인지 옵션으로 결정한 후, Merge pull request를 클릭합니다.
@@ -163,4 +172,14 @@ Deploy까지 성공적으로 마무리 되었을 것입니다, 실습에 따라 
 
 # 마무리
 
-1편부터 우리가 
+1편부터 우리가 구축한 내용은 다음과 같습니다.
+
+* 1. Amazon VPC를 이용한 VPN 환경 구성
+* 2. AWS의 Code 시리즈(CodeCommit, CodeBuild)를 이용한 코드 정적 분석 자동화
+* 3. AWS의 Code 시리즈(CodeDeploy, CodePipeline)를 이용한 배포 자동화
+
+## 2번과 3번을 왜 따로 하나요?
+
+라는 질문에 답변드리자면, `CodePipeline에서는 Pull Request를 다룰 수 없어서` 입니다. 블로그를 작성하다가 저희도 이 부분에 많은 궁금증을 가지어 AWS 서포트 센터에 문의를 해보았지만 CodeCommit에서 Pull Request를 하는데 필수적인 환경 변수들이 존재하는데, 이 변수들은 CodeCommit에서만 다루어 진다는 답변을 받았습니다.
+
+아무쪼록 원하시는 환경 구축에 본 포스팅이 도움이 되었으면 하네요. 읽어주셔서 감사합니다.
