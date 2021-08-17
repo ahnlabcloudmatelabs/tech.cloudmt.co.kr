@@ -343,6 +343,7 @@ CodeBuildRole:
 ```
 
 CodeBuild IAM Role을 생성합니다. Policy 부분은 CodeCommit에서 작성된 승인규칙에 따라 승인 여부와 메시지 작성 Action, Pull Action, 다음에서 설명할 Secret Manager에 저장된 Value 값들을 가져오는 것을 허용합니다.
+
 <br>
 <br>
 
@@ -413,6 +414,7 @@ PullRequestTriggerCodeBuildRule:
 ```
 
 CloudWatch Events rule은 CodeCommit의 Pull Request를 트리거할 Rule을 생성하기 위해 사용합니다. CodeCommit의 Pull Request 생성과 브랜치의 업데이트가 있을 때 이벤트가 발생합니다. 이벤트 발생 후 `Targets`인 CodeBuild 프로젝트에 빌드에 필요한 환경변수들을 전달합니다.
+
 <br>
 <br>
 
