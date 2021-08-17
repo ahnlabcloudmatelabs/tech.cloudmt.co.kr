@@ -31,6 +31,8 @@ categories:
 
    ![01](images/01-flowchart.png)
 
+![0101](images/01-flowchart.png)
+
 1. 최초 CodeCommit의 레포지토리에 코드가 저장되어 있습니다.
 2. 임의의 유저가 테스트 브랜치를 만들어 코드를 git push 합니다.
 3. CodeBuild의 타겟 브랜치에 대해 CodeBuild가 실행되어 SonarQube를 설치하는 도커 컨테이너를 통해 코드 정적 분석이 진행됩니다.
