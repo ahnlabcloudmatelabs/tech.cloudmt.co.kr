@@ -1,5 +1,5 @@
 ---
-title: AWS VPC를 활용한 SonarQube와 AWS 연동 - 1
+title: CodeBuild에 SonarQube를 집어넣어 봤습니다. 근데 이제 VPN을 곁들인 - 1
 authors:
   - sanghyeok-lim
 date: 2021-08-09T08:44:30.241Z
