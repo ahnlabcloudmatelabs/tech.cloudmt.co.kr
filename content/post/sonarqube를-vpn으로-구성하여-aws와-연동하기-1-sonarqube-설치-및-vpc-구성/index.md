@@ -68,6 +68,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 * VPC Peering Connection
 <br>
 <br>
+
 - - -
 
 * CodeBuild VPC - Public Subnet Route Table
@@ -130,6 +131,7 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 > Security Group: SSH, TCP 9000 port Open  
 <br>
 <br>
+
 ![instance-1](images/instance-1.png)
 
 ![instance-2](images/instance-2.png)
