@@ -181,7 +181,7 @@ admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성
 
 ## 3. 테스트 리소스 구성
 
-<img src = "images/template1-designer-1-.png" width="40%">
+<img src = "images/template1-designer-1-.png" width="70%">
 
 * CodeCommit repository
 * Secrets Manager secret
