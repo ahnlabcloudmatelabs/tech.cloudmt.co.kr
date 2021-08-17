@@ -1,5 +1,5 @@
 ---
-title: SonarQube를 VPN으로 구성하여 AWS와 연동 - 2. PR, 코드 정적 분석 후 승인 자동화, merge 후 deploy까지
+title: Codebuild에 SonarQube를 집어넣어봤습니다. 근데 이제 VPN을 곁들인 - 2
 authors:
   - dongwook-kim
 date: 2021-08-13T08:18:00.792Z
