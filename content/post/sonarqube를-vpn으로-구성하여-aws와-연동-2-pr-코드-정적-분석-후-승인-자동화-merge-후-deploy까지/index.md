@@ -6,6 +6,10 @@ date: 2021-08-17T02:18:00.792Z
 feature_image: images/microsoftteams-image.png
 categories:
   - Hands On
+tags:
+  - AWS
+  - CodeBuild
+  - SonarQube
 ---
 이번 포스팅에서는 본격적으로 소스 업로드부터 코드 정적 분석을 거쳐 배포하는 과정의 자동화를 구성해보도록 하겠습니다. 목차는 다음과 같습니다.
 
