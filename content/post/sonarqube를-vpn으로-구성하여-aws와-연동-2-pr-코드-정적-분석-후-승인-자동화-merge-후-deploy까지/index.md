@@ -2,7 +2,7 @@
 title: AWS CodeBuild에 SonarQube를 집어넣어 봤습니다. 근데 이제 VPN을 곁들인 - 2
 authors:
   - dongwook-kim
-date: 2021-08-13T08:18:00.792Z
+date: 2021-08-17T08:18:00.792Z
 feature_image: images/microsoftteams-image.png
 categories:
   - Hands On
