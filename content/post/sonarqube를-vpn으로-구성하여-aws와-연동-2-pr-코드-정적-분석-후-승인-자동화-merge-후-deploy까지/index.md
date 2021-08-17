@@ -167,7 +167,7 @@ CodeDeploy를 구성하기 위해서는 배포할 환경이 갖추어져 있어�
 
 ![11](images/11-pipelineprogress.png)
 
-Deploy까지 성공적으로 마무리 되었을 것입니다, 실습에 따라 Beanstalk 환경을 구성하였다면, Deploy 스테이지에 있는 AWS Elastic Beanstalk 링크로 들어가서 본인의 Environment 링크를 엽니다. 테스트 코드는 /src/main/webapp/index.jsp 경로에 위치해 있습니다.
+Deploy까지 성공적으로 마무리 되었을 것입니다. 실습에 따라 Beanstalk 환경을 구성하였다면, Deploy 스테이지에 있는 AWS Elastic Beanstalk 링크로 들어가서 본인의 Environment 링크를 엽니다. 테스트 코드는 /src/main/webapp/index.jsp 경로에 위치해 있습니다.
 
 ![12](images/12-environment.png)
 
@@ -183,4 +183,4 @@ Deploy까지 성공적으로 마무리 되었을 것입니다, 실습에 따라 
 
 라는 질문에 답변드리자면, `CodePipeline에서는 Pull Request를 다룰 수 없어서` 입니다. 블로그를 작성하다가 저희도 이 부분에 많은 궁금증을 가지어 AWS 서포트 센터에 문의를 해보았지만 CodeCommit에서 Pull Request를 하는데 필수적인 환경 변수들이 존재하는데, 이 변수들은 CodeCommit에서만 다루어 진다는 답변을 받았습니다.
 
-아무쪼록 원하시는 환경 구축에 본 포스팅이 도움이 되었으면 하네요. 읽어주셔서 감사합니다.
+아무쪼록 원하시는 환경 구축에 본 포스팅이 도움이 되었으면 합니다. 읽어주셔서 감사합니다.
