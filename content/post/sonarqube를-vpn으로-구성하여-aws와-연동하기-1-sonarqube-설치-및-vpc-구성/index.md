@@ -19,14 +19,11 @@ tags:
 
 SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜, 보안 취약점을 발견할 목적으로 정적 코드 분석으로 자동 리뷰를 수행하기 위한 지속적인 코드 품질 검사용 오픈 소스 플랫폼입니다. 중복 코드, 코딩 표준, 유닛 테스트, 코드 커버리지 등 코드 복잡도, 주석, 버그 및 보안 취약점의 보고서를 제공합니다.
 
-이 포스팅에서는 Private Zone에 위치하는 SonarQube의 코드 정적분석 결과를 통해 안전한 CI/CD 환경을 구축하고자 합니다.
-<br />
+이 포스팅에서는 Private Zone에 위치하는 SonarQube의 코드 정적분석 결과를 통해 안전한 CI/CD 환경을 구축하고자 합니다.  
 
 ## 상황
 
-> SonarQube가 On-premises Private Zone에 있고, AWS CodeCommit을 사용하여 AWS에서 개발 중입니다. 하지만, SonarQube가 AWS CodeCommit을 정식 지원하지 않고, Private Zone에 있어 코드 정적 분석이 어렵습니다.
-<br />
-
+> SonarQube가 On-premises Private Zone에 있고, AWS CodeCommit을 사용하여 AWS에서 개발 중입니다. 하지만, SonarQube가 AWS CodeCommit을 정식 지원하지 않고, Private Zone에 있어 코드 정적 분석이 어렵습니다.  
 
 ## 해결방안
 
@@ -35,15 +32,12 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 3. AWS CodeBuild의 buildspec.yaml을 통해 pre-build에서 SonarQube에 Source Code를 전달하여 정적 분석
 4. SonarQube에서 분석된 내용을 기반으로 AWS CodeCommit에 메시지를 추가하여 Commit 혹은 AWS CodePipeline에 의해 지속적인 배포 진행
 
-이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.
-<br />
+이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.  
 
 
 ## 구성도
 
-![image-20210810124902765](images/image-20210810124902765.png)
-
-<br />
+![image-20210810124902765](images/image-20210810124902765.png)  
 
 - - -
 
@@ -65,8 +59,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 * SonarQube VPC : 10.0.0.0/16
 
   * Private subnet
-* VPC Peering Connection
-
+* VPC Peering Connection  
 - - -
 
 * CodeBuild VPC - Public Subnet Route Table
@@ -93,7 +86,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 CodeBuild Agent는 반드시 Private subnet에 위치되어야 합니다. 
 
-SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
+SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.  
 
 **현재 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
 
@@ -109,7 +102,7 @@ SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디�
 | 0.0.0.0/0   | igw-인터넷 게이트웨이          |
 | 10.1.0.0/0  | pcx-Peering Connection |
 
-CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적분석 내 확인을 합니다.
+CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적분석 내 확인을 합니다.  
 
 - - -
 
@@ -117,24 +110,24 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 
 테스트 환경을 위해 SonarQube를 EC2 인스턴스로 구성합니다.
 
-> AMI: Amazon Linux 2 AMI Instance
-> Type: t2.medium 
-> VPC: \[VPN 환경을 위한 VPC] 
-> Auto-assign Public IP: Enable 
-> Security Group: SSH, TCP 9000 port Open
-
+> AMI: Amazon Linux 2 AMI Instance   
+> Type: t2.medium  
+> VPC: \[VPN 환경을 위한 VPC]  
+> Auto-assign Public IP: Enable  
+> Security Group: SSH, TCP 9000 port Open  
+  
 ![instance-1](images/instance-1.png)
 
 ![instance-2](images/instance-2.png)
 
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
-또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
+또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.  
 
 ![instance-3](images/instance-3.png)
 
-SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.
-
+SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.  
+  
 ### SonarQube 설치 및 실행
 
 ```yaml
