@@ -34,8 +34,6 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.  
 
-
-
 ## 구성도
 
 ![image-20210810124902765](images/image-20210810124902765.png)
@@ -408,3 +406,5 @@ Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력�
 이상으로 테스트에서 사용할 리소스들이 작성한 CloudFormation 템플릿에 의해 모두 성공적으로 생성되었습니다.
 
 이번 포스팅에서는 테스트 환경을 구성을 완료했습니다. 다음 포스팅에서는 앞서 만든 리소스들을 사용하여, CodeCommit의 소스 업데이트가 발생 시, SonarQube 정적분석 결과로 CodeDeploy를 용한 지속적인 서비스 배포를 다뤄보겠습니다.
+
+test
