@@ -3,6 +3,7 @@ title: AWS VPC를 활용한 SonarQube와 AWS 연동 - 1
 authors:
   - sanghyeok-lim
 date: 2021-08-09T08:44:30.241Z
+feature_image: images/microsoftteams-image.png
 categories:
   - Hands On
 tags:
