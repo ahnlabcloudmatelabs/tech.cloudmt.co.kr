@@ -3,6 +3,7 @@ title: Codebuild에 SonarQube를 집어넣어봤습니다. 근데 이제 VPN을 
 authors:
   - dongwook-kim
 date: 2021-08-13T08:18:00.792Z
+feature_image: images/microsoftteams-image.png
 categories:
   - Hands On
 ---
@@ -24,7 +25,7 @@ categories:
 
 # 들어가기 전
 
-본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 : <URL>
+본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 : [<URL>](33)
 
 본 실습은 AWS 콘솔에서 진행되며, 콘솔의 언어는 영어로 진행됩니다. 콘솔 웹페이지 좌측 하단에서 언어를 변경하실 수 있습니다. 
 
