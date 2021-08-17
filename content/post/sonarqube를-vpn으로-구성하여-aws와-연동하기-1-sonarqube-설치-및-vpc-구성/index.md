@@ -66,6 +66,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
   * Private subnet
 * VPC Peering Connection
+
 <br>
 
 - - -
@@ -95,7 +96,7 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 CodeBuild Agent는 반드시 Private subnet에 위치되어야 합니다. 
 
 SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
-<br>
+
 <br>
 
 **현재 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
@@ -113,7 +114,7 @@ SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디�
 | 10.1.0.0/0  | pcx-Peering Connection |
 
 CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적분석 내 확인을 합니다.
-<br>
+
 <br>
 <br>
 
@@ -128,6 +129,7 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 > VPC: \[VPN 환경을 위한 VPC]  
 > Auto-assign Public IP: Enable  
 > Security Group: SSH, TCP 9000 port Open  
+
 <br>
 <br>
 
@@ -138,13 +140,13 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
 또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
-<br>
+
 <br>
 
 ![instance-3](images/instance-3.png)
 
 SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.
-<br>
+
 <br>
 <br>
   
@@ -163,19 +165,19 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 ```
 
 다운로드 받은 SonarQube 압축을 풀고 실행합니다.
-<br>
+
 <br>
 
 ![sonarqube-1](images/sonarqube-1.png)
 
 초기 ID/PW는 `admin/admin`입니다.
-<br>
+
 <br>
 
 ![sonarqube-2](images/sonarqube-2.png)
 
 admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성하여 테스트를 진행합니다.
-<br>
+
 <br>
 <br>
 
@@ -191,6 +193,7 @@ admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성
 * IAM role (for CloudWatch Events to assume and invoke CodeBuild)
 
 테스트를 위한 AWS 리소스 구성입니다. 하나하나 리소스를 만들지 않고 CloudFormation을 활용하여 구성하였습니다. 다음은 CloudFormation 스택 생성에 사용될 템플릿의 내용입니다.
+
 <br>
 <br>
 
@@ -218,6 +221,7 @@ Parameters:
 ```
 
 CloudFormation 스택에서 사용될 파라미터 값들입니다. 리포지토리 이름, 설명과 앞서 만든 SonarQube Test 계정의 ID와 PW값을 입력받습니다.
+
 <br>
 <br>
 
@@ -256,6 +260,7 @@ SonarQubeUserSecretResourcePolicy:
 SecretId 값을 입력받은 파라미터 값으로 지정하고, 템릿에서 만든 CodeBuildRole을 가진 CodeBuild 프로젝트가 SecretId 값을 참조할 수 있도록 승인해주도록 합니다.
 
 > `!Sub` 함수는 입력 문자열의 변수를 지정한 값으로 대체합니다. 템플릿에서 이 함수를 사용하여 스택을 만들거나 업데이트할 때까지 사용할 수 없는 값을 포함하는 명령이나 출력을 구성할 수 있습니다.
+
 <br>
 <br>
 
@@ -282,6 +287,7 @@ CodeCommit의 리포지토리를 생성하기 위한 구문입니다.
 > * 리소스의 논리적 이름을 지정하면 해당 리소스를 참조하는 데 일반적으로 사용할 수 있는 값이 반환됩니다.
 >
 > 템플릿에서 리소스를 선언하는 데 이름으로 또 다른 템플릿 리소스를 지정해야 하는 경우 `Ref`를 사용하여 해당하는 다른 리소스를 참조할 수 있습니다. 일반적으로, `Ref`는 리소스의 이름을 반환합니다.
+
 <br>
 <br>
 
@@ -310,6 +316,7 @@ CodeBuildProject:
 CodeBuild 프로젝트를 생성하기 위한 구문입니다. CodeBuild에서 소스 코드를 사용할 위치와 사용할 빌드 환경을 구성합니다. Environment 설정에서는 \[ComputeType 종류]([Build environment compute types - AWS CodeBuild (amazon.com)](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html))와 \[CodeBuild에서 제공하는 Docker 이미지]([CodeBuild 에서 제공하는 도커 이미지 - AWS CodeBuild (amazon.com)](https://docs.aws.amazon.com/ko_kr/codebuild/latest/userguide/build-env-ref-available.html))에 따라 원하는 빌드 환경을 구성하고 빌드에 필요한 소스 저장소를 설정합니다.
 
 > `GetAtt` 함수는 템플릿의 리소스에서 특성값을 반환합니다.
+
 <br>
 <br>
 
@@ -438,7 +445,7 @@ CloudWatchEventsCodeBuildRole:
 ```
 
 Pull Request 트리거로부터 이벤트가 발생면, CodeBuild가 빌드를 시작하게 해주는 Role입니다. 대상 리소스는 CloudFormation에서 생성된 CodeBuild Project입니다.
-<br>
+
 <br>
 <br>
 
@@ -450,14 +457,14 @@ Pull Request 트리거로부터 이벤트가 발생면, CodeBuild가 빌드를 �
 ![image-20210811093829980](images/image-20210811093829980.png)
 
 앞서 작성한 CloudFormation 템플릿을 사용해 스택을 생성하여 리소스들을 생성합니다.
-<br>
+
 <br>
 
 
 ![image-20210811094606263](images/image-20210811094606263.png)
 
 Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력하고, 스택을 생성합니다.
-<br>
+
 <br>
 
 
@@ -466,5 +473,5 @@ Secrets Manager와 CodeCommit 리소스에 필요한 파라미터 값을 입력�
 이상으로 테스트에서 사용할 리소스들이 작성한 CloudFormation 템플릿에 의해 모두 성공적으로 생성되었습니다.
 
 이번 포스팅에서는 테스트 환경을 구성을 완료했습니다. 다음 포스팅에서는 앞서 만든 리소스들을 사용하여, CodeCommit의 소스 업데이트가 발생 시, SonarQube 정적분석 결과로 CodeDeploy를 용한 지속적인 서비스 배포를 다뤄보겠습니다.
-<br>
+
 <br>
