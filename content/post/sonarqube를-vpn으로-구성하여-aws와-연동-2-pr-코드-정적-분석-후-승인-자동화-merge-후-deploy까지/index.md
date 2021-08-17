@@ -87,8 +87,6 @@ categories:
 | ------------------------------- | ----------------------------------------------------- |
 | **Approver pool member의 Value** | **arn:aws:sts::<Account>:assumed-role/<Role name>/*** |
 
-
-
 ### b. 테스트 브랜치 생성
 
    새로운 브랜치를 하나 생성합니다. CodeCommit - <생성된 레포지토리> 로 접근하면 좌측 네비게이션 메뉴에 Branches로 접근이 가능합니다. 이곳에서 Create branch를 눌러 브랜치 이름(e.g. test)을 입력 후, Branch from은 main으로 설정합니다. 
@@ -162,4 +160,4 @@ categories:
 
    마무리
 
-   지금까지 CodeCommit-
+   지금까지 CodeCommit-이었습니다.
