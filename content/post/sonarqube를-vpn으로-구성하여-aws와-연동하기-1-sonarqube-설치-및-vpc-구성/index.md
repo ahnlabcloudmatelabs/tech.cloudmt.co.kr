@@ -36,12 +36,14 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 이 방법의 문제는 AWS CodeBuild에서 SonarQube에 접근해야 한다는 이슈가 있습니다. 이때 CodeBuild를 VPC 내에 배포하는 옵션을 구성하여 VPN을 통해 SonarQube와 안전하게 통신할 수 있습니다.
 <br>
 <br>
-<br>
-<br>
 
 ## 구성도
 
-![image-20210810124902765](images/image-20210810124902765.png)  
+![image-20210810124902765](images/image-20210810124902765.png)
+<br>
+<br>
+<br>
+<br>
 
 - - -
 
@@ -63,7 +65,9 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 * SonarQube VPC : 10.0.0.0/16
 
   * Private subnet
-* VPC Peering Connection  
+* VPC Peering Connection
+<br>
+<br>
 - - -
 
 * CodeBuild VPC - Public Subnet Route Table
@@ -90,7 +94,9 @@ SonarQube는 20개 이상의 프로그래밍 언어에서 버그, 코드 스멜,
 
 CodeBuild Agent는 반드시 Private subnet에 위치되어야 합니다. 
 
-SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.  
+SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디에 배치해도 상관없지만, Private subnet에 배치하는 것이 일반적입니다. 다만 원활한 테스트를 위해 (SonarQube 서버에 간편한 접속을 위해) 일시적으로 Public Subnet에 배치하였습니다.
+<br>
+<br>
 
 **현재 사용된 SonarQube VPC에 대한 네트워크 리소스 목록**
 
@@ -106,7 +112,10 @@ SonarQube 인스턴스는 상황에 맞게 Public 혹은 Private subnet 어디�
 | 0.0.0.0/0   | igw-인터넷 게이트웨이          |
 | 10.1.0.0/0  | pcx-Peering Connection |
 
-CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적분석 내 확인을 합니다.  
+CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:9000` 으로, User와 아웃바운드 통신은 `<Public IPv4 주소>:9000` 으로 접속하여 가입 및 코드 정적분석 내 확인을 합니다.
+<br>
+<br>
+<br>
 
 - - -
 
@@ -119,18 +128,24 @@ CodeBuild Agent와 SonarQube Instance간의 통신은 `<private IPv4 주소>:900
 > VPC: \[VPN 환경을 위한 VPC]  
 > Auto-assign Public IP: Enable  
 > Security Group: SSH, TCP 9000 port Open  
-  
+<br>
+<br>
 ![instance-1](images/instance-1.png)
 
 ![instance-2](images/instance-2.png)
 
 인스턴스 구성에서 인스턴스 유형이 중요합니다. **2GB이상의 메모리 성능과 1 vcpu 이상의 사양이 SonarQube의 최소 요구사양**입니다. 그러므로 인스턴스 유형은 **t2.medium 이상**의 설정이 필요합니다.
 
-또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.  
+또한 테스트 접속을 위한 Public IP 할당과 VPN 구성을 위한 VPC 네트워크를 설정합니다.
+<br>
+<br>
 
 ![instance-3](images/instance-3.png)
 
-SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.  
+SonarQube 웹서버 접속을 위해 `TCP 9000` 포트를 허용합니다.
+<br>
+<br>
+<br>
   
 ### SonarQube 설치 및 실행
 
@@ -147,14 +162,21 @@ $ ~/sonarqube-8.0/bin/linux-x86-64/sonar.sh start
 ```
 
 다운로드 받은 SonarQube 압축을 풀고 실행합니다.
+<br>
+<br>
 
 ![sonarqube-1](images/sonarqube-1.png)
 
 초기 ID/PW는 `admin/admin`입니다.
+<br>
+<br>
 
 ![sonarqube-2](images/sonarqube-2.png)
 
 admin 권한으로 접속하여 Administration탭에서 새로운 User를 생성하여 테스트를 진행합니다.
+<br>
+<br>
+<br>
 
 ## 3. 테스트 리소스 구성
 
