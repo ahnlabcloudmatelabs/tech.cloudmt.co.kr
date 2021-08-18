@@ -29,7 +29,8 @@ tags:
 
 # 들어가기 전
 
-본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 : [<URL>](33)
+본 실습을 진행하시기 위해서는 이전 포스팅의 절차를 완료하셔야 합니다 :
+* [[AWS CodeBuild에 SonarQube를 집어넣어 봤습니다. 근데 이제 VPN을 곁들인 - 1]](https://tech.cloudmt.co.kr/2021/08/17/sonarqube%EB%A5%BC-vpn%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%84%B1%ED%95%98%EC%97%AC-aws%EC%99%80-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-1-sonarqube-%EC%84%A4%EC%B9%98-%EB%B0%8F-vpc-%EA%B5%AC%EC%84%B1/)
 
 본 실습은 AWS 콘솔에서 진행되며, 콘솔의 언어는 영어로 진행됩니다. 콘솔 웹페이지 좌측 하단에서 언어를 변경하실 수 있습니다. 
 
