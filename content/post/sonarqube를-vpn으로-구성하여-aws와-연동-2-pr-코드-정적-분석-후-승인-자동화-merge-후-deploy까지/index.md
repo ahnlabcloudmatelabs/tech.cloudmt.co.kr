@@ -3,7 +3,7 @@ title: AWS CodeBuild에 SonarQube를 집어넣어 봤습니다. 근데 이제 VP
 authors:
   - dongwook-kim
 date: 2021-08-17T02:18:00.792Z
-feature_image: images/microsoftteams-image.png
+feature_image: images/image-codebuild.svg
 categories:
   - Hands On
 tags:
