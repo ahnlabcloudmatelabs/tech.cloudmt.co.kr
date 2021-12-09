@@ -6,8 +6,64 @@ date: 2021-10-20T07:35:01.645Z
 categories:
   - Tech
 tags:
-  - azure-devops
-  - python
-  - rest-api
+  - Azure Devops
+  - Python
+  - Rest API
 ---
-최근 회사 내에서, 기존 클라우드 점검 스크립트에 새 기능을 넣는 작업을 하고 있다.
+최근 회사 내에서, 기존 클라우드 점검 스크립트에 새 기능을 넣는 작업을 하고 있는데요. 이번에 작업을 하면서 Azure DevOps 점검도 자동화 할 필요가 있어, Azure DevOps 를 점검하는 기능도 구현하고 있습니다. 기존 Azure 의 리소스를 점검할 때는 Azure SDK for Python 으로 충분했지만, Azure DevOps는 원래 Visual Studio Team Services 였던 서비스가 이름이 바뀌고 변화해 온 서비스여서, Azure 와는 별개로 사용됩니다. Azure에 가입하지 않아도, Azure DevOps만 따로 사용이 가능하죠. 그래서 API와 SDK 도 따로 있습니다. 이 글에서는 이렇게 따로 존재하는 Azure DevOps REST API 와, 이 REST API 기반으로 만들어진 Azure DevOps Python API 모듈을 사용해서 Azure DevOps 검사 기능을 구현해 본 것에 대해 정리해 보고자 합니다.
+
+## Azure 에서의 Azure DevOps 리소스
+위에서 언급했듯, Azure DevOps 는 Azure 와 별개의 서비스여서, 기본적으로 Azure SDK 에서 Azure 리소스로 조회가 되지 않습니다. Azure 구독과 Azure DevOps 조직을 연동하면 Azure Portal 이나 Azure SDK로도 Azure 리소스로서 조회가 가능한데요. 하지만 이 경우 조회가 가능한 것은 Azure DevOps 조직 목록만으로 한정되어 조회해서 점검 할 수 있는 것이 제한적입니다. 다시 말해 Azure DevOps 의 Git 저장소, Azure Pipeline, Azure Boards, Test Plans, Artifacts 등 Azure DevOps 에 포함된 세부 서비스를 조회하여 점검할 수 없습니다.
+
+## Azure SDK - Management 라이브러리로 리소스 조회 해 보기
+기존에는 Azure SDK 의 Management Libraries 를 활용하여 리소스를 조회하고 점검하는 스크립트를 작성 했는데요, 간단한 예제로 리소스를 조회 해 보고 Azure DevOps 는 어떻게 조회 되는지 살펴봅시다.
+
+![](devops_billing.png)
+
+먼저 Azure DevOps 조직에 Azure 구독을 연결해야 조회가 가능합니다. 조직 설정(Organization) 의 Billing 화면에서 Azure 구독을 연결할 수 있습니다. 아래 URL로도 들어갈 수 있습니다.
+
+```
+https://dev.azure.com/{조직_이름}/_settings/billing
+```
+![](devops_billing1.png)
+
+연결할 구독을 선택하고 연결합니다. 참고로 지출 제한 없는 구독만 연결이 가능하니, 지출제한 설정이 없는 구독을 선택 하시거나 지출 제한을 제거해야 연동이 가능합니다.
+
+![](devops_org_res.png)
+
+구독을 연결하면, Azure Portal 에서도 Azure DevOps Organization 리소스로 조회가 가능 한 것을 확인할 수 있습니다. 하지만 이름만 조회 될 뿐, 클릭하여 들어가면 Azure DevOps 로 리다이렉트 해 주는 화면만 나오는 것이 다 입니다.
+
+이제 Azure SDK for Python 으로 간단한 예제 코드를 작성하여 리소스를 조회 해 봅시다. Azure SDK Python 모듈을 설치 합니다. Azure SDK는 각 서비스별로 모듈이 나누어져 있어서 필요한 모듈만 설치해서 사용이 가능합니다. 여기서는 인증을 위한 `azure-mgmt-identity` 및 Azure 리소스 관리를 위한 `azure-mgmt-resource` 모듈을 설치해 사용해 보겠습니다. `azure-mgmt-core` 도 설치가 필요한데요, 보통 다른 Azure SDK 모듈 설치 시 자동으로 같이 설치 되기 때문에 명시적으로 설치 할 필요는 없습니다.
+
+```bash
+# Python 가상 환경 생성 및 진입
+python -m venv venv
+. venv/bin/activate
+
+# Azure SDK 모듈 설치
+pip install azure-mgmt-identity azure-mgmt-resource
+```
+
+```python
+from azure.identity import InteractiveBrowserCredential
+from azure.mgmt.resource import ResourceManagementClient
+
+# Azure DevOps 조직에 연동한 Azure 구독 ID
+subscription_id = "********-****-****-****-************"
+credential = InteractiveBrowserCredential()
+
+resource_client = ResourceManagementClient(credential, subscription_id)
+res = iter(resource_client.resources.list())
+for i in res:
+    print(f"{i.name} ({i.type}))
+```
+위 예제 코드를 실행하면 아래처럼 리소스 목록이 출력됩니다. 아래는 출력된 내용 중 일부로, 앞서 연결한 DevOps 조직이 목록에 나타나는 모습 입니다. `youngbinhan(microsoft.visualstudio/account)`로 조회된 DevOps 조직을 확인할 수 있는데요. 하지만 Azure Portal 에서 처럼 조직 이름만 조회가 될 뿐, 파이프라인, Azure Repos 등은 조회가 되지 않는 모습을 확인할 수 있습니다.
+```bash
+...
+teams(Microsoft.Web/connections)
+youngbinhan(microsoft.visualstudio/account)
+sharedachboardvm_OsDisk_1_12345d3a92454f70af1d882123457cae(Microsoft.Compute/disks)
+...
+```
+
+[Azure SDK for Python](https://azure.github.io/azure-sdk-for-python) API 문서에서도 Azure DevOps 관련 모듈에 대한 문서는 찾을 수 없음을 확인할 수 있습니다.
