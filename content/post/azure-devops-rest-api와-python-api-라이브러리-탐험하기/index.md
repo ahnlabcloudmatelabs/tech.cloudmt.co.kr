@@ -33,7 +33,7 @@ https://dev.azure.com/{조직_이름}/_settings/billing
 
 구독을 연결하면, Azure Portal 에서도 Azure DevOps Organization 리소스로 조회가 가능 한 것을 확인할 수 있습니다. 하지만 이름만 조회 될 뿐, 클릭하여 들어가면 Azure DevOps 로 리다이렉트 해 주는 화면만 나오는 것이 다 입니다.
 
-이제 Azure SDK for Python 으로 간단한 예제 코드를 작성하여 리소스를 조회 해 봅시다. Azure SDK Python 모듈을 설치 합니다. Azure SDK는 각 서비스별로 모듈이 나누어져 있어서 필요한 모듈만 설치해서 사용이 가능합니다. 여기서는 인증을 위한 `azure-mgmt-identity` 및 Azure 리소스 관리를 위한 `azure-mgmt-resource` 모듈을 설치해 사용해 보겠습니다. `azure-mgmt-core` 도 설치가 필요한데요, 보통 다른 Azure SDK 모듈 설치 시 자동으로 같이 설치 되기 때문에 명시적으로 설치 할 필요는 없습니다.
+이번에는 Azure SDK for Python 으로 간단한 예제 코드를 작성하여 리소스를 조회 해 봅시다. Azure SDK Python 모듈을 설치 합니다. Azure SDK는 각 서비스별로 모듈이 나누어져 있어서 필요한 모듈만 설치해서 사용이 가능합니다. 여기서는 인증을 위한 `azure-mgmt-identity` 및 Azure 리소스 관리를 위한 `azure-mgmt-resource` 모듈을 설치해 사용해 보겠습니다. `azure-mgmt-core` 도 설치가 필요한데요, 보통 다른 Azure SDK 모듈 설치 시 자동으로 같이 설치 되기 때문에 명시적으로 설치 할 필요는 없습니다.
 
 ```bash
 # Python 가상 환경 생성 및 진입
@@ -67,3 +67,19 @@ sharedachboardvm_OsDisk_1_12345d3a92454f70af1d882123457cae(Microsoft.Compute/dis
 ```
 
 [Azure SDK for Python](https://azure.github.io/azure-sdk-for-python) API 문서에서도 Azure DevOps 관련 모듈에 대한 문서는 찾을 수 없음을 확인할 수 있습니다.
+
+## Azure DevOps REST API 활용하기
+Azure SDK 로는 DevOps 서비스의 데이터를 조회하거나 정책 설정을 바꾸는 등의 작업을 할 수 없기 때문에, 별도의 API 를 사용해야 합니다. Azure DevOps 의 경우, [Azure DevOps Services REST API](https://docs.microsoft.com/en-us/rest/api/azure/devops) 를 사용해서 Azure DevOps 에서 관리중인 각종 서비스나 자원을 프로그래밍 방식으로 제어할 수 있습니다.
+
+### Personal Access Token 으로 인증하기
+Azure DevOps REST API 에 인증할 때 여러 방법으로 인증하여 API호출을 할 수 있는데요, MSAL, oAuth, PAT(Personal Access Token) 등 다양한 방법으로 인증이 가능합니다. 여기서는 Azure DevOps 에서 PAT를 발급하여 인증 해 보도록 하겠습니다.
+
+PAT 는 이름 그대로 개인별로 생성해서 사용 가능한 액세스 토큰 입니다. 간단히 생성하여 인증 할 때 암호 대신 사용할 수 있고, 생성 시 PAT 유효 기간이나 권한 범위 등도 같이 설정하여 사용하고, 필요에 따라 원격으로 토큰을 취소 시킬 수도 있습니다.
+
+인증에 사용할 PAT를 간단히 발급해 보겠습니다. 먼저 Azure DevOps 화면에서 우측 상단의 프로필 버튼 바로 옆에 설정 버튼을 누르면 아래와 같은 메뉴가 나타납니다. 여기서 `Personal access tokens`를 선택하여 들어갑니다.
+
+![](pat1.png)
+
+좌측 상단에 `+ New Token` 을 클릭하면, 우측에 새 토큰 생성 패널이 나타납니다. 여기서 이름과 유효기간, 토큰에 부여할 권한 등을 지정해 줍니다. PAT는 암호와도 같기 때문에, 외부에 노출되지 않도록 잘 관리하는것도 중요하고, 유효기간과 권한 범위도 필요한 만큼만 적절히 지정해서 유출 되더라도 그로 인한 위험성을 최소화 해 주는것이 좋습니다.
+
+![](pat2.png)
