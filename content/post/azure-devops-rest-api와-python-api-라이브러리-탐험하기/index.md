@@ -10,10 +10,14 @@ tags:
   - Python
   - Rest API
 ---
-최근 회사 내에서, 기존 클라우드 점검 스크립트에 새 기능을 넣는 작업을 하고 있는데요. 이번에 작업을 하면서 Azure DevOps 점검도 자동화 할 필요가 있어, Azure DevOps 를 점검하는 기능도 구현하고 있습니다. 기존 Azure 의 리소스를 점검할 때는 Azure SDK for Python 으로 충분했지만, Azure DevOps는 원래 Visual Studio Team Services 였던 서비스가 이름이 바뀌고 변화해 온 서비스여서, Azure 와는 별개로 사용됩니다. Azure에 가입하지 않아도, Azure DevOps만 따로 사용이 가능하죠. 그래서 API와 SDK 도 따로 있습니다. 이 글에서는 이렇게 따로 존재하는 Azure DevOps REST API 와, 이 REST API 기반으로 만들어진 Azure DevOps Python API 모듈을 사용해서 Azure DevOps 검사 기능을 구현해 본 것에 대해 정리해 보고자 합니다.
+최근 회사 내에서, 기존 클라우드 점검 스크립트에 새 기능을 넣는 작업을 하고 있는데요. 이번에 작업을 하면서 Azure DevOps 점검도 자동화 할 필요가 있어, Azure DevOps 를 점검하는 기능도 구현하고 있습니다. 기존 Azure 의 리소스를 점검할 때는 Azure SDK for Python 으로 충분했지만, Azure DevOps는 원래 Visual Studio Team Services 였던 서비스가 이름이 바뀌고 변화해 온 서비스여서, Azure 와는 별개로 사용됩니다. 
+
+Azure에 가입하지 않아도, Azure DevOps만 따로 사용이 가능하죠. 그래서 API와 SDK 도 따로 있습니다. 이 글에서는 이렇게 따로 존재하는 Azure DevOps REST API 와, 이 REST API 기반으로 만들어진 Azure DevOps Python API 모듈을 사용해서 Azure DevOps 검사 기능을 구현해 본 것에 대해 정리해 보고자 합니다.
 
 ## Azure 에서의 Azure DevOps 리소스
-위에서 언급했듯, Azure DevOps 는 Azure 와 별개의 서비스여서, 기본적으로 Azure SDK 에서 Azure 리소스로 조회가 되지 않습니다. Azure 구독과 Azure DevOps 조직을 연동하면 Azure Portal 이나 Azure SDK로도 Azure 리소스로서 조회가 가능한데요. 하지만 이 경우 조회가 가능한 것은 Azure DevOps 조직 목록만으로 한정되어 조회해서 점검 할 수 있는 것이 제한적입니다. 다시 말해 Azure DevOps 의 Git 저장소, Azure Pipeline, Azure Boards, Test Plans, Artifacts 등 Azure DevOps 에 포함된 세부 서비스를 조회하여 점검할 수 없습니다.
+위에서 언급했듯, Azure DevOps 는 Azure 와 별개의 서비스여서, 기본적으로 Azure SDK 에서 Azure 리소스로 조회가 되지 않습니다. Azure 구독과 Azure DevOps 조직을 연동하면 Azure Portal 이나 Azure SDK로도 Azure 리소스로서 조회가 가능한데요. 
+
+하지만 이 경우 조회가 가능한 것은 Azure DevOps 조직 목록만으로 한정되어 조회해서 점검 할 수 있는 것이 제한적입니다. 다시 말해 Azure DevOps 의 Git 저장소, Azure Pipeline, Azure Boards, Test Plans, Artifacts 등 Azure DevOps 에 포함된 세부 서비스를 조회하여 점검할 수 없습니다.
 
 ## Azure SDK - Management 라이브러리로 리소스 조회 해 보기
 기존에는 Azure SDK 의 Management Libraries 를 활용하여 리소스를 조회하고 점검하는 스크립트를 작성 했는데요, 간단한 예제로 리소스를 조회 해 보고 Azure DevOps 는 어떻게 조회 되는지 살펴봅시다.
@@ -112,4 +116,55 @@ CLI 환경이 편하다면, `curl` 명령으로 아래와 같이 호출해 볼 �
 ```bash
 # curl -u <사용자 이름>:<암호> <URL>
 curl -u :<발급한 PAT> https://dev.azure.com/youngbinhan/_apis/projects?api-version=6.1-preview.4
+```
+
+## Python 코드로 작성해서 호출 해 보기
+PAT 발급도 했고, REST API 호출도 해 보았는데요. 이번에는 Python 으로 API 호출하는 코드를 작성 해 보겠습니다.
+Python HTTP 라이브러리인 [`requests`](https://docs.python-requests.org/en/latest/)로 API 를 호출하는 코드를 간단히 작성해 봅시다.
+
+```bash
+# Python 가상 환경 생성 및 진입
+python -m venv venv
+. venv/bin/activate
+
+# requests 라이브러리 설치
+pip install requests
+```
+
+`requests.auth` 패키지의 `HTTPBasicAuth` 클래스로 인증 정보가 담긴 객체를 만들어 Azure DevOps REST API 에 인증하고 API 를 호출하는 작업을 할 수 있습니다.
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+PAT = "<앞에서 발급한 PAT>"
+AZ_DEVOPS_ORG = "youngbinhan" # Azure DevOps 조직 이름
+
+result = requests.get(f'https://dev.azure.com/{AZ_DEVOPS_ORG}/_apis/projects?api-version=6.1-preview.4', auth=HTTPBasicAuth('', PAT))
+print(result.json())
+```
+> 실행 결과 
+![](python.png)
+```json
+{
+   "count":2,
+   "value":[
+      {
+         "id":"********-****-****-****-************",
+         "name":"samples",
+         "url":"https://dev.azure.com/youngbinhan/_apis/projects/********-****-****-****-************",
+         "state":"wellFormed",
+         "revision":12,
+         "visibility":"public",
+         "lastUpdateTime":"2020-10-14T02:40:01.027Z"
+      },
+      {
+         "id":"********-****-****-****-************",
+         "name":"FittrixTest",
+         "url":"https://dev.azure.com/youngbinhan/_apis/projects/********-****-****-****-************",
+         "state":"wellFormed",
+         "revision":20,
+         "visibility":"private",
+         "lastUpdateTime":"2020-10-16T01:32:22.173Z"
+      }
+   ]
+}
 ```
