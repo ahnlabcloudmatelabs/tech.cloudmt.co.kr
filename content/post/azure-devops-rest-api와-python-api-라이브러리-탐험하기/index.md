@@ -123,10 +123,6 @@ PAT 발급도 했고, REST API 호출도 해 보았는데요. 이번에는 Pytho
 Python HTTP 라이브러리인 [`requests`](https://docs.python-requests.org/en/latest/)로 API 를 호출하는 코드를 간단히 작성해 봅시다.
 
 ```bash
-# Python 가상 환경 생성 및 진입
-python -m venv venv
-. venv/bin/activate
-
 # requests 라이브러리 설치
 pip install requests
 ```
@@ -167,4 +163,45 @@ print(result.json())
       }
    ]
 }
+```
+## Python 클라이언트 라이브러리 사용하기
+앞서 API를 호출하는 코드를 작성 할 때는, 직접 URL 을 넣고 호출 했는데요. 간단한 작업 한 두게면 큰 문제가 없겠지만, 만약 Azure DevOps 조직의 대부분의 데이터를 호출해야 해서 상당히 많은 숫자의 API 를 호출해야 한다면, 그 URL 경로나 조회 했을 때 나오는 데이터 등을 관리 하는 것도 아마 쉽지 않을 겁니다.
+
+앞서 보았던 Azure SDK 처럼, Azure DevOps 도 [.Net](https://docs.microsoft.com/en-us/azure/devops/integrate/concepts/dotnet-client-libraries?view=azure-devops), [Go](https://github.com/Microsoft/azure-devops-go-api), [Node.js](https://github.com/Microsoft/vsts-node-api), [Python](https://github.com/Microsoft/azure-devops-python-api) 등 다양한 언어별로 클라이언트 라이브러리가 제공됩니다. 이를 이용하면, URL 을 직접 명시할 필요 없이, 라이브러리에 있는 함수 중 해당 API 를 호출 해 주는 것으로 호출 해 주면 되고, 딕셔너리가 아닌 클래스 기반 객체로도 변환을 해 줍니다. 때문에 많은 숫자의 API 를 호출하여 작업을 자동화 하는 코드를 작성한다면 좀 더 편리하게 코드를 작성할 수 있습니다.  
+
+Python 용 클라이언트 라이브러리를 사용 하려면, `azure-devops` 패키지를 설치하면 됩니다.
+
+```bash
+pip install azure-devops
+```
+
+그러면 이제 설치된 패키지를 활용하여, Azure DevOps REST API 와의 연결 설정을 초기화 해서 사용할 수 있습니다. 인증 데이터가 담긴 객체는 `msrest.authentication` 패키지의 `BasicAuthentication`를 사용 하는데요, `azure-devops` 패키지 설치 시 같이 설치되므로, 별도로 설치하지 않아도 됩니다.
+
+```python
+from azure.devops.connection import Connection
+from msrest.authentication import BasicAuthentication
+
+personal_access_token = '<앞에서 발급한 PAT>'
+organization_url = 'https://dev.azure.com/youngbinhan' # youngbinhan 를 사용중인 DevOps 조직 이름으로 변경
+
+# Basic Auth 인증 정보 만들기
+credentials = BasicAuthentication('', personal_access_token)
+# 연결 객체 만들기
+connection = Connection(base_url=organization_url, creds=credentials)
+```
+
+Python 용 클라이언트 라이브러리의 경우, REST API 문서에서 분류 되어 있는 것 처럼 함수 및 클래스가 모듈화 되어 있습니다. 그래서 REST API 문서 목록에 분류 되어 있는 것을 참고해서 필요한 모듈을 불러오고 모듈에 있는 함수로 API 호출을 할 수 있습니다.
+
+예를 들어 앞서 호출했던 프로젝트 목록 조회 API 는 `Core` - `Projects` 분류에 `List` 에 해당함을 API 문서에서 확인할 수 있습니다.
+![](apilist.png)
+
+이는 Python 클라이언트 라이브러리에서는 앞에서 만든 `connection` 객체에 있는 `core_client` 에 포함된 `get_projects()` 함수에 해당합니다.
+아래와 같은 코드로, `core_client` 를 얻고, 해당 클라이언트 객체에서 `get_projects()` 함수를 호출해서 프로젝트 목록을 조회할 수 있습니다.
+
+```python
+# Core 클라이언트 객체 얻기
+core_client = connection.clients.get_core_client()
+
+# Core 클라이언트 객체에서 프로젝트 목록 조회
+get_projects_response = core_client.get_projects()
 ```
