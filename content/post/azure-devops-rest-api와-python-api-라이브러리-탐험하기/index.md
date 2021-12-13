@@ -83,3 +83,33 @@ PAT 는 이름 그대로 개인별로 생성해서 사용 가능한 액세스 �
 좌측 상단에 `+ New Token` 을 클릭하면, 우측에 새 토큰 생성 패널이 나타납니다. 여기서 이름과 유효기간, 토큰에 부여할 권한 등을 지정해 줍니다. PAT는 암호와도 같기 때문에, 외부에 노출되지 않도록 잘 관리하는것도 중요하고, 유효기간과 권한 범위도 필요한 만큼만 적절히 지정해서 유출 되더라도 그로 인한 위험성을 최소화 해 주는것이 좋습니다.
 
 ![](pat2.png)
+
+## REST API 호출 해 보기
+이제 발급한 PAT로 Azure DevOps REST API 를 간단히 호출 해 보겠습니다. 여기서는 예시로 [Azure DevOps 조직의 프로젝트를 나열하는 API](https://docs.microsoft.com/en-us/rest/api/azure/devops/core/projects/list?view=azure-devops-rest-6.1)를 호출 해 보겠습니다.
+
+API 참조 문서를 확인 해 보면, 아래와 같은 경로로 `GET` 요청을 보내면 된다고 나와 있습니다.
+
+```
+GET https://dev.azure.com/{organization}/_apis/projects?api-version=6.1-preview.4
+```
+
+PAT 로 인증 또한 해 주어야 하는데요, [이 문서에 따르면](https://docs.microsoft.com/en-us/rest/api/azure/devops/?view=azure-devops-rest-6.1#assemble-the-request) Basic Auth 방식으로 인증하면 된다고 나와 있습니다. GUI 로 HTTP 요청을 만들어 테스트 해 볼수 있는 [hoppscotch](https://hoppscotch.io/)를 사용하여 간단히 테스트 해 보겠습니다.
+
+![](apitest.png)
+
+Hoppscotch 에 접속하셔서, 위 사진처럼 설정합니다.
+- URL: `https://dev.azure.com/{organization}/_apis/projects?api-version=6.1-preview.4` - `{organization}`은 Azure DevOps 조직 이름으로 수정
+- 요청 방식: GET
+- 인증: Basic Auth 선택
+  - 사용자 이름: 비워두기
+  - 비밀번호: 앞에서 발급한 PAT 입력
+
+입력 후, `보내기` 버튼을 클릭하여 API 를 호출하면 아래와 같이 JSON 형식으로 된 Azure DevOps 조직의 프로젝트 목록 데이터가 조회되는 것을 확인하실 수 있습니다.
+![](testresponse.png)
+
+CLI 환경이 편하다면, `curl` 명령으로 아래와 같이 호출해 볼 수 있습니다.
+
+```bash
+# curl -u <사용자 이름>:<암호> <URL>
+curl -u :<발급한 PAT> https://dev.azure.com/youngbinhan/_apis/projects?api-version=6.1-preview.4
+```
