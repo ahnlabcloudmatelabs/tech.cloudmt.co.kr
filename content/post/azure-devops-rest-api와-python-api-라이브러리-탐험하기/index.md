@@ -205,3 +205,24 @@ core_client = connection.clients.get_core_client()
 # Core 클라이언트 객체에서 프로젝트 목록 조회
 get_projects_response = core_client.get_projects()
 ```
+
+함수를 호출해서 반환된 객체의 `value` 속성을 출력 해 보면, JSON 이나 Python 딕셔너리가 아닌 클래스가 담긴 배열로 출력되는 것을 볼 수 있습니다.
+```python
+print(get_projects_response.value)
+```
+```python
+[<azure.devops.v5_1.core.models.TeamProjectReference object at 0x000001CA7BD8FBE0>, <azure.devops.v5_1.core.models.TeamProjectReference object at 0x000001CA7BD8FB80>]
+```
+
+아래와 같이 간단한 반복문으로 프로젝트 이름만 출력 해 볼 수 있습니다.
+```python
+project_names = [ project.name for project in get_projects_response.value]
+print(project_names)
+```
+```python
+['samples', 'FittrixTest']
+```
+
+이렇게 클라이언트 라이브러리를 활용해서 코드를 작성하면, 사용하는 API의 URL이나 객체 바인딩 등을 관리할 필요가 없어져, 좀더 편리하게 API 를 호출하여 사용하는 코드를 작성하실 수 있습니다. 참고해야 할 점은, 잘 관리되고 있는 Node.js 및 Go 클라이언트 라이브러리와 달리, Python 클라이언트 라이브러리는 지금 시점에서 보면 작년 여름 이후 업데이트가 없어 구현 되어 있지 않은 함수도 여럿 있습니다.
+때문에 필요한 경우, Python 클라이언트 라이브러리를 사용하는 방법과 REST API 를 직접 호출하는 방법을 같이 활용해야 할 수도 있습니다.
+![](github.png)
