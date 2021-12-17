@@ -226,3 +226,35 @@ print(project_names)
 이렇게 클라이언트 라이브러리를 활용해서 코드를 작성하면, 사용하는 API의 URL이나 객체 바인딩 등을 관리할 필요가 없어져, 좀더 편리하게 API 를 호출하여 사용하는 코드를 작성하실 수 있습니다. 참고해야 할 점은, 잘 관리되고 있는 Node.js 및 Go 클라이언트 라이브러리와 달리, Python 클라이언트 라이브러리는 지금 시점에서 보면 작년 여름 이후 업데이트가 없어 구현 되어 있지 않은 함수도 여럿 있습니다.
 때문에 필요한 경우, Python 클라이언트 라이브러리를 사용하는 방법과 REST API 를 직접 호출하는 방법을 같이 활용해야 할 수도 있습니다.
 ![](github.png)
+
+## 웹 브라우저의 개발자 콘솔로, 호출 할 API 찾기
+Azure DevOps 의 REST API 를 보면, 상당히 다양한 숫자의 API 가 제공 되고 있고, 어떤 API 의 경우 이름이 여러분이 예상했던 이름과 일치하지 않아서 찾기 어려운 경우도 많이 있습니다.
+Azure DevOps 의 REST API는 단지 Azure DevOps 기능을 외부에서 호출하기 위해서만 쓰는것이 아니라, Azure DevOps 웹 프론트에서도 호출해서 여러분이 보는 Azure DevOps 화면의 데이터 표시에도 사용되기 때문에, 이를 활용하면 여러분이 원하는 API 를 좀 더 쉽게 찾을 수 있습니다.
+
+아래 사진 처럼 Azure Boards 에 나오는 Work Item 목록을 조회하는 것을 예로 들어 보겠습니다. 사진에 나오는 것을 API 로 조회 하려면 어떻게 해야 할까요? 문서에서 Work Item 관련 API 를 찾으면 되긴 하겠지만. API 문서를 처음 본다면 API 가 많아서 그 중에 찾기 어려울 겁니다. 
+![](workitems.png)
+
+해당 페이지에서 개발자 도구를 열고, `네트워크` 탭으로 이동한 후, 새로 고침을 하면. 페이지에서 발생하는 HTTP 호출 등을 보실 수 있습니다. 그 중, 경로에 `_apis` 가 포함된 것을 찾아서 확인해 보면 되겠습니다.
+여기서는 `_apis/wit/workItemsBatch` 에 해당하는 `workItemsBatch` 항목이 해당 되겠네요. 
+![](workitemsapi0.png)
+
+해당 항목을 누르고, `미리보기` 탭을 클릭하면, API를 호출해서 응답으로 전달받은 데이터를 확인할 수 있습니다. 데이터를 열어보니, 각 항목마다 또다른 API를 호출하기 위한 URL 이 포함되어 있는것이 보이는데요. 하나 선택해서 API 를 호출하여 어떤 데이터를 가져다 주는지 테스트 해 보겠습니다.
+![](workitemsapi.png)
+
+`콘솔` 탭에서, 앞에서 `미리보기` 탭에서 본 `url` 값으로 아래와 같은 코드를 작성해서 실행해 봅니다.
+```js
+
+// 예시: "https://dev.azure.com/youngbinhan/_apis/wit/workItems/117"
+let workItem = "앞에서 복사한 Work Item의 URL 값"
+await fetch(workItem).json()
+```
+![](workitemdetails.png)
+실행 해 보면, API 호출에 대한 응답 데이터가 콘솔에 바로 나타나서 확인할 수 있는데요. Work Item 하나에 대한 자세한 데이터를 조회해서 보여주는 것을 확인할 수 있습니다.
+
+이렇게 호출 해 본 API 의 경로에서. API 문서 상에선 어디에서 찾을 수 있는지 대략 유추해 볼 수 있습니다. 여기서 예제로 찾아본 Work Item 조회 관련 API 의 경우, `wit (Work Items Tracking)` 에 해당하는 **Work Items** 아래에 **List** 및 **Get Work Item** 에서 찾을 수 있습니다.
+
+- [Work Items - List](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/work-items/list?view=azure-devops-rest-6.1)
+- [Work Items - Get Work Item](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/work-items/get-work-item?view=azure-devops-rest-6.1)
+
+## Work Item 목록 조회하는 코드 작성해보기
+이번에는 위에서 찾아본 API 로 한번 Work Item 과 각 Work Item 제목을 출력하는 것을 간단히 Python 으로 작성 해 보겠습니다.
