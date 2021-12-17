@@ -2,7 +2,7 @@
 title: Azure DevOps REST API와 Python API 라이브러리로 Azure DevOps 작업 자동화 하기
 authors:
   - youngbin-han
-date: 2021-10-20T07:35:01.645Z
+date: 2021-12-17T07:35:01.645Z
 categories:
   - Tech
 tags:
