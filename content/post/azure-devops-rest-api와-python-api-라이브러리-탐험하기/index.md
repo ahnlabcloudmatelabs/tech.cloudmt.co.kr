@@ -257,7 +257,7 @@ await fetch(workItem).json()
 - [Work Items - Get Work Item](https://docs.microsoft.com/en-us/rest/api/azure/devops/wit/work-items/get-work-item?view=azure-devops-rest-6.1)
 
 ## Work Item 목록 조회하는 코드 작성해보기
-이번에는 위에서 찾아본 Work Item API 로 한번 Work Item 과 각 Work Item 제목을 출력하는 것을 간단히 Python 으로 작성 해 보겠습니다.
+이번에는 위에서 찾아본 **Work Items - Get Work Items Batch** API 로 한번 Work Item 과 각 Work Item 제목을 출력하는 것을 간단히 Python 으로 작성 해 보겠습니다.
 
 ### REST API 직접 호출
 ```python
@@ -268,13 +268,14 @@ AZ_DEVOPS_ORG = "youngbinhan" # Azure DevOps 조직 이름
 PROJECT = "samples"
 URL = f'https://dev.azure.com/{AZ_DEVOPS_ORG}/{PROJECT}/_apis/wit/workitemsbatch?api-version=6.1-preview.1'
 body = {
-    "fields":["System.Id", "System.State", "System.WorkItemType", "System.IterationPath", "System.AreaPath","Microsoft.VSTS.Scheduling.StoryPoints"],
+    "fields":["System.Id", "System.Title"],
     "ids":[1,2,3]
 }
 result = requests.post(URL, auth=HTTPBasicAuth('', PAT), json=body)
 print(result.json())
 ```
 PAT, DevOps 조직 URL 을 지정하고, **Work Items - List** API 를 바로 호출합니다. API 문서를 참고하여, 프로젝트 이름과 조회할 데이터에 대한 조건도 JSON 으로 넣어주어 호출합니다. 
+여기서는 조회 조건으로 조회할 Work Item ID 와 Work Item 의 필드를 넣어 주었습니다. 필드의 경우 ID(`System.Id`)와 제목(`System.Title`)을 지정 하였습니다. 
 그러면 아래와 같은 형태의 JSON 데이터가 출력되는 것을 확인할 수 있습니다.
 ```json
 {
@@ -285,10 +286,7 @@ PAT, DevOps 조직 URL 을 지정하고, **Work Items - List** API 를 바로 �
          "rev":2,
          "fields":{
             "System.Id":1,
-            "System.AreaPath":"samples",
-            "System.IterationPath":"samples",
-            "System.WorkItemType":"Task",
-            "System.State":"To Do"
+            "System.Title":"test"
          },
          "url":"https://dev.azure.com/youngbinhan/_apis/wit/workItems/1"
       },
@@ -297,10 +295,7 @@ PAT, DevOps 조직 URL 을 지정하고, **Work Items - List** API 를 바로 �
          "rev":1,
          "fields":{
             "System.Id":2,
-            "System.AreaPath":"samples",
-            "System.IterationPath":"samples",
-            "System.WorkItemType":"Task",
-            "System.State":"To Do"
+            "System.Title":"Bug fix"
          },
          "url":"https://dev.azure.com/youngbinhan/_apis/wit/workItems/2"
       },
@@ -309,113 +304,130 @@ PAT, DevOps 조직 URL 을 지정하고, **Work Items - List** API 를 바로 �
          "rev":1,
          "fields":{
             "System.Id":3,
-            "System.AreaPath":"samples",
-            "System.IterationPath":"samples",
-            "System.WorkItemType":"Task",
-            "System.State":"To Do"
+            "System.Title":"Sign in feature"
          },
          "url":"https://dev.azure.com/youngbinhan/_apis/wit/workItems/3"
       }
    ]
 }
 ```
-Work Item 의 세부 정보도 조회하여 표시하도록 아래와 같이 코드를 추가합니다.
+여기서 ID 와 제목만 출력 되도록 아래와 같이 수정합니다.
 ```python
 ...
 result = requests.post(URL, auth=HTTPBasicAuth('', PAT), json=body)
 # 추가한 코드
 workItems = result.json()["value"]
 for workItem in workItems:
-    # 각 Work Item 별 세부 정보 조회
-    result = requests.get(workItem["url"], auth=HTTPBasicAuth('', PAT))
-    print(result.json())
+    print(f"[{workItem['id']}] {workItem['fields']['System.Title']}")
 ```
-수정한 코드를 실행하면, 각 Work Item 에 대해 아래와 같은 형태의 데이터가 조회되를 것을 확인하실 수 있습니다. 
-```json
-{
-   "id":3,
-   "rev":1,
-   "fields":{
-      "System.AreaPath":"samples",
-      "System.TeamProject":"samples",
-      "System.IterationPath":"samples",
-      "System.WorkItemType":"Task",
-      "System.State":"To Do",
-      "System.Reason":"Added to backlog",
-      "System.CreatedDate":"2021-12-17T07:15:13.727Z",
-      "System.CreatedBy":{
-         "displayName":"Youngbin Han",
-         "url":"https://spsprodsea1.vssps.visualstudio.com/********-****-****-****-************/_apis/Identities/********-****-****-****-************",
-         "_links":{
-            "avatar":{
-               "href":"https://dev.azure.com/youngbinhan/_apis/GraphProfile/MemberAvatars/aad.************************************************"
-            }
-         },
-         "id":"********-****-****-****-************",
-         "uniqueName":"youngbin.han@*****.co.kr",
-         "imageUrl":"https://dev.azure.com/youngbinhan/_apis/GraphProfile/MemberAvatars/aad.************************************************",
-         "descriptor":"aad.************************************************"
-      },
-      "System.ChangedDate":"2021-12-17T07:15:13.727Z",
-      "System.ChangedBy":{
-         "displayName":"Youngbin Han",
-         "url":"https://spsprodsea1.vssps.visualstudio.com/********-****-****-****-************/_apis/Identities/********-****-****-****-************",
-         "_links":{
-            "avatar":{
-               "href":"https://dev.azure.com/youngbinhan/_apis/GraphProfile/MemberAvatars/aad.************************************************"
-            }
-         },
-         "id":"********-****-****-****-************",
-         "uniqueName":"youngbin.han@*****.co.kr",
-         "imageUrl":"https://dev.azure.com/youngbinhan/_apis/GraphProfile/MemberAvatars/aad.************************************************",
-         "descriptor":"aad.************************************************"
-      },
-      "System.CommentCount":0,
-      "System.Title":"Sign in feature",
-      "Microsoft.VSTS.Common.StateChangeDate":"2021-12-17T07:15:13.727Z",
-      "Microsoft.VSTS.Common.Priority":2
-   },
-   "_links":{
-      "self":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItems/3"
-      },
-      "workItemUpdates":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItems/3/updates"
-      },
-      "workItemRevisions":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItems/3/revisions"
-      },
-      "workItemComments":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItems/3/comments"
-      },
-      "html":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_workitems/edit/3"
-      },
-      "workItemType":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItemTypes/Task"
-      },
-      "fields":{
-         "href":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/fields"
-      }
-   },
-   "url":"https://dev.azure.com/youngbinhan/********-****-****-****-************/_apis/wit/workItems/3"
-}
-```
-코드를 아래와 같이 수정해서, 위 데이터에서 Work Item 의 ID 와 제목만 출력 되도록 수정하고, 다시 실행 해 보겠습니다.
-```python
-...
-result = requests.post(URL, auth=HTTPBasicAuth('', PAT), json=body)
-# 추가한 코드
-workItems = result.json()["value"]
-for workItem in workItems:
-    # 각 Work Item 별 세부 정보 조회
-    result = requests.get(workItem["url"], auth=HTTPBasicAuth('', PAT))
-    item_detail = result.json()
-    print(f"[{item_detail['id']}] {item_detail['fields']['System.Title']}")
-```
-수정 후 다시 실행하면, 아래과 같이 Work Item 목록이 출력 되는 것을 확인할 수 있습니다.
+수정한 코드를 실행하면, 아래과 같이 Work Item 목록이 출력 되는 것을 확인할 수 있습니다.
 ```bash
 [1] test
 [2] Bug fix
 [3] Sign in feature
 ```
+
+### Python 클라이언트 라이브러리 활용
+같은 작업을 이번에는 Python 클라이언트 라이브리를 활용해서 작성 해 보겠습니다. 먼저 앞에서 작성 했던 코드 처럼 연결을 초기화 합니다.
+```python
+from azure.devops.connection import Connection
+from msrest.authentication import BasicAuthentication
+
+personal_access_token = '<PAT>'
+organization_url = 'https://dev.azure.com/youngbinhan' # youngbinhan 를 사용중인 DevOps 조직 이름으로 변경
+PROJECT = "samples"
+# Basic Auth 인증 정보 만들기
+credentials = BasicAuthentication('', personal_access_token)
+# 연결 객체 만들기
+connection = Connection(base_url=organization_url, creds=credentials)
+```
+Python 클라이언트 라이브러리의 경우, `work_item_tracking_client` 모듈에서 Work Item 관련 API 를 호출하는 함수를 불러와 호출할 수 있습니다. 이를 위해 `get_work_item_tracking_client()` 메서드를 이용합니다.
+이후 해당 모듈의 `get_work_items_batch()` 로 동일한 데이터를 조회할 수 있습니다.
+```python
+...
+from azure.devops.v6_0.work_item_tracking import WorkItemBatchGetRequest
+
+...
+# 연결 객체 만들기
+connection = Connection(base_url=organization_url, creds=credentials)
+# Work Item 클라이언트 얻기
+client = connection.clients.get_work_item_tracking_client()
+
+# Work Item 목록 조회
+body = WorkItemBatchGetRequest(
+    ids=[1,2,3], 
+    fields=["System.Id", "System.Title"])
+result = client.get_work_items_batch(body, project=PROJECT)
+```
+Python 클라이언트의 경우, 앞에서 언급했듯, 조회된 결과 데이터를 클래스 기반 객체로 변환하여 반환 해 줍니다. `get_work_item_tracking_client()` 함수의 경우, `WorkItem` 타입의 배열을 반환 해 주는데요. 이 클래스에 어떤 필드가 있는지 소스코드로 확인 해 보겠습니다. 설치된 Python 패키지의 `azure/devops/v6_0/work_item_tracking/models.py` 에서 `WorkItem` 클래스를 확인할 수 있습니다.
+
+```python
+class WorkItem(WorkItemTrackingResource):
+    """
+    Describes a work item.
+
+    :param url:
+    :type url: str
+    :param _links: Link references to related REST resources.
+    :type _links: :class:`ReferenceLinks <azure.devops.v6_0.work_item_tracking.models.ReferenceLinks>`
+    :param comment_version_ref: Reference to a specific version of the comment added/edited/deleted in this revision.
+    :type comment_version_ref: :class:`WorkItemCommentVersionRef <azure.devops.v6_0.work_item_tracking.models.WorkItemCommentVersionRef>`
+    :param fields: Map of field and values for the work item.
+    :type fields: dict
+    :param id: The work item ID.
+    :type id: int
+    :param relations: Relations of the work item.
+    :type relations: list of :class:`WorkItemRelation <azure.devops.v6_0.work_item_tracking.models.WorkItemRelation>`
+    :param rev: Revision number of the work item.
+    :type rev: int
+    """
+
+    _attribute_map = {
+        'url': {'key': 'url', 'type': 'str'},
+        '_links': {'key': '_links', 'type': 'ReferenceLinks'},
+        'comment_version_ref': {'key': 'commentVersionRef', 'type': 'WorkItemCommentVersionRef'},
+        'fields': {'key': 'fields', 'type': '{object}'},
+        'id': {'key': 'id', 'type': 'int'},
+        'relations': {'key': 'relations', 'type': '[WorkItemRelation]'},
+        'rev': {'key': 'rev', 'type': 'int'}
+    }
+
+    def __init__(self, url=None, _links=None, comment_version_ref=None, fields=None, id=None, relations=None, rev=None):
+        super(WorkItem, self).__init__(url=url, _links=_links)
+        self.comment_version_ref = comment_version_ref
+        self.fields = fields
+        self.id = id
+        self.relations = relations
+        self.rev = rev
+```
+확인 해 보면, REST API 로 호출 했을 때 처럼, `id` 와 배열 형태의 `fields` 필드가 포함 되어 있는데요. 이를 이용해 Work Item ID 와 제목을 출력하도록 작성하면 아래와 같습니다.
+```python
+...
+from azure.devops.v6_0.work_item_tracking import WorkItemBatchGetRequest
+
+...
+# 연결 객체 만들기
+connection = Connection(base_url=organization_url, creds=credentials)
+# Work Item 클라이언트 얻기
+client = connection.clients.get_work_item_tracking_client()
+
+# Work Item 목록 조회
+body = WorkItemBatchGetRequest(
+    ids=[1,2,3], 
+    fields=["System.Id", "System.Title"])
+result = client.get_work_items_batch(body, project=PROJECT)
+for item in result:
+    print(f"[{item.id}] {item.fields['System.Title']}")
+```
+이제 수정한 코드를 실행 해 보면, REST API 로 호출 했을 때 처럼 Work Item 목록이 출력되는 것을 확인할 수 있습니다.
+```bash
+[1] test
+[2] Bug fix
+[3] Sign in feature
+```
+
+# 정리
+
+지금까지 Azure DevOps REST API 를 활용하여 DevOps 의 데이터를 조회하거나 업데이트 하고, 각 언어별 DevOps 클라이언트 라이브러리 등에 대해 알아보았습니다.
+그리고 Work Item 조회를 예로 들어 간단한 예제 코드를 통해 사용 방법에 대해서도 알아보았습니다. Azure와 Azure DevOps 를 사용 하다 보면 일괄적으로 데이터를 조회해서 확인 하거나, 해당 서비스에서의 정해진 작업을 자동화 할 때도 자주 있을 텐데요, 이럴 때 각 서비스가 제공하는 API를 활용하여 자동화를 해 볼 수 있습니다.
+
