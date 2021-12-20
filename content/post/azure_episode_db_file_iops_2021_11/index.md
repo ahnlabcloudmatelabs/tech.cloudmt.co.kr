@@ -121,7 +121,9 @@ tbl_his 테이블을 파티셔닝 하기 전에는 Primary 파일그룹에 담�
 
 각 개별 data file size를 128GiB 보다 큰 값, 예를 들어 136GiB으로 늘려 장애 상황이 해소되는지 알아보기로 했다.
 
-> 오오! 문제가 해결되었다. 데이터 파일 사이즈를 늘리자마자 App의 requests가 일정하게 유입되는 것으로 확인된다.
+> 오오! 문제가 해결되었다.
+
+아래 메트릭처럼 data file size를 늘리자마자 App의 requests가 일정하게 유입되는 것으로 확인된다.
 
 ![](images/metric_normal_03.png)
 
