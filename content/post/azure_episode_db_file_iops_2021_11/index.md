@@ -5,7 +5,7 @@ authors:
 - jungwoo kim
 categories:
 - Tech
-date: "2021-12-16T00:00:00Z"
+date: "2021-12-20T00:00:00Z"
 #draft: true
 tags:
 - Azure SQL Managed Instance
