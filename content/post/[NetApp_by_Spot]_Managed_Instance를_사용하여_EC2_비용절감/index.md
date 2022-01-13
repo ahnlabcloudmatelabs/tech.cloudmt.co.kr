@@ -94,7 +94,7 @@ Recycle은 실행중인 EC2가 종료되고 동일한 인스턴스로 시작합�
 
 ## 3. Managed Instance 대시보드
 생성이 완료되고 Managed Instance → Instance → 해당 Instance를 클릭하면 대시보드를 볼 수 있습니다.
-![MI 생성12](images/11.png)
+![MI 생성12](images/12.png)
 대시보드에서 전체적인 개요 및 디테일을 볼 수 있고, 볼륨 및 네트워크, 모니터링, 로그를 확인할 수 있습니다. 리소스를 미리 생성해놓아서 119시간이라고 표시되어 있습니다.  
 * Potential Costs : 잠재적 비용  
 * Actual Costs : 실제 비용  
