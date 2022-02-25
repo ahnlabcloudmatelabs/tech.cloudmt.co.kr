@@ -50,13 +50,14 @@ SSO를 구현하는 방법은 애플리케이션이 호스트 되는 위치에 �
 이렇게 환경에 따라 SSO 구성 설정을 완료하고 나면 실제로 애플리케이션 사용자의 ID 및 역할 또한 살펴보아야 합니다. 막상 Azure AD를 통해 추가된 애플리케이션에 한 번의 로그인으로 편리한 환경을 구성했지만, 새 사용자가 추가될 때마다 해당 애플리케이션에서 일일이 사용자 매핑을 해주어야 한다면 이것 또한 번거로운 작업이 될 것입니다. 그래서 Azure AD Enterprise Application에서는 해당 사용자의 ID 및 역할에 대해 자동으로 생성하고 할당하는 앱 프로비저닝이라는 서비스를 제공합니다. 사용자 생성하는 것 외에도 상태 또는 역할이 변경될 때 해당 계정에 대한 업데이트가 자동으로 이루어집니다.
 
 이러한 앱 프로비저닝을 이용한다면 아래의 기능을 통한 이점을 확실히 누릴 수 있을 것입니다. Enterprise Application 구성으로 편리성과 관리 포인트의 감소를 동시에 누릴 수 있죠.
-    > __*프로비저닝 및 프로비저닝 해제 자동화*__ | 새 사용자의 새 계정 자동 생성 및 삭제된 사용자 자동 비활성화
-    > __*시스템 간 데이터 동기화*__ | 사용자의 변경 내용 최신 상태로 유지
-    > __*그룹 프로비저닝*__ 
-    > __*액세스 제어*__ | 사용자 액세스에 대한 모니터링 및 감사
-    > __*브라운 필드 시나리오에서 원활하게 배포*__ | 대상 시스템의 사용자 특성으로 기존 ID 매칭
-    > __*다양한 사용자 지정*__ | 사용자 지정 특성 매핑 가능
-    > __*위험 이벤트에 대한 경고*__ | LogAnalytics 통합으로 경고 지정
+    
+> __*프로비저닝 및 프로비저닝 해제 자동화*__ | 새 사용자의 새 계정 자동 생성 및 삭제된 사용자 자동 비활성화
+> __*시스템 간 데이터 동기화*__ | 사용자의 변경 내용 최신 상태로 유지
+> __*그룹 프로비저닝*__ 
+> __*액세스 제어*__ | 사용자 액세스에 대한 모니터링 및 감사
+> __*브라운 필드 시나리오에서 원활하게 배포*__ | 대상 시스템의 사용자 특성으로 기존 ID 매칭
+> __*다양한 사용자 지정*__ | 사용자 지정 특성 매핑 가능
+> __*위험 이벤트에 대한 경고*__ | LogAnalytics 통합으로 경고 지정
 
 ---
 
@@ -68,17 +69,17 @@ GitHub은 Azure AD 와 사전 통합된 애플리케이션으로서 SAML 인증�
 해당 권한들을 가진 사용자로 로그인을 하여서 밑의 작업들을 진행합니다.
 
 ![](images/add-app.png)
-![](images/ea-github.png)
+![](images/ea-github.png)   
 Azure Active Direcoty 엔터프라이즈 애플리케이션에서 연결하고자 하는 새로운 애플리케이션을 검색하여 추가합니다.
 GitHub 을 검색하게 되면 GitHub과 관련된 애플리케이션이 총 6개가 검색되게 되고 사용하고 있는 환경에 맞는 애플리케이션을 선택하여 추가 작업을 진행해 줍니다. Azure Active Directory 와 연동이 가능한 GitHub 버전은 기본적으로 Enterprise 버전만 가능합니다. (Free tier는 불가능!)
 애플리케이션 추가에는 얼마 동안 시간이 필요한 작업이며, 완료 후 Single Sign-On 설정까지 진행할 수 있습니다.
 
-![](images/add-user-and-group.png)
+![](images/add-user-and-group.png)   
 해당 애플리케이션을 사용할 사용자 혹은 그룹을 선택하여 할당합니다. 
 Single Sign-On 설정 마지막 단계에서 SAML 테스트를 진행할 수 있으며, 단적으로 SSO 테스트를 가장 빠르게 할 수 있는 기능이 있으니 구성 전 클릭하고 넘어가는 것이 좋습니다!
 
 애플리케이션의 SAML 프로토콜 인증을 사용하여 Single Sign-On 할 수 있도록 설정을 시작합니다.
-![](images/set saml.png)
+![](images/set saml.png)   
 각 단계마다 편집을 누르고 기본 SAML 구성, 특성 및 클레임 항목에서 적절한 값들로 설정합니다.
 
 - [Github](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-tutorial)
@@ -94,16 +95,16 @@ SAML 프로토콜에서 애플리케이션 인증을 위한 SAML 토큰은 Azure
 추가적으로 SAML 토큰에 대한 암호화도 구성할 수 있습니다. 애플리케이션용으로 내보낸 SAML 어설션을 인증서에서 가져온 공개키를 통해 암호화 하며 AES-256 알고리즘을 사용하여 SAML 어설션을 암호화 합니다. 이때 사용하는 인증서로 공개키를 포함하는 X.509 인증서 파일이 필요합니다.
 인증서에 대한 옵션, SAML 토큰에 대한 암호화는 SAML SSO 를 구성할 때 설정하므로 사전 검토를 진행하는 것이 좋습니다.
 
-이제 GitHub의 설정을 변경하도록 합시다!
-![](images/set-ghes-1.png)
+이제 GitHub의 설정을 변경하도록 합시다!   
+![](images/set-ghes-1.png)   
 Management Console의 Authentication 탭에서 SAML 인증 방법을 선택하고 세부 항목 설정들을 변경합니다. (GitHub Enterprise에서는 SAML 인증 이외에 LDAP, CAS 인증도 지원합니다.)
 *Allow creation of accounts with built-in authentication* 을 선택하면, SAML 인증이 아닌 built-in 인증을 통해서도 로그인 및 계정 생성이 가능합니다. 
 위에서 기록해두었던 로그온 URL 을 Singgle sign-on URL에, Azure AD 식별자 URL을 Issuer에 붙여 넣습니다.
 
-![](images/set-ghes-2.png)
+![](images/set-ghes-2.png)   
 또, 위에서 다운로드했던 SAML 서명 인증서를 선택하여 업로드하고 설정값들을 해당 환경에 저장합니다. 적용하는 데 다소 시간이 걸릴 수 있습니다.
 
-![](images/test-sso.png)
+![](images/test-sso.png)   
 GitHub에 대한 설정이 모두 저장되었으면 다시 Azure AD에 돌아와 SSO 가 정상으로 작동하는지 테스트를 통해 확인합니다. 
 
 테스트가 완료되면 SAML 인증 설정이 완료됩니다. 
@@ -111,7 +112,9 @@ GitHub에 대한 설정이 모두 저장되었으면 다시 Azure AD에 돌아�
 
 Azure AD의 애플리케이션 사용자 및 그룹 할당을 통해 Role Base Access Control(역할 기반 접근 제어) 혹은 Attribute Based Access Control(특성 기반 접근 제어)를 포함한 올바른 액세스 정책을 세울 수 있습니다. 
 해당 애플리케이션 사용 권한을 갖는 특정 사용자나 그룹을 할당하여 액세스 제어도 할 수 있습니다. 특히나, 특정 그룹을 할당 규칙으로 공유함으로서 할당하게 되면 전반적인 관리 복잡성을 줄일 수 있습니다. 이러한 액세스 권한에 대해 적절한지 검토하고 관리하는 것이 필요합니다.
-	> 그룹 기반 할당은 Azure AD Premium P1 또는 P2 라이선스가 필요합니다.
+	
+    > 그룹 기반 할당은 Azure AD Premium P1 또는 P2 라이선스가 필요합니다.
+
 또한, 사용자가 Azure AD와 통합된 애플리케이션에 로그인하여 사용하기 위해 애플리케이션이 사용자 프로필 및 조직 데이터에 대한 액세스할 수 있어야 하고 이에 대한 동의가 필요합니다. 사용자가 이러한 사용 권한에 동의할 수 없는 경우가 많기에 관리자가 애플리케이션 액세스에 대한 검토 및 승인 요청할 수 있도록 관리자 동의 워크플로우를 구성하는 등 앱에 대한 액세스 정책을 세울 수 있습니다. 
 
 이러한 Single Sign-On의 설정이 끝나게 되면 __프로비저닝 중__ 탭에서 프로비저닝 설정을 진행합니다. Azure AD 에서 지원하는 프로비저닝은 두가지 입니다.
@@ -128,6 +131,7 @@ Azure AD의 애플리케이션 사용자 및 그룹 할당을 통해 Role Base A
 ---
 
 [참고자료]   
-<https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features](https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features>
-<https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on>
-<https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment>
+<https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features](https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features>   
+<https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on>   
+<https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment>   
+<https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-application-management>(https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-application-management)
