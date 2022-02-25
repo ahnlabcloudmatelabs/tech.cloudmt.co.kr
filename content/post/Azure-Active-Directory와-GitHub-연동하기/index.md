@@ -14,9 +14,9 @@ TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여�
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
 ---
 
-'''
+```
 (주)샌드박스메이트를 운영 중인 이사 주은 씨. Azure AD로 사내 계정을 관리하고 있는 와중 개발팀으로부터 github 무료 계정에서 engterprise로의 업그레이드에 대한 허가를 요청받았다.
-''' 
+``` 
 
 Azure AD를 사용하고 있는 조직 내 사용자를 관리하다 보면 회사 운영의 편리성을 위해서 Azure뿐 아니라 3rd-Party 혹은 타사 애플리케이션을 이용하게 되고 해당 애플리케이션에 대해 SSO(Single Sign-On) 과 같은 액세스 관리나 추가 보안 요구사항이 생길 때가 있습니다. (때로는 자사가 개발한 애플리케이션일 수도 있죠!)
 
@@ -63,19 +63,17 @@ SSO를 구현하는 방법은 애플리케이션이 호스트 되는 위치에 �
 그렇다면 이제, 개발팀의 요구사항대로 Azure Active Directory와 GitHub Enterprise를 연동하는 방법을 알아봅시다! :)
 GitHub은 Azure AD 와 사전 통합된 애플리케이션으로서 SAML 인증을 사용하여 페더레이션 기반 SSO를 구성할 수 있습니다. Github 이외에도 Azure AD와 사전 통합된 다양한 애플리케이션이 있습니다. 조직 내 애플리케이션 연동에 대한 요구사항이 생기면 해당 [애플리케이션의 연동 가이드](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/tutorial-list)를 참고하여 손쉽게 구현할 수 있습니다.
 
----
-
 먼저 Azure Active Directory 와 Github Enterprise 연동 환경을 만들기 위해서는 작업을 할 수 있는 권한을 가진 사용자가 필요합니다.
 이 사용자는 __전역 관리자, 클라우드 애플리케이션 관리자, 애플리케이션 관리자 또는 서비스 주체의 소유자__ 권한이 있어야 합니다.
 해당 권한들을 가진 사용자로 로그인을 하여서 밑의 작업들을 진행합니다.
 
-![](images/add app.png)
-![](images/ea github.png)
+![](images/add-app.png)
+![](images/ea-github.png)
 Azure Active Direcoty 엔터프라이즈 애플리케이션에서 연결하고자 하는 새로운 애플리케이션을 검색하여 추가합니다.
 GitHub 을 검색하게 되면 GitHub과 관련된 애플리케이션이 총 6개가 검색되게 되고 사용하고 있는 환경에 맞는 애플리케이션을 선택하여 추가 작업을 진행해 줍니다. Azure Active Directory 와 연동이 가능한 GitHub 버전은 기본적으로 Enterprise 버전만 가능합니다. (Free tier는 불가능!)
 애플리케이션 추가에는 얼마 동안 시간이 필요한 작업이며, 완료 후 Single Sign-On 설정까지 진행할 수 있습니다.
 
-![](images/add user and group.png)
+![](images/add-user-and-group.png)
 해당 애플리케이션을 사용할 사용자 혹은 그룹을 선택하여 할당합니다. 
 Single Sign-On 설정 마지막 단계에서 SAML 테스트를 진행할 수 있으며, 단적으로 SSO 테스트를 가장 빠르게 할 수 있는 기능이 있으니 구성 전 클릭하고 넘어가는 것이 좋습니다!
 
@@ -97,15 +95,15 @@ SAML 프로토콜에서 애플리케이션 인증을 위한 SAML 토큰은 Azure
 인증서에 대한 옵션, SAML 토큰에 대한 암호화는 SAML SSO 를 구성할 때 설정하므로 사전 검토를 진행하는 것이 좋습니다.
 
 이제 GitHub의 설정을 변경하도록 합시다!
-![](images/set ghes 1.png)
+![](images/set-ghes-1.png)
 Management Console의 Authentication 탭에서 SAML 인증 방법을 선택하고 세부 항목 설정들을 변경합니다. (GitHub Enterprise에서는 SAML 인증 이외에 LDAP, CAS 인증도 지원합니다.)
 *Allow creation of accounts with built-in authentication* 을 선택하면, SAML 인증이 아닌 built-in 인증을 통해서도 로그인 및 계정 생성이 가능합니다. 
 위에서 기록해두었던 로그온 URL 을 Singgle sign-on URL에, Azure AD 식별자 URL을 Issuer에 붙여 넣습니다.
 
-![](images/set ghes 2.png)
+![](images/set-ghes-2.png)
 또, 위에서 다운로드했던 SAML 서명 인증서를 선택하여 업로드하고 설정값들을 해당 환경에 저장합니다. 적용하는 데 다소 시간이 걸릴 수 있습니다.
 
-![](images/test sso.png)
+![](images/test-sso.png)
 GitHub에 대한 설정이 모두 저장되었으면 다시 Azure AD에 돌아와 SSO 가 정상으로 작동하는지 테스트를 통해 확인합니다. 
 
 테스트가 완료되면 SAML 인증 설정이 완료됩니다. 
