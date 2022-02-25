@@ -69,18 +69,18 @@ GitHub은 Azure AD 와 사전 통합된 애플리케이션으로서 SAML 인증�
 이 사용자는 __전역 관리자, 클라우드 애플리케이션 관리자, 애플리케이션 관리자 또는 서비스 주체의 소유자__ 권한이 있어야 합니다.
 해당 권한들을 가진 사용자로 로그인을 하여서 밑의 작업들을 진행합니다.
 
-![App추가](images/add app.png)
-![git종류](images/ea github.png)
+![](images/add app.png)
+![](images/ea github.png)
 Azure Active Direcoty 엔터프라이즈 애플리케이션에서 연결하고자 하는 새로운 애플리케이션을 검색하여 추가합니다.
 GitHub 을 검색하게 되면 GitHub과 관련된 애플리케이션이 총 6개가 검색되게 되고 사용하고 있는 환경에 맞는 애플리케이션을 선택하여 추가 작업을 진행해 줍니다. Azure Active Directory 와 연동이 가능한 GitHub 버전은 기본적으로 Enterprise 버전만 가능합니다. (Free tier는 불가능!)
 애플리케이션 추가에는 얼마 동안 시간이 필요한 작업이며, 완료 후 Single Sign-On 설정까지 진행할 수 있습니다.
 
-![사용자추가](images/add user and group.png)
+![](images/add user and group.png)
 해당 애플리케이션을 사용할 사용자 혹은 그룹을 선택하여 할당합니다. 
 Single Sign-On 설정 마지막 단계에서 SAML 테스트를 진행할 수 있으며, 단적으로 SSO 테스트를 가장 빠르게 할 수 있는 기능이 있으니 구성 전 클릭하고 넘어가는 것이 좋습니다!
 
 애플리케이션의 SAML 프로토콜 인증을 사용하여 Single Sign-On 할 수 있도록 설정을 시작합니다.
-![sso선택](images/set saml.png)
+![](images/set saml.png)
 각 단계마다 편집을 누르고 기본 SAML 구성, 특성 및 클레임 항목에서 적절한 값들로 설정합니다.
 
 - [Github](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-tutorial)
@@ -97,15 +97,15 @@ SAML 프로토콜에서 애플리케이션 인증을 위한 SAML 토큰은 Azure
 인증서에 대한 옵션, SAML 토큰에 대한 암호화는 SAML SSO 를 구성할 때 설정하므로 사전 검토를 진행하는 것이 좋습니다.
 
 이제 GitHub의 설정을 변경하도록 합시다!
-![github설정](images/set ghes 1.png)
+![](images/set ghes 1.png)
 Management Console의 Authentication 탭에서 SAML 인증 방법을 선택하고 세부 항목 설정들을 변경합니다. (GitHub Enterprise에서는 SAML 인증 이외에 LDAP, CAS 인증도 지원합니다.)
 *Allow creation of accounts with built-in authentication* 을 선택하면, SAML 인증이 아닌 built-in 인증을 통해서도 로그인 및 계정 생성이 가능합니다. 
 위에서 기록해두었던 로그온 URL 을 Singgle sign-on URL에, Azure AD 식별자 URL을 Issuer에 붙여 넣습니다.
 
-![github설정](images/set ghes 2.png)
+![](images/set ghes 2.png)
 또, 위에서 다운로드했던 SAML 서명 인증서를 선택하여 업로드하고 설정값들을 해당 환경에 저장합니다. 적용하는 데 다소 시간이 걸릴 수 있습니다.
 
-![test](images/test sso.png)
+![](images/test sso.png)
 GitHub에 대한 설정이 모두 저장되었으면 다시 Azure AD에 돌아와 SSO 가 정상으로 작동하는지 테스트를 통해 확인합니다. 
 
 테스트가 완료되면 SAML 인증 설정이 완료됩니다. 
@@ -129,7 +129,7 @@ Azure AD의 애플리케이션 사용자 및 그룹 할당을 통해 Role Base A
 
 ---
 
-[참고자료]
+[참고자료]   
 <https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features](https://azure.microsoft.com/ko-kr/services/active-directory/sso/#features>
 <https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/what-is-single-sign-on>
 <https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment](https://docs.microsoft.com/ko-kr/azure/active-directory/manage-apps/plan-sso-deployment>
