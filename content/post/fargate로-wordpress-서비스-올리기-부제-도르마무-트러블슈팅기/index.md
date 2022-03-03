@@ -63,7 +63,8 @@ CI/CD는 애플리케이션 개발에 필요한 여러 단계에 자동화를 �
 
 크게 이렇게 구성해보았습니다.
 
-![title](saa.png)
+![title](images/saa.png)
+
 
 - - -
 
