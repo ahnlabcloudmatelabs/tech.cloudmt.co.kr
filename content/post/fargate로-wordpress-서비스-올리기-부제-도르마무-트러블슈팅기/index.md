@@ -3,7 +3,7 @@ title: "Fargate로 wordpress 서비스 올리기(부제 : 도르마무 트러블
 authors:
   - hwiyoung-jung
 date: 2022-03-03T00:57:23.546Z
-feature_image: content/post/fargate로-wordpress-서비스-올리기-부제-도르마무-트러블슈팅기/images/saa-1-.png
+feature_image: ""
 categories:
   - Hands On
 tags:
@@ -14,7 +14,6 @@ tags:
   - "#wordrpess"
   - "#juniorproject"
 ---
-![](images/saa-1-.png)
 
 ## 신입에게 던져진 퀘스트(feat. ECS)
 
