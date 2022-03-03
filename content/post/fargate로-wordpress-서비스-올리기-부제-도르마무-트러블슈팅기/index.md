@@ -14,7 +14,7 @@ tags:
   - "#wordrpess"
   - "#juniorproject"
 ---
-![]()
+![](images/saa-1-.png)
 
 ## 신입에게 던져진 퀘스트(feat. ECS)
 
