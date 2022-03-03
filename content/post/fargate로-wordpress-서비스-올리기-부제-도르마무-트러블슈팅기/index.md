@@ -255,7 +255,7 @@ Mixed content 가 떴네요
 
 **\[이렇게 작성하면 된다😇]**
 
-`docker run -d -p 80:80 complete_image_v2 -e WORDPRESS_DB_HOST='hwidb.abcdefgh.ap-northeast-1.rds.amazonaws.com' -e WORDPRESS_DB_USER='hwi' -e WORDPRESS_DB_PASSWORD='abc123123' -e WORDPRESS_DB_NAME='wordpress'`
+`docker run -d -p 80:80 complete_image_v2 -e WORDPRESS_DB_HOST='hwidb.********.ap-northeast-1.rds.amazonaws.com' -e WORDPRESS_DB_USER='hwi' -e WORDPRESS_DB_PASSWORD='********' -e WORDPRESS_DB_NAME='wordpress'`
 
 다시 올렸습니다.
 
@@ -284,8 +284,8 @@ MySQL [wordpress]> select * from wp_options limit 10;
 +-----------+--------------------+----------------------------------------------------------------+----------+
 | option_id | option_name        | option_value                                                   | autoload |
 +-----------+--------------------+----------------------------------------------------------------+----------+
-|         1 | siteurl            | http://hwi-alb-976846782.ap-northeast-1.elb.amazonaws.com:8080 | yes      |
-|         2 | home               | http://hwi-alb-976846782.ap-northeast-1.elb.amazonaws.com:8080 | yes      |
+|         1 | siteurl            | http://hwi-alb-*********.ap-northeast-1.elb.amazonaws.com:8080 | yes      |
+|         2 | home               | http://hwi-alb-*********.ap-northeast-1.elb.amazonaws.com:8080 | yes      |
 |         3 | blogname           | TalTalSisters                                                  | yes      |
 |         4 | blogdescription    |우리의 인생도, 경운기도 탈탈                                  | yes      |
 |         5 | users_can_register | 0                                                              | yes      |
@@ -426,7 +426,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:ap-northeast-1:782621889128:task-definition/hwi-task:20"
+        TaskDefinition: "arn:aws:ecs:ap-northeast-1:********:task-definition/hwi-task:20"
         LoadBalancerInfo:
           ContainerName: "wordpress"
           ContainerPort: 80
@@ -437,11 +437,11 @@ Resources:
 ```shell
 #taskdef.json
 {
-    "executionRoleArn": "arn:aws:iam::782621889128:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::********:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "wordpress",
-            "image": "782621889128.dkr.ecr.ap-northeast-1.amazonaws.com/complete_image",
+            "image": "********.dkr.ecr.ap-northeast-1.amazonaws.com/complete_image",
             "essential": true,
             "portMappings": [
                 {
