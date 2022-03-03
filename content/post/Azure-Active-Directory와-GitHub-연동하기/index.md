@@ -1,7 +1,7 @@
 ---
 title: Azure Active Directory 와 GitHub 하나의 계정으로 사용할 수 있을까?
 authors:
-- author-name Jiyoung-Sung
+- jiyoung-sung
 date: 2022-02-24T11:46:49+09:00
 categories:
 - Tech
