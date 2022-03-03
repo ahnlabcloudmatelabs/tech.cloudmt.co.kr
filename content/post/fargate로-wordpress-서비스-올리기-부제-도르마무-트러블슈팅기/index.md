@@ -65,7 +65,6 @@ CI/CD는 애플리케이션 개발에 필요한 여러 단계에 자동화를 �
 
 ![title](images/saa.png)
 
-
 - - -
 
 ## <span style='background-color:#fff5b1'> \[내부 인테리어-1]</span>
@@ -123,16 +122,14 @@ cc1fb97762e5: Download complete
 035892fe58ac: Download complete
 ```
 
-``
-
 </div>
 </details>
 
 확인이 되었군요!
 
-![](untitled.png)
+![](images/untitled.png)
 
-![](untitled-1-.png)
+![](images/untitled-1-.png)
 
 데이터 베이스를 쓰라고하네요
 
@@ -142,7 +139,7 @@ cc1fb97762e5: Download complete
 
 띄우기 성공! 잘 되는군요 🙂
 
-![](untitled-2-.png)
+![](images/untitled-2-.png)
 
 이렇게 docker에 잘 떴다면 이제 AWS ECR 프라이빗 레포지토리로 생성을 하고 push 명령을 통해 ECR 에 이미지를 등록하였습니다.
 
@@ -159,11 +156,11 @@ complete_image       latest    53e51a811751   5 weeks ago   616MB
 
 push 명령은 ECR에서 확인할 수 있습니다.
 
-![](untitled-5-.png)
+![](images/untitled-5-.png)
 
 \[올라간 이미지]
 
-![](untitled-6-.png)
+![](images/untitled-6-.png)
 
 - - -
 
@@ -173,9 +170,9 @@ push 명령은 ECR에서 확인할 수 있습니다.
 
 최초의 작업은 EC2로 띄우는 것이였습니다. 추후에는 Fargate로 변경했습니다.
 
-![](untitled-7-.png)
+![](images/untitled-7-.png)
 
-![](untitled-8-.png)
+![](images/untitled-8-.png)
 
 2vCPU로 맞췄습니다.EC2 일단 띄우긴 띄우고
 
@@ -191,7 +188,7 @@ push 명령은 ECR에서 확인할 수 있습니다.
 
 ### <span style='background-color:#f5f0ff'> 🤯 \[Mixed contents]</span>
 
-![](untitled-9-.png)
+![](images/untitled-9-.png)
 
 Mixed content 가 떴네요
 
@@ -204,7 +201,7 @@ Mixed content 가 떴네요
 
 혹시 몰라 로드밸런서의 443포트가 문제인가 해서 등록을 해봤습니다.
 
-![](untitled-10-.png)
+![](images/untitled-10-.png)
 
 ~~앗 이건 아닌 것 같군요.~~
 
@@ -212,7 +209,7 @@ Mixed content 가 떴네요
 
 1. wordpress 오프로드 미디어 라이트의 <span style="color:red">강제 HTTPS를 off</span>
 
-   ![](untitled-11-.png)
+   ![](images/untitled-11-.png)
 2. wp-config.php에 X_forworded-for를 설정.
 
    ```shell
@@ -227,9 +224,9 @@ Mixed content 가 떴네요
 
 그 후 해결은 했는데
 
-![](untitled-12-.png)
+![](images/untitled-12-.png)
 
-![](untitled-13-.png)
+![](images/untitled-13-.png)
 
 여기서 계속 반복되네요 ...
 
@@ -261,17 +258,13 @@ Mixed content 가 떴네요
 
 `docker run -d -p 80:80 complete_image_v2 -e WORDPRESS_DB_HOST='hwidb.csyfd3cw0qgh.ap-northeast-1.rds.amazonaws.com' -e WORDPRESS_DB_USER='hwi' -e WORDPRESS_DB_PASSWORD='hwi123!@#' -e WORDPRESS_DB_NAME='wordpress'`
 
-``
-
 다시 올렸습니다.
 
-``
-
-![](kakaotalk_photo_2022-01-13-14-41-46.png)
+![](images/kakaotalk_photo_2022-01-13-14-41-46.png)
 
 드디어 나라 고르기가 아니라 웹페이지 확인이 되네요!
 
-![](untitled-14-.png)
+![](images/untitled-14-.png)
 
 그 이후...
 
@@ -325,8 +318,6 @@ MySQL [wordpress]> select * from wp_options limit 10;
 +-----------+--------------------+-------------------------------------------+----------+
 ```
 
-``
-
 \*\*무료도메인 구입처
 
 [Freenom - A Name for Everyone](https://www.freenom.com/en/index.html?lang=en)
@@ -350,7 +341,7 @@ MySQL [wordpress]> select * from wp_options limit 10;
 
 네 그런데 아예 컨테이너에 붙지를 않더군요
 
-![](untitled-20-.png)
+![](images/untitled-20-.png)
 
 아 또 시작인가요
 
@@ -362,11 +353,11 @@ MySQL [wordpress]> select * from wp_options limit 10;
 
 \[host]
 
-![](untitled-21-.png)
+![](images/untitled-21-.png)
 
 \[bridge]
 
-![](untitled-22-.png)
+![](images/untitled-22-.png)
 
 > EC2로 배포를 하려면 컨테이너당 ENI를 주기 마련인데 
 >
@@ -378,7 +369,7 @@ MySQL [wordpress]> select * from wp_options limit 10;
 
 **무한 배포로 해결이 안되고 찾아보니 매핑이 안되는 이슈가 있었네요.**
 
-![](untitled-23-.png)
+![](images/untitled-23-.png)
 
 그래서 bridge 모드를 사용하지 않았습니다.
 
@@ -403,7 +394,7 @@ ECR 에 있는 이미지를 가져와 사용했으며 호스트의 80번 포트�
 
 ✔️ 컨테이너 정의시 이미지를 가져와 사용할 수 있습니다.
 
-![](그림1.png)
+![](images/그림1.png)
 
 ### 2. 서비스 업데이트
 
@@ -421,7 +412,7 @@ ECR 에 있는 이미지를 가져와 사용했으며 호스트의 80번 포트�
    >
    > <span style='background-color:#ffdce0'>추 후 Codepipeline 생성시 작업 공급자로 선택하고 소스코드를 push한 리포지토리로 선택합니다. </span>
 
-![](untitled-24-.png)
+![](images/untitled-24-.png)
 
 <details>
 <summary> Code </summary>
@@ -442,7 +433,7 @@ Resources:
           ContainerPort: 80
 ```
 
-2. taskdef.json
+2. > taskdef.json
 
 ```shell
 #taskdef.json
@@ -472,12 +463,10 @@ Resources:
 }
 ```
 
-``
-
 </div>
 </details>
 
-![](untitled-25-.png)
+![](images/untitled-25-.png)
 
 HTTPS나 SSH를 활용하여, 파일을 송수신할 수 있는데 IAM에서 자격증명도 해주시면 훨씬 좋답니다 😃
 
@@ -491,7 +480,7 @@ HTTPS나 SSH를 활용하여, 파일을 송수신할 수 있는데 IAM에서 자
 
 대체 환경을 만들어 점진적인 배포를 수행하는 블루/그린(Blue/Green)를 사용하였습니다.
 
-![](untitled-26-.png)
+![](images/untitled-26-.png)
 
 * ### Blue/Green deploy
 
@@ -505,23 +494,23 @@ HTTPS나 SSH를 활용하여, 파일을 송수신할 수 있는데 IAM에서 자
 
 1.코드 코밋에서 새 코드를 변경하게 되면 코드 디플로이에서 배포가 시작되고 블루 그룹에 존재하는 컨테이너수와 동일하게 그린 그룹을 만드는 과정이 일어나고 그린 그룹에 작업정의에서 지정한 버전으로 배포가 됩니다.
 
-![](untitled-27-.png)
+![](images/untitled-27-.png)
 
 2.블루그린 배포는 2개의 그룹을 가지고 진행을 하죠. 이 상태는 잠시동안 두개의 그룹이 모두 트래픽이 처리되도록 리스너에 연결됩니다.로드밸런서 대상그룹에서 healthy check를 하는 것도 필요하겠죠?
 
-![](untitled-28-.png)
+![](images/untitled-28-.png)
 
 3.블루 그룹이 종료 되면 로드밸런서에 그린 그룹에서 트래픽이 전환되어 모든 요청을 처리하도록 합니다.
 
 현재 그림은 신버전, 그린 그룹에 배포가 완료가 된 상태입니다. 타겟그룹 2에 지정되어있는 상태이고 기존 갯수의 작업내역으로 돌아가있음을 확인할 수 있습니다
 
-![](untitled-29-.png)
+![](images/untitled-29-.png)
 
 3. Codepipeline
 
 > <span style='background-color:#ffdce0'>📍 Codepipeline은 빠르고 안정적인 애플리케이션 및 인프라 업데이트를 위해 릴리스 파이프라인을 자동화하는 데 도움이 되는 완전관리형 지속적 전달 서비스입니다. </span>
 
-![](untitled-30-.png)
+![](images/untitled-30-.png)
 
 ➕ Option :
 
@@ -543,9 +532,9 @@ codecommit의 repository로 선택한 ‘hwi-codecommit’을 선택합니다.
 
 <span style="color:red">**이미 ECR에 남이 build를 했는데 CI/CD tool에 대한 이해를 하지 못해서 파워삽질을 했죠🤪** </span>
 
-![](untitled-31-.png)
+![](images/untitled-31-.png)
 
-![](untitled-32-.png)
+![](images/untitled-32-.png)
 
 #### 그래도 나름 배운 점은 codebuild 할 때 여러 권한이 필요하다는 점이였죠
 
@@ -563,11 +552,11 @@ codecommit의 repository로 선택한 ‘hwi-codecommit’을 선택합니다.
 
 \[실패의 향연을 거쳤네요 하하]
 
-![](스크린샷-2022-01-11-오후-4.34.53-1-.png)
+![](images/스크린샷-2022-01-11-오후-4.34.53-1-.png)
 
 아무래도 이런 것도 이해 못하고 삽질을 몇 일 넘게 한 저는 앞으로 이름을 바꿔야겠네요 😇
 
-![](untitled-33-.png)
+![](images/untitled-33-.png)
 
 <span style="color:gray"> 개명추천 </span> 😇
 
@@ -593,15 +582,15 @@ codecommit의 repository로 선택한 ‘hwi-codecommit’을 선택합니다.
 
 ### 前:\[테스트도커에서 확인했을 때의 이미지] - NOW
 
-![](untitled-34-.png)
+![](images/untitled-34-.png)
 
 ### 後:\[설정 다하고 commit 후에 ECS fargate에 띄운 이미지]
 
-![](untitled-35-.png)
+![](images/untitled-35-.png)
 
 플러그인이 안붙어옵니다.. 
 
-![](그림1.3png.png)
+![](images/그림1.3png.png)
 
 cloudfront 설정이 다 날아가버렸어요.. 🥲
 
@@ -613,7 +602,7 @@ cloudfront 설정이 다 날아가버렸어요.. 🥲
 >
 > <span style='background-color:#ffdce0'>컨테이너를 변경하게 되면 컨테이너 계층에 있던 모든 파일과 정보가 사라지고 RDS에 붙어있으니 data는 남아있지만 플러그인을 설치한 파일들은 전부 사라지게 되는거죠 </span>
 
-![](untitled-36-.png)
+![](images/untitled-36-.png)
 
 돌이켜보니까 무한 또 도르마무 고통을 한 순간이 생각나군요...
 
@@ -671,7 +660,7 @@ akismet  amazon-s3-and-cloudfront  hello.php  index.php
 
 그리고 컨테이너를 띄워보겠습니다.
 
-![](untitled-37-.png)
+![](images/untitled-37-.png)
 
 ## (경) 😚 와 잘 살아있어요! 잘 붙어서 왔네요!!!!!! 😚 (축)
 
@@ -679,7 +668,7 @@ akismet  amazon-s3-and-cloudfront  hello.php  index.php
 
 그 후에 DB 호스트와 DB 네임을 환경 변수의 value로 지정하고 민감한 정보인 DB ID와 Password는 파라미터스토어에서 파라미터로 생성하여 매칭하여서 다시 배포했습니다.
 
-![](untitled-38-.png)
+![](images/untitled-38-.png)
 
 아 맞다 이제 아키텍처도 좀 수정해야할 것 같아요!
 
@@ -689,21 +678,21 @@ akismet  amazon-s3-and-cloudfront  hello.php  index.php
 
 EFS 적용을 했으니까요 🙂
 
-![](saa-1-.png)
+![](images/saa-1-.png)
 
 ### <span style='background-color:#f5f0ff'> 🤯  \[5.9 version alias_update.php]</span>
 
 Container의 서비스 업데이트를 하다보면 로그를 확인할 수 있습니다.
 
-![](untitled-39-.png)
+![](images/untitled-39-.png)
 
 그런데 alias_update.php 이 후에
 
-![](untitled-40-.png)
+![](images/untitled-40-.png)
 
 이렇게 아무것도 안뜨더라구요...
 
-![](untitled-41-.png)
+![](images/untitled-41-.png)
 
 ### <span style='color:red'>***\[원인 확인]</span>***
 
@@ -711,7 +700,7 @@ Container의 서비스 업데이트를 하다보면 로그를 확인할 수 있�
 
 그래서 배포 이후에 이렇게 명령어가 뜬다면 사용하지 않는 Target group 1에 경로를 지정합니다.
 
-![](untitled-42-.png)
+![](images/untitled-42-.png)
 
 그럼 이쪽으로 업데이트 타겟은 돌아가고 healthy check는 다른 Target group 2로 가겠죠
 
@@ -721,7 +710,7 @@ Container의 서비스 업데이트를 하다보면 로그를 확인할 수 있�
 
 현재 2월 17일에 확인해보니 이제는 이슈는 없네요.
 
-![](untitled-43-.png)
+![](images/untitled-43-.png)
 
 ### <span style='background-color:#fff5b0'> 이렇게 내부 인테리어 공사를 마칩니다.
 
@@ -731,43 +720,38 @@ Container의 서비스 업데이트를 하다보면 로그를 확인할 수 있�
 
 내부 인테리어를 마쳤으니 외부 인테리어(?) 를 해봅시다.
 
-![](untitled-44-.png)
+![](images/untitled-44-.png)
 
-![](untitled-45-.png)
+![](images/untitled-45-.png)
 
 * #### 정적 컨텐츠 & 동적 컨텐츠는 Cloudfront의 대체 도메인으로 설정하였습니다.
 * #### 중국에서 들어오는 IP는 우회하게 만들었습니다.
 * #### WebACL & WAF filter로 최소한의 Endpoint를 만들었습니다.
 
-
-
 ### <span style='background-color:#f1f8ff'>\[ Route53 설정 ]
 
  이제 진짜 도메인을 구입한 후!
 
-![](untitled-46-.png)
+![](images/untitled-46-.png)
 
 지리적 위치 라우팅 정책으로 나라를 차단해보겠습니다.
 
-![](untitled-47-.png)
+![](images/untitled-47-.png)
 
 보통 중국의 해커가 좀 많아서.. 중국은 문서용 IP로 우회하게끔 설정했습니다.
 다른 나라는 도메인을 타고 접속할 수 있게끔 했고 중국이 차단되는지 테스트도 해봤습니다.
 
-![](untitled-48-.png)
+![](images/untitled-48-.png)
 
 문서용 IP는 RFC 5735 에 의해 특수한 목적으로 예약된 IP 주소이므로 공인 IP 주소로 할당 받는 것이 불가능한 것을 이용하였습니다.
 
-![](untitled-49-.png)
+![](images/untitled-49-.png)
 
 한번 더 확인해보면 중국은 문서용 IP로 넘어감을 확인할 수 있었습니다.
 
-![](untitled-50-.png)
+![](images/untitled-50-.png)
 
-
-
-
-![](untitled-51-.png)
+![](images/untitled-51-.png)
 
 고마워요 너굴맨! 
 
@@ -775,19 +759,17 @@ Container의 서비스 업데이트를 하다보면 로그를 확인할 수 있�
 
 웹컨텐츠의 배포 속도를 높이기 위해 Cloudfront를 사용했습니다. 특별히 정적, 동적 둘로 나누었는데요.
 
-
-![](untitled-52-.png)
+![](images/untitled-52-.png)
 
 정적컨텐츠는 S3을 Origin으로 지정했고 동적컨텐츠는 application load balancer를 Origin으로 지정했습니다. 참조 분리기능과 Behavior 수정으로 세부화 했습니다.
-
 
 ❓ Cloudfront 정적컨텐츠, 동적컨텐츠를 분리를 하는 이유는 ?
 
 솔직히.. 말하면 **관리가 편하기 때문입니다.**
 
-![](untitled-53-.png)
+![](images/untitled-53-.png)
 
-![](untitled-54-.png)
+![](images/untitled-54-.png)
 
 Cloudfront 보고서 분석에서 캐시통계로 이미지 캐시율을 확인할 수 있고
 모니터링 지표를 확인하기 편하기 때문이죠.
@@ -802,10 +784,9 @@ Cloudfront 보고서 분석에서 캐시통계로 이미지 캐시율을 확인�
 
 AWS WAF를 이용할 수 있습니다.
 
-AWS WAF를 사용하면 IP 주소, HTTP 헤더 및 본문 또는 사용자 정의 URI와 같은 조건을 기준으로 웹 트래픽을 필터링하도록 규칙을 생성할 수 있습니다. 이를 통해 사용자 지정 또는 타사 웹 애플리케이션의 취약성을 악용하려는 웹 공격에 대비하여 보안 계층을 더 추가할 수 있습니다. 또한, AWS WAF는 SQL 명령어 주입과 교차 사이트 스크립팅 같은 일반적인 웹 취약점 공격을 차단하는 규칙을 손쉽게 생성할 수 있게 해줍니다.
+> AWS WAF를 사용하면 IP 주소, HTTP 헤더 및 본문 또는 사용자 정의 URI와 같은 조건을 기준으로 웹 트래픽을 필터링하도록 규칙을 생성할 수 있습니다. 이를 통해 사용자 지정 또는 타사 웹 애플리케이션의 취약성을 악용하려는 웹 공격에 대비하여 보안 계층을 더 추가할 수 있습니다. 또한, AWS WAF는 SQL 명령어 주입과 교차 사이트 스크립팅 같은 일반적인 웹 취약점 공격을 차단하는 규칙을 손쉽게 생성할 수 있게 해줍니다.
 
-
-![](untitled-55-.png)
+![](images/untitled-55-.png)
 
 🚫 Web ACL : AWS WAF의 최상위 컴포넌트로 하위 컴포넌트인 Rule을 추가하여 AWS 리소스를 보호합니다.      Web ACL을 사용하여 CloudFront 배포, API Gateway REST API 또는 ALB가 응답하는 웹 요청을 세부적으로 제어할 수 있었습니다.
 
@@ -813,13 +794,11 @@ AWS WAF를 사용하면 IP 주소, HTTP 헤더 및 본문 또는 사용자 정�
 
 🚫  Statement : Rule의 하위 컴포넌트로 웹 필터링의 상세 조건을 정의 했습니다.
 
-![](untitled-56-.png)
+![](images/untitled-56-.png)
 
 이렇게 4가지 룰을 추가하였고 3가지는 Managed Rule입니다. 
 
 \[Managed Rule]
-
-
 
 * Amazon IP reputation list : Amazon 위협 인텔리전스를 기반으로하는 규칙입니다. 봇 또는 기타 위협과 관련된 소스를 차단하려는 경우 사용합니다.
 * PHP application : 안전하지 않은 PHP 함수 삽입을 포함하여 PHP 사용과 관련된 취약점 악용과 관련된 요청 패턴을 차단하는 규칙을 포함합니다. 이를 사용하면 공격자가 코드나 명령을 원격으로 실행할 수있는 악용을 방지할 수 있습니다.
@@ -827,11 +806,9 @@ AWS WAF를 사용하면 IP 주소, HTTP 헤더 및 본문 또는 사용자 정�
 
 이 중에서 /xmlrpc.php 를 차단하거나 다른 IP로 admin page를 들어오지 못하게 했습니다.
 
-![](untitled-57-.png)
+![](images/untitled-57-.png)
 
-
----
-
+- - -
 
 네, 여기까지가 제가 신입과제를 하면서 설정하고 삽질한 과정입니다.
 
@@ -870,4 +847,3 @@ AWS WAF를 사용하면 IP 주소, HTTP 헤더 및 본문 또는 사용자 정�
 
 [자습서: Amazon ECR 소스 및 ECS-to-CodeDeploy 배포를 사용하여 파이프라인 생성](https://docs.aws.amazon.com/ko_kr/codepipeline/latest/userguide/tutorials-ecs-ecr-codedeploy.html)
 
-\[[AWS] CI/CD를 위한 Cloud9, CodeCommit, CodeBuild, CodeDeploy, CodePipeline 의 개념](https://nearhome.tistory.com/119)
