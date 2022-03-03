@@ -105,7 +105,7 @@ Recycle은 실행중인 EC2가 종료되고 동일한 인스턴스로 시작합�
 
 여기까지 Spot Managed Instance를 사용하여 EC2 인스턴스 비용절감을 진행했습니다.  
 
-출처  
+출처입니다.  
 <https://docs.spot.io/>  
 <https://en.wikipedia.org/wiki/Blue-green_deployment>
 <https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html>
