@@ -244,7 +244,7 @@ Mixed content 가 떴네요
 
 ### <span style='color:red'>***\[원인 확인]</span>***
 
-![](kakaotalk_photo_2022-01-13-14-41-24.png)
+![](images/kakaotalk_photo_2022-01-13-14-41-24.png)
 
 이 것을 그대로 다시 올린다면 wp-config-docker.php 로 됩니다.
 
