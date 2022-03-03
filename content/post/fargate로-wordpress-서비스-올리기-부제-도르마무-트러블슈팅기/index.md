@@ -3,7 +3,7 @@ title: "Fargate로 wordpress 서비스 올리기(부제 : 도르마무 트러블
 authors:
   - hwiyoung-jung
 date: 2022-03-03T00:57:23.546Z
-feature_image: "images/saa.png"
+feature_image: images/saa.png
 categories:
   - Hands On
 tags:
@@ -14,7 +14,6 @@ tags:
   - "#wordrpess"
   - "#juniorproject"
 ---
-
 ## 신입에게 던져진 퀘스트(feat. ECS)
 
 안녕하세요 클라우드 메이트 신입사원 정휘영입니다 🙂
@@ -87,8 +86,8 @@ Instance에 도커를 설치합니다. 그 후 Wordpress도 image pull 을 합�
 sudo yum update -y
 #최신 Docker Engine 패키지를 설치 (Amazon Linux2)
 sudo amazon-linux-extras install docker
-#ocker Start
-sudo service docker start
+#Docker Start
+sudo systemctl service docker start
 ```
 
 보통 Star를 많이 받은 이미지를 사용하는게 좋다고 합니다. bitnami/wordpress를 선택합니다.
@@ -139,7 +138,7 @@ cc1fb97762e5: Download complete
 
 띄우기 성공! 잘 되는군요 🙂
 
-![](images/untitled-2-.png)
+![](images/untitled-14-.png)
 
 이렇게 docker에 잘 떴다면 이제 AWS ECR 프라이빗 레포지토리로 생성을 하고 push 명령을 통해 ECR 에 이미지를 등록하였습니다.
 
@@ -244,7 +243,7 @@ Mixed content 가 떴네요
 
 ### <span style='color:red'>***\[원인 확인]</span>***
 
-![](images/kakaotalk_photo_2022-01-13-14-41-24.png)
+![](images/92527d0b-76a1-45a8-8b20-38194a1a2778.png)
 
 이 것을 그대로 다시 올린다면 wp-config-docker.php 로 됩니다.
 
@@ -256,7 +255,7 @@ Mixed content 가 떴네요
 
 **\[이렇게 작성하면 된다😇]**
 
-`docker run -d -p 80:80 complete_image_v2 -e WORDPRESS_DB_HOST='hwidb.csyfd3cw0qgh.ap-northeast-1.rds.amazonaws.com' -e WORDPRESS_DB_USER='hwi' -e WORDPRESS_DB_PASSWORD='hwi123!@#' -e WORDPRESS_DB_NAME='wordpress'`
+`docker run -d -p 80:80 complete_image_v2 -e WORDPRESS_DB_HOST='hwidb.abcdefgh.ap-northeast-1.rds.amazonaws.com' -e WORDPRESS_DB_USER='hwi' -e WORDPRESS_DB_PASSWORD='abc123123' -e WORDPRESS_DB_NAME='wordpress'`
 
 다시 올렸습니다.
 
@@ -480,7 +479,7 @@ HTTPS나 SSH를 활용하여, 파일을 송수신할 수 있는데 IAM에서 자
 
 대체 환경을 만들어 점진적인 배포를 수행하는 블루/그린(Blue/Green)를 사용하였습니다.
 
-![](images/untitled-26-.png)
+![](images/4a901cdf-adaa-475d-8793-e974cffdb118.png)
 
 * ### Blue/Green deploy
 
@@ -540,7 +539,7 @@ codecommit의 repository로 선택한 ‘hwi-codecommit’을 선택합니다.
 
 \[Error message]
 
-`An error occurred (AccessDeniedException) when calling the GetAuthorizationToken operation: User: arn:aws:sts::782621889128:assumed-role/hwi/AWSCodeBuild-4f674b22-7969-46be-b1c5-a65362888e45 is not authorized to perform: ecr:GetAuthorizationToken on resource: * because no identity-based policy allows the ecr:GetAuthorizationToken action`
+`An error occurred (AccessDeniedException) when calling the GetAuthorizationToken operation: User: arn:aws:sts::1234567:assumed-role/hwi/AWSCodeBuild-4f674b22-7969-46be-b1c5-a65362888e45 is not authorized to perform: ecr:GetAuthorizationToken on resource: * because no identity-based policy allows the ecr:GetAuthorizationToken action`
 
 <span style="color:green"> **권한 확인하는 위치 👌🏻 </span>**
 
@@ -846,4 +845,3 @@ AWS WAF를 이용할 수 있습니다.
 [Task Networking in AWS Fargate | Amazon Web Services](https://aws.amazon.com/ko/blogs/compute/task-networking-in-aws-fargate/)
 
 [자습서: Amazon ECR 소스 및 ECS-to-CodeDeploy 배포를 사용하여 파이프라인 생성](https://docs.aws.amazon.com/ko_kr/codepipeline/latest/userguide/tutorials-ecs-ecr-codedeploy.html)
-
