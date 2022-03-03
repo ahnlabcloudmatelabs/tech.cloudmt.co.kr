@@ -1,7 +1,7 @@
 ---
 title: Azure Active Directory 와 GitHub 하나의 계정으로 사용할 수 있을까?
 authors:
-- author-name jiyoung-Sung
+- author-name Jiyoung-Sung
 date: 2022-02-24T11:46:49+09:00
 categories:
 - Tech
@@ -79,17 +79,17 @@ GitHub 을 검색하게 되면 GitHub과 관련된 애플리케이션이 총 6�
 해당 애플리케이션을 사용할 사용자 혹은 그룹을 선택하여 할당합니다. 
 Single Sign-On 설정 마지막 단계에서 SAML 테스트를 진행할 수 있으며, 단적으로 SSO 테스트를 가장 빠르게 할 수 있는 기능이 있으니 구성 전 클릭하고 넘어가는 것이 좋습니다!
 
-애플리케이션의 SAML 프로토콜 인증을 사용하여 Single Sign-On 할 수 있도록 설정을 시작합니다.
-![](images/set saml.png)   
-각 단계마다 편집을 누르고 기본 SAML 구성, 특성 및 클레임 항목에서 적절한 값들로 설정합니다.
+애플리케이션의 SAML 프로토콜 인증을 사용하여 Single Sign-On 할 수 있도록 설정을 시작합니다.   
+![](images/set-saml.png)   
+각 단계마다 편집을 누르고 기본 SAML 구성, 특성 및 클레임 항목에서 적절한 값들로 설정합니다.   
 
 - [Github](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-tutorial)
 - [Github AE](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-ae-tutorial)
 - [Github Enterprise Cloud – Enterprise account](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-enterprise-cloud-enterprise-account-tutorial)
 - [Github Enterprise Managed user](https://docs.microsoft.com/ko-kr/azure/active-directory/saas-apps/github-enterprise-managed-user-tutorial)
 
-GitHub에서의 SSO 설정을 진행하기 위해 SAML 서명 인증서를 다운로드하고 로그온 URL과 Azure AD 식별자 URL을 기록해 두어야 합니다.
-
+GitHub에서의 SSO 설정을 진행하기 위해 SAML 서명 인증서를 다운로드하고 로그온 URL과 Azure AD 식별자 URL을 기록해 두어야 합니다.   
+   
 SAML 프로토콜에서 애플리케이션 인증을 위한 SAML 토큰은 Azure AD 및 특정 표준 알고리즘에서 생성된 고유한 인증서로 서명됩니다.
 인증서 서명 옵션에서 SAML 어설션 서명, SAML 응답 서명, SAML 응답 및 어설션 서명 옵션을 선택하여 서명 범위를 지정하며, SHA-256과 SHA-1 알고리즘을 통해 인증서에 서명합니다. 
 이렇게 생성된 인증서는 3년의 유효기간을 가집니다. 해당 인증서 만료 60일, 30일, 7일전 이메일 알림을 받으면 새로운 인증서를 생성해 갱신하여 안정성을 유지합니다.
@@ -98,7 +98,7 @@ SAML 프로토콜에서 애플리케이션 인증을 위한 SAML 토큰은 Azure
 
 이제 GitHub의 설정을 변경하도록 합시다!   
 ![](images/set-ghes-1.png)   
-Management Console의 Authentication 탭에서 SAML 인증 방법을 선택하고 세부 항목 설정들을 변경합니다. (GitHub Enterprise에서는 SAML 인증 이외에 LDAP, CAS 인증도 지원합니다.)
+Management Console의 Authentication 탭에서 SAML 인증 방법을 선택하고 세부 항목 설정들을 변경합니다. (GitHub Enterprise에서는 SAML 인증 이외에 LDAP, CAS 인증도 지원합니다.)   
 *Allow creation of accounts with built-in authentication* 을 선택하면, SAML 인증이 아닌 built-in 인증을 통해서도 로그인 및 계정 생성이 가능합니다. 
 위에서 기록해두었던 로그온 URL 을 Singgle sign-on URL에, Azure AD 식별자 URL을 Issuer에 붙여 넣습니다.
 
