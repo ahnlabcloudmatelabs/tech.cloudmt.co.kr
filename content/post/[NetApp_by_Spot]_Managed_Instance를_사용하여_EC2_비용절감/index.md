@@ -6,16 +6,16 @@ date: "2022-01-04T00:00:00Z"
 categories:
 - Hands On
 tags:
-- NetApp by Spot
+- Spot by NetApp
 - AWS
 - EC2
 - 비용 절감
-title: "[NetApp by Spot] Managed Instance를 사용하여 EC2 비용절감"
+title: "[Spot by NetApp] Managed Instance를 사용하여 EC2 비용절감"
 
 ---
 ## 1. Managed Instance 개요
 
-NetApp by Spot의 Managed Instance는 AWS의 단일 EC2 인스턴스를 Spot으로 활용, 관리하는 서비스입니다.
+Spot by NetApp의 Managed Instance는 AWS의 단일 EC2 인스턴스를 Spot으로 활용, 관리하는 서비스입니다.
 
 실습하기 전에 다음의 요구사항이 충족해야 합니다.
 * AWS계정이 [Spot 계정](https://docs.spot.io/connect-your-cloud-provider/aws-account)에 연결되어 있는지 확인해야 합니다.
