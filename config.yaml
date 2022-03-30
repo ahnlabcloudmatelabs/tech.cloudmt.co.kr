@@ -27,6 +27,13 @@ related:
   threshold: 80
   toLower: false
 
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+        title: true
+        
 googleAnalytics: UA-146594086-2
 hasCJKLanguage: true
 paginate: 10
