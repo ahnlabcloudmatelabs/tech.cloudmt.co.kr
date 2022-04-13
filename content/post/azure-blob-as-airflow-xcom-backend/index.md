@@ -1,5 +1,6 @@
 ---
-title: Azure Blob Storage와 XCom백엔드 커스터마이징으로 Airflow Task간 크기가 큰 데이터 공유하기
+title: Azure Blob Storage와 커스텀 XCom 백엔드로 Airflow Task간 대용량 데이터 공유하기
+
 authors:
 - youngbin-han # 저자 프로필 페이지 경로 입력
 date: 2022-04-13T09:51:53+09:00
