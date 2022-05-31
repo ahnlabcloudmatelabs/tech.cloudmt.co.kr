@@ -89,7 +89,7 @@ SaaS는 내가 내야하는 것은 오로지 목적지를 가기위한 비용만
 
 
 
-##\[ Serverless ] 
+## \[ Serverless ] 
 
 
 ![](images/untitled-5-.png)
@@ -148,7 +148,7 @@ Serverless의 장점은 서버의 준비도 관리도 불필요해요. 관리자
 
 ---
 
-##\[ Azure container apps ] 
+## \[ Azure container apps ] 
 
 ![](images/untitled-11-.png)
 
