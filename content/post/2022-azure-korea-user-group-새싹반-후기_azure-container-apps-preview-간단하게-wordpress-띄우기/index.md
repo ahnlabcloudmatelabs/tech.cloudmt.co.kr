@@ -188,18 +188,20 @@ Azure App Service는 웹 사이트 및 웹 API를 비롯한 웹 애플리케이�
 
 Azure Functions은 프로그래밍 모델을 사용하여 이벤트 기반 애플리케이션을 실행하는 데 최적화되어 있습니다.  Azure Container Apps와 많은 특징을 공유하지만 함수에 최적화되어 있는 것이 특징입니다.
 
-\[ Azure Container Apps - Wordpress]
+### \[ Azure Container Apps - Wordpress]
 
 간단하게 도커에서 이미지를 ACR에 업로드를 하고 Azure Container Apps에서 컨테이너를 올린 후 바로 뜨는 URL로 확인만 한다면 누구나 빠르게 할 수 있습니다. 하지만 당시 preview로 오류(?)가 발생해서 손수 오류 수정했던 썰도 있었습니다.
 
-첫 번째, 사전 작업
+---
+
+#### 첫 번째, 사전 작업
 
 1. Docker를 사용할 VM 배포
 2. 내부에 Azure CLI, Docker 설치
 
 여기까지 사전 작업을 했다면 본격적으로 고고!
 
-두 번째, ContainerRegistry에 이미지 올리기
+#### 두 번째, ContainerRegistry에 이미지 올리기
 
 먼저 VM에 Docker를 설치했으니 wordpress 이미지를 pull 해옵니다.
 
@@ -288,7 +290,7 @@ CPU와 메모리도 설정할 수 있습니다.
 
 제가 참고한 자료의 표 네 번째를 보시면 allowInsecure의 디폴트값은 false로 되어 있는데 이 false로 설정하면 https 리디렉션으로 자동으로 설정하게끔 되어 있습니다. 저는 이 부분을 true로 설정을 하고 다시 재배포를 하려고 합니다.
 
-\[ 수정해보기 ]
+### \[ 수정해보기 ]
 
 ![](images/untitled-29-.png)
 
