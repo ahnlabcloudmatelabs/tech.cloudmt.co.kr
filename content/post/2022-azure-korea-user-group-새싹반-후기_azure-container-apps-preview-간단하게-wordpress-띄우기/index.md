@@ -76,7 +76,7 @@ On-premise, IaaS, PaaS, SaaS가 보여주는 이 장표는 기업이 관리하�
 
 IaaS는 자동차는 이미 다 만들어졌으니 원하는 자동차를 내돈내산으로 구매했지만 운전은 사용자가 해야합니다. 종종 자동차가 사고가 나거나 고장이 나면 사용자가 수리를 해야하죠. 또 새로 구입하려면 자동차를 새 차로 사야합니다.
 
-![](untitled-3-.png)
+![](images/untitled-3-.png)
 
 PaaS는 자동차도 내돈내산도 아니고 저렴하게 렌트를 합니다. 맘에 들지 않으면 빠르게 다른 자동차로 바꿀수도 있죠 그렇지만 목적지까지 운전은 사용자가 해야합니다. 어느정도의 사용자의 컨트롤은 필요하다는 것이죠.
 
@@ -86,7 +86,11 @@ SaaS는 내가 내야하는 것은 오로지 목적지를 가기위한 비용만
 
 이렇게 관리의 범위를 CSP와 사용자가 어디까지 책임지는 것이냐에 따라서 핵심이죠.
 
-\[ Serverless ] 
+
+
+
+##\[ Serverless ] 
+
 
 ![](images/untitled-5-.png)
 
@@ -142,7 +146,9 @@ Serverless의 장점은 서버의 준비도 관리도 불필요해요. 관리자
 
 이런 경우 기존 클라우드 컴퓨팅 모델에 비해 돈과 시간을 모두 절약할 수 있으니 **토이 프로젝트나 초기 서비스을 런칭하고 싶을 때** 추천드립니다.
 
-\[ Azure container apps ] 
+---
+
+##\[ Azure container apps ] 
 
 ![](images/untitled-11-.png)
 
@@ -168,7 +174,7 @@ Azure Container apps는 규모에 맞게끔 구축이 가능한 서버가 없는
 
 (GA되었어도 리눅스 기반의 운영체제로만 되어있네요.)
 
- 네번째로 컨테이너를 배포하면 **\*\*Log Analytics 에서\*\*** 로그도 확인할 수 있습니다.
+ 네번째로 컨테이너를 배포하면 Log Analytics 에서 로그도 확인할 수 있습니다.
 
 ![](images/untitled-13-.png)
 
@@ -188,7 +194,7 @@ Azure App Service는 웹 사이트 및 웹 API를 비롯한 웹 애플리케이�
 
 Azure Functions은 프로그래밍 모델을 사용하여 이벤트 기반 애플리케이션을 실행하는 데 최적화되어 있습니다.  Azure Container Apps와 많은 특징을 공유하지만 함수에 최적화되어 있는 것이 특징입니다.
 
-### \[ Azure Container Apps - Wordpress]
+## \[ Azure Container Apps - Wordpress]
 
 간단하게 도커에서 이미지를 ACR에 업로드를 하고 Azure Container Apps에서 컨테이너를 올린 후 바로 뜨는 URL로 확인만 한다면 누구나 빠르게 할 수 있습니다. 하지만 당시 preview로 오류(?)가 발생해서 손수 오류 수정했던 썰도 있었습니다.
 
