@@ -4,9 +4,15 @@ title: 2022 Azure Korea User Group 새싹반 후기_Azure Container apps Preview
 authors:
   - hwiyoung-jung
 date: 2022-05-31T14:32:24.069Z
-feature_image: ddd.png
+feature_image: null
 categories:
-  - Tech
+  - Hands On
+tags:
+  - "#wordpressazure"
+  - "#containerapps"
+  - "#wordpressserverless"
+  - "#serverless"
+  - "#azurecontainerapps"
 ---
 안녕하세요!
 
@@ -38,11 +44,13 @@ Azure Container Apps를 설명하면서 발표 자료와 함께 개념 설명을
 
 해당 내용은 **\[Global Azure Virtual 2022]의 컨테이너로 구성된 웹서비스 복잡한 구성 “멈춰!” Azure PaaS Service 로 발표한 Azure Container apps의 내용과 동일합니다.**
 
+- - -
+
 ## \[ 공동책임모델 ]
 
 기본적으로 Azure Container apps는 Azure의 Serverless 제품이기 때문에 이 Serverless의 개념이 필요하다고 생각했습니다.
 
-![](untitled.png)
+![](images/untitled.png)
 
 여러분이 아주 많이 보신 장표일텐데. 클라우드 사용자의 책임과 클라우드 서비스 공급자(CSP), 즉 기업의 책임을 설명하는 것을 책임공유모델이라고 합니다.
 
@@ -54,13 +62,13 @@ On-premise, IaaS, PaaS, SaaS가 보여주는 이 장표는 기업이 관리하�
 
 \[데이터와 코드레벨에 따라서 공유책임모델이 정해지기 때문에 감안하고 설정한 예입니다.]
 
-![](untitled-1-.png)
+![](images/untitled-1-.png)
 
 프레미스는 모든 것을 자동차 공장부터 시작해서 자동차를 제작하고 직접 운전해서 도착하는 것입니다.
 
 무슨 자동차를 프레임은 어떻게 바퀴는 어떻게 만들지부터 어떻게 가야할지, 누가 운전할지 그리고 자동차를 만드는 비용을 전부 사용자가 책임져야합니다.
 
-![](untitled-2-.png)
+![](images/untitled-2-.png)
 
 IaaS는 자동차는 이미 다 만들어졌으니 원하는 자동차를 내돈내산으로 구매했지만 운전은 사용자가 해야합니다. 종종 자동차가 사고가 나거나 고장이 나면 사용자가 수리를 해야하죠. 또 새로 구입하려면 자동차를 새 차로 사야합니다.
 
@@ -68,7 +76,7 @@ IaaS는 자동차는 이미 다 만들어졌으니 원하는 자동차를 내돈
 
 PaaS는 자동차도 내돈내산도 아니고 저렴하게 렌트를 합니다. 맘에 들지 않으면 빠르게 다른 자동차로 바꿀수도 있죠 그렇지만 목적지까지 운전은 사용자가 해야합니다. 어느정도의 사용자의 컨트롤은 필요하다는 것이죠.
 
-![](untitled-4-.png)
+![](images/untitled-4-.png)
 
 SaaS는 내가 내야하는 것은 오로지 목적지를 가기위한 비용만 지불만 하면 됩니다. 기사님이 운전도 해주고 자동차는 내가 산 것도 아니니까요. 편하게 앉아서 경치구경만 하면 되죠.
 
@@ -76,7 +84,7 @@ SaaS는 내가 내야하는 것은 오로지 목적지를 가기위한 비용만
 
 \[ Serverless ] 
 
-![](untitled-5-.png)
+![](images/untitled-5-.png)
 
 Serverless는 서버가 없는게 아닙니다.  
 
@@ -86,11 +94,11 @@ CSP가 설정해 놓은 제약사항들 안에서 어플리케이션을 띄우�
 
 클라우드 컴퓨팅의 등장부터 알아야겠죠?
 
-![](untitled-6-.png)
+![](images/untitled-6-.png)
 
 아까 자동차로 예를 든 온프레미스 시점부터 다시 되돌려보자면 서버에 선도 꽂고 서버도 가져오고 스토리지가 부족하면 또 주문해서 가져오고 서버운영비용도 들고 숨만 쉬어도 돈이 나가게 되는데 시간도 오래걸리게 되죠. 
 
-![](untitled-7-.png)
+![](images/untitled-7-.png)
 
 이제 그걸 해결해줄 수 있는 클라우드가 등장하게 되면서 가상의 서버를 사용할 수 있게 된것이죠, 스토리지도 내가 필요한 만큼 금방 추가할 수 있고 인스턴스 타입도 변경할 수 있습니다. 
 
@@ -98,13 +106,13 @@ CSP가 설정해 놓은 제약사항들 안에서 어플리케이션을 띄우�
 
 **그러나 여전히 서버의 소프트웨어적인 부분은 사용자가 직접 관리를 해야 합니다. 서버에 깔린 운영체제 등을 업데이트하고, 데이터를 백업하고, 보안에도 신경 써야 하는 일이 생깁니다.**
 
-![](untitled-8-.png)
+![](images/untitled-8-.png)
 
 그런데도 이것도 시간이 오래걸린다고 생각하면 하면서 더 빠른 배포를 해서 서비스를 출시하고자하는 니즈가 생겼습니다. 이미지만 올리면 나머지는 알아서 서비스를 컨테이너의 등장으로 수분, 수초면 서비스를 올릴 수 있는 관리형 서비스가 등장한 것입니다. 
 
 요약하자면 관리의 대상을 줄이는 것으로 Serverless가 등장하게 된것이죠. 시간은 곧 돈이라고 하니깐요.
 
-![](untitled-9-.png)
+![](images/untitled-9-.png)
 
 그럼 Serverless는 어떻게 동작하게끔 이해하면 될까요?
 
@@ -120,7 +128,7 @@ Serverless도 그렇습니다.
 
 서버가 없는 것이 아니라 보이지 않는 것이죠. 서버가 대기하고 있는 것이 아니라 현재 필요하다라는 호출을 하게 되면 실행하는 것입니다. 사용자는 필요한 것만 사용할 수 있습니다. 요청했을 때만  어플리케이션을 실행할 수 있으니 사용자는 어플리케이션 레벨만 사용하면 됩니다.
 
-![](untitled-10-.png)
+![](images/untitled-10-.png)
 
 Serverless의 장점은 서버의 준비도 관리도 불필요해요. 관리자가 적은 입장에서는 편하게 사용 할 수 있죠. 프로비저닝 및 패치 적용과 같은 인프라 관리 작업이 필요하지 않으므로 고객은 본인 서비스 운영에 집중할 수 있습니다. 
 
@@ -132,13 +140,13 @@ Serverless의 장점은 서버의 준비도 관리도 불필요해요. 관리자
 
 \[ Azure container apps ] 
 
-![](untitled-11-.png)
+![](images/untitled-11-.png)
 
 오늘날의 개발자는 더 빠른 개발을 위한 플랫폼을 사용하길 원하고 그에 맞는 인프라를 쉽고 간단하게 운영하길 원합니다. 
 
 사용자 즉, 서비스를 배포하는 개발자의 입장에서는  관리까지 신경쓸 수가 없고. 본인의 서비스에 집중할 수있는 것이 필요합니다.
 
-![](untitled-12-.png)
+![](images/untitled-12-.png)
 
 Azure Container apps는 규모에 맞게끔 구축이 가능한 서버가 없는 완전관리형 컨테이너 서비스입니다. 그리고 자동 스케일링의 기능이 있어서 필요한 만큼 확장이 가능하고 수정관리에서 재배포도 가능합니다.
 
@@ -158,7 +166,7 @@ Azure Container apps는 규모에 맞게끔 구축이 가능한 서버가 없는
 
  네번째로 컨테이너를 배포하면 ***\*Log Analytics 에서\**** 로그도 확인할 수 있습니다.
 
-![](untitled-13-.png)
+![](images/untitled-13-.png)
 
 다른 Container 서비스랑도 비교를 해볼까 합니다.
 
@@ -191,34 +199,34 @@ Azure Functions은 프로그래밍 모델을 사용하여 이벤트 기반 애�
 
 먼저 VM에 Docker를 설치했으니 wordpress 이미지를 pull 해옵니다.
 
-![](untitled-14-.png)
+![](images/untitled-14-.png)
 
 그 후 ACR을 만들어 놓습니다.
 
-![](untitled-15-.png)
+![](images/untitled-15-.png)
 
 개인적으로 프로젝트를 한다거나 보안이 필요할 때는 프라이빗을 사용하는 게 좋겠지만 단하게 웹 서비스를 올리는 과정이기 때문에 연결 구성은 공용 액세스로 체크할게요 !
 
 메뉴에서  빠른 시작을 선택하면
 
-![](untitled-16-.png)
+![](images/untitled-16-.png)
 
 이렇게 컨테이너 레지스트리에 로그인, 푸시하는 방법까지 친절하게 알려줍니다!
 
-![](untitled-17-.png)
+![](images/untitled-17-.png)
 
-![](untitled-18-.png)
+![](images/untitled-18-.png)
 
 이렇게 따라하시면 됩니다 :) 
 참 쉽죠?
 
 이렇게 올라간 이미지는 컨테이너 레지스트리에서 확인할 수 있습니다.
 
-![](untitled-19-.png)
+![](images/untitled-19-.png)
 
 그럼 이제 올라간 이미지를 컨테이너 앱에 올려봐야죠? 
 
-![](untitled-20-.png)
+![](images/untitled-20-.png)
 
 기본 사항에서는 구독, 리소스그룹, 컨테이너 앱 이름을 지정합니다.
 
@@ -226,11 +234,11 @@ Azure Functions은 프로그래밍 모델을 사용하여 이벤트 기반 애�
 
 신규환경 생성시 기본 사항에서 리전을 선택할 수 있습니다.
 
-![](untitled-21-.png)
+![](images/untitled-21-.png)
 
 GA 되고 나서도 확인해봤는데 어서 한국도 생겼으면.. ! 
 
-![](untitled-22-.png)
+![](images/untitled-22-.png)
 
 여기서 앱설정을 하는데 컨테이너의 세부정보를 적습니다. 이미지 원본은 아까 ACR에 올린 이미지를 사용할 수 있습니다. 내가 그동안 서버의 워드프레스를 사용하기 위해서 아파치나 php를 설치하지 않고도 이렇게 컨테이너로만 띄울 수 있는 거는 초보자들도 방법만 알고 이해를 할 수 있다면 누구나 자기의 웹 서비스를 만들 수 있다는 점이 큰 장점이죠.
 
@@ -238,7 +246,7 @@ GA 되고 나서도 확인해봤는데 어서 한국도 생겼으면.. !
 
 어플리케이션 레벨만 사용자는 사용하면 서비스 만들기 끝!
 
-![](untitled-23-.png)
+![](images/untitled-23-.png)
 
 CPU와 메모리도 설정할 수 있습니다. 
 
@@ -246,17 +254,17 @@ CPU와 메모리도 설정할 수 있습니다.
 
 이렇게 배포를 하고
 
-![](untitled-24-.png)
+![](images/untitled-24-.png)
 
 컨테이너 앱을 확인해봅니다. 
 
-![](untitled-25-.png)
+![](images/untitled-25-.png)
 
 어플리케이션 URL이 뜹니다! 한번 확인해보겠습니..?!
 
 
 
-![](untitled-26-.png)
+![](images/untitled-26-.png)
 
 앗?! 제대로 된 Install 화면이 아니네요.
 
@@ -266,7 +274,7 @@ CPU와 메모리도 설정할 수 있습니다.
 
 정상적인 Install page로 배포하기 위해서 수정을 해야 하는 부분이 있을 것 같아요.
 
-![](untitled-27-.png)
+![](images/untitled-27-.png)
 
 배포한 컨테이너 앱의 리소스 JSON을 확인해봅니다.
 
@@ -275,32 +283,33 @@ CPU와 메모리도 설정할 수 있습니다.
 [Azure Container Apps에서 HTTPS 수신 설정](https://docs.microsoft.com/ko-kr/azure/container-apps/ingress?tabs=bash)
 
 
-![](untitled-28-.png)
+![](images/untitled-28-.png)
 
 제가 참고한 자료의 표 네 번째를 보시면 allowInsecure의 디폴트값은 false로 되어 있는데 이 false로 설정하면 https 리디렉션으로 자동으로 설정하게끔 되어 있습니다. 저는 이 부분을 true로 설정을 하고 다시 재배포를 하려고 합니다.
 
+
 [ 수정해보기 ]
 
-![](untitled-29-.png)
+![](images/untitled-29-.png)
 
 보통 이렇게 신규로 무언가를 만들 때 자동화에 대한 템플릿을 다운로드하는 편인데요 다행히 도움이 되는 날이 오는군요! 이 템플릿을 다운받아서 사용자 지정 템플릿을 배포를 할 예정입니다.
 
-![](untitled-30-.png)
+![](images/untitled-30-.png)
 
 allowInsecure를 true로 바꾸고 사용자 지정 배포를 합니다.
 
-![](untitled-31-.png)
+![](images/untitled-31-.png)
 
 다시 배포가 된 컨테이너 앱의 어플리케이션 URL을 확인해봅니다.
 
-![](untitled-32-.png)
+![](images/untitled-32-.png)
 
 
 와아!! 이제 잘 뜨네요 🙂 !!
 
 이렇게 간단하게 워드프레스를 띄워보고 오류 수정까지 해보는 멋진! 스토리로 마무리가 되었네요 
 
-
+- - -
 
 발표내용을 요약을 하자면 Container apps를 사용하면 클라우드 인프라 및 복잡한 컨테이너의 오케스트레이션 관리 걱정을 하지 않고 컨테이너를 실행할 수 있는 이점이 있죠.  애저 포털에서 구성 시 직관적으로 표기가 되어 있기 때문에 편리하게 배포가 됩니다. 익숙해지면 5분 컷이네요.
 
