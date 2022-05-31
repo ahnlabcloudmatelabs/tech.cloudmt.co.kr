@@ -4,7 +4,7 @@ title: 2022 Azure Korea User Group 새싹반 후기_Azure Container apps Preview
 authors:
   - hwiyoung-jung
 date: 2022-05-31T14:32:24.069Z
-feature_image: blob:https://tech.cloudmt.co.kr/60852db3-25f8-4e6a-abb2-2f8f687ce5c5
+feature_image: ddd.png
 categories:
   - Hands On
 tags:
@@ -25,6 +25,10 @@ tags:
 **현재는 GA가 되었습니다.**
 
 Azure VM을 배포하지 않고 Azure Resource Manager에서 Kubernetes 수준의 Container Cluster를 관리할 수 있답니다!
+
+
+
+---
 
 **\[ 발표 유튜브 ]**
 
@@ -164,7 +168,7 @@ Azure Container apps는 규모에 맞게끔 구축이 가능한 서버가 없는
 
 (GA되었어도 리눅스 기반의 운영체제로만 되어있네요.)
 
- 네번째로 컨테이너를 배포하면 ***\*Log Analytics 에서\**** 로그도 확인할 수 있습니다.
+ 네번째로 컨테이너를 배포하면 **\*\*Log Analytics 에서\*\*** 로그도 확인할 수 있습니다.
 
 ![](images/untitled-13-.png)
 
@@ -262,8 +266,6 @@ CPU와 메모리도 설정할 수 있습니다.
 
 어플리케이션 URL이 뜹니다! 한번 확인해보겠습니..?!
 
-
-
 ![](images/untitled-26-.png)
 
 앗?! 제대로 된 Install 화면이 아니네요.
@@ -278,17 +280,15 @@ CPU와 메모리도 설정할 수 있습니다.
 
 배포한 컨테이너 앱의 리소스 JSON을 확인해봅니다.
 
-### [ 참고자료 ]
+### \[ 참고자료 ]
 
 [Azure Container Apps에서 HTTPS 수신 설정](https://docs.microsoft.com/ko-kr/azure/container-apps/ingress?tabs=bash)
-
 
 ![](images/untitled-28-.png)
 
 제가 참고한 자료의 표 네 번째를 보시면 allowInsecure의 디폴트값은 false로 되어 있는데 이 false로 설정하면 https 리디렉션으로 자동으로 설정하게끔 되어 있습니다. 저는 이 부분을 true로 설정을 하고 다시 재배포를 하려고 합니다.
 
-
-[ 수정해보기 ]
+\[ 수정해보기 ]
 
 ![](images/untitled-29-.png)
 
@@ -303,7 +303,6 @@ allowInsecure를 true로 바꾸고 사용자 지정 배포를 합니다.
 다시 배포가 된 컨테이너 앱의 어플리케이션 URL을 확인해봅니다.
 
 ![](images/untitled-32-.png)
-
 
 와아!! 이제 잘 뜨네요 🙂 !!
 
