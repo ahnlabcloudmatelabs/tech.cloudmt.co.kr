@@ -4,7 +4,7 @@ title: 2022 Azure Korea User Group 새싹반 후기_Azure Container apps Preview
 authors:
   - hwiyoung-jung
 date: 2022-05-31T14:32:24.069Z
-feature_image: null
+feature_image: blob:https://tech.cloudmt.co.kr/60852db3-25f8-4e6a-abb2-2f8f687ce5c5
 categories:
   - Hands On
 tags:
