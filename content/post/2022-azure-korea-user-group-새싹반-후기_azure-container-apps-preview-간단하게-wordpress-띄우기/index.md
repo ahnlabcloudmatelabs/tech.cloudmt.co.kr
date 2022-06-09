@@ -4,7 +4,7 @@ title: 2022 Azure Korea User Group 새싹반 후기_Azure Container apps Preview
 authors:
   - hwiyoung-jung
 date: 2022-05-31T14:32:24.069Z
-feature_image: ""
+feature_image: ddd.png
 categories:
   - Hands On
 tags:
@@ -26,9 +26,7 @@ tags:
 
 Azure VM을 배포하지 않고 Azure Resource Manager에서 Kubernetes 수준의 Container Cluster를 관리할 수 있답니다!
 
-
-
----
+- - -
 
 **\[ 발표 유튜브 ]**
 
@@ -86,11 +84,7 @@ SaaS는 내가 내야하는 것은 오로지 목적지를 가기위한 비용만
 
 이렇게 관리의 범위를 CSP와 사용자가 어디까지 책임지는 것이냐에 따라서 핵심이죠.
 
-
-
-
-## \[ Serverless ] 
-
+## \[ Serverless ]
 
 ![](images/untitled-5-.png)
 
@@ -146,9 +140,9 @@ Serverless의 장점은 서버의 준비도 관리도 불필요해요. 관리자
 
 이런 경우 기존 클라우드 컴퓨팅 모델에 비해 돈과 시간을 모두 절약할 수 있으니 **토이 프로젝트나 초기 서비스을 런칭하고 싶을 때** 추천드립니다.
 
----
+- - -
 
-## \[ Azure container apps ] 
+## \[ Azure container apps ]
 
 ![](images/untitled-11-.png)
 
@@ -198,7 +192,7 @@ Azure Functions은 프로그래밍 모델을 사용하여 이벤트 기반 애�
 
 간단하게 도커에서 이미지를 ACR에 업로드를 하고 Azure Container Apps에서 컨테이너를 올린 후 바로 뜨는 URL로 확인만 한다면 누구나 빠르게 할 수 있습니다. 하지만 당시 preview로 오류(?)가 발생해서 손수 오류 수정했던 썰도 있었습니다.
 
----
+- - -
 
 #### 첫 번째, 사전 작업
 
@@ -323,5 +317,7 @@ allowInsecure를 true로 바꾸고 사용자 지정 배포를 합니다.
 그리고 서버리스 컨테이너이기 때문에 간단하게 웹 애플리케이션을 실행할 수 있습니다.
 
 GA가 되었기 때문에 이제 자유롭게 사용하실 수 있습니다. 아직은 Korea Region이 나오지 않아서 아쉽지만 빨리 나왔으면 하는 바램입니다!
+
+
 
 이상 글을 마치겠습니다 🙂
