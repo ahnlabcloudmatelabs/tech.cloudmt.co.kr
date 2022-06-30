@@ -561,7 +561,7 @@ A /var/spool/mail/containeruser
 `diff` 명령어를 사용하여 컨테이너의 변경된 이력을 확인할 수 있습니다. \
 **A(Add)**는 추가된 이력, **C(Change)**는 변경된 이력, **D(Delete)**는 삭제된 이력을 의미합니다.
 
-
+- - -
 
 ### 글을 마치며
 
