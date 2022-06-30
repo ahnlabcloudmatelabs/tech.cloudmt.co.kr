@@ -48,7 +48,7 @@ tags:
 
 
 
-![](image_container.png)
+![](images/image_container.png)
 
 
 
@@ -75,7 +75,7 @@ tags:
 
 ## 도커 컨테이너
 
-![](dockercontainerstatus.png)
+![](images/dockercontainerstatus.png)
 
 
 
