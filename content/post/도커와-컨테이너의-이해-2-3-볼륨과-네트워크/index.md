@@ -11,30 +11,25 @@ tags:
   - volume
   - network
 ---
+
+이전 게시글에서는 도커 컨테이너와 관련된 명령어들을 다루었습니다.
+
+이번 시간에는 컨테이너 애플리케이션의 능력을 십분 발휘하게 하는 요소인 **볼륨**과 **네트워크**에 대해 다루겠습니다.
+
 - - -
 
 **목차**
 
 [도커 볼륨 생성하기](#도커-볼륨-생성하기)
-
 [── 생성한 컨테이너를 inspect하여 마운트 정보 관찰하기](#생성한-컨테이너를-inspect-하여-마운트-정보-관찰하기)
-
 [── 읽기와 쓰기 허용(rw) vs 읽기 전용(ro) 디렉터리](#읽기와-쓰기-허용rw-vs-읽기-전용ro-디렉터리)
-
 [── overlayfs에 대해 알아보기](#overlayfs-에-대해-알아보기)
-
 [도커 컨테이너가 외부와 통신되는 것을 확인해보자](#도커-컨테이너가-외부와-통신되는-것을-확인해보자)
-
 [── docker network 종류 알아보기](#docker-network-종류-알아보기)
-
 [──── bridge 네트워크](#bridge-네트워크)
-
 [──── host 네트워크](#host-네트워크)
-
 [──── none 네트워크](#none-네트워크)
-
 [── 사용자 정의 브릿지 네트워크](#사용자-정의-브릿지-네트워크)
-
 [── 그 이외의 네트워크 종류](#그-이외의-네트워크-종류)
 
 - - -
@@ -45,7 +40,7 @@ tags:
 
 **볼륨 생성**
 
-```
+```bash
 [root@localhost]# IMAGE=centos
 [root@localhost]# CONT=myvol01
 [root@localhost]# docker container run -it --name $CONT -v docker_vol:/cont_vol $IMAGE
@@ -55,7 +50,7 @@ tags:
 
 `docker volume ls`를 통해 생성된 볼륨을 확인할 수 있습니다.
 
-```
+```bash
 [container]# echo 'Hello, Volume!' > /cont_vol/hello.txt
 
 [root@localhost]# docker volume ls
@@ -97,7 +92,7 @@ local     docker_vol
 
 컨테이너 생성 시에 사용한  `-v <볼륨 이름>:<마운트 경로>` 옵션이 각각 `Source와 Destination`으로 매칭됩니다.
 
-```
+```bash
 [root@localhost] # docker container inspect --format='{{json .Mounts}}' $CONT | jq
 [
   {
@@ -113,7 +108,7 @@ local     docker_vol
 ]
 ```
 
-```
+```bash
 [root@localhost] # tree /var/lib/docker/volumes/
 /var/lib/docker/volumes/
 ├── docker_vol
@@ -139,7 +134,7 @@ bash: /read_only/file2: Read-only file system # 쓰기가 불가하여 에러 �
 
 컨테이너에서 빠져나와, 방금 생성한 컨테이너를 inspect 해보면, 마운트 별로 `RW` 권한 값이 다른 것을 확인할 수 있습니다.
 
-```
+```bash
 [root@localhost]# docker inspect --format='{{json .Mounts}}' $CONT | jq
 
 [
@@ -176,7 +171,7 @@ OverlayFS는 두 개의 디렉터리를 계층화하여 단일 디렉터리로 �
 
 컨테이너의 *GraphDriver*를 살펴보면 각 레이어들에 매칭되는 디렉터리 경로를 알 수 있습니다.
 
-```json
+```bash
 [root@localhost]# docker inspect --format='{{json .GraphDriver}}' $CONT | jq
 {
   "Data": {
@@ -247,7 +242,7 @@ curl <Host IP>:49153
 
 `docker container inspect` 에서 `NetworkSettings` 부분에서 네트워크 관련 세팅을 확인할 수 있습니다.
 
-```
+```bash
 [root@localhost]# docker inspect web1 --format='{{json .NetworkSettings}}' | jq
 ...
   "Ports": {
@@ -297,7 +292,7 @@ curl <Host IP>:49153
 
 리눅스에서 네트워크 설정 정보를 확인하려면 `ip addr` 명령어를 사용합니다. `ip addr`를 입력해 보면 `172.17.0.1/16` 대역의 `docker0` 인터페이스가 생성되어 있는 것을 확인할 수 있습니다. 그 아래에는 `veth`로 시작되는 인터페이스가 있는데, 이것들은 도커 컨테이너의 통신을 위해 자동으로 만들어지는 가상 네트워크 인터페이스입니다.
 
-```
+```bash
 [root@localhost]# ip addr
 
 # lo : LOOPBACK, 자기 자신을 의미함
@@ -403,7 +398,7 @@ curl <Host IP>
 
 none 네트워크는 말 그대로 네트워크를 사용하지 않기를 원할 때 쓰는 타입입니다.
 
-```
+```bash
 [root@localhost]# docker run --rm -dit --network none --name no-net-alpine alpine:latest ash
 
 # none 네트워크로 컨테이너 실행 시 피어링되는 가상 인터페이스가 존재하지 않아 외부 통신이 불가
@@ -424,7 +419,7 @@ none 네트워크는 말 그대로 네트워크를 사용하지 않기를 원할
 
 아래 코드는 워드프레스를 구성할 때, DB 연결 시 호스트명을 ip가 아닌 mysql 컨테이너의 이름으로 수행하는 예시입니다.
 
-```
+```bash
 # 1. my_net이라는 사용자 정의 브릿지를 생성합니다.
 [root@localhost]# docker network create my_net
 
@@ -452,7 +447,7 @@ wordpress
 
 호스트에서 브릿지의 정보를 한눈에 파악할 수 있는 좋은 도구로 `brctl`이 있습니다. `brctl show`로 브릿지와 그에 피어링된 인터페이스를 확인할 수 있습니다.
 
-```
+```bash
 [root@localhost]# brctl show
 bridge name	        bridge id	        	interfaces
 br-f218f72bd5d1		8000.024250cdf17e		veth4e8f2ea
