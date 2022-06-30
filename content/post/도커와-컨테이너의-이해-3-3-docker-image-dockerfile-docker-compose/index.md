@@ -57,7 +57,7 @@ rancher/nginx-ingress-controller                                                
 
  이 레지스트리는 저장소라고 하면 쉽습니다. 내가 사용하는 이미지가 도커허브에서 다운을 받았거나 추후에 설명하는 도커파일로 내가 만들어서 내부에서 만든 레지스트리일 수도 있습니다.
 
-![](/images/untitled.png)
+![](images/untitled.png)
 
 온 프레미스일 수도 있고 클라우드 벤더사에서 제공하는 레지스트리일수도 있죠. 예로 든 docker.io는 기본적으로 도커 허브이며 내가 지정한 레지스트리가 있으면 변경하면 됩니다.
 
@@ -66,7 +66,7 @@ rancher/nginx-ingress-controller                                                
 
  이미지는 이미지 자체로는 사용할 수 없고 컨테이너에 추가해야지만 사용할 수 있는 패키지 같은 느낌입니다.
 
-![](/images/untitled-13-.png)
+![](images/untitled-13-.png)
 
 이미지(앞바퀴) 없으면 컨테이너(자전거) 안돌아가는 것처럼요.
 
@@ -98,7 +98,7 @@ Status: Downloaded newer image for nginx:latest #상태확인
 
 
 
-![](/images//untitled-3-.png)
+![](images//untitled-3-.png)
 
 많으면 좋아요 별이 많으면 다다익선
 
@@ -119,7 +119,7 @@ Status: Downloaded newer image for nginx:latest #상태확인
 docker image pull
 ```
 
-![](/images//untitled-4-.png)
+![](images//untitled-4-.png)
 
 미지를 나에게 끌고온다라는 느낌으로 생각하시면 쉬울 듯합니다!
 
@@ -159,7 +159,7 @@ nginx        latest    sha256:0e901e68141fd02f237cf63eb842529f8a9500636a9419e3cf
 docker image inspect [image] 로 이미지의 상세출력을 봅시다.
 
 
-![](/image/untitled-5-.png)
+![](image/untitled-5-.png)
 
 너무 길어서 적당히 잘랐습니다!
 
@@ -225,7 +225,7 @@ nginx           latest    0e901e68141f   3 weeks ago   142MB
 원래 이미지의 IMAGE ID( 0e901e68141f) 새로운 이미지의 IMAGE ID가 동일하죠? 다른 이미지가 아니라 동일한 이미지로 이미지에 별명만 새롭게 붙인 것입니다. 그렇기 때문에 이미지 자체가 변경 된 것은 아닙니다.
 
 
-![](/images/untitled-6-.png)
+![](images/untitled-6-.png)
 
 어떻게 어디서 해야할지 모르겠다면 이 그림 참조하시고 바꿔보세요 🙂 
 
@@ -373,7 +373,7 @@ save 명령어를  통해 이미지를 tar 파일로 저장합니다.
 
 [명령어]
 
-```\
+```
 docker image rm [image]
 
 —force, -f #이미지 강제 삭제
@@ -497,18 +497,18 @@ CMD #컨테이너 명령 실행
 
 
 
-![](/images/untitled-7-.png)
+![](images/untitled-7-.png)
 
 
 그럼 이미지가 만들어지는 과정을 볼게요
 
-![](/images/untitled-8-.png)
+![](images/untitled-8-.png)
 
 간단하게 설명해보자면 현재 OS로 사용하고 있는 base image 입니다. Read only 입니다. 여기에 파일을 하나씩 추가한다면 그 위에 레이어가 쌓이게 되는 거죠 upper layer를 하게되면 (프로그램 설치) Read, Write가 되고 그 이후에 image 2 는 전체가 Read only가 됩니다. 이렇게 명령어가 하나씩 실행될 때마다 add file로 upper layer (프로그램 설치)가 반복이 됩니다. 그렇게 image 3가 만들어지면 전체가 Read only가 되는 것이죠.
 
 그런데, 이렇게 명령어가 많아진다면?
 
-![](/images/untitled-9-.png)
+![](images/untitled-9-.png)
 
 
 끊임없이 레이어가 쌓이게 되니까 메모리는 점점 많아질 거에요. 
@@ -606,7 +606,7 @@ RUN apt-get update && apt-get install -y nginx
 - 직접 실행이 아니라 $SHOME 같은 쉘 환경 변수를 사용할 수 없다.
 - 명령어가 단독적으로 실행이 아니기 때문에 JSON 배열 형식으로 정의합니다.
 
-```bash
+```
 RUN ["/bin/bash", "apt-get install -y nginx" ]
 
 EX)
@@ -640,7 +640,7 @@ CMD ["nginx", "-g", "daemon o ff;" ] _
 개념을 조금 이해하고 가야하는데요. 곧 여름이니까 맛있는 복숭아를 예로 들겠습니다.
 
 
-![](/images/untitled-10-.png)
+![](images/untitled-10-.png)
 
 ~~전 딱복이 제 스타일이에요~~
 
@@ -648,7 +648,7 @@ CMD ["nginx", "-g", "daemon o ff;" ] _
 
 보통 복숭아를 수확하려면 처음에 묘묙을 심고 나무가 자라서 열매를 맺어야 얻을 수 있잖아요. 하지만 농부는 복숭아 나무가 있음에도 묘묙을 사서 심곤하죠. 
 
-![](/images/untitled-11-.png)
+![](images/untitled-11-.png)
 
 본인이 그 묘묙에서 자라는 복숭아를 먹기 위해서일까요? 아닙니다. 묘목은 본인의 후손을 위해서입니다.
 
@@ -658,7 +658,7 @@ ONBUILD를 쓰는 이유는 import 하는 추후의 이미지에서 쓰여지기
 
 
 
-![](/images/untitled-12-.png)
+![](images/untitled-12-.png)
 
 
 ✔ Dockerfile 에 ONBUILD 명령을 사용하여 어떤 명령을 실행하도록 설정하여 빌드하고 이미지를 작성 하게 되면 그 이미지를 다른 Dockerfile 에서 베이스 이미지로 설정하여 빌드했을 때 ONBUILD 명령에서 지정한 명령을 실행하는 것이죠. 웹 서비스 환경 구성 시 OS 설치 및 미들웨어 관련 설정을 기본 이미지로 만들고, 개발자들에 의해서 추가되는 부분을 ONBUILD 구문으로 구성하면, 개발자들이 좀 더 쉽게 docker 이미지를 빌드 할 수 있습니다.
