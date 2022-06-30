@@ -3,7 +3,7 @@ title: 도커와 컨테이너의 이해 (3/3) - Docker image, Dockerfile, Docker
 authors:
   - HwiYoung-Jung
 date: 2022-06-29T10:52:37.653Z
-feature_image: ""
+feature_image: 프레젠테이션1.jpg
 categories:
   - Hands On
 tags:
