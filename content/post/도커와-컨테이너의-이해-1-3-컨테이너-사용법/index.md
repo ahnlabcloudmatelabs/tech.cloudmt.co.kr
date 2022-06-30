@@ -59,7 +59,7 @@ tags:
 
 ## 도커 컨테이너
 
-![](images/dockercontainerstatus.png)
+![](images/dockercontainerstatus2.png)
 
 * **docker (container) create**
 
