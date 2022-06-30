@@ -373,7 +373,7 @@ save 명령어를  통해 이미지를 tar 파일로 저장합니다.
 
 [명령어]
 
-```
+```\
 docker image rm [image]
 
 —force, -f #이미지 강제 삭제
@@ -606,7 +606,7 @@ RUN apt-get update && apt-get install -y nginx
 - 직접 실행이 아니라 $SHOME 같은 쉘 환경 변수를 사용할 수 없다.
 - 명령어가 단독적으로 실행이 아니기 때문에 JSON 배열 형식으로 정의합니다.
 
-```
+```bash
 RUN ["/bin/bash", "apt-get install -y nginx" ]
 
 EX)
