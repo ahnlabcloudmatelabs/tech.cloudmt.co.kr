@@ -32,14 +32,14 @@ tags:
 
 ## 도커 이미지(Docker Image)
 
-도커 이미지는 **컨테이너를 만드는 데 사용**되는 **읽기 전용(Read-only)** 템플릿입니다.
-
+도커 이미지는 **컨테이너를 만드는 데 사용**되는 **읽기 전용(Read-only)** 템플릿입니다.\
 컨테이너 실행에 필요한 파일과 설정값 등을 포함하고 있는 도커파일을 만든 후 **Dockerfile을 빌드** 하여 이미지를 만듭니다.
 
 ## 도커 컨테이너(Docker Container)
 
 도커 **이미지를 실행한 상태**입니다. \
-이미지로 컨테이너를 생성하면 이미지의 목적에 맞는 파일이 들어있는 파일 시스템과 격리된 시스템 자원 및 네트워크를 사용할 수 있는 독립된 공간이 생성됩니다. \
+이미지로 컨테이너를 생성하면 이미지의 목적에 맞는 파일이 들어있는 파일 시스템과 \
+격리된 시스템 자원 및 네트워크를 사용할 수 있는 독립된 공간이 생성됩니다. \
 이것을 도커 컨테이너라고 합니다. \
 도커 컨테이너는 읽기 전용인 이미지에 변경된 사항을 저장하는 컨테이너 계층(Layer)에 저장합니다.
 
@@ -95,6 +95,14 @@ docker create -it --name testos2 centos
 ```
 
 해당 옵션들의 설명은 아래와 같습니다.
+
+| 옵션                  | 설명                                 |
+| ------------------- | ---------------------------------- |
+| \-i (--interactive) | 표준 입력(STDIN)을 활성화함.                |
+|                     | 컨테이너와 attach 되어있지 않더라도 표준 입력을 유지함. |
+| \-t (--tty)         | 컨테이너에 pseudo-terminal을 할당          |
+
+<br>
 
 * **docker ps**
 
@@ -158,6 +166,8 @@ CONTAINER ID                                                       IMAGE     COM
 adb6732a399de1d9d4d2d8e2b74d6a4c6829652c8e950c77daebe32afdc25430   centos    "/bin/bash"   5 minutes ago   Up 5 minutes             testos2
 ```
 
+<br>
+
 * **docker start**
 
   → 컨테이너를 시작(실행)
@@ -171,8 +181,12 @@ root@DH:~# docker start -ai testos
 
 컨테이너(testos)를 시작하면서 `-ai` 옵션을 사용해 해당 컨테이너 내부로 접근하여 표준 입력을 받을 수 있도록 하였습니다.
 
-해당 컨테이너에 접근한 상태로 exit 명령을 사용하면, `/bin/bash`가 종료되면서 컨테이너도 함께 종료됩니다.
+| 옵션             | 설명             |
+| -------------- | -------------- |
+| \-a (--attach) | 해당 컨테이너 내부로 접근 |
 
+\
+해당 컨테이너에 접근한 상태로 exit 명령을 사용하면, `/bin/bash`가 종료되면서 컨테이너도 함께 종료됩니다.\
 때문에 순차적으로 `Ctrl + P`, `Ctrl + Q`를 눌러 컨테이너 실행 상태를 유지한 채로 빠져나온 후, 컨테이너가 실행 중(Up)인지 확인할 수 있습니다.
 
 ```shell
@@ -180,6 +194,8 @@ root@DH:~# docker ps
 CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES
 151f3b70b5a4   centos    "/bin/bash"   44 seconds ago   Up 16 seconds             testos
 ```
+
+<br>
 
 * **docker stop**
 
@@ -198,6 +214,8 @@ CONTAINER ID   IMAGE     COMMAND       CREATED         STATUS                   
 151f3b70b5a4   centos    "/bin/bash"   8 minutes ago   Exited (0) 19 seconds ago             testos
 ```
 
+<br>
+
 * **docker run**
 
   → 컨테이너를 시작하고 COMMAND를 실행
@@ -215,8 +233,7 @@ CONTAINER ID   IMAGE     COMMAND       CREATED        STATUS        PORTS     NA
 5d56fc765e37   centos    "/bin/bash"   1 second ago   Up 1 second             test
 ```
 
-`-d` 옵션을 사용해 사용자가 직접 컨테이너 안으로 접근하지 않고, 컨테이너의 **COMMAND를 백그라운드로 실행**할 수 있습니다.
-
+`-d` 옵션을 사용해 사용자가 직접 컨테이너 안으로 접근하지 않고, 컨테이너의 **COMMAND를 백그라운드로 실행**할 수 있습니다.\
 컨테이너를 시작할 때, 명령어의 맨 뒤에 **임의로 COMMAND를 정의**할 수 있습니다.
 
 ```shell
@@ -242,6 +259,14 @@ root@DH:~# docker run -it --name test -w "/tmpdir" -e "MYNAME=DH" centos
 DH
 ```
 
+| 옵션                 | 설명                                     |
+| ------------------ | -------------------------------------- |
+| \-w (--workdir)    | 컨테이너의 작업 디렉토리를 설정                      |
+| \-e (--env)        | 환경 변수 설정                               |
+| \--env-file=\[파일명] | 정의해야 하는 환경 변수가 많은 경우 특정 파일을 호출해서 설정 가능 |
+
+``
+
 `restart` 옵션을 통해 정해진 규칙에 따라 자동으로 **재시작**이 가능합니다.
 
 ```shell
@@ -258,9 +283,26 @@ CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS         PORTS    
 
 아래의 표와 같은 `restart` 옵션을 사용할 수 있습니다.
 
+| 옵션         | 키워드              | 설명                                   |
+| ---------- | ---------------- | ------------------------------------ |
+| \--restart | no               | 재시작하지 않음                             |
+|            | on-failure       | 종료 상태(Exited code)가 0이 아닌 경우 재시작     |
+|            | on-failure:횟수(n) | 종료 상태(Exited code)가 0이 아닌 경우 n회만 재시작 |
+|            | always           | 항상 재시작                               |
+
 컨테이너를 시작할 때 CPU와 메모리 등 **리소스 사용량을 제한**할 수 있습니다.
 
+| 옵션                | 설명                                                                   |     |
+| ----------------- | -------------------------------------------------------------------- | --- |
+| \--cpus           | 컨테이너에서 최대 사용 가능한 cpu의 수를 지정(CPU 사용 비율 지정)                            |     |
+|                   | ex) --cpus=0.2 는 CPU를 0.2개(20%)만큼 사용한다는 의미                           |     |
+| \-c (--cpu-share) | default 값은 1024                                                      |     |
+|                   | 512라고 정의하면 프로세스들 간의 CPU 자원의 경합이 발생했을 때 다른 프로세스들(1024)의 50%만 자원 할당 가능 |     |
+| \-m (--memory)    | 메모리 사용량을 제한(b, k, m, g 단위 정의)                                        |     |
+
 이 외에도 리소스를 제한하는 더 많은 옵션들이 있습니다.
+
+<br>
 
 * **docker attach**
 
@@ -283,6 +325,8 @@ root@DH:~# docker attach test
    15 pts/0    00:00:00 ps
 ```
 
+<br>
+
 * **docker exec**
 
   → 동작 중인 컨테이너에서 새로운 프로세스를 실행
@@ -304,6 +348,8 @@ root@4e02c31135d3:/usr/local/apache2#
 웹서버 같은 경우는 COMMAND(PID=1)가 httpd로 정의되고, 쉘이 실행되지 않기 때문에 `docker attach`로 명령 입력이 불가능합니다.
 
 때문에 쉘에 접근하기 위해서는 개별적으로 실행을 해줘야 합니다.
+
+<br>
 
 * **docker logs**
 
@@ -330,6 +376,13 @@ root@DH:~# docker logs -ft pingtest
 ```
 
 몇 가지 옵션을 주어 로그를 다양한 방식으로 출력할 수 있습니다.
+
+| 옵션                | 설명               |
+| ----------------- | ---------------- |
+| \-f (--follow)    | 실시간으로 로그를 추적, 출력 |
+| \-t (--timestamp) | 타임스탬프 출력         |
+
+<br>
 
 * **docker stats**
 
@@ -382,6 +435,8 @@ e1f401b606f3   test      29.31%    752KiB / 12.36GiB   0.01%     906B / 0B   0B 
 >
 > * 사용 중인 PID의 수(프로세스의 수)
 
+<br>
+
 * **docker top**
 
   → 동작 중인 컨테이너에서 실행되고 있는 프로세스를 확인할 때 사용
@@ -396,6 +451,8 @@ root                3947                3927                0                   
 ```
 
 컨테이너 내부 격리 환경에서 각 프로세스는 PID 1번이지만, **전체 운영체제에서의 PID가 출력**됩니다.
+
+<br>
 
 * **docker pause/unpause**
 
@@ -428,6 +485,8 @@ e900da8137a0   centos    "/bin/bash"   6 minutes ago   Up 6 minutes             
 `unpause` 명령어로 일시 중지된 컨테이너를 재시작 해주어야 접근이 가능합니다. \
 `docker ps -a`로 STATUS에 `Paused`가 출력되는 것을 확인할 수 있습니다.
 
+<br>
+
 * **docker rm**
 
   → 컨테이너를 삭제
@@ -456,6 +515,8 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 `rm` 명령어에 `-f` 옵션을 사용해 삭제할 수 있습니다.
 
 > **docker rmi \[이미지명]** → 이미지를 삭제
+
+<br>
 
 * **docker container prune**
 
@@ -489,6 +550,8 @@ ex) container, image, network, volume, system
 
 동작 중인 컨테이너는 삭제되지 않고 종료된 컨테이너만 삭제합니다.
 
+<br>
+
 * **docker cp**
 
   → 컨테이너와 호스트 간의 파일 복사
@@ -519,6 +582,8 @@ example.txt  example2.txt
 `docker cp` 명령어를 사용하여 컨테이너와 로컬 호스트 간의 파일을 복사할 수 있습니다. \
 `docker cp [복사할 대상] [복사시킬 대상]` 구조로 사용할 수 있습니다. \
 컨테이너 안의 디렉터리를 지정하려면 `[컨테이너명:경로]`의 구조로 사용해야 합니다.
+
+<br>
 
 * **docker diff**
 
