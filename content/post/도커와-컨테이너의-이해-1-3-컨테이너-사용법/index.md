@@ -3,7 +3,7 @@ title: 도커와 컨테이너의 이해 (1/3) - 컨테이너 사용법
 authors:
   - dohyeon-lee
 date: 2022-06-29T11:29:56.542Z
-feature_image: 프레젠테이션1.jpg
+feature_image: images/프레젠테이션1.jpg
 categories:
   - Hands On
 tags:
