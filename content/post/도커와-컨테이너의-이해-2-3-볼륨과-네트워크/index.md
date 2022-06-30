@@ -3,7 +3,7 @@ title: 도커와 컨테이너의 이해 (2/3) - 볼륨과 네트워크
 authors:
   - dongwook-kim
 date: 2022-06-29T11:00:00.000Z
-feature_image: thumbnail.jpg
+feature_image: images/thumbnail.jpg
 categories:
   - Hands On
 tags:
