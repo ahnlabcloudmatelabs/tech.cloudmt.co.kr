@@ -164,7 +164,7 @@ nginx        latest    sha256:0e901e68141fd02f237cf63eb842529f8a9500636a9419e3cf
 docker image inspect [image] 로 이미지의 상세출력을 봅시다.
 
 
-![](image/untitled-5-.png)
+![](images/untitled-5-.png)
 
 너무 길어서 적당히 잘랐습니다!
 
