@@ -98,10 +98,10 @@ docker create -it --name testos2 centos
 
 | 옵션                  | 설명                                 |
 | ------------------- | ---------------------------------- |
-| \-i (--interactive) | 표준 입력(STDIN)을 활성화함.                |
-|                     | 컨테이너와 attach 되어있지 않더라도 표준 입력을 유지함. |
+| \-i (--interactive) | 표준 입력(STDIN)을 활성화함. <br> 컨테이너와 attach 되어있지 않더라도 표준 입력을 유지함.                |
 | \-t (--tty)         | 컨테이너에 pseudo-terminal을 할당          |
 
+<br>
 <br>
 
 * **docker ps**
@@ -265,7 +265,6 @@ DH
 | \-e (--env)        | 환경 변수 설정                               |
 | \--env-file=\[파일명] | 정의해야 하는 환경 변수가 많은 경우 특정 파일을 호출해서 설정 가능 |
 
-``
 
 `restart` 옵션을 통해 정해진 규칙에 따라 자동으로 **재시작**이 가능합니다.
 
@@ -290,18 +289,19 @@ CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS         PORTS    
 |            | on-failure:횟수(n) | 종료 상태(Exited code)가 0이 아닌 경우 n회만 재시작 |
 |            | always           | 항상 재시작                               |
 
+<br>
+
 컨테이너를 시작할 때 CPU와 메모리 등 **리소스 사용량을 제한**할 수 있습니다.
 
-| 옵션                | 설명                                                                   |     |
-| ----------------- | -------------------------------------------------------------------- | --- |
-| \--cpus           | 컨테이너에서 최대 사용 가능한 cpu의 수를 지정(CPU 사용 비율 지정)                            |     |
-|                   | ex) --cpus=0.2 는 CPU를 0.2개(20%)만큼 사용한다는 의미                           |     |
-| \-c (--cpu-share) | default 값은 1024                                                      |     |
-|                   | 512라고 정의하면 프로세스들 간의 CPU 자원의 경합이 발생했을 때 다른 프로세스들(1024)의 50%만 자원 할당 가능 |     |
-| \-m (--memory)    | 메모리 사용량을 제한(b, k, m, g 단위 정의)                                        |     |
+| 옵션                | 설명                                                                   |     
+| ----------------- | -------------------------------------------------------------------- | 
+| \--cpus           | 컨테이너에서 최대 사용 가능한 cpu의 수를 지정(CPU 사용 비율 지정) <br> ex) --cpus=0.2 는 CPU를 0.2개(20%)만큼 사용한다는 의미 |                         
+| \-c (--cpu-share) | default 값은 1024 <br> 512라고 정의하면 프로세스들 간의 CPU 자원의 경합이 발생했을 때 다른 프로세스들(1024)의 50%만 자원 할당 가능 |     
+| \-m (--memory)    | 메모리 사용량을 제한(b, k, m, g 단위 정의)  |
 
 이 외에도 리소스를 제한하는 더 많은 옵션들이 있습니다.
 
+<br>
 <br>
 
 * **docker attach**
@@ -350,6 +350,7 @@ root@4e02c31135d3:/usr/local/apache2#
 때문에 쉘에 접근하기 위해서는 개별적으로 실행을 해줘야 합니다.
 
 <br>
+<br>
 
 * **docker logs**
 
@@ -382,6 +383,7 @@ root@DH:~# docker logs -ft pingtest
 | \-f (--follow)    | 실시간으로 로그를 추적, 출력 |
 | \-t (--timestamp) | 타임스탬프 출력         |
 
+<br>
 <br>
 
 * **docker stats**
@@ -436,6 +438,7 @@ e1f401b606f3   test      29.31%    752KiB / 12.36GiB   0.01%     906B / 0B   0B 
 > * 사용 중인 PID의 수(프로세스의 수)
 
 <br>
+<br>
 
 * **docker top**
 
@@ -452,6 +455,7 @@ root                3947                3927                0                   
 
 컨테이너 내부 격리 환경에서 각 프로세스는 PID 1번이지만, **전체 운영체제에서의 PID가 출력**됩니다.
 
+<br>
 <br>
 
 * **docker pause/unpause**
@@ -486,6 +490,7 @@ e900da8137a0   centos    "/bin/bash"   6 minutes ago   Up 6 minutes             
 `docker ps -a`로 STATUS에 `Paused`가 출력되는 것을 확인할 수 있습니다.
 
 <br>
+<br>
 
 * **docker rm**
 
@@ -516,6 +521,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 > **docker rmi \[이미지명]** → 이미지를 삭제
 
+<br>
 <br>
 
 * **docker container prune**
@@ -551,6 +557,7 @@ ex) container, image, network, volume, system
 동작 중인 컨테이너는 삭제되지 않고 종료된 컨테이너만 삭제합니다.
 
 <br>
+<br>
 
 * **docker cp**
 
@@ -583,6 +590,7 @@ example.txt  example2.txt
 `docker cp [복사할 대상] [복사시킬 대상]` 구조로 사용할 수 있습니다. \
 컨테이너 안의 디렉터리를 지정하려면 `[컨테이너명:경로]`의 구조로 사용해야 합니다.
 
+<br>
 <br>
 
 * **docker diff**
