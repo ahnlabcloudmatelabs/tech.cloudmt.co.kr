@@ -13,6 +13,11 @@ tags:
   - dockercompose
   - dockerfilewrite
 ---
+
+
+
+
+
 안녕하세요. 세 번째 글을 작성하게 된 클라우드메이트 TE팀 정휘영입니다.
 
 제가 작성할 컨텐츠는 도커의 꽃 !
@@ -98,7 +103,7 @@ Status: Downloaded newer image for nginx:latest #상태확인
 
 
 
-![](images//untitled-3-.png)
+![](images/untitled-3-.png)
 
 많으면 좋아요 별이 많으면 다다익선
 
@@ -119,7 +124,7 @@ Status: Downloaded newer image for nginx:latest #상태확인
 docker image pull
 ```
 
-![](images//untitled-4-.png)
+![](images/untitled-4-.png)
 
 미지를 나에게 끌고온다라는 느낌으로 생각하시면 쉬울 듯합니다!
 
@@ -528,7 +533,7 @@ hwi01        1.0       e4cfc041c8a5   3 hours ago      168MB
 
 첫 번째, 이미지 내부 임시 파일 삭제하기
 
-```b
+```
 [ec2-user@hwi dockerfile_dir]$ cat -n Dockerfile.2
      1	FROM ubuntu
      2	RUN  apt-get update && apt-get install -y -q nginx
