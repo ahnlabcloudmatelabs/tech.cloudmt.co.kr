@@ -62,7 +62,7 @@ CloudWatch Agent는 Hypervisor 영역에서 확인할 수 없는 메트릭을 �
 - CloudWatch 알람은 메트릭에 대한 임계치와 조건을 정의하여 알람을 트리거합니다. CloudWatch 알람은 SNS(Simple Notification Service)와 연동하여 작동하며 IT 인프라의 장애 혹은 특이사항을 알람으로 받을 수 있습니다. 
 - 메트릭의 수치가 등록한 임계치에 포함되지 않을 경우 알람에 따라 자동으로 동작하는 후속 조치를 정의할 수 있다면 IT 인프라 관리자는 24/7 인프라를 모니터링해야 할 필요가 없어지며 시간과 노력을 절약할 수 있고 이는 자원의 효율적인 활용과 더불어 서비스의 품질 향상에도 큰 보탬이 될 것입니다.
 
-**4. SNS**
+**4. Amazon SNS**
 - SNS(Simple Notification Service)는 AWS의 푸시 알림 서비스로 HTTP/S, Email, SMS, IT/Mobile Device 그리고 AWS 인프라를 타겟으로 메시지를 전달할 수 있습니다.
 
 **5. SSM Agent**
@@ -75,11 +75,11 @@ CloudWatch Agent는 Hypervisor 영역에서 확인할 수 없는 메트릭을 �
 - Run Command는 AWS Systems Manager의 기능으로 해당 EC2 인스턴스에 접속하여 직접 명령어를 입력하지 않고 원격으로 명령어를 실행하는 기능을 합니다. 
 - 일반적인 관리 테스크를 자동화하고 대규모로 일회성 구성 변경을 수행할 수 있어 보통 원격으로 업데이트 작업이나 다수의 인스턴스에 하나의 명령어를 실행하는 경우에 많이 사용됩니다.
 
-**7. Lambda 함수**
+**7. AWS Lambda**
 - Lambda는 가상의 함수로 관리할 서버 없이 코드를 프로비저닝하면 함수가 실행되는 AWS의 서버리스 서비스입니다. 
 - 다양한 언어를 지원하며 여러 AWS 서비스와 통합되어 CloudWatch와도 쉽게 모니터링을 통합할 수 있다는 장점이 있습니다.
 
-**8. AWS Chatbot이란?**
+**8. AWS Chatbot**
 - AWS Chatbot이란 Slack 및 Amazon Chime을 채팅 클라이언트로 지원하는 대화형 Agent로 Amazon SNS 주제를 통해 여러 AWS 서비스와 통합됩니다. AWS Chatbot을 사용하면 AWS 환경에서 실행되는 애플리케이션에 대한 최신 이벤트를 놓치지 않고 수신하고 이에 대응하여 신속하게 조치 및 해결할 수 있습니다.
 
 ---
@@ -117,7 +117,7 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 
 - 질문에 답하며 서버의 구성 파일을 사용자 정의합니다.
 
-#### 2️⃣ 통합 CloudWatch Agent에서 procstat 플러그인을  사용하여 프로세스 지표를 수집합니다.  
+#### 2️⃣ 통합 CloudWatch Agent에서 Procstat Plugin을  사용하여 프로세스 지표를 수집합니다.  
 🔷 **CloudWatch Agent 구성 파일**
 
 1) CloudWatch Agent 구성 파일 수정
@@ -126,8 +126,8 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
 ```linux
 vim /opt/aws/amazon-cloudwatch-agent/bin/config.json
 ```
-- procstat 플러그인을 사용하기 위하여 CloudWatch Agent 구성 파일의 metrics_collected 섹션에 procstat 섹션을 추가합니다.[[5]](https://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-procstat-process-metrics.html)
-- exe는 정규식 일치 규칙을 사용하여 프로세스 이름이 지정한 문자열과 일치하는 프로세스를 선택합니다.measurement는 수집할 메트릭의 배열을 지정하며 여기에 프로세스의 실행 수를 의미하는 pid_count를 추가합니다.
+- Procstat Plugin을 사용하기 위하여 CloudWatch Agent 구성 파일의 metrics_collected 섹션에 procstat 섹션을 추가합니다.[[5]](https://docs.aws.amazon.com/ko_kr/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-procstat-process-metrics.html)
+- exe는 정규식 일치 규칙을 사용하여 프로세스 이름이 지정한 문자열과 일치하는 프로세스를 선택합니다. measurement는 수집할 메트릭의 배열을 지정하며 여기에 프로세스의 실행 수를 의미하는 pid_count를 추가합니다.
 - 다음 예제의 procstat 섹션은 문자열 httpd와 이름이 일치하는 모든 프로세스를 모니터링하며 각 프로세스에서 동일한 지표가 수집됩니다.
 
 ```linux
@@ -146,7 +146,7 @@ sudo yum -y install httpd
 sudo systemctl start httpd
 ```
 
-- CloudWatch Agent 설정 값을 저장하고 재실행합니다. CloudWatch Agent 구성 파일을 변경할 때마다 Agent를 다시 시작하여 변경 사항을 적용되도록 해야 합니다.
+- CloudWatch Agent 설정 값을 저장하고 재실행합니다. CloudWatch Agent 구성 파일을 변경할 때마다 Agent를 다시 시작하여 변경 사항이 적용되도록 해야 합니다.
 
 ```linux
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
@@ -160,14 +160,14 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 1) Amazon SNS 주제 생성
 - CloudWatch 알람 발생 시 수행될 Amazon SNS 주제를 생성합니다.
 ![step-3](./img/step-3-1.png)
-- CloudWatch 알람이 해제되어 상태가 정상인 경우 수행될 Amazon SNS 주제를 생성합니다.
+- CloudWatch 알람이 해제되어 상태가 정상으로 변경된 경우 수행될 Amazon SNS 주제를 생성합니다.
 ![step-3](./img/step-3-2.png)
 
-🔷 **Lambda 함수**
+🔷 **AWS Lambda**
 ![step-3](./img/step-3-3.png)
 
 1) Lambda 함수 생성
-- CloudWatch 알람 발생 시 동작하는 Lambda 함수 생성합니다.
+- CloudWatch 알람 발생 시 동작하는 Lambda 함수를 생성합니다.
 - Lambda 함수 생성 시 함수에 대한 권한을 정의하는 IAM 역할이 필요합니다. 기본적으로 Lambda는 Amazon CloudWatch Logs에 로그를 업로드할 수 있는 권한을 가진 실행 역할을 생성하며 이 기본 역할은 나중에 트리거를 추가할 때 사용자 지정이 가능합니다. 정책은 다음과 같습니다.[[6]](https://aws.amazon.com/ko/premiumsupport/knowledge-center/lambda-cloudwatch-log-streams-error/)
 
 ```json
@@ -211,7 +211,7 @@ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-c
 ![step-3](./img/step-3-11.png)
 
 #### 4️⃣ SNS 서비스를 Lambda 함수로 연결하여 EC2 인스턴스 내에서 SSM Agent를 통해 Run Command를 수행하도록 합니다.
-🔷 **Lambda 함수**
+🔷 **AWS Lambda**
 ![step-4](./img/step-4.png)
 1) Lambda 함수의 코드를 작성하기 전에 AWS 콘솔 > CloudWatch > Log groups > /aws/lambda/jisoo-test-cw 에서 위에서 생성한 이벤트를 출력해보았습니다.
 - 로그 이벤트의 결과는 다음과 같습니다.
@@ -300,7 +300,7 @@ def lambda_handler(event, context):
 ![step-5](./img/step-5-8.png)
 - 해당 Slack 채널에 알림을 전송하도록 앞에서 생성한 SNS 주제를 모두 추가합니다.
 ![step-5](./img/step-5-9.png)
-
+ㅇㅇ
 ---
 
 ##### "테스트 결과"
@@ -321,7 +321,7 @@ def lambda_handler(event, context):
 ![summary](./img/summary.png)
 
 1. Amazon EC2 인스턴스에 CloudWatch Agent와 SSM Agent를 설치합니다.
-1. 통합 CloudWatch Agent에서 procstat 플러그인을  사용하여 프로세스 지표를 수집합니다.
+1. 통합 CloudWatch Agent에서 Procstat Plugin을  사용하여 프로세스 지표를 수집합니다.
 1. CloudWatch 알람을 생성하여 특정 임계치에 도달한 경우 알람이 트리거되며 Amazon SNS를 연동하여 알림을 보냅니다.
 1. Amazon SNS를 AWS Lambda로 연결하여 EC2 인스턴스 내에서 SSM Agent를 통해 Run Command를 수행하도록 합니다.
 1. Amazon SNS를 AWS Chatbot과 연결하고 Slack과 연동하여 해당 알림에 대한 메시지를 수신하도록 합니다.
