@@ -6,7 +6,11 @@ date: 2022-07-13T12:00:00+09:00
 categories:
 - Hands On
 tags:
-- Kubernetes
+- AWS
+- CloudWatch
+- Amazon SNS
+- AWS Lambda
+- AWS Chatbot
 feature_image: 'img/thumbnail.png'
 ShowToc: false
 TocOpen: false
@@ -300,7 +304,6 @@ def lambda_handler(event, context):
 ![step-5](./img/step-5-8.png)
 - 해당 Slack 채널에 알림을 전송하도록 앞에서 생성한 SNS 주제를 모두 추가합니다.
 ![step-5](./img/step-5-9.png)
-ㅇㅇ
 ---
 
 ##### "테스트 결과"
