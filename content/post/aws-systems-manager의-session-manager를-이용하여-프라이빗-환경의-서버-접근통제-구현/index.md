@@ -9,73 +9,69 @@ tags:
   - SessionManager
 ---
 ## 목차 <br>
->:one: [서버 접근통제란](#서버-접근통제란)
 
->:two: [Session Manager란](#session-manager란)
->> 2-1 [계획](#계획)
-
->> 2-2 [아키텍처](#아키텍처)
+> :one: [서버 접근통제란](#서버-접근통제란)
 >
->:three: [Session Manager 설정하기](#session-manager-설정하기)
->> 3-1 [사전 조건](#사전-조건)
-
->> 3-2 [엔드포인트 설정](#엔드포인트-설정)
-
->> 3-3 [EC2 설정](#ec2-설정)
-
->> 3-4 [IAM 설정](#iam-설정)
-
->> 3-5 [S3 logging 설정](#s3-logging-설정)
-
->> 3-6 [로그 확인](#로그-확인)
-
+> :two: [Session Manager란](#session-manager란)
 >
->:four: [마치며](#마치며)
+> > 2-1 [계획](#계획)
+>
+> > 2-2 [아키텍처](#아키텍처)
+>
+> :three: [Session Manager 설정하기](#session-manager-설정하기)
+>
+> > 3-1 [사전 조건](#사전-조건)
+>
+> > 3-2 [엔드포인트 설정](#엔드포인트-설정)
+>
+> > 3-3 [EC2 설정](#ec2-설정)
+>
+> > 3-4 [IAM 설정](#iam-설정)
+>
+> > 3-5 [S3 logging 설정](#s3-logging-설정)
+>
+> > 3-6 [로그 확인](#로그-확인)
+>
+> :four: [마치며](#마치며)
 
+- - -
 
----
-안녕하세요. 클라우드메이트 TE팀 이도현입니다. 
+안녕하세요. 클라우드메이트 TE팀 이도현입니다. <br> AWS의 서비스 중 간편하게 서버 접근통제를 구현할 수 있는 *Session Manager*에 대해 공유하고자 합니다. <br> 테스트하실 수 있게 핸즈온으로 구성했습니다. <br><br>
 
-AWS의 서비스 중 간편하게 서버 접근통제를 구현할 수 있는 *Session Manager*에 대해 공유하고자 합니다. 
+## 서버 접근통제란
 
-테스트하실 수 있게 핸즈온으로 구성했습니다. <br><br>
-
-## 서버 접근통제란 
 접근통제란 적절한 권한이 인가된 사용자만 해당 시스템에 접근할 수 있도록 하고, 권한이 없는 사용자는 접근하지 못하도록 통제하는 것입니다. <br>
 
 또한 인가된 사용자의 부인 방지를 위해 작업 이력에 대한 로깅을 할 수 있어야 합니다. <br><br>
 
 ## Session Manager란
+
 간단하게 Session Manager의 기능에 대해 설명드리겠습니다. <br>
 
 Session Manager는 Systems Manager의 기능 중 하나로써, 
 EC2 인스턴스, 엣지 디바이스, 온프레미스 서버 및 가상 머신을 브라우저 기반 셸 또는 AWS CLI를 통해 관리할 수 있습니다. <br>
 
 또한 Session Manager는 4가지 장점이 있습니다. <br>
-- 인바운트 포트를 열 필요가 없습니다. <br>
-- Bastion 호스트를 사용하지 않습니다. <br>
-- SSH 키를 사용하지 없습니다. <br>
-- 세션 활동을 로깅 및 감사가 가능합니다. 
+
+* 인바운트 포트를 열 필요가 없습니다. <br>
+* Bastion 호스트를 사용하지 않습니다. <br>
+* SSH 키를 사용하지 없습니다. <br>
+* 세션 활동을 로깅 및 감사가 가능합니다. 
 
 <br>
 
 로깅 및 감사 기능은 다음과 같은 AWS 서비스와의 통합을 통해 제공됩니다. <br>
-- S3
-- CloudTrail
-- CloudWatch Logs
-- EventBridge 및 SNS 
+
+* S3
+* CloudTrail
+* CloudWatch Logs
+* EventBridge 및 SNS 
 
 <br>
 
 ### 계획
->:one: 인터넷이 되지 않는 Private 환경을 구성합니다. <br>
 
->:two: 특정 사용자만 특정 EC2 인스턴스에 접근이 가능하도록 합니다. <br>
-
->:three: MFA 인증이 되지 않으면 접근하지 못하도록 합니다. <br>
-
->:four: 사용자가 인스턴스에 접근할 때 접근 이력과 명령어 실행 이력이 로깅되도록 합니다. <br>
-
+> :one: 인터넷이 되지 않는 Private 환경을 구성합니다. <br> :two: 특정 사용자만 특정 EC2 인스턴스에 접근이 가능하도록 합니다. <br> :three: MFA 인증이 되지 않으면 접근하지 못하도록 합니다. <br> :four: 사용자가 인스턴스에 접근할 때 접근 이력과 명령어 실행 이력이 로깅되도록 합니다. <br>
 
 IAM 정책을 이용하여 특정 사용자에게만 권한을 부여하고 특정 인스턴스에만 접근할 수 있도록 합니다. <br>
 
@@ -84,6 +80,7 @@ IAM 정책을 이용하여 특정 사용자에게만 권한을 부여하고 특�
 그리고 인스턴스 내부의 명령어 실행 이력을 S3 버킷에 로깅하도록 하겠습니다. <br><br>
 
 ### 아키텍처
+
 ![아키텍처](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\architecture.png)
 <br>
 편의상 User를 Admin으로 표시하였지만, <br>
@@ -96,49 +93,58 @@ SSM Agent에 양방향 연결을 열라는 메시지를 보냅니다. <br>
 연결이 설정되어 사용자가 다음 명령을 입력하면 SSM Agent의 명령 출력이 이 통신 채널로 업로드되고 다시 사용자의 로컬 시스템으로 전송됩니다. <br><br>
 
 ## Session Manager 설정하기
+
 이 글에서는 VPC를 생성하는 설명은 생략하도록 하겠습니다. <br>
 실습을 진행하는 환경은 인터넷 게이트웨이 또는 NAT 게이트웨이가 없는 프라이빗 서브넷에서 이루어집니다. <br><br>
 
 ### 사전 조건
+
 Session Manager 사용을 시작하기 전에 환경이 다음 요구 사항을 충족하는지 사전 조건을 확인해 보아야 합니다. <br>
->:one: 지원되는 운영체제인지 확인
-> - https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/prereqs-operating-systems.html 
-> 
->:two: 관리형 노드에 SSM Agent가 설치되어 있는지 확인
-> - https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/session-manager-prerequisites.html 
+
+> :one: 지원되는 운영체제인지 확인
 >
->:three: 엔드포인트에 연결
-> - ec2messages._*region*_.amazonaws.com
-> - ssm._*region*_.amazonaws.com
-> - ssmmessages._*region*_.amazonaws.com
-> - s3._*region*_.amazonaws.com 
->   - _S3 로깅을 위한 게이트웨이 엔드포인트 추가_
+> * https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/prereqs-operating-systems.html 
+>
+> :two: 관리형 노드에 SSM Agent가 설치되어 있는지 확인
+>
+> * https://docs.aws.amazon.com/ko_kr/systems-manager/latest/userguide/session-manager-prerequisites.html 
+>
+> :three: 엔드포인트에 연결
+>
+> * ec2messages.*region*.amazonaws.com
+> * ssm.*region*.amazonaws.com
+> * ssmmessages.*region*.amazonaws.com
+> * s3.*region*.amazonaws.com 
+>
+>   * *S3 로깅을 위한 게이트웨이 엔드포인트 추가*
 
 ec2messages, ssm, ssmmessages의 엔드포인트를 생성하는 것은 Private 환경에서 사용하기 위한 *필수 조건*입니다. <br>
 여기서는 S3 버킷에 로깅하기 위해 S3 게이트웨이 엔드포인트까지 추가적으로 생성하겠습니다. <br><br>
 
 ### 엔드포인트 설정
+
 3가지 서비스에 대해 엔드포인트 생성을 한 후에, <br>
 해당 엔드포인트들의 보안 그룹에 HTTPS 인바운드 트래픽을 허용해 줘야 합니다. <br><br>
 먼저 엔드포인트용 보안 그룹을 생성하겠습니다. <br>
-![엔드포인트_보안그룹](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint1.png) <br>
+![엔드포인트\_보안그룹](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint1.png) <br>
 인바운드 규칙에 자신의 VPC 대역을 소스로 두고 443 포트를 허용해 줍니다. <br><br>
 
 엔드포인트 3개를 각각 하나씩 생성합니다. <br>
-![엔드포인트_생성_1](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint2.png) <br>
-![엔드포인트_생성_2](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint3.png) <br>
+![엔드포인트\_생성\_1](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint2.png) <br>
+![엔드포인트\_생성\_2](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint3.png) <br>
 위에서 만든 엔드포인트용 보안 그룹을 적용해 줍니다. <br>
 
 위와 같은 방법으로 *ec2messages, ssm, ssmmessages* 엔드포인트를 생성합니다. <br>
 
 S3 게이트웨이 엔드포인트도 생성합니다. <br>
-![엔드포인트_생성_3](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint4.png) <br>
+![엔드포인트\_생성\_3](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint4.png) <br>
 EC2 인스턴스가 존재하는 서브넷이 연결되어 있는 라우팅 테이블을 선택합니다. <br>
 
 필요한 엔드포인트를 모두 생성하였습니다. <br>
-![엔드포인트_생성_4](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint5.png) <br><br>
+![엔드포인트\_생성\_4](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\endpoint5.png) <br><br>
 
 ### EC2 설정
+
 먼저 EC2용 보안 그룹을 생성하겠습니다. <br>
 ![EC2_1](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\ec2_1.png) <br>
 아웃바운드 규칙은 interface 엔드포인트들이 포함되어 있는 서브넷 대역에 443 포트를 허용합니다. <br>
@@ -159,6 +165,7 @@ AWS 관리형 정책인 Amazon SSM Managed Instance Core를 꼭 포함시켜야 
 이 관리형 정책은 Systems Manager 서비스 핵심 기능을 사용하도록 설정하는 EC2 역할 정책입니다. <br>
 그리고 해당 역할에 인라인 정책을 추가하여 EC2 인스턴스가 로깅할 특정 S3 버킷에 쓰기 권한을 갖도록 설정합니다. <br>
 ![EC2_6](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\ec2_6.png) <br>
+
 ```
 {
     "Version": "2012-10-17",
@@ -179,11 +186,14 @@ AWS 관리형 정책인 Amazon SSM Managed Instance Core를 꼭 포함시켜야 
 IAM 역할 업데이트를 진행했다면 꼭 해당 인스턴스를 *재부팅*해 줍니다. <br><br>
 
 ### IAM 설정
+
 IAM 사용자 2명을 추가해 줍니다. <br>
-- dohyeon_A <br>
-- dohyeon_B <br>
+
+* dohyeon_A <br>
+* dohyeon_B <br>
 
 그리고 각각 새로 정책을 생성 후 사용자에게 권한을 추가해 줍니다. <br>
+
 ```
 {
     "Version": "2012-10-17",
@@ -235,6 +245,7 @@ Condition의 `ssm:resourceTag/[KEY]`와 `[VALUE]`는 사용자가 접근하고�
 
 그리고 추가적으로 두 사용자 모두 동일한 정책을 추가하여 MFA 디바이스를 삭제하거나 추가하고 패스워드를 바꿀 수 있도록 설정합니다. <br>
 또한 로그인 후 MFA 인증을 하지 않으면 나열해놓은 서비스를 제외하고는 접근할 수 없도록 설정합니다. <br>
+
 ```
 {
     "Version": "2012-10-17",
@@ -317,10 +328,12 @@ Condition의 `ssm:resourceTag/[KEY]`와 `[VALUE]`는 사용자가 접근하고�
 <br>
 
 ### S3 logging 설정
+
 *Systems Manager > 세션 관리자 > 기본 설정 > 편집*을 클릭하여 S3 logging 설정을 합니다. <br>
 ![ssm1](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\ssm1.png) <br><br>
 
 ### 로그 확인
+
 이후 생성한 사용자에 로그인 후 MFA 디바이스 할당을 합니다. <br>
 로그아웃 후 MFA 인증을 하여 재로그인을 합니다. <br>
 
@@ -333,6 +346,7 @@ Condition의 `ssm:resourceTag/[KEY]`와 `[VALUE]`는 사용자가 접근하고�
 ![log2](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\log2.png) <br><br>
 
 ## 마치며
+
 Session Manager는 EC2 인스턴스에 접근할 때 추가 요금이 발생하지 않습니다. <br>
 하지만 프라이빗 환경에서 사용하기 위해 생성한 인터페이스 엔드포인트가 시간당 0.013 달러이므로 3개의 엔드포인트를 생성하였으니 시간당 0.039 달러가 청구되긴 합니다. <br>
 ![price1](C:\Users\DohyeonLee\Desktop\0915컨퍼런스\블로그용\price1.png) <br>
