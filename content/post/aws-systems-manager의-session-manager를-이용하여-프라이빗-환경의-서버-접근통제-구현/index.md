@@ -12,7 +12,7 @@ tags:
 >:one: [서버 접근통제란](#서버-접근통제란) <br>
 >:two: [Session Manager란](#session-manager란) <br>
 >> 2-1 [계획](#계획) <br>
->> 2-2 [아키텍처](#아키텍처)
+>> 2-2 [아키텍처](#아키텍처
 >
 >:three: [Session Manager 설정하기](#session-manager-설정하기) <br>
 >> 3-1 [사전 조건](#사전-조건) <br>
