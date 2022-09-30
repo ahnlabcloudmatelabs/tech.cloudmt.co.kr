@@ -3,6 +3,7 @@ title: 인프라 엔지니어라면 꼭 알아야하는 네트워크 - VPN
 authors:
   - HwiyoungJung
 date: 2022-09-30T12:20:03.268Z
+feature_image: images/vpn_thumb.png
 categories:
   - Hands On
 tags:
