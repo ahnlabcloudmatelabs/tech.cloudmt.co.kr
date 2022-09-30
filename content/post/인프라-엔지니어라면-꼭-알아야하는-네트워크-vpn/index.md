@@ -65,7 +65,7 @@ VPN을 사용하게 된다면 예시처럼 내가 보낸 문자를 암호화 시
 
 VPN 장비를 사용하면 보호 받아야하는 트러스트 네트워크를 만들 수 있습니다.
 
-![](untitled-3-.png)
+![](images/untitled-3-.png)
 
 그렇기에 VPN은 보통 3가지 유형으로 나뉩니다.
 
@@ -95,7 +95,7 @@ VPN은 가상 네트워크를 만들어주는 장비로 터널링 기법을 사�
 
 **\[ 본사 - 지사 ]  : IPSEC VPN**
 
-![](untitled-4-.png)
+![](images/untitled-4-.png)
 
 본사-지사 간 네트워크 - 네트워크 연결 구성도
 
@@ -105,7 +105,7 @@ VPN은 가상 네트워크를 만들어주는 장비로 터널링 기법을 사�
 
 **\[본사 -  개인]  : SSL VPN**
 
-![](untitled-5-.png)
+![](images/untitled-5-.png)
 
 \[개인 사용자-본사 간 네트워크 - 네트워크 연결 구성도]
 
@@ -125,7 +125,7 @@ PC나 모바일 단말과 같은 원격지에서는 별도의 네트워크 장�
 
 그 이유를 IDC의 한계점과 그것을 보안해줄 수 있는 Cloud의 장점으로 생각해봤습니다.
 
-![](untitled-5-1-.png)
+![](images/untitled-5-1-.png)
 
 Cloud는 탄력적이고 신속한 대응이 가능한 것이 큰 장점이죠.
 
@@ -147,7 +147,7 @@ B사도 사내에서 IDC와 함께 VPN으로 연결해서 사용합니다. 갑�
 
 - - -
 
-![](untitled-6-1-.png)
+![](images/untitled-6-1-.png)
 
 **첫 번째 이유**는 IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud라고 합니다.Hybrid Cloud를 구성하기 위해선 전용선이나 VPN을 이용해야 합니다. 
 
@@ -180,7 +180,7 @@ VPC에는 가상 프라이빗 게이트웨이가 연결되어 있고, 온프레�
 
 ### S3. Static Routing 사용
 
-![](untitled-7-1-.png)
+![](images/untitled-7-1-.png)
 
 그렇다면 시나리오 2에서 고객 게이트웨이 디바이스가 클러스터링을 미지원을 한다고 가정할 때 객 게이트웨이 디바이스의 이중화로 가용성을 높이는 구성을 만들어 볼 수 있겠습니다. 
 
@@ -192,7 +192,7 @@ VPC 라우팅 테이블의 라우팅 전파 옵션을 활성화하기 위해 사
 
 ### S4.  Dynamic Routing (BGP) 사용
 
-![](untitled-8-1-.png)
+![](images/untitled-8-1-.png)
 
 시나리오 3의 Static Routing 설정의 ‘수동’ 부분을 개선해줄 수 있는 것이  Dynamic Routing(BGP)입니다.
 
@@ -285,7 +285,7 @@ AWS Health Dashboard는 VPN 연결에 대해 2가지의 알림을 제공합니�
 
 VPN은 실제로 터널링을 해봐야 문제점을 파악하기가 쉽답니다.
 
-![](untitled-9-1-.png)
+![](images/untitled-9-1-.png)
 
 IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud라고 말씀드렸지만 저는 Multi Cloud로 연결해보려고 합니다. Azure를 온프레미스라고 가정해봅니다. 
 
@@ -299,9 +299,9 @@ IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud�
 
 아래 표는 각각 Azure와 AWS의 설정을 간단하게 표로 정리한 것입니다. 
 
-![](untitled-10-1-.png)
+![](images/untitled-10-1-.png)
 
-![](untitled-11-1-.png)
+![](images/untitled-11-1-.png)
 
 Azure에서 리소스 그룹을 생성합니다.
 Azure는 리소스 그룹을 만들고 그 내부에서 리소스를 생성할 수 있습니다.
@@ -346,7 +346,7 @@ AWS와 Azure에 이렇게 확인 할 수 있는 서비스가 있습니다!
 
 ### \[ AWS Reachability Analyzer ]
 
-![](untitled-12-1-.png)
+![](images/untitled-12-1-.png)
 
 AWS Reachability Analyzer 는 네트워크 구성이 의도한 대로 되었는지 확인하는 방법 중의 하나입니다.
 
@@ -360,7 +360,7 @@ AWS Reachability Analyzer 는 네트워크 구성이 의도한 대로 되었는�
 
 ### \[ Azure Network Watcher ]
 
-![](untitled-13-1-.png)
+![](images/untitled-13-1-.png)
 
 Azure Network Watcher는 Azure 가상 네트워크의 리소스를 모니터링 및 진단을 할 수있습니다.
 네트워크 구성이 의도한 대로 되었는지 확인하는 방법이죠. 
