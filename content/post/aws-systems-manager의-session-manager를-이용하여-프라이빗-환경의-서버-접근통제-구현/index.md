@@ -117,6 +117,7 @@ Session Manager 사용을 시작하기 전에 환경이 다음 요구 사항을 
 
 엔드포인트 3개를 각각 하나씩 생성합니다.  
 ![](images/endpoint2.png)  
+
 ![](images/endpoint3.png)  
 위에서 만든 엔드포인트용 보안 그룹을 적용해 줍니다.  
 
@@ -145,6 +146,7 @@ EC2 인스턴스가 존재하는 서브넷이 연결되어 있는 라우팅 테�
 그리고 세션 매니저를 사용하기 위해 EC2에 IAM Role을 설정해 주어야 합니다.  
 **IAM > 역할 > 역할 생성**을 통해 설정합니다.  
 ![](images/ec2_4.png)  
+
 ![](images/ec2_5.png)  
 AWS 관리형 정책인 Amazon SSM Managed Instance Core를 꼭 포함시켜야 합니다.  
 이 관리형 정책은 Systems Manager 서비스 핵심 기능을 사용하도록 설정하는 EC2 역할 정책입니다.  
