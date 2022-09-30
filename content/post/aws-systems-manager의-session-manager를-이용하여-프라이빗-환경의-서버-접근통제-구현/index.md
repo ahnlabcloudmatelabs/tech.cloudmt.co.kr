@@ -3,6 +3,7 @@ title: AWS Systems Manager의 Session Manager를 이용하여 프라이빗 환�
 authors:
   - dohyeon-lee
 date: 2022-09-29T09:19:35.960Z
+feature_image: images/thumbnail.png
 categories:
   - Hands On
 tags:
