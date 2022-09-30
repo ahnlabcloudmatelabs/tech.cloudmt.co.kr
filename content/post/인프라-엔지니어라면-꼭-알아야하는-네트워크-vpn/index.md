@@ -210,7 +210,7 @@ VPC 라우팅 테이블의 라우팅 전파 옵션을 활성화하기 위해 사
 
 ### Case1. DPD
 
-![](images/untitled-11-.png)
+![](untitled-11-.png)
 
 본사와 AWS 간 IPSec Tunnel 을 통한 통신이 정상적이지 않은 이슈로 문의를 주셨습니다.
 
