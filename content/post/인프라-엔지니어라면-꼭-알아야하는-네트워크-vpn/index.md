@@ -29,38 +29,6 @@ VPN은 가상사설네트워크의 줄임말로 사설네트워크를 물리적�
 
 - - -
 
-\#목차
-
-[1. VPN](#1.-VPN)
-
-[2. IDC + VPN + CLOUD](#2.-IDC-+-VPN-+-CLOUD)
-
-[3. CASE STUDY(1)-시나리오](#3.-CASE-STUDY(1)-시나리오)
-
-[── S1. 단일 Site-to-Site VPN 연결](#S1.-단일-Site-to-Site-VPN-연결)
-
-[── S2. 다중 Site-to-Site VPN 연결](#S2.-다중-Site-to-Site-VPN-연결)
-
-[── S3. Static Routing 사용](#S3.-Static-Routing-사용)
-
-[── S4.  Dynamic Routing (BGP) 사용](#S4.-Dynamic-Routing-(BGP)-사용)
-
-[4. CASE STUDY(2)-Checkpoint](#4.-CASE-STUDY(2)-Checkpoint)
-
-[── Case1. DPD](#Case1.-DPD)
-
-[── Case2. IKE_SA](#Case2.-IKE_SA)
-
-[──모니터링은?](#모니터링은?)
-
-[5. Hands-On](#5.-Hands-On)
-
-[── Azure와 AWS의 설정](#Azure와-AWS의-설정)
-
-[── Connection Check](#Connection-Check)
-
-- - -
-
 # "1. VPN"
 
 VPN은 내가 가려는 목적지와 내 정보를 암호화 하는 것입니다. 
@@ -97,7 +65,7 @@ VPN을 사용하게 된다면 예시처럼 내가 보낸 문자를 암호화 시
 
 VPN 장비를 사용하면 보호 받아야하는 트러스트 네트워크를 만들 수 있습니다.
 
-![](images/untitled-2-.png)
+![](untitled-3-.png)
 
 그렇기에 VPN은 보통 3가지 유형으로 나뉩니다.
 
@@ -127,7 +95,7 @@ VPN은 가상 네트워크를 만들어주는 장비로 터널링 기법을 사�
 
 **\[ 본사 - 지사 ]  : IPSEC VPN**
 
-![](images/untitled-3-.png)
+![](untitled-4-.png)
 
 본사-지사 간 네트워크 - 네트워크 연결 구성도
 
@@ -137,7 +105,7 @@ VPN은 가상 네트워크를 만들어주는 장비로 터널링 기법을 사�
 
 **\[본사 -  개인]  : SSL VPN**
 
-![](images/untitled-4-.png)
+![](untitled-5-.png)
 
 \[개인 사용자-본사 간 네트워크 - 네트워크 연결 구성도]
 
@@ -157,7 +125,7 @@ PC나 모바일 단말과 같은 원격지에서는 별도의 네트워크 장�
 
 그 이유를 IDC의 한계점과 그것을 보안해줄 수 있는 Cloud의 장점으로 생각해봤습니다.
 
-![](images/untitled-5-.png)
+![](untitled-5-1-.png)
 
 Cloud는 탄력적이고 신속한 대응이 가능한 것이 큰 장점이죠.
 
@@ -179,7 +147,7 @@ B사도 사내에서 IDC와 함께 VPN으로 연결해서 사용합니다. 갑�
 
 - - -
 
-![](images/untitled-6-.png)
+![](untitled-6-1-.png)
 
 **첫 번째 이유**는 IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud라고 합니다.Hybrid Cloud를 구성하기 위해선 전용선이나 VPN을 이용해야 합니다. 
 
@@ -212,7 +180,7 @@ VPC에는 가상 프라이빗 게이트웨이가 연결되어 있고, 온프레�
 
 ### S3. Static Routing 사용
 
-![](images/untitled-9-.png)
+![](untitled-7-1-.png)
 
 그렇다면 시나리오 2에서 고객 게이트웨이 디바이스가 클러스터링을 미지원을 한다고 가정할 때 객 게이트웨이 디바이스의 이중화로 가용성을 높이는 구성을 만들어 볼 수 있겠습니다. 
 
@@ -224,7 +192,7 @@ VPC 라우팅 테이블의 라우팅 전파 옵션을 활성화하기 위해 사
 
 ### S4.  Dynamic Routing (BGP) 사용
 
-![](images/untitled-10-.png)
+![](untitled-8-1-.png)
 
 시나리오 3의 Static Routing 설정의 ‘수동’ 부분을 개선해줄 수 있는 것이  Dynamic Routing(BGP)입니다.
 
@@ -317,7 +285,7 @@ AWS Health Dashboard는 VPN 연결에 대해 2가지의 알림을 제공합니�
 
 VPN은 실제로 터널링을 해봐야 문제점을 파악하기가 쉽답니다.
 
-![](images/untitled-15-.png)
+![](untitled-9-1-.png)
 
 IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud라고 말씀드렸지만 저는 Multi Cloud로 연결해보려고 합니다. Azure를 온프레미스라고 가정해봅니다. 
 
@@ -331,9 +299,9 @@ IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud�
 
 아래 표는 각각 Azure와 AWS의 설정을 간단하게 표로 정리한 것입니다. 
 
-![](images/untitled-16-.png)
+![](untitled-10-1-.png)
 
-![](images/untitled-17-.png)
+![](untitled-11-1-.png)
 
 Azure에서 리소스 그룹을 생성합니다.
 Azure는 리소스 그룹을 만들고 그 내부에서 리소스를 생성할 수 있습니다.
@@ -348,7 +316,6 @@ VPN-VPG에서의 공용 IP 주소는 AWS의 고객 게이트웨이 (Customer gat
 
 AWS의 Site to Site VPN Connection에서 확인할 수 있습니다. 
 
-
 ![](images/untitled-19-.png)
 
 Azure의 Local Network Gateway에서 AWS VPN의 Tunnel IP 주소(외부 주소)를 입력합니다. 주소 공간은 AWS의 VPC 주소를 씁니다.
@@ -359,17 +326,16 @@ VPN Connection은 IDC 혹은 다른 클라우드의 장치와 Amazon VPC간의 �
 
 ![](images/untitled-20-.png)
 
-[연결] 에서 세팅을 완료한 후 상태를 확인할 수 있습니다.
+\[연결] 에서 세팅을 완료한 후 상태를 확인할 수 있습니다.
 
 ![](images/untitled-21-.png)
 
 AWS의 콘솔에서 확인하면 Tunnel 1이 업이 되어있음을 알 수 있습니다.
 
-
 이렇게 다른 클라우드랑도 VPN을 사용할 수 있답니다 🙂
 
+- - -
 
----
 # "Connection Check"
 
 이렇게 설정을 했어도 내가 과연 잘 했는지 설정이 궁금할 때가 있습니다.
@@ -378,24 +344,23 @@ AWS의 콘솔에서 확인하면 Tunnel 1이 업이 되어있음을 알 수 있�
 
 AWS와 Azure에 이렇게 확인 할 수 있는 서비스가 있습니다!
 
-### [ AWS Reachability Analyzer ]
+### \[ AWS Reachability Analyzer ]
 
-![](images/untitled-22-.png)
+![](untitled-12-1-.png)
 
 AWS Reachability Analyzer 는 네트워크 구성이 의도한 대로 되었는지 확인하는 방법 중의 하나입니다.
 
 점점 더 복잡해지는 네트워크 아키텍처를 구축함에 따라 잘못된 구성으로 인한 네트워크 연결 문제를 해결할 수 있는 도구이기도 하죠.
 
-
 이렇게 세팅을 해놓으면 소스에서 대상까지 흐름을 눈으로 확인할 수 있답니다!.
 
-- Source :  i-06afea8b224444eed (인스턴스)
-- Destination :  vgw-0a0bf7fecaf716214 (VPN)
-- Destination port : 22
+* Source :  i-06afea8b224444eed (인스턴스)
+* Destination :  vgw-0a0bf7fecaf716214 (VPN)
+* Destination port : 22
 
-### [ Azure Network Watcher ]
+### \[ Azure Network Watcher ]
 
-![](images/untitled-23-.png)
+![](untitled-13-1-.png)
 
 Azure Network Watcher는 Azure 가상 네트워크의 리소스를 모니터링 및 진단을 할 수있습니다.
 네트워크 구성이 의도한 대로 되었는지 확인하는 방법이죠. 
@@ -406,8 +371,7 @@ Network Watcher > 연결 문제 해결에서 지정할 수 있습니다.
 
 Azure가 온프레미스라고 헀으니까 ICMP로 계속 ping을 날려보는 것으로 설정해서 체크해봤습니다.
 
-
----
+- - -
 
 ## 정리하며…
 
@@ -417,18 +381,18 @@ Amazon VPC의 있는 서비스를 이해하기 위해서 아직도 많이 알아
 
 가장 기본이 되는 CIDR 과 Subnet, Router, Gateway 등등 하나씩 알아가보려고 합니다.
 
-
 읽어주셔서 감사합니다.
 
----
-[📖 참고 도서]
+- - -
+
+\[📖 참고 도서]
 
 따라하며 AWS 배우는 네트워크 입문(김원일, 서종호 저)
 
 IT엔지니어를 위한 네트워크 입문(고재성, 이상훈 저)
 
-[🔗 참고 링크]
+\[🔗 참고 링크]
 
-[https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html](https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html)
+<https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html>
 
-[https://aws.amazon.com/ko/blogs/korea/new-vpc-insights-analyzes-reachability-and-visibility-in-vpcs/](https://aws.amazon.com/ko/blogs/korea/new-vpc-insights-analyzes-reachability-and-visibility-in-vpcs/)
+<https://aws.amazon.com/ko/blogs/korea/new-vpc-insights-analyzes-reachability-and-visibility-in-vpcs/>
