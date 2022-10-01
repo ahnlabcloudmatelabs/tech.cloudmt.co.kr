@@ -23,7 +23,8 @@ tags:
 바로 VPN(Virtual Private Network) 입니다.
 
 VPN은 가상사설네트워크의 줄임말로 사설네트워크를 물리적이 아니라 가상으로 연결해주는 네트워크 기술입니다. 
-보통 신입 엔지니어는 (저 포함) 은 정확히 어떻게 동작하는지 모르는 분들이 있기도 하고 문제가 생기면 AWS 콘솔에서 어떤 것을 봐야할 지, 포인트가 뭔지 어려워하는 경우가 있었습니다. 
+보통 신입 엔지니어는 (저 포함) 은 정확히 어떻게 동작하는지 모르는 분들이 있기도 하고
+문제가 생기면 AWS 콘솔에서 어떤 것을 봐야할 지, 포인트가 뭔지 어려워하는 경우가 있었습니다. 
 
 그래서 한번 공유하고자 글을 적어봅니다.
 
@@ -31,7 +32,7 @@ VPN은 가상사설네트워크의 줄임말로 사설네트워크를 물리적�
 
 # "1. VPN"
 
-VPN은 내가 가려는 목적지와 내 정보를 암호화 하는 것입니다. 
+VPN은 내가 가려는 목적지와 내 정보를 암호화하는 것입니다. 
 
 보통 사용자는 자신이 사용하는 휴대폰, 노트북처럼 인터넷에 연결하게 되면 통신사 기반의 네트워크를 거쳐 온라인으로 접속하게 되면 ‘기록’이라는 것이 남게 됩니다.
 
@@ -82,12 +83,12 @@ VPN 장비를 사용하면 보호 받아야하는 트러스트 네트워크를 �
 2️⃣ **Host와 Network로 접근할때 통신보호**
 
 * 사용자가 인터넷망을 통해 사내망으로 연결하는 경우입니다.
-IPSEC과 SSL Protocol이 모두 범용적으로 사용됩니다.
+  IPSEC과 SSL Protocol이 모두 범용적으로 사용됩니다.
 
 3️⃣ **Network와 Network의 통신보호**
 
 * 특정 네트워크를 가진 두 endpoint를 연결 하는 경우 사용합니다.
-이 경우는 IPSEC Protocol이 가장 많이 사용됩니다.
+  이 경우는 IPSEC Protocol이 가장 많이 사용됩니다.
 
 - - -
 
@@ -101,7 +102,7 @@ VPN은 가상 네트워크를 만들어주는 장비로 터널링 기법을 사�
 
 ![](images/untitled-4-.png)
 
-본사-지사 간 네트워크 - 네트워크 연결 구성도
+\[본사-지사 간 네트워크 - 네트워크 연결 구성도]
 
 네트워크 간 연결은 보안이 강력한 IPSEC 기반의 VPN 기술을 사용합니다.
 
@@ -126,7 +127,7 @@ PC나 모바일 단말과 같은 원격지에서는 별도의 네트워크 장�
 
 여기서 전 궁금한 점이 있었습니다.
 
- **❓ 왜 전부 Cloud로 마이그레이션 하지 않고 IDC에서 같이 사용하는걸까요?** 
+ **❓ 왜 전부 Cloud로 마이그레이션 하지 않고 IDC에서 같이 사용하는걸까요❓** 
 
 그 이유를 IDC의 한계점과 그것을 보안해줄 수 있는 Cloud의 장점으로 생각해봤습니다.
 
@@ -142,7 +143,7 @@ IDC 서버와 AWS Instance를 VPN으로 연결해서 사용합니다.
 B사도 사내에서 IDC와 함께 VPN으로 연결해서 사용합니다. 
 갑작스럽게 트래픽이 증가해서 서버가 부족하면 신속하게 프리워밍을 해서 프로비저닝을 할 수 있습니다.
 
-**❓그렇다면 이렇게 좋은 Cloud를 두고 왜 IDC에서 VPN을 연결해서 사용할까요?** 
+**❓그렇다면 이렇게 좋은 Cloud를 두고 왜 IDC에서 VPN을 연결해서 사용할까요❓**  
 
 이렇게 On-Premise에서 해결해줄 수 없는 것을 클라우드는 가능케하지만 3가지로 생각해봤습니다.
 
@@ -211,9 +212,7 @@ VPC 라우팅 테이블의 라우팅 전파 옵션을 활성화하기 위해 사
 네트워크 대역 정보가 자동으로 학습 및 갱신되므로 변경되는 네트워크 대역 정보를 매번 수동 설정할 필요가 없습니다. 
 여기서는 VPN 터널중에 하나가 연결이 끊기게 된다면 다른 장비로 넘어가서 Standby로 터널링을 그대로 승계받게 됩니다. 역시 높은 수준의 고가용성 환경을 만들 수 있습니다. 
 
-👍🏻시나리오 3과 시나리오 4의 차이 !
-
-protocol failover의 수동 자동의 차이로 이해하시면 좋아요!👍🏻
+#### 👍🏻시나리오 3과 시나리오 4의 차이는 protocol failover의 수동 자동의 차이로 이해하세요👍🏻
 
 - - -
 
@@ -227,7 +226,8 @@ protocol failover의 수동 자동의 차이로 이해하시면 좋아요!👍�
 
 본사와 AWS 간 IPSec Tunnel 을 통한 통신이 정상적이지 않은 이슈로 문의를 주셨습니다.
 
-해당 화면처럼 터널 다운이 생기고 있었습니다.  이것은 DPD(Dead Peer Detection) 구성을 의미하게 되는데요 
+해당 화면처럼 터널 다운이 생기고 있었습니다. 
+이것은 **DPD(Dead Peer Detection) 구성을 의미**합니다.
 
 VPN은 연결된 터널에 트래픽 흐르지 않으면 Idle time을 기반으로 터널 연결은 중지(Down)합니다.
 
@@ -249,7 +249,7 @@ AWS Site-to-site VPN은 DPD가 동작할 때 세션을 다시 연결하는 기�
 
 또 다른 사례는 AWS VPN 터널 1개가 다운되어 조치 방법을 문의했고 Customer Gateway측으로부터 Delete IKE_SA에 대한 명령이 수신되었습니다. 
 
-보통 VPN 터널의 IKE initiation 옵션은 Startup action과 DPD timeout action이 있습니다.  
+보통 VPN 터널의 IKE initiation 옵션은 **Startup action**과 **DPD timeout action**이 있습니다.  
 
 전자의 사례와 다르게 DPD 제한 시작 작업을 바꾸는 것이 아닌 IKE 협상을 다시 진행해야합니다.
 
@@ -263,7 +263,7 @@ VPN으로 터널링을 만들고 그 사이로 데이터가 암호화된다고 �
 
 시작 작업(Startup action)은 새 VPN 연결이나 수정된 VPN 연결에 대해 VPN 터널을 설정할 때 수행할 작업입니다. 
 
-고객 게이트웨이 디바이스는 IKE 협상 프로세스를 시작하여 터널표시대신 AWS가 IKE 협상 프로세스를 시작하도록 지정할 수 있습니다.
+고객 게이트웨이 디바이스는 IKE 협상 프로세스를 시작하여 터널표시 대신 AWS가 IKE 협상 프로세스를 시작하도록 지정할 수 있습니다.
 
 ### 모니터링은?
 
@@ -275,11 +275,15 @@ VPN으로 터널링을 만들고 그 사이로 데이터가 암호화된다고 �
 * TunnelDataOut : VPN 터널을 통해서 전송 된 데이터 (Byte 단위)입니다. Sum 통계를 사용할 수 있습니다.
 * TunnelState : 터널의 상태로 1은 터널이 연결 됨, 상태 0은 터널의 Down 입니다. BGP VPN의 경우도 마찬가지입니다.
 
-AWS CLI를 사용하여 지표를 확인할 수 있습니다.
+
+
+**AWS CLI를 사용**하여 지표를 확인할 수 있습니다.
 
 ```linux
 aws cloudwatch list-metrics --namespace "AWS/VPN"
 ```
+
+
 
 **AWS Health 이벤트를 사용하여 VPN 연결 모니터링도 가능합니다.**
 
@@ -298,13 +302,21 @@ AWS Health Dashboard는 VPN 연결에 대해 2가지의 알림을 제공합니�
 
 VPN은 실제로 터널링을 해봐야 문제점을 파악하기가 쉽답니다.
 
+
+
 ![](images/untitled-9-1-.png)
 
 IDC에서 클라우드로 확장하여 사용하는 것을 보통 Hybrid Cloud라고 말씀드렸지만 저는 Multi Cloud로 연결해보려고 합니다. Azure를 온프레미스라고 가정해봅니다. 
 
+
+
 사실 제일 테스트하기 쉬운 건 클라우드죠. 
 
+
+
 #### 역시 여기서도 클라우드의 장점이!
+
+
 
 - - -
 
@@ -331,11 +343,15 @@ AWS의 Site to Site VPN Connection에서 확인할 수 있습니다.
 
 ![](images/untitled-19-.png)
 
-Azure의 Local Network Gateway에서 AWS VPN의 Tunnel IP 주소(외부 주소)를 입력합니다. 주소 공간은 AWS의 VPC 주소를 씁니다.
+Azure의 Local Network Gateway에서 AWS VPN의 Tunnel IP 주소(외부 주소)를 입력합니다. 
+
+주소 공간은 AWS의 VPC 주소를 씁니다.
 
 VPN Connection은 IDC 혹은 다른 클라우드의 장치와 Amazon VPC간의 보안 연결을 나타냅니다.
 
-여기서 VPN Tunnel은 AWS VPC Network와 온프레미스 혹은 다른 클라우드의 네트워크 간 주고 받을 수 있는 링크입니다. 역시 암호화 되어있습니다.
+여기서 VPN Tunnel은 AWS VPC Network와 온프레미스 혹은 다른 클라우드의 네트워크 간 주고 받을 수 있는 링크입니다. 
+
+역시 암호화 되어있습니다.
 
 ![](images/untitled-20-.png)
 
@@ -347,6 +363,8 @@ AWS의 콘솔에서 확인하면 Tunnel 1이 업이 되어있음을 알 수 있�
 
 이렇게 다른 클라우드랑도 VPN을 사용할 수 있답니다 🙂
 
+
+
 - - -
 
 # "Connection Check"
@@ -357,9 +375,11 @@ AWS의 콘솔에서 확인하면 Tunnel 1이 업이 되어있음을 알 수 있�
 
 AWS와 Azure에 이렇게 확인 할 수 있는 서비스가 있습니다!
 
+
+
 ### \[ AWS Reachability Analyzer ]
 
-![](images/untitled-12-1-.png)
+![](images/replace.png)
 
 AWS Reachability Analyzer 는 네트워크 구성이 의도한 대로 되었는지 확인하는 방법 중의 하나입니다.
 
@@ -367,26 +387,34 @@ AWS Reachability Analyzer 는 네트워크 구성이 의도한 대로 되었는�
 
 이렇게 세팅을 해놓으면 소스에서 대상까지 흐름을 눈으로 확인할 수 있답니다!.
 
-* Source :  i-06afea8b224444eed (인스턴스)
+* Source :  i-06afea8b224444eed (Instance)
 * Destination :  vgw-0a0bf7fecaf716214 (VPN)
 * Destination port : 22
 
+
+
 ### \[ Azure Network Watcher ]
 
-![](images/untitled-15-1-.png)
+![](images/replace-2.png)
 
 Azure Network Watcher는 Azure 가상 네트워크의 리소스를 모니터링 및 진단을 할 수있습니다.
 네트워크 구성이 의도한 대로 되었는지 확인하는 방법이죠. 
 
 두 지가 있습니다. 눈금보기와 토로지 보기가 있어요. 가상 네트워크의 리소스와 해당 리소스의 관계를 보기에 좋습니다. 
 
-Network Watcher > 연결 문제 해결에서 지정할 수 있습니다.
+Network Watcher > **연결 문제 해결**에서 지정할 수 있습니다.
 
 Azure가 온프레미스라고 정했으 ICMP로 계속 ping을 날려보는 것으로 설정해서 체크해봤습니다.
+
+
+
+
 
 - - -
 
 ## 정리하며…
+
+
 
 네트워크에 대한 공부는 끊임이 없지만 VPN에 대해 공부하면서 전체적인 흐름을 이해할 수 있었습니다.
 
@@ -396,7 +424,11 @@ Amazon VPC의 있는 서비스를 이해하기 위해서 아직도 많이 알아
 
 읽어주셔서 감사합니다.
 
+
+
 - - -
+
+
 
 \[📖 참고 도서]
 
