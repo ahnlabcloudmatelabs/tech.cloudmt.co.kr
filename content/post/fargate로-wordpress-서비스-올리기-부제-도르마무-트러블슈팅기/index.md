@@ -3,7 +3,7 @@ title: "Fargate로 wordpress 서비스 올리기(부제 : 도르마무 트러블
 authors:
   - hwiyoung-jung
 date: 2022-03-03T00:57:23.546Z
-feature_image: images/saa.png
+feature_image: images/fargate_wordpress.png
 categories:
   - Hands On
 tags:
