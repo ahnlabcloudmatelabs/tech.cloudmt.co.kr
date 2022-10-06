@@ -126,7 +126,8 @@ docker image pull
 
 ![](images/untitled-4-.png)
 
-미지를 나에게 끌고온다라는 느낌으로 생각하시면 쉬울 듯합니다!
+
+나에게 끌고온다라는 느낌으로 생각하시면 쉬울 듯합니다!
 
 이미지를 다운 받게 되면 항상 ‘확인' 하는 습관을 들여야합니다. 
 
@@ -484,7 +485,7 @@ CMD #컨테이너 명령 실행
 ```bash
 [ec2-user@hwi dockerfile_dir]$ cat -n Dockerfile.1
      1	FROM ubuntu
-		 2	RUN  apt-get update && apt-get install -y -q nginx
+     2	RUN  apt-get update && apt-get install -y -q nginx
      3	COPY index.html /var/www/html/
      4  CMD ["nginx", "-g", "daemon off; " ]
 ```
@@ -608,7 +609,7 @@ RUN apt-get update && apt-get install -y nginx
 2) exec 형식 기술
 
 - 쉘을 경유하지 않는 것이 특징입니다.
-- 직접 실행이 아니라 $SHOME 같은 쉘 환경 변수를 사용할 수 없다.
+- 직접 실행이 아니라 $SHOME 같은 쉘 환경 변수를 사용할 수 없습니다.
 - 명령어가 단독적으로 실행이 아니기 때문에 JSON 배열 형식으로 정의합니다.
 
 ```bash
@@ -628,7 +629,9 @@ ps --forest
 - 생성된 이미지를 바탕으로 컨테이너 내부에서 수행될 작업이나 명령을 실행합니다.
 - Dockerfile에 하나의 CMD 명령만 기술 가능하기 때문에 여러 개를 기록하게 된다면 마지막 명령만 유효합니다.
 
-예를 든다면 Nginx web container 이미지를 생성 할 때 Nginx 설치하는 것은 RUN 명령어지만  Nginx Daemon 실행하는 것은 CMD 명령어입니다. 컨테이너 내부에서 수행될 작업 명령을 실행하는 것이 CMD 인 것이죠.
+예를 든다면 Nginx web container 이미지를 생성 할 때 Nginx 설치하는 것은 RUN 명령어지만  Nginx Daemon 실행하는 것은 CMD 명령어입니다. 
+
+컨테이너 내부에서 수행될 작업 명령을 실행하는 것이 CMD 인 것이죠.
 
 - shell 형식과 exec 형식을 지원합니다.
 
@@ -704,7 +707,9 @@ Successfully built f930a750c35f
 Successfully tagged webbase:1.0
 ```
 
-ONBUILD ADD webdata.tar /var/www/html/ 으로 **webdata.tar 파일이 존재하지 않지만 error 없이 진행합니다. 지금 현재에 영향을 미치는 것이 아니기 때문이죠. (묘묙을 심었다고 보면 되요)**
+ONBUILD ADD webdata.tar /var/www/html/ 으로 webdata.tar 파일이 존재하지 않지만 error 없이 진행합니다.
+
+지금 현재에 영향을 미치는 것이 아니기 때문이죠. (묘묙을 심었다고 보면 됩니다.)
 
 그럼 이제 webdata.tar를 만들어보겠습니다.
 
@@ -751,7 +756,10 @@ a.html  b.html  c.html  index.html
 
 ## ENV +) ARG
 
-가끔 사용하다보면 일일히 입력하기가 힘들기 때문에 고정시켜버릴 수 없을까? 생각이 들 때가 있죠. 도커파일 내부에서도 환경변수로 가능합니다.
+가끔 사용하다보면 일일히 입력하기가 힘들기 때문에 고정시켜버릴 수 없을까? 
+생각이 들 때가 있죠. 
+
+도커파일 내부에서도 환경변수로 가능합니다.
 
 한번 만들어보겠습니다. 위에서 배운 내용 그대로 레이어를 하나씩 쌓지 않도록 명령어를 잘 설정하세요 🙂
 
@@ -897,7 +905,9 @@ Docker Compose는 여러 개의 컨테이너(container)로 구성된 애플리�
 ### YAML (YAML Ain't Markup Language)
 
 • 구조화 데이터나 오브젝트를 문자열로 변환하기 위한 데이터 형식의 한 종류입니다.
+
 • Space를 사용한 들여쓰기를 통해 데이터 계층을 표시하는데요.
+
 
 절대로!!!! **tab키 사용하지 않기로 합니다. 이유는** 같은 parents를 가지는 값은 **들여쓰기의 크기가 반드시 동일 해야 합니다.**
 
@@ -929,8 +939,11 @@ networks: (docker network)
 compose 파일은 버전관리를 해서 사용할 수 있습니다.
 
  `Version 1`  (미사용)
+
 • 서비스에 관한 부분만 정의 ( volumes, network, build arguments 정의 불가 )합니다.
+
 • 모든 컨테이너가 default bridge 에만 연결이 가능합니다.
+
 • 컨테이너 사이의 통신을 위해서는 link 기능을 사용 합니다.
 
 ```bash
@@ -948,6 +961,7 @@ redis:
 
 `Version 2` 
 • Service 아래 서비스 부분을 정의합니다.
+
 • volumes, network등의 키가 생기면서 named volume 과 같은 디테일한 설정이 가능합니다.
 
 ```bash
@@ -964,7 +978,9 @@ services:
 ```
 
 `Version 3`
+
 • docker compose 와 Docker Engine의 swam mode를 호환할 수 있도록 구성되어 있습니다.
+
 • 버전 별로 지원하는 기능 차이가 있기 때문에 위의 공식링크의 메뉴얼을 꼭 확인해야합니다.
 
 ## compose file structure
@@ -1007,8 +1023,11 @@ env_file: envfile
 `environment`: 컨테이너 내부에서 사용할 환경 변수 , 환경변수가 많은 경우 `env_file`을 사용합니다.
 
 `restart` : 컨테이너 종료 시 재시작 횟수를 정의합니다.  3가지의 옵션이 있습니다.
+
 • no: 수동으로재시작
+
 • always : 컨테이너를 수동으로 끄기 전까지 항상 재시작
+
 • on-failure: 비정상 코드로 종료한 경우 재시작
 
 `depends_on` : 컨테이너 간의 시작과 종료를 위한 의존성 정보를 적습니다. 
@@ -1056,10 +1075,12 @@ docker-compose kill #실행 중인 컨테이너에 SIGKH 시그널을 통해서 
 docker-compose pause/ unpause  #컨테이너 정지 /재가동
 ```
 
-이것 외에도 많은 명령어가 있습니다. 
+---
+
+😎 이것 외에도 많은 명령어가 있습니다. 
 
 전부 다 담을 수는 없지만 여러분께 조금이나마 도움이 되었으면 좋겠습니다.
 
-도커에 대한 이해가 필요했는데 이렇게나마 기록으로 남깁니다. 도커의 기본, 네트워크가 궁금하신 분은 앞의 1,2편도 함께 봐주세요
+도커에 대한 이해가 필요했는데 이렇게나마 기록으로 남깁니다. 도커의 기본, 네트워크가 궁금하신 분은 앞의 1,2편도 함께 봐주세요😎
 
-지금까지 도커이미지, 도커파일, 도커컴포즈에 대해 알아보았습니다. 감사합니다!
+지금까지 도커이미지, 도커파일, 도커컴포즈에 대해 알아보았습니다. 감사합니다!‼️
