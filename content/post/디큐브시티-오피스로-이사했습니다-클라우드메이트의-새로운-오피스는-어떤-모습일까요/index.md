@@ -211,7 +211,7 @@ tags:
 
 ![](images/photo31.png)
 
-![](images/photo32.png)
+
 
 가끔 고민이 있으면 멋진 뷰를 보면서 사수분과 멘토링도 가능하답니다.
 
