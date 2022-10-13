@@ -79,7 +79,7 @@ tags:
 
 ### \[ 떠나는 날 👋🏻 ]
 
-![](images/photo7.jpg)
+![](images/photo7.png)
 
 ![](images/photo8.png)
 
@@ -167,7 +167,7 @@ tags:
 
 원하는 커피타입에 맞게 커피도 뽑아먹고
 
-![](images/photo22.png)
+![](images/photo22.jpg)
 
 ![](images/photo23.png)
 
