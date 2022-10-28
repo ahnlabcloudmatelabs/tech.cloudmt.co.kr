@@ -1,7 +1,7 @@
 ---
 title: "프록시: 당신의 아웃바운드, 막혔습니다 (Feat. 자본주의)"
 authors:
-  - Daniel-Lim
+  - daniel-lim
 date: 2022-10-28T01:26:58.404Z
 feature_image: images/proxymatter.png
 categories:
