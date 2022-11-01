@@ -35,7 +35,7 @@ categories:
 
 우선 프록시를 대략적으로 알아보자
 
-![](proxymatter.png)
+![](images/proxymatter.png)
 
 프록시는 사용자/클라이언트와 서버 사이에 위치하는 중간 보스(?) 역할을 한다고 보면 된다. 
 사용자의 접속 요청을 프록시라는 녀석에게 전달하고 프록시는 받은 요청을 본인이 가지고 있는 설정이나 조건을 기반으로
@@ -89,7 +89,7 @@ categories:
 사실 로드 밸런서 그 자체는 프록시라고 볼 수는 없고 그저 "로드 밸런서"일 뿐이지만\
 리버스 프록시의 기능과의 차이를 설명하기 위해 본 글에서 쩜오로 간략히 소개 해보겠다. 
 
-![](reverseproxyvslb.png)
+![](images/reverseproxyvslb.png)
 
 이 처럼 리버스 프록시와 로드 밸런서의 기능이 유사해 보이지만 완전히 다른 모습이다 라는 걸 알 수있다. \
 익명성의 보장, 서버 수의 차이, 웹 캐싱 기능의 차이.
@@ -112,11 +112,11 @@ categories:
 
 자 설명은 이쯤 하고 직접 만들어 보자.
 
-![](squid.png)
+![](images/squid.png)
 
 기본적인 구성은 이렇다:
 
-![](architecture.png)
+![](images/architecture.png)
 
 쉽게 설명 하자면 다음과 같다.
 
@@ -126,15 +126,15 @@ categories:
 * 화이트리스트격인 whitelist "/etc..."를 스퀴드 서버 안에 넣어 준다. 
 * 생성한 화이트리스트에다가 막고 싶은 사이트를 넣는다. (이 시점에서 DNS Filter의 의미를 알 수 있다.)
 
-![](createsquid.png)
+![](images/createsquid.png)
 
 * 서버를 재시작 한다.
 * 서버로 들어 가서 설정을 확인 해주고
 * 화이트리스트로 작성한 페이지가 들어 가는지 확인 한다. 
 
-![](settings.png)
+![](images/settings.png)
 
-![](resultsfromsettings.png)
+![](images/resultsfromsettings.png)
 
 작성 된 화이트리스트 기반으로 페이지가 보여지고 있다. 정말 다행이다(...)
 
@@ -162,7 +162,7 @@ https://web.microsoftstream.com/video/d4ce2082-fbc7-45a4-8bff-b60cae2b417e?list=
 
 AWS Firewall 을 사용한다면 국가 기준으로, IP기준으로, 웹사이트 DNS 기준으로 조금 더 쉽게 설정이 가능하다.
 
-![](firenetwork.png)
+![](images/firenetwork.png)
 
 그렇다... 이 페이지가 정말 끝이다.
 
@@ -173,7 +173,7 @@ AWS Firewall 을 사용한다면 국가 기준으로, IP기준으로, 웹사이�
 
 AWS Firewall을 사용함에 있어서 과금이 꽤나 부담 스러울 수도 있다.
 
-![](pricingtag.png)
+![](images/pricingtag.png)
 
 우선 단순 계산으로 한다 하더라도 기본 $100 부터 시작하니 부담이 없다고 할 수는 없다.
 
