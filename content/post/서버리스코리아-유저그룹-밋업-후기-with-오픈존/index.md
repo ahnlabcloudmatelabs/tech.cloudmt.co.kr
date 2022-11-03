@@ -1,5 +1,5 @@
 ---
-title: 서버리스코리아 유저그룹 밋업 후기 ! ( With 오픈존)
+title: 서버리스 코리아 유저 그룹 밋업 후기 ! ( With OpenZone Cloudmate)
 authors:
   - hwiyoung-jung
 date: 2022-11-02T04:25:07.900Z
