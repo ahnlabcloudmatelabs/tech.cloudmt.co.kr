@@ -1,5 +1,5 @@
 ---
-feature_image: images/abcde.png
+feature_image: images/image-002.png
 authors:
 - jeonghwan kim
 date: "2022-11-08T00:00:00Z"
