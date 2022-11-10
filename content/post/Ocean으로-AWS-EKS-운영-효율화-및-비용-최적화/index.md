@@ -13,7 +13,7 @@ tags:
 - 비용 최적화
 - kubernetes
 - ec2
-title: Ocean으로 AWS EKS 운영 효율화 및 비용 최적화
+title: AWS EKS 비용 최적화 NetApp Spot Ocean
 ---
 
 안녕하세요. 클라우드메이트 김희원입니다.
