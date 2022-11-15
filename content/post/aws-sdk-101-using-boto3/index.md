@@ -3,7 +3,7 @@ feature_image: images/00.png
 title: AWS SDK로 AWS 인프라 관리하기(boto3 설치 및 구성)
 authors:
   - dongwook-kim
-date: "2022-11-15T00:00:00Z"
+date: "2022-11-15T07:43:00Z"
 categories:
   - Hands On
 tags:
