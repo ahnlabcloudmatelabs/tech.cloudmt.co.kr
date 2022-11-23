@@ -83,7 +83,6 @@ data를 확인하며, 모니터링에 활용할 수 있는 VM 이벤트들을 �
 
 Json 포맷 데이터를 예시로 들자면 아래와 같습니다.
 
-'''
 {
   "EntityLineage":{
   "namespace":"3B9C1D25BE7879D5",
@@ -112,7 +111,6 @@ Json 포맷 데이터를 예시로 들자면 아래와 같습니다.
   "Id":"xxxxx"
   }
 }
-'''
 
 아래와 같이 playfab.servers.vm_unhealthy 이벤트의 HealthStatus들을 찾을 수 있었습니다.
 
@@ -129,7 +127,6 @@ https://docs.microsoft.com/en-us/gaming/playfab/features/multiplayer/servers/mul
 추가적으로 API호출 및 처리에 대한 이벤트들이 있는지도 조사해 봅니다.
 playfab.functions의 function_executed라는 이벤트가 있네요.
 
-'''
 {
   "PayloadContentType":"Json",
   "EntityLineage":{
@@ -169,7 +166,6 @@ playfab.functions의 function_executed라는 이벤트가 있네요.
   "OriginInfo":{
   }
 }
-'''
 
 이상을 종합하여 수집할 항목들을 리스트업 해 봅니다. 
 (Functions, Storage 의 Name은 임의로 A,B라 하였습니다.)
@@ -240,14 +236,14 @@ Azure PlayFab의 VM, API 이벤트들은 Kusto Query(KQL)를 사용하여 Data�
 ![grafana_noserverheartbeat_detail](images/grafana_noserverheartbeat_detail.png)
 
 Data source와 KQL Query를 설정하여 data를 불러옵니다.
-<pre><code>
+
 ['events.all']
 | where $__timeFilter(Timestamp)
 | where FullName_Name == 'vm_unhealthy'
 | where EventData.Payload.HealthStatus == 'NoServerHeartbeat'
 | project Timestamp, EventData.Payload.VmId, EventId
 | order by Timestamp desc
-</code></pre>
+
 Grafana의 컴포넌트 시각화 기능을 사용하여 불러온 data를 시각화 합니다.
 
 ![grafana_noserverheartbeat_adjust](images/grafana_noserverheartbeat_adjust.png)
@@ -266,7 +262,6 @@ Azure Managed Grafana에서는 각 컴포넌트마다 Data source와 Query들을
 다음 쿼리는 5분 단위로 NoServerHeartbeat 이벤트를 count하고 집계하는 KQL의 한 예입니다.
 또한, data가 존재하지 않는 5분 단위의 구간은 0으로 data를 채워주는 서브 Query도 포함되어 있습니다.
 
-<pre><code>
 let StartTime=datetime(${__from:date});
 let StopTime=datetime(${__to:date});
 ['events.all']  
@@ -280,13 +275,11 @@ let StopTime=datetime(${__to:date});
   | extend Count=0 
   )
 | summarize Count=sum(Count) by bin(Timestamp, 5m)
-</code></pre>
 
 5분 단위의 이벤트 집계를 통하여 Alert를 발생시키는 것도 좋지만, 
 더욱더 세밀한 모니터링과 Alert를 발생시키려면
 1분 단위의 이벤트 집계로 표현하여 Alert를 발생시키는 것이 바람직하다는 생각이 드네요.
 
-<pre><code>
 let StartTime=datetime(${__from:date});
 let StopTime=datetime(${__to:date});
 ['events.all']  
@@ -300,7 +293,6 @@ let StopTime=datetime(${__to:date});
   | extend Count=0
   )
 | summarize Count=sum(Count) by bin(Timestamp, 1m)
-</code></pre>
 
 그래서, 위와 같이 작성한 KQL Query를 사용하여 모니터링 대시보드를 따로 구성하고 그 컴포넌트 각각에 Alert를 적용하기로 하였습니다.
 마찬가지로, Azure PlayFab API 이벤트들도 시각화 합니다.
@@ -309,7 +301,6 @@ let StopTime=datetime(${__to:date});
 
 Data source와 KQL Query를 설정하여 data를 불러옵니다.
 
-<pre><code>
 let StartTime=datetime(${__from:date});
 let StopTime=datetime(${__to:date});
 ['events.all']  
@@ -324,7 +315,6 @@ let StopTime=datetime(${__to:date});
   | extend Count=0 
   )
 | summarize Count=sum(Count) by bin(Timestamp, 5m)
-</code></pre>
 
 Grafana의 컴포넌트 시각화 기능을 사용하여 불러온 data를 시각화 합니다.
 
