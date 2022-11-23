@@ -2,7 +2,7 @@
 feature_image: images/playfab_grafana_intro.png
 authors:
 - hanjoon-jo
-date: "2022-11-24T00:00:00Z"
+date: "2022-11-23T00:00:00Z"
 categories:
 - Tech
 
@@ -18,7 +18,7 @@ tags:
 - 모니터링
 - Kusto Query
 - KQL
-title: Grafana를 이용하여 Azure PlayFab을 모니터링 해보기
+title: Grafana를 이용하여 Azure PlayFab 모니터링 하기
 ---
 
 안녕하십니까. 클라우드메이트 조한준입니다.
