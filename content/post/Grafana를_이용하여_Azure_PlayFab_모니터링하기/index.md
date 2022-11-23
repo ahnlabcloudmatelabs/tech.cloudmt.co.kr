@@ -2,7 +2,7 @@
 feature_image: images/playfab_grafana_intro.png
 authors:
 - hanjoon-jo
-date: "2022-11-23T00:00:00Z"
+date: "2022-11-24T00:00:00Z"
 categories:
 - Tech
 
@@ -50,8 +50,6 @@ PlayFab의 백 엔드 서비스는 게임과 함께 확장되고 플레이어의
 ## Azure PlayFab Metric 도출
 **미팅에서 고객이 요구한 사항은 “Azure 리소스, PlayFab 리소스에 대한 대시보드 구성 / 모니터링 / 관제를 해줄 수 있나?”라는 내용이었습니다.**
 
-<img src="images/playfab_grafana_intro.png" width="950">
-
 그래서 다음과 같이 고려해 보았습니다.
 
 * Metric 수집 : Azure Monitor Or Azure Data Explorer
@@ -85,8 +83,7 @@ data를 확인하며, 모니터링에 활용할 수 있는 VM 이벤트들을 �
 
 Json 포맷 데이터를 예시로 들자면 아래와 같습니다.
 
-<pre>
-<code>
+'''
 {
   "EntityLineage":{
   "namespace":"3B9C1D25BE7879D5",
@@ -115,8 +112,7 @@ Json 포맷 데이터를 예시로 들자면 아래와 같습니다.
   "Id":"xxxxx"
   }
 }
-</code>
-</pre>
+'''
 
 아래와 같이 playfab.servers.vm_unhealthy 이벤트의 HealthStatus들을 찾을 수 있었습니다.
 
@@ -133,8 +129,7 @@ https://docs.microsoft.com/en-us/gaming/playfab/features/multiplayer/servers/mul
 추가적으로 API호출 및 처리에 대한 이벤트들이 있는지도 조사해 봅니다.
 playfab.functions의 function_executed라는 이벤트가 있네요.
 
-<pre>
-<code>
+'''
 {
   "PayloadContentType":"Json",
   "EntityLineage":{
@@ -174,8 +169,7 @@ playfab.functions의 function_executed라는 이벤트가 있네요.
   "OriginInfo":{
   }
 }
-</code>
-</pre>
+'''
 
 이상을 종합하여 수집할 항목들을 리스트업 해 봅니다. 
 (Functions, Storage 의 Name은 임의로 A,B라 하였습니다.)
@@ -204,11 +198,11 @@ https://learn.microsoft.com/en-us/gaming/playfab/features/insights/connectivity/
 
 Azure Monitor Setting 탭에서 Authentication, Default Subscription을 설정하여 줍니다.
 
-<img src="images/grafana_monitor_configuration.png" width="900">
+![grafana_monitor_configuration](images/grafana_monitor_configuration.png)
 
 Azure Data Explorer Datasource Setting 탭에서 Connection Details, Query Optimizations, Database schema settings 섹션의 값들을 설정하여 줍니다.
 
-<img src="images/grafana_dataexplorer_configuration.png" width="900">
+![grafana_dataexplorer_configuration](images/grafana_dataexplorer_configuration.png)
 
 위의 과정들을 거치면, Grafana를 통한 Azure Monitor, Azure PlayFab의 데이터 연동이 가능하게 됩니다.
 
@@ -224,17 +218,17 @@ Grafana 사용법은 Grafana 공식 사이트를 참고하시기 바랍니다.
 ## Azure Monitor Data 시각화
 고객사의 Azure Functions, Azure Storage 관련 metric들을 시각화 합니다.
 
-<img src="images/grafana_functionrequest_edit.png" width="1350">
+![grafana_functionrequest_edit](images/grafana_functionrequest_edit.png)
 
 각각의 컴포넌트에 Resource, Metric의 값들을 지정하여 줍니다.
 
 Azure Functions Row(Section)는 아래와 같이 구성하였습니다.
 
-<img src="images/grafana_azure_function.png" width="1350">
+![grafana_azure_function](images/grafana_azure_function.png)
 
 Azure Storage Row(Section)는 아래와 같이 구성하였습니다.
 
-<img src="images/grafana_storage_row.png" width="1350">
+![grafana_storage_row](images/grafana_storage_row.png)
 
 ---
 
@@ -243,7 +237,7 @@ Azure PlayFab의 VM, API 이벤트들은 Kusto Query(KQL)를 사용하여 Data�
 
 아래는 VM NoServerHeartbeat 이벤트를 table 형식으로 viewing하는 컴포넌트입니다.
 
-<img src="images/grafana_noserverheartbeat_detail.png" width="1350">
+![grafana_noserverheartbeat_detail](images/grafana_noserverheartbeat_detail.png)
 
 Data source와 KQL Query를 설정하여 data를 불러옵니다.
 <pre><code>
@@ -311,7 +305,7 @@ let StopTime=datetime(${__to:date});
 그래서, 위와 같이 작성한 KQL Query를 사용하여 모니터링 대시보드를 따로 구성하고 그 컴포넌트 각각에 Alert를 적용하기로 하였습니다.
 마찬가지로, Azure PlayFab API 이벤트들도 시각화 합니다.
 
-<img src="images/grafana_playfab_apicall_edit.png" width="1350">
+![grafana_playfab_apicall_edit](images/grafana_playfab_apicall_edit.png)
 
 Data source와 KQL Query를 설정하여 data를 불러옵니다.
 
@@ -340,31 +334,31 @@ Grafana의 컴포넌트 시각화 기능을 사용하여 불러온 data를 시�
 
 ### 관제용 대시보드 2개
 
-<img src="images/grafana_noc_VMmonitoring.png" width="1350">
-<img src="images/grafana_noc_VMmonitoring2.png" width="1350">
+![grafana_noc_VMmonitoring](images/grafana_noc_VMmonitoring.png)
+![grafana_noc_VMmonitoring2](images/grafana_noc_VMmonitoring2.png)
 
 그리고, 4개의 Row(Section)로 이루어진 모니터링 대시보드 1개를 구성하였습니다.
 
 ### PlayFab VM 모니터링
 
-<img src="images/grafana_dashboard_VM.png" width="1350">
+![grafana_dashboard_VM](images/grafana_dashboard_VM.png)
 
 ### PlayFab API 모니터링
 
-<img src="images/grafana_dashboard_API.png" width="1350">
+![grafana_dashboard_API](images/grafana_dashboard_API.png)
 
 ### Azure Functions 모니터링
 
-<img src="images/grafana_dashboard_functions.png" width="1350">
+![grafana_dashboard_functions](images/grafana_dashboard_functions.png)
 
 ### Azure Storage 모니터링
 
-<img src="images/grafana_dashboard_storage.png" width="1350">
+![grafana_dashboard_storage](images/grafana_dashboard_storage.png)
 
 ---
 
 ## Alert 설정
-<img src="images/grafana_alerting_channel.png" width="1350">
+![grafana_alerting_channel](images/grafana_alerting_channel.png)
 
 Alerting 메뉴로 이동하여 Notification channels 탭에서 New channel을 등록합니다.
 
@@ -373,7 +367,7 @@ Alerting 메뉴로 이동하여 Notification channels 탭에서 New channel을 �
 Type에는 여러가지 방식이 있는데 webhook Type으로 우리 회사의 NOC 솔루션을 이용하기로 합니다. 
 Url도 등록하여 줍니다. 등록 시 Test 버튼을 통하여 Test도 가능합니다.
 
-<img src="images/grafana_alerting_timeseries_adjust.png" width="1350">
+![grafana_alerting_timeseries_adjust](images/grafana_alerting_timeseries_adjust.png)
 
 Alert 탭에서 Rule을 설정합니다.
 Conditions, No data and error handling 값들을 설정합니다.
