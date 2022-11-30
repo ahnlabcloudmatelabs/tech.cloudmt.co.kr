@@ -84,7 +84,7 @@ VPC Enpoint에는 두 가지 종류가 있습니다.
 저는 미리 AWS와 GCP를 VPN 연결해 두었습니다.
 VPN 연결에 관한 더 자세한 내용은 이전 글을 참고하여 설정해 주시기 바랍니다.
 
-<https://tech.cloudmt.co.kr/2022/09/30/%EC%9D%B8%ED%94%84%EB%9D%BC-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%9D%BC%EB%A9%B4-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%98%EB%8A%94-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-vpn/>
+참고 : [인프라 엔지니어라면 꼭 알아야하는 네트워크 - VPN](https://tech.cloudmt.co.kr/2022/09/30/%EC%9D%B8%ED%94%84%EB%9D%BC-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%9D%BC%EB%A9%B4-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC%ED%95%98%EB%8A%94-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-vpn/)
 
 AWS 환경에는 Internet Gateway나 NAT Gateway를 만들지 않았고, GCP 환경에서는 인터넷이 가능한 퍼블릭 환경으로 생성하였습니다.
 그리고 GCP에서 AWS에 생성한 Wordpress 웹 사이트에 접근하기 위해 Windows VM 인스턴스를 생성해 두었습니다.
@@ -130,7 +130,8 @@ IAM에서 SSM을 사용하기 위한 새로운 역할을 생성하여  5개 정�
 
 SSM에 관한 더 자세한 내용은 이전 글을 참고해 주시기 바랍니다.
 
-<https://tech.cloudmt.co.kr/2022/09/29/aws-systems-manager%EC%9D%98-session-manager%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%ED%94%84%EB%9D%BC%EC%9D%B4%EB%B9%97-%ED%99%98%EA%B2%BD%EC%9D%98-%EC%84%9C%EB%B2%84-%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C-%EA%B5%AC%ED%98%84/>
+
+참고 : [AWS Systems Manager의 Session Manager를 이용하여 프라이빗 환경의 서버 접근통제 구현](https://tech.cloudmt.co.kr/2022/09/29/aws-systems-manager%EC%9D%98-session-manager%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%ED%94%84%EB%9D%BC%EC%9D%B4%EB%B9%97-%ED%99%98%EA%B2%BD%EC%9D%98-%EC%84%9C%EB%B2%84-%EC%A0%91%EA%B7%BC%ED%86%B5%EC%A0%9C-%EA%B5%AC%ED%98%84/)
 
 ## Elastic Beanstalk 생성
 
