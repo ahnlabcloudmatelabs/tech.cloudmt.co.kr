@@ -53,7 +53,7 @@ VPC Endpoint는 인터넷 연결 없이 AWS 서비스에 프라이빗하게 연�
 
 VPC Enpoint에는 두 가지 종류가 있습니다.
 
-![](endpoint.png)
+![](images/endpoint.png)
 
 * Interface Endpoint\
   \
@@ -73,7 +73,7 @@ VPC Enpoint에는 두 가지 종류가 있습니다.
 
 ## 아키텍처
 
-![](architecture_with_gcp.png)
+![](images/architecture_with_gcp.png)
 
 핸즈온을 진행하기 전 다른 클라우드 환경과 VPN 연결이 필요합니다.
 저는 미리 AWS와 GCP를 VPN 연결해 두었습니다.
@@ -91,37 +91,37 @@ AWS 환경에는 Internet Gateway나 NAT Gateway를 만들지 않았고, GCP 환
 
 먼저 서울 리전에 VPC를 생성하고, 고가용성을 위해 두 개의 AZ에 EC2 인스턴스와 RDS를 위한 Subnet을 생성합니다. (2a-WEB, 2c-WEB, 2a-DB, 2c-DB)
 
-![](vpc_subnet.png)
+![](images/vpc_subnet.png)
 
 생성한 서브넷을 라우팅 테이블에 연결합니다.
 
-![](route_table1.png)
+![](images/route_table1.png)
 
 ## VPC Endpoint 생성
 
 Private Subnet이기 때문에 다른 AWS 서비스에 액세스 하기 위해 VPC Endpoint를 생성해야 합니다.
 Elastic Beanstalk을 사용하기 위해 다음의 VPC Endpoint들을 생성합니다. 
 
-![](vpc_endpoint.png)
+![](images/vpc_endpoint.png)
 
 참고 : <https://aws.amazon.com/ko/premiumsupport/knowledge-center/elastic-beanstalk-instance-failure/>
 
 Interface Endpoint 생성 시 이전에 생성한 VPC, Subnet, 보안 그룹을 선택합니다.
 Gateway Endpoint 생성 시에는 VPC와 라우팅 테이블을 선택하고, 생성이 되면 지정한 라우팅 테이블에 자동으로 Gateway Endpoint가 추가됩니다.
 
-![](added_endpoint.png)
+![](images/added_endpoint.png)
 
 ## SSM
 
 Beanstalk에서 생성되는 EC2 인스턴스에서 AWS Systems Manager(SSM)를 사용하기 위해, SSM과 관련된 Endpoint를 추가로 생성합니다.
 -> 선택한 보안 그룹 인바운드 규칙에 443(HTTPS) 추가
 
-![](ssm_endpoint.png)
+![](images/ssm_endpoint.png)
 
 Beanstalk 생성 시 가상 머신 권한에 기본적으로 적용되어 있는 aws-elasticbeanstalk-ec2-role 역할에는 5개의 정책이 적용되어 있습니다.
 IAM에서 SSM을 사용하기 위한 새로운 역할을 생성하여  5개 정책과 AmazonSSMManagedInstanceCore 정책을 추가해 줍니다.
 
-![](ssm_role.png)
+![](images/ssm_role.png)
 
 SSM에 관한 더 자세한 내용은 이전 글을 참고해 주시기 바랍니다.
 
@@ -134,7 +134,7 @@ Wordpress 웹사이트를 구축하기 위해 Beanstalk에서 웹 서버 환경�
 애플리케이션 이름, 환경 이름과 도메인을 입력하고,
 플랫폼으로는 PHP를 선택합니다.
 
-![](beanstalk.png)
+![](images/beanstalk.png)
 
 추가 옵션 구성을 클릭하여 다음과 같이 설정합니다.
 
@@ -142,59 +142,59 @@ Wordpress 웹사이트를 구축하기 위해 Beanstalk에서 웹 서버 환경�
 
 * 환경 유형 : 로드 밸런싱 수행
 
-![](beanstalk_yongryang.png)
+![](images/beanstalk_yongryang.png)
 
 네트워크 
 
 * 로드 밸런서 설정 : 내부
 * VPC, 로드 밸런서 서브넷(2a-WEB, 2c-WEB), 인스턴스 서브넷(2a-WEB, 2c-WEB), 데이터베이스 서브넷(2a-DB, 2c-DB) 선택
 
-![](beanstalk_network.png)
+![](images/beanstalk_network.png)
 
 인스턴스
 
 * 보안 그룹 : Interface Endpoint 생성 시 선택한 보안 그룹을 선택
 
-![](beanstalk_instance.png)
+![](images/beanstalk_instance.png)
 
 로드밸런서
 
 * 로그 저장 : 활성
 * S3 버킷 선택
 
-![](beanstalk_lb.png)
+![](images/beanstalk_lb.png)
 
 보안
 
 * IAM 인스턴스 프로파일 : 위에서 생성해둔 역할 선택
 
-![](beanstalk_security.png)
+![](images/beanstalk_security.png)
 
 환경을 생성합니다.
 
-![](beanstalk_green.jpg)
+![](images/beanstalk_green.jpg)
 
 ## Beanstalk url 접속 확인
 
 생성된 Beanstalk 환경의 URL로 들어가서 페이지가 잘 뜨는지 확인해 봅시다.
 
-![](error_page.png)
+![](images/error_page.png)
 
 AWS 환경을 폐쇄망으로 구성했기 때문에 외부에서는 접속할 수 없는 것을 확인할 수 있습니다.
 
 이번에는 GCP에 생성해 놓은 Windows VM 인스턴스에 RDP 접속을 해서 해당 URL에 들어가 봅니다.
 PHP 샘플 코드 화면이 잘 뜨는 것을 볼 수 있습니다.
 
-![](test_screen.png)
+![](images/test_screen.png)
 
 ## SSM 접속 확인
 
 EC2에 가서 Beanstalk으로 생성된 EC2 인스턴스에서 SSM 접속이 잘 되는지 확인해 봅시다.
 SSM의 연결 버튼이 활성화되어 있고, SSM 화면에 잘 접속되는 것을 확인할 수 있습니다.
 
-![](ec2_ssm.png)
+![](images/ec2_ssm.png)
 
-![](ssm_screen.png)
+![](images/ssm_screen.png)
 
 ## RDS에서 MySQL 생성
 
@@ -206,7 +206,7 @@ WordPress에 연결할 RDS 데이터베이스를 생성합니다.
 * 마스터 암호 : qwer1234
 * VPC, 보안 그룹 선택 -> 보안 그룹 인바운드 규칙에 3306(MYSQL/Aurora) 추가
 
-  ![](rds.png)
+  ![](images/rds.png)
 
 생성된 데이터베이스의 엔드포인트를 복사합니다.
 
@@ -234,7 +234,7 @@ define( 'DB_HOST', '<데이터베이스 엔드포인트>' );
 ```
 
 CodeCommit에서 리포지토리를 생성하고, WordPress 파일을 업로드합니다.
-![](codecommit.png)
+![](images/codecommit.png)
 
 ## CodePipeline으로 WordPress 코드 배포
 
@@ -248,7 +248,7 @@ CodePipeline에서 새 파이프라인을 생성합니다.
 * 배포 공급자 : AWS Elastic Beasntalk
 * 애플리케이션 이름, 환경 이름 선택
 
-![](codepipeline.png)
+![](images/codepipeline.png)
 
 파이프라인이 생성되면 CodeCommit에 업로드된 파일들이 Beanstalk으로 배포됩니다.
 이제 CodeCommit의 파일이 업로드되면 CodePipeline을 통해 자동으로 Beanstalk에 배포됩니다.
@@ -257,7 +257,7 @@ CodePipeline에서 새 파이프라인을 생성합니다.
 
 GCP의 Windows VM 인스턴스에 접속하여 Beanstalk url로 들어가 WordPress가 잘 배포되었는지 확인합니다.
 
-![](wordpress_main_page.png)
+![](images/wordpress_main_page.png)
 
 ## 마지막으로
 
