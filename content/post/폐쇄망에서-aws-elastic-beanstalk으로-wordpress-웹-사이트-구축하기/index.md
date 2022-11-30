@@ -6,6 +6,11 @@ date: 2022-11-30T13:22:45.862Z
 feature_image: images/cover.png
 categories:
   - Hands On
+tags:
+  - AWS
+  - VPCENDPOINT
+  - BEANSTALK
+  - WORDPRESS
 ---
 안녕하세요! 클라우드메이트 이주연입니다.
 
@@ -95,7 +100,7 @@ AWS 환경에는 Internet Gateway나 NAT Gateway를 만들지 않았고, GCP 환
 
 생성한 서브넷을 라우팅 테이블에 연결합니다.
 
-![](images/route_table1.png)
+![](images/route_table.png)
 
 ## VPC Endpoint 생성
 
@@ -172,20 +177,20 @@ Wordpress 웹사이트를 구축하기 위해 Beanstalk에서 웹 서버 환경�
 
 환경을 생성합니다.
 
-![](beanstalk_green.png)
+![](images/beanstalk_green.png)
 
 ## Beanstalk url 접속 확인
 
 생성된 Beanstalk 환경의 URL로 들어가서 페이지가 잘 뜨는지 확인해 봅시다.
 
-![](error_page.png)
+![](images/error_page.png)
 
 AWS 환경을 폐쇄망으로 구성했기 때문에 외부에서는 접속할 수 없는 것을 확인할 수 있습니다.
 
 이번에는 GCP에 생성해 놓은 Windows VM 인스턴스에 RDP 접속을 해서 해당 URL에 들어가 봅니다.
 PHP 샘플 코드 화면이 잘 뜨는 것을 볼 수 있습니다.
 
-![](test_screen.png)
+![](images/test_screen.png)
 
 ## SSM 접속 확인
 
@@ -257,7 +262,7 @@ CodePipeline에서 새 파이프라인을 생성합니다.
 
 GCP의 Windows VM 인스턴스에 접속하여 Beanstalk url로 들어가 WordPress가 잘 배포되었는지 확인합니다.
 
-![](wordpress_main_page.png)
+![](images/wordpress_main_page.png)
 
 ## 마지막으로
 
