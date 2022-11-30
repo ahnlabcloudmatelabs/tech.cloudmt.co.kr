@@ -17,14 +17,14 @@ categories:
 
 *\[ 퍼블릭 클라우드 / 프라이빗 클라우드 / 하이브리드 클라우드 / 멀티 클라우드 ]*
 
-### 하이브리드 클라우드
+#### 하이브리드 클라우드
 
 하이브리드 클라우드는 기존의 온프레미스 환경이나 프라이빗 클라우드에 퍼블릭 클라우드를 같이 사용하는 형태입니다.
 
 온프레미스나 프라이빗 클라우드가 가지는 보안성과
 퍼블릭 클라우드의 유연성 등 둘의 장점을 동시에 가질 수 있습니다.
 
-### 멀티 클라우드
+#### 멀티 클라우드
 
 멀티 클라우드는 서로 다른 퍼블릭 클라우드를 함께 사용하는 형태입니다.
 
@@ -59,14 +59,14 @@ VPC Enpoint에는 두 가지 종류가 있습니다.
   \
   Interface Endpoint는 Private Subnet 안에 위치하고, Private IP를 이용하여 다른 서비스로 연결시켜줍니다.
   현재 많은 종류의 AWS 서비스들을 지원하고 있습니다.\
-  \
   EC2에서 Private Subnet 내부의 Interface Endpoint를 통해 AWS 서비스에 액세스하게 됩니다.
+
+
 * Gateway Endpoint\
   \
   Gateway Endpoint는 라우팅 테이블을 이용하여 다른 서비스에 연결합니다.
   Gateway Endpoint 생성 시 라우팅 테이블에 자동으로 Gateway Endpoint가 추가됩니다.
   현재 Gateway Endpoint가 지원하는 서비스에는 S3와 DynamoDB가 있습니다.\
-  \
   EC2에서 라우터를 거쳐 Gateway Endpoint를 통해 S3에 엑세스하게 됩니다. 
 
 # Hands-On
@@ -172,20 +172,20 @@ Wordpress 웹사이트를 구축하기 위해 Beanstalk에서 웹 서버 환경�
 
 환경을 생성합니다.
 
-![](images/beanstalk_green.jpg)
+![](beanstalk_green.png)
 
 ## Beanstalk url 접속 확인
 
 생성된 Beanstalk 환경의 URL로 들어가서 페이지가 잘 뜨는지 확인해 봅시다.
 
-![](images/error_page.png)
+![](error_page.png)
 
 AWS 환경을 폐쇄망으로 구성했기 때문에 외부에서는 접속할 수 없는 것을 확인할 수 있습니다.
 
 이번에는 GCP에 생성해 놓은 Windows VM 인스턴스에 RDP 접속을 해서 해당 URL에 들어가 봅니다.
 PHP 샘플 코드 화면이 잘 뜨는 것을 볼 수 있습니다.
 
-![](images/test_screen.png)
+![](test_screen.png)
 
 ## SSM 접속 확인
 
@@ -257,7 +257,7 @@ CodePipeline에서 새 파이프라인을 생성합니다.
 
 GCP의 Windows VM 인스턴스에 접속하여 Beanstalk url로 들어가 WordPress가 잘 배포되었는지 확인합니다.
 
-![](images/wordpress_main_page.png)
+![](wordpress_main_page.png)
 
 ## 마지막으로
 
