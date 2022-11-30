@@ -37,6 +37,8 @@ CloudWatch에서는 AWS 서비스의 기본 메트릭을 수집하여 대시보�
 
 ![https://postfiles.pstatic.net/MjAyMjExMjNfMTI0/MDAxNjY5MjExMjAzMjcx.dxwxkRLJsLVQ8ksOsEDQdTjAnEFWyy4xzDs-N1-VOisg.zPm0juOemuDygC6ZMYldVKWLOxQRKqXcIHgeOtwpbwMg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMjNfMTI0/MDAxNjY5MjExMjAzMjcx.dxwxkRLJsLVQ8ksOsEDQdTjAnEFWyy4xzDs-N1-VOisg.zPm0juOemuDygC6ZMYldVKWLOxQRKqXcIHgeOtwpbwMg.PNG.bbaaee9/image.png?type=w966)
 
+- - -
+
 ## 1. EC2 인스턴스 Tag를 사용하여 여러 EC2 인스턴스에 CloudWatch Alarm 생성하기
 
 대규모 EC2 인스턴스 집합에 대한 CloudWatch Alarm을 생성하고 구성하는 것은 시간이 오래 걸리고 관리가 어렵습니다. 이는 인스턴스에 대한 동일한 Alarm을 신속하게 설정하려는 대규모 마이그레이션 및 다중 계정 환경에서 유용합니다. 또한 새로 생성하는 인스턴스와 실행 중인 인스턴스에 대한 표준 CloudWatch Alarm을 빠르고 일관되게 설정할 수 있으며 인스턴스가 종료되면 경보를 삭제하는 데 도움이 됩니다.
@@ -121,8 +123,6 @@ aws cloudformation create-stack --stack-name amazon-cloudwatch-auto-alarms-sns-t
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTky/MDAxNjY4MTU2OTEwNjUx.Ry2Pe7qKbeD92w0QOerbklllBmLM348fsFFNrcM0_fMg.X0oGYvIF_VISZr1kHUixiwpsDPRjSy7skkWhyiKJY7Yg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTky/MDAxNjY4MTU2OTEwNjUx.Ry2Pe7qKbeD92w0QOerbklllBmLM348fsFFNrcM0_fMg.X0oGYvIF_VISZr1kHUixiwpsDPRjSy7skkWhyiKJY7Yg.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
 4. Amazon SNS Topic이 생성된 후 Alarm 임계값이 위반될 때마다 알림을 받을 수 있도록 Topic에 대한 이메일 주소를 구독해야 합니다.
 
 a) Amazon SNS 콘솔로 이동합니다.
@@ -140,10 +140,7 @@ c) Create subscrption을 클릭하고 프로토콜로 이메일을 선택합니�
 d) Confirm subscription의 링크를 클릭하여 구독을 확인합니다. CloudWatch 경보 Amazon SNS Topic에 대한 이메일 구독을 확인합니다.
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMjYw/MDAxNjY4MTU3NjY1Nzg4.g9CvgmYRm8qNLSrVH5gayPgOhCqV8ynlVDgzK0k7FN0g.Rzy2dQ5LlZH4K_Hwea-BatEWSIAycrVazNyvH5lRvugg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMjYw/MDAxNjY4MTU3NjY1Nzg4.g9CvgmYRm8qNLSrVH5gayPgOhCqV8ynlVDgzK0k7FN0g.Rzy2dQ5LlZH4K_Hwea-BatEWSIAycrVazNyvH5lRvugg.PNG.bbaaee9/image.png?type=w966)
-
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMjIw/MDAxNjY4MTU3NzAzMzY3.mfY7vA6B2Zn0wXr5Xz_4J1Jl6kHXEHYJcrau144HkdAg.FLvZu8Z89dK2B9ypKmiwkhuDyxIYZ0V47emUWTRXKWkg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMjIw/MDAxNjY4MTU3NzAzMzY3.mfY7vA6B2Zn0wXr5Xz_4J1Jl6kHXEHYJcrau144HkdAg.FLvZu8Z89dK2B9ypKmiwkhuDyxIYZ0V47emUWTRXKWkg.PNG.bbaaee9/image.png?type=w966)
-
-- - -
 
 5. CloudWatchAutoAlarms Lambda 함수 배포 패키지를 저장하고 액세스하는 데 사용할 S3 버킷을 생성합니다. 샘플 CloudFormation 템플릿을 사용하여 S3 버킷을 생성할 수 있으며 매개변수 OrganizationID는 다중 계정 배포에 사용되므로 비워 둡니다.
 
@@ -160,21 +157,16 @@ aws cloudformation create-stack --stack-name amazon-cloudwatch-auto-alarms-s3-bu
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfNDMg/MDAxNjY4MTU3OTgxMTI1.2YJxnuAlIqD2hCgrnks01_6lnUk8sSoe22JNHVYIOVAg.0XOSFbUJbK2gaqbWPzzeEFKpBYuCXL6bYE4R4lFxlh0g.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfNDMg/MDAxNjY4MTU3OTgxMTI1.2YJxnuAlIqD2hCgrnks01_6lnUk8sSoe22JNHVYIOVAg.0XOSFbUJbK2gaqbWPzzeEFKpBYuCXL6bYE4R4lFxlh0g.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
 * S3 버킷 이름 찾는 방법(1) - 콘솔
 
   * cloudwatch로 검색합니다.
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMjQg/MDAxNjY4MTU4MzA0NjI5.6YOtmHPF37-7nY_R9AX-IQyEP-zVCgV_YDjLIzvN9wMg.vVq_EeDZQ9qhwdJp7VFUby2BuUq-CZFkJoqiUnM7_xQg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMjQg/MDAxNjY4MTU4MzA0NjI5.6YOtmHPF37-7nY_R9AX-IQyEP-zVCgV_YDjLIzvN9wMg.vVq_EeDZQ9qhwdJp7VFUby2BuUq-CZFkJoqiUnM7_xQg.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
 * 버킷 안에는 아직 아무것도 없습니다.
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTU0/MDAxNjY4MTU4Mzc1MjY2.eRePTguYgTCsPyQt16x-G-sG40P5G_jTk0qxoXJq0wcg.A_6JLiG87ChFvnQ3jVrt2y7GCAbCTuIy7ohy4o-zTd0g.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTU0/MDAxNjY4MTU4Mzc1MjY2.eRePTguYgTCsPyQt16x-G-sG40P5G_jTk0qxoXJq0wcg.A_6JLiG87ChFvnQ3jVrt2y7GCAbCTuIy7ohy4o-zTd0g.PNG.bbaaee9/image.png?type=w966)
 
-- - -
 
 * S3 버킷 이름 찾는 방법(2) - AWS CLI
 
@@ -189,8 +181,6 @@ aws cloudformation describe-stacks --stack-name amazon-cloudwatch-auto-alarms-s3
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfNzkg/MDAxNjY4MTYwNTM2MjE0.U9dlfk2F4QmyIJji6HuTJsdAFMM7OSPzNtS3baGgz64g.p4nlK1G1pgNAaLMT3nENTxnmmYNjqR4A1WSk707HKEQg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfNzkg/MDAxNjY4MTYwNTM2MjE0.U9dlfk2F4QmyIJji6HuTJsdAFMM7OSPzNtS3baGgz64g.p4nlK1G1pgNAaLMT3nENTxnmmYNjqR4A1WSk707HKEQg.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
 7. amazon-cloudwatch-auto-alarms.zip 파일을 S3 버킷에 복사합니다.
 
 ```bash
@@ -199,13 +189,7 @@ aws s3 cp amazon-cloudwatch-auto-alarms.zip s3://<your S3 bucket name>
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTc2/MDAxNjY4MTU4NDk4MzI0.T_4vGqZis58CR7gDX9dpfVSDFT3F67PSRkXfnU68XR0g.QwZdjNuRCJlZ3akvJAW5v1mjgE0kpvRT23E2xTNVyqsg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTc2/MDAxNjY4MTU4NDk4MzI0.T_4vGqZis58CR7gDX9dpfVSDFT3F67PSRkXfnU68XR0g.QwZdjNuRCJlZ3akvJAW5v1mjgE0kpvRT23E2xTNVyqsg.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
-- - -
-
 8. CloudWatchAutoAlarms.yaml CloudFormation 템플릿과 S3 버킷에 업로드한 배포 패키지를 사용하여 AWS Lambda 함수를 배포합니다. 3단계에서 생성한 SNS Topic에 대한 ARN도 입력해야 합니다.
-
-- - -
 
 * SNS Topic ARN 찾는 방법
 
@@ -217,10 +201,6 @@ aws cloudformation describe-stacks --stack-name amazon-cloudwatch-auto-alarms-sn
 ```
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTEz/MDAxNjY4MTYwNDQ3NDA5.YCuqHdDKhH-fAi93F08Lh66RYUiVVRPvQbWc0IRb0xgg.hxyu4K_ohhOIPuidxMICPwptLMOaO_JarkbWMapXhkog.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTEz/MDAxNjY4MTYwNDQ3NDA5.YCuqHdDKhH-fAi93F08Lh66RYUiVVRPvQbWc0IRb0xgg.hxyu4K_ohhOIPuidxMICPwptLMOaO_JarkbWMapXhkog.PNG.bbaaee9/image.png?type=w966)
-
-- - -
-
-- - -
 
 ```bash
 aws cloudformation create-stack --stack-name amazon-cloudwatch-auto-alarms \
@@ -234,11 +214,7 @@ ParameterKey=AlarmNotificationARN,ParameterValue=<SNS Topic ARN for Alarm Notifi
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMjA5/MDAxNjY4MTYwMzU5ODg5.rA1k4djkjfemVZHSoNanCd7y4bmhFoAh7A0tMCaFTXgg.90h-kD9LH-0QPbA2HzTzAsRdwLq30G1UaMc5kZ6D9-Qg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMjA5/MDAxNjY4MTYwMzU5ODg5.rA1k4djkjfemVZHSoNanCd7y4bmhFoAh7A0tMCaFTXgg.90h-kD9LH-0QPbA2HzTzAsRdwLq30G1UaMc5kZ6D9-Qg.PNG.bbaaee9/image.png?type=w966)
 
-- - -
-
 9. AWS CloudFormation 콘솔에서 amazon-cloudwatch-auto-alarms 스택이 생성되었는지 확인합니다.
-
-- - -
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMjg1/MDAxNjY4MTYwNzA1OTc1.jx90XAF9WOobIwDwGsrXRu8q_s4UGhW3-P8syvs3yKcg.4yIPJVBOyVUfmZgwCfDrgwUu5VzrSmlRfEVBzj-nQdgg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMjg1/MDAxNjY4MTYwNzA1OTc1.jx90XAF9WOobIwDwGsrXRu8q_s4UGhW3-P8syvs3yKcg.4yIPJVBOyVUfmZgwCfDrgwUu5VzrSmlRfEVBzj-nQdgg.PNG.bbaaee9/image.png?type=w966)
 
@@ -296,15 +272,11 @@ ParameterKey=AlarmNotificationARN,ParameterValue=<SNS Topic ARN for Alarm Notifi
 
 * 이제 EC2에 필요한 Amazon CloudWatch Agent가 설치됩니다.
 
-- - -
-
 * Summary를 확인한 다음 Launch instance를 클릭합니다 .
 
 ![https://postfiles.pstatic.net/MjAyMjExMTBfNDIg/MDAxNjY4MDY2OTUzMDIx.PtsC4C2JOpz7Bj7Tr1Vp8i1HFdjXJyKc8fZCHr57bdQg.T7d7ZHlN-ymeUJ4CH33hUGSos3c1X0n3-sLx-PMOQl0g.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTBfNDIg/MDAxNjY4MDY2OTUzMDIx.PtsC4C2JOpz7Bj7Tr1Vp8i1HFdjXJyKc8fZCHr57bdQg.T7d7ZHlN-ymeUJ4CH33hUGSos3c1X0n3-sLx-PMOQl0g.PNG.bbaaee9/image.png?type=w966)
 
 인스턴스가 실행 상태에 도달하는 즉시 규칙 Amazon CloudWatch Events Initiate-CloudWatchAutoAlarms가 트리거되고 Lambda 함수 CloudWatchAutoAlarms에 대한 호출이 시작됩니다. Lambda 함수는 시작된 인스턴스의 세부 정보를 가지고 Create_Auto_Alarms라는 EC2 인스턴스의 Tag Key를 확인합니다. Tag Key가 있는 경우 환경 변수 임계값을 사용하여 Alarm을 생성합니다.
-
-- - -
 
 * Amazon CloudWatch 콘솔의 Alarm 페이지에서 Alarm이 생성되었는지 확인합니다.
 
@@ -313,9 +285,7 @@ ParameterKey=AlarmNotificationARN,ParameterValue=<SNS Topic ARN for Alarm Notifi
 결과: Alarm이 생성되지 않았습니다.
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTg0/MDAxNjY4MTYxODkwOTM1.6Mfe8u-d5lUTytxxLBqYHJIBZAzeWLBW1MWumKS8OLwg.7mydcpXl_gkQ9eIGyQEiZJvuWH4LFcOlHqk4UO3Nohcg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTg0/MDAxNjY4MTYxODkwOTM1.6Mfe8u-d5lUTytxxLBqYHJIBZAzeWLBW1MWumKS8OLwg.7mydcpXl_gkQ9eIGyQEiZJvuWH4LFcOlHqk4UO3Nohcg.PNG.bbaaee9/image.png?type=w966)
-
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTg2/MDAxNjY4MTYxNTU4NTkx.XOfMYa\_-RV2062nrQbp6LK1Q54BQ7g4N7fZ1x05FbeMg.qpHza5w2oWDwn0dJZ-YY3S0vi-eBnpyYOjOdBTw1No8g.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTg2/MDAxNjY4MTYxNTU4NTkx.XOfMYa_-RV2062nrQbp6LK1Q54BQ7g4N7fZ1x05FbeMg.qpHza5w2oWDwn0dJZ-YY3S0vi-eBnpyYOjOdBTw1No8g.PNG.bbaaee9/image.png?type=w966)
-
 ![https://postfiles.pstatic.net/MjAyMjExMTRfMTk4/MDAxNjY4NDE1MjA4MjIy.U2T281uDn5u129BMKGbJkcAoDTOByeE9_PcvQtHmigUg.lsc2H-VWsmyiiofz791TuJRlJzYz6F_ioMnirAVEp34g.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTRfMTk4/MDAxNjY4NDE1MjA4MjIy.U2T281uDn5u129BMKGbJkcAoDTOByeE9_PcvQtHmigUg.lsc2H-VWsmyiiofz791TuJRlJzYz6F_ioMnirAVEp34g.PNG.bbaaee9/image.png?type=w966)
 
 Cloudwatch의 Metrics에서 해당 인스턴스를 검색해보면 Cloudwatch agent에 있는 메트릭을 확인할 수 있습니다.
@@ -324,7 +294,7 @@ Cloudwatch의 Metrics에서 해당 인스턴스를 검색해보면 Cloudwatch ag
 
 Lambda 함수에 누락된 부분이 있어 오류가 나는지 확인해 봅니다.
 
-무료 코드 비교 툴은 mergely([www.mergely.com](https://www.mergely.com/)) 를 사용하여 Lambd 함수 코드와 GitHub에 있는 코드를 비교해 보았지만, 결과는 동일한 코드였습니다.
+코드 비교 툴 mergely([www.mergely.com](https://www.mergely.com/)) 를 사용하여 Lambd 함수 코드와 GitHub에 있는 코드를 비교해 보았지만, 결과는 동일한 코드였습니다.
 
 ![https://postfiles.pstatic.net/MjAyMjExMTFfMTA2/MDAxNjY4MTYyOTEyNDc0.rWSPnJv4wQtnFaCr7byjhgonFQ1fbK1PwUXNOjq3E5og.fzINOaWKemLo3I9RSp7GHBxNM28QUkW8PYGQHkzH5hMg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTFfMTA2/MDAxNjY4MTYyOTEyNDc0.rWSPnJv4wQtnFaCr7byjhgonFQ1fbK1PwUXNOjq3E5og.fzINOaWKemLo3I9RSp7GHBxNM28QUkW8PYGQHkzH5hMg.PNG.bbaaee9/image.png?type=w966)
 
@@ -352,6 +322,8 @@ Lambda 함수의 Configure 탭을 확인하여 환경 변수를 확인해 봅니
 
 ![https://postfiles.pstatic.net/MjAyMjExMTRfMjkx/MDAxNjY4NDEzMzc0NTY4.TRyleNS3qbwyf6Ttt3eliDsyr3pQ-guHviKxE9v-jakg.iGt_lGo02uI6dBLGt6okGXJgWz0ZCSBlZtzM1QPIKfsg.PNG.bbaaee9/image.png?type=w966](https://postfiles.pstatic.net/MjAyMjExMTRfMjkx/MDAxNjY4NDEzMzc0NTY4.TRyleNS3qbwyf6Ttt3eliDsyr3pQ-guHviKxE9v-jakg.iGt_lGo02uI6dBLGt6okGXJgWz0ZCSBlZtzM1QPIKfsg.PNG.bbaaee9/image.png?type=w966)
 
+- - -
+
 ## 2. AWS CLI를 사용하여 EC2 인스턴스에 CloudWatch Alarm 생성하기
 
 AWS CLI를 사용하여 다음 명령어를 실행하여 CloudWatch Alarm을 생성할 수 있습니다. CloudWatch Alarm을 생성하려는 인스턴스마다 Alarm 이름과 인스턴스 ID를 변경할 수 있으며 테스트에서는 메트릭 CPUUtiliization 및 disk_used_percent에 대한 CloudWatch Alarm을 생성하였습니다.
@@ -376,9 +348,7 @@ aws cloudwatch put-metric-alarm
 --unit Percent
 ```
 
-CloudWatch Alarm이 생성된 것을 확인할 수 있습니다.
-
-![Untitled]()
+AWS 콘솔에서 CloudWatch Alarm이 생성된 것을 확인할 수 있습니다.
 
 다양한 경우에서 EC2 메트릭에 대한 CloudWatch Alarm을 생성해보는 테스트를 통해 Amazon CloudWatch라는 서비스를 경험해 본 좋은 기회였습니다.
 
