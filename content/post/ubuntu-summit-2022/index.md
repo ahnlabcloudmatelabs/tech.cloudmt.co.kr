@@ -8,7 +8,7 @@ categories:
 tags:
 - Ubuntu
 - Linux
-feature_image: 'images/keda-http.png' # 포스트 커버 이미지 경로 (포스트에 포함된 이미지 중 하나 지정. 필드 제거하면 기본 이미지가 나옵니다.)
+feature_image: 'opening.jpg' # 포스트 커버 이미지 경로 (포스트에 포함된 이미지 중 하나 지정. 필드 제거하면 기본 이미지가 나옵니다.)
 ---
 
 지난 11월 7일부터 9일 까지 체코 프라하에서 Ubuntu Summit 2022 (우분투 서밋 2022) 행사가 있었는데요, 한국에서는 저를 비롯한 우분투 한국 커뮤니티 운영진으로 활동 중인 4명의 인원이 Canonical 측으로부터 초청을 받아 참가할 수 있었습니다. 이번에 우분투 서밋 참가를 통해 다양한 분야에서 최근 우분투가 어떤 역할을 하는지도 알 수 있었고, 전세계 우분투 커뮤니티의 다양한 사람들을 만날 수 있어 즐거운 시간이였습니다. 행사 후에는 회사 지원을 받아 워케이션 일정으로 몇일 더 머물 수 있었는데요, 이 글을 통해서 이번에 열렸던 우분투 서밋에 대해 소개 해 보고, 제가 참가했던 세션 중 흥미로웠던 세션 일부를 소개 해 보고자 합니다.
@@ -32,6 +32,8 @@ Ubuntu Summit 은 주로 Ubuntu 를 개발한 회사인 Canonical 에서 행사�
 
 ## 1일차
 Community Team 을 이끌고 있는 Philipp Kewisch님과 Canonical CEO인 Mark Shuttleworth의 오프닝으로 1일차 일정이 시작 되었습니다. 1일차 주요 일정에 대해 소개하고 참가자들이 어디에서 왔는지 국가 목록을 보여 주면서 다양한 곳에서 온 분들을 다시한번 환영하는 자리를 가졌습니다.
+
+![](opening.jpg)
 
 ### The Windows Subsystem for Linux (WSL) - Latest updates and future improvements
 이후 오전에는 Ballroom 에서 세션이 이어 졌는데요, 개인적으로 WSL을 자주 쓰다 보니 [Craig Loewen 님의 세션 "The Windows Subsystem for Linux (WSL) - Latest updates and future improvements"](https://events.canonical.com/event/2/contributions/24/)을 재미있게 봤습니다. EA, 블리자드에서 WSL을 활용하여 리눅스에서 돌아갈 게임 서버 개발 및 디버깅등에 활용한 활용 사례, 새로 나온 서비스인 DevBox 에서의 WSL 시연, WSL 에서의 상호운용성 기능과 GPU 가속 기능, 등에 대한 소개가 있었고. WSL2와 WSLg 의 내부 구조에 대한 설명이 있었습니다.
@@ -65,7 +67,7 @@ Community Team 을 이끌고 있는 Philipp Kewisch님과 Canonical CEO인 Mark 
 ![](ubuntuarm3.jpg)
 
 ### Ubucon Europe and Asia
-이 날은 [저와 우분투 포르투갈 로컬 커뮤니티의 운영진인 Tiago Carrando 님의 함께 준비한 세션](https://events.canonical.com/event/2/contributions/109/)이 있는 날 이기도 했습니다. 세션을 통해서 Ubucon Europe 행사와 Ubucon Asia 행사에 대해 소개하는 시간을 가졌습니다. Ubuntu Summit 과는 어떻게 다른 행사인지, 과거에 열린 Ubucon 행사는 어땠는지, Ubucon 을 개최하려면 어떤 준비과정을 거쳐야 하고, 준비 하면서 꼭 명심해야 할 것은 무엇인지에 대해서도 공유하는 시간을 가졌습니다. 
+이 날은 [저와 우분투 포르투갈 로컬 커뮤니티의 운영진인 Tiago Carrando 님이 함께 준비한 세션](https://events.canonical.com/event/2/contributions/109/)이 있는 날 이기도 했습니다. 세션을 통해서 Ubucon Europe 행사와 Ubucon Asia 행사에 대해 소개하는 시간을 가졌습니다. Ubuntu Summit 과는 어떻게 다른 행사인지, 과거에 열린 Ubucon 행사는 어땠는지, Ubucon 을 개최하려면 어떤 준비과정을 거쳐야 하고, 준비 하면서 꼭 명심해야 할 것은 무엇인지에 대해서도 공유하는 시간을 가졌습니다. 
 
 청중이 많이 없어서 아쉽긴 했지만, 발표 자체는 즐겁게 준비해서 잘 마쳤고. (전날 까지도 준비가 다 안 되어서 밤에 Tiago 님과 맥주 마시면서 준비하고 당일 오전에도 마저 준비를 마무리 하긴 했습니다만...) 외국 분과 협업해서 발표도 준비 해 보고, Ubucon 에 대한 경험을 공유 해 볼 수 있는 좋은 경험 이였습니다.
 
@@ -103,3 +105,17 @@ Community Team 을 이끌고 있는 Philipp Kewisch님과 Canonical CEO인 Mark 
 마지막으로 [Ubuntu Frame 을 활용해서 Flutter 기반 키오스크 앱을 구축해서 실행 해 보는 워크샵](https://events.canonical.com/event/2/contributions/39/)에도 참여 하였습니다. 그러나 이 워크샵에서는 샘플 코드 빌드에 시간이 한참 걸려서, 실제로 제 노트북에서 실행되는 것을 보진 못했습니다. 그래서 이 워크샵에서도 마찬가지로 앞에서 발표자 분이 시연 하는것을 구경하는 것으로 만족 했습니다.
 
 ![](ubuntuframe.jpg)
+
+## 클로징 파티
+
+행사에서 가장 즐겁게 참여 했던 프로그램이 아마 클로징 파티가 아닐까 싶습니다. 프라하 블타바 강의 크루즈에서 파티가 열려서 프라하 야경도 보면서 술과 음식도 즐길 수 있었고. 오픈소스만으로 각종 음악 작업을 다 하는 Lorenzo's music 에서 공연을 해 주어서 더 즐거운 클로징 파티가 아니였나 싶습니다 :) 내부에는 포토 프린터와 소품도 있어서 한국에서 같이 온 운영진 분들이나 또 다른 참가자 분들과 사진도 찍으면서 즐거운 추억도 남길 수 있었습니다.
+
+![](closing.jpg)
+![](closing1.jpg)
+![](closing2.jpg)
+
+# 글을 마치며
+
+행사 이후에는 몇일간 프라하에 더 머물면서 관광도 하고 회사 일도 조금씩 보는 워케이션 일정을 가졌는데요. 이 기간 동안 호텔 숙박은 회사 측에서 부담 해 줘서 프라하에 더 머물며 이곳저곳 둘러볼 수 있어 좋았습니다. 우분투 서밋은 코로나19 이후 오랜만에 참여했던 해외 오프라인 행사 였는데요, 개인적으로 참여 해 봤던 컨퍼런스 중에 가장 즐겁게 참여 했었던 것 같습니다. 내년에도 열려서 여건이 된다면, 한번 더 참여 해 보고 싶은 행사라고 할 수 있겠네요. 
+
+우분투 서밋이 끝난 지도 어느덧 한 달이 지나서, 녹화 영상이 조금씩 올라오고 있습니다. 우분투 서밋에서 어떤 세션이 있었고, 녹화 영상으로 자세히 알고 싶다면 [행사 홈페이지](https://events.canonical.com/event/2)와 [YouTube 재생목록](https://www.youtube.com/playlist?list=PL-qBHd6_LXWYutOfi0r_jzyqHGmq1vIhf)을 한번 보시면 좋을 것 같습니다. :)
