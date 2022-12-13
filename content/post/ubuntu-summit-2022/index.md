@@ -78,3 +78,28 @@ Community Team 을 이끌고 있는 Philipp Kewisch님과 Canonical CEO인 Mark 
 
 ![](docs.jpg)
 ![](docs1.jpg)
+
+## 3일차
+
+3일차에는 주로 워크샵 세션에 많이 참가해서 참가했던 워크샵에 대해 이야기 해 보고자 합니다.
+
+### Build your own environmental monitoring station with a raspberry Pi on Ubuntu Core
+
+[Raspberry Pi 와 Ubuntu Core 를 이용해서 온습도 센서에서 값을 읽어다가 보여주는 실습을 해 보는 시간을 가졌습니다.](https://events.canonical.com/event/2/contributions/77/) 발표자 분이 실습용 라즈베리파이와, Ubuntu Core 가 미리 설치 된 SD 카드, 센서까지 미리 다 준비 해서 나눠 주셨으나... 저는 Ubuntu Core 초기 설정에 실패하는 바람에 초기화 하고 다시 설정 한다고 시간을 다 써서 제대로 실습 해 보지는 못한 것 같습니다. 옆에분은 잘 실습 진행하고 계서서 대신 옆에분이 Ubuntu Core 에 날씨 모니터링 프로그램 샘플 Snap 패키지 셋팅하는것을 구경하거나 앞에서 발표자분이 시연하는것을 구경하는 것으로 대신 했습니다.
+
+![](core.jpg)
+![](core1.jpg)
+![](core2.jpg)
+
+### Ubuntu on RISC-V - state of things
+
+요즘 Arm 과 함께 또 많은 사람들이 관심을 가지는 프로세서가 ISA가 모두 오픈소스로 공개되어 있는 RISC-V가 아닐까 싶은데요. [현재 우분투의 RISC-V 지원은 어떤지에 대해 이야기 하는 짧은 세션](https://events.canonical.com/event/2/contributions/111/)에도 참여 했습니다. 세션에서 현재 우분투가 지원되는 RISC-V 싱글보드 (SiFive Hifive Unmatched, StarFive VisionFive 2, Allwinner Nezha 등)에 대해 알아보고, 지금 각 우분투 릴리스 별로 지원하는 RISC-V 하드웨어, 지원되는 패키지 현황 등에 대해 알아보는 시간을 가졌습니다. Python, JSK, Node.js, Docker, LXD 등 자주 쓰는 개발 도구는 이미 지원이 잘 된다고 하는군요.
+
+![](riscv.jpg)
+![](riscv1.jpg)
+
+### Building graphical IoT solutions with Mir and Ubuntu Core
+
+마지막으로 [Ubuntu Frame 을 활용해서 Flutter 기반 키오스크 앱을 구축해서 실행 해 보는 워크샵](https://events.canonical.com/event/2/contributions/39/)에도 참여 하였습니다. 그러나 이 워크샵에서는 샘플 코드 빌드에 시간이 한참 걸려서, 실제로 제 노트북에서 실행되는 것을 보진 못했습니다. 그래서 이 워크샵에서도 마찬가지로 앞에서 발표자 분이 시연 하는것을 구경하는 것으로 만족 했습니다.
+
+![](ubuntuframe.jpg)
