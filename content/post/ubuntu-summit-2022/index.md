@@ -2,7 +2,7 @@
 title: Ubuntu Summit 2022 참관기 
 authors:
 - youngbin-han # 저자 프로필 페이지 경로 입력
-date: 2022-11-16T09:51:53+09:00
+date: 2022-12-13T09:51:53+09:00
 categories:
 - Mate Story # 새로운 기술 소개 또는 Hands On 이외 기술 관련 글
 tags:
