@@ -45,3 +45,36 @@ Community Team 을 이끌고 있는 Philipp Kewisch님과 Canonical CEO인 Mark 
 
 ![](rocklts.jpg)
 ![](rockcraft.jpg)
+
+### LXD: Containers for Human Beings
+
+보통 리눅스 컨테이너에 대해 이야기 하면, Docker 와 Podman 같은 애플리케이션을 패키징 해서 배포하기 위한 OCI 포맷의 애플리케이션 컨테이너를 많이 이야기 하는데요. 이 세션에서는 VM 대신 가벼운 격리 환경을 만들어 쓸 때 많이 사용하는 시스템 컨테이너인 LXD에 대해 알아보는 시간을 가졌습니다. 이와 함께 간단한 LXD 시연도 볼 수 있는 시간이였습니다.
+
+![](lxd.jpg)
+
+## 2일차
+2일차 일정은 ["Ubuntu on Arm"](https://events.canonical.com/event/2/contributions/8/) 이라는 흥미로운 제목의 세션으로 일정이 시작 되었습니다. 
+
+### Ubuntu on Arm
+
+캐노니컬의 Ubuntu on Arm 팀에서 우분투에서 Arm 프로세서 지원을 위해 어떤 활동을 해 왔는지 알 수 있는 세션이였습니다. 우분투 12.04 때 부터 Arm 지원을 위해 커뮤니티와 해온 갖은 노력, .Net, JDK, Airflow 등 다양한 워크로드를 우분투 Arm 으로 운영할 때의 다양한 이점, 우분투가 프리로드된 ThinkPad X13s (Snapdragon 8cx Gen3 가 탑제된) 노트북을 위한 협업, 그외 퍼블릭 클라우드, Juju, MAAS, Automotive 등 분야에서의 우분투 Arm 지원을 위해 다양한 작업을 하고 있음을 알 수 있는 세션이였습니다. 재미난 것이 원래 우분투 모바일 팀에서 지금의 우분투 Arm 팀으로 피봇해서 활동을 해 오고 있다고 하는데, 우분투 모바일 팀은 원래 인텔의 제안으로 시작 했다고 하는군요...?
+
+![](ubuntuarm.jpg)
+![](ubuntuarm1.jpg)
+![](ubuntuarm2.jpg)
+![](ubuntuarm3.jpg)
+
+### Ubucon Europe and Asia
+이 날은 [저와 우분투 포르투갈 로컬 커뮤니티의 운영진인 Tiago Carrando 님의 함께 준비한 세션](https://events.canonical.com/event/2/contributions/109/)이 있는 날 이기도 했습니다. 세션을 통해서 Ubucon Europe 행사와 Ubucon Asia 행사에 대해 소개하는 시간을 가졌습니다. Ubuntu Summit 과는 어떻게 다른 행사인지, 과거에 열린 Ubucon 행사는 어땠는지, Ubucon 을 개최하려면 어떤 준비과정을 거쳐야 하고, 준비 하면서 꼭 명심해야 할 것은 무엇인지에 대해서도 공유하는 시간을 가졌습니다. 
+
+청중이 많이 없어서 아쉽긴 했지만, 발표 자체는 즐겁게 준비해서 잘 마쳤고. (전날 까지도 준비가 다 안 되어서 밤에 Tiago 님과 맥주 마시면서 준비하고 당일 오전에도 마저 준비를 마무리 하긴 했습니다만...) 외국 분과 협업해서 발표도 준비 해 보고, Ubucon 에 대한 경험을 공유 해 볼 수 있는 좋은 경험 이였습니다.
+
+![](ubucon.jpg)
+![](ubucon1.jpg)
+![](ubucon2.jpg)
+
+### Finding happiness and success through documentation - workshop
+제 발표를 마친 후에는, 어떤 세션을 참가 해 볼까 하다가 [문서화 워크샵](https://events.canonical.com/event/2/contributions/70/) 에 참여 했었는데요. 문서화 도구에 관한 워크샵 인가 싶어서 참여 했더니, [Diátaxis framework](https://diataxis.fr/) 라는 문서화 방법론에 관한 워크샵 이였습니다. 세션 중간에 참여해서 내용 전체를 잘 이해하진 못했지만, 그룹별로 책상에 보드와 카드를 올려두고, 각 카드에 나와있는 텍스트가 튜토리얼(Tutorial), How-to 가이드(How-to guides), 설명(Explanation), 참조자료(Reference) 중 어디에 해당하는지 분류 해 보면서 각 유형의 문서가 어떤 특성을 가지는지 이해해 보는 시간을 가졌습니다.
+
+![](docs.jpg)
+![](docs1.jpg)
