@@ -21,7 +21,7 @@ hugo mod get
 저자 등록을 하지 않았다면 먼저 합니다. 본인 이름의 로마자 표기에 공백 대신`-`를 사용한 표기법으로 폴더를 만들고 그 안에, `_index.md` 를 생성합니다.
 ```bash
 # 이름이 "홍길동" 이고, 로마자 표기가 Gildong Hong 인 경우, 아래처럼 gildong-hong 으로 사용.
-hugo new --kind author authors/gildong-hong/_index.md
+hugo new authors/gildong-hong/_index.md
 ```
 생성된 `_index.md` 파일을 열어. 해당 프로필 파일의 안내에 따라 프로필 이미지를 넣고 프로필 파일을 수정합니다.
 ```yaml
@@ -39,7 +39,7 @@ photo: Author.jpg # 저자 프로필 이미지 경로. index.md 와 같은 폴�
 
 ```bash
 # hugo new --kind post post/원하는-게시물-주소/index.md
-hugo new --kind post post/path-to-post/index.md
+hugo new post/path-to-post/index.md
 ```
 
 아래와 같은 파일이 생성됩니다. `authors`의 경우, 앞서 생성한 저자 프로필 폴더 이름을 사용합니다. 저자가 여러명인 경우 리스트 형태로 여러명 넣어줍니다.
