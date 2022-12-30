@@ -49,10 +49,10 @@ Azure Repos에서는 코드를 편집할 때 버전 제어 시스템에 파일�
     - Python, Java, JavaScript, PHP, Ruby, C#, C++ 및 Go를 비롯한 여러 언어와 다양한 프로젝트 유형에서 작동
     - 배포대상으로는 가상 머신, 환경, 컨테이너, 온프레미스 및 클라우드 플랫폼 또는 PaaS 서비스가 포함
 
-'''json
+```
 CI : 개발팀이 코드 병합 및 테스트를 자동화를 사용하는 방식. 결과로 아티팩트가 생성되고 이를 릴리스 프로세스에 공급하여 빈번한 배포 유도하는 프로세스   
 CD : 하나 이상의 테스트/프로덕션 환경에 코드를 실제로 빌드, 테스트 및 배포하는 프로세스
-'''
+```
 
 Azure Pipelines의 경우, 동시에 다른 유형의 대상에 배포해야 하는경우, Azure 배포나 Github과의 통합을 진행해야 하는 경우 Windows, Linux 또는 Mac 시스템에서 빌드해야 하는 경우 사용하기에 유용합니다.
 
@@ -125,7 +125,8 @@ __Envoy__ 는 클라우드 네이티브 애플리케이션용으로 설계된 �
 현재 파이프라인에서 구성된 yaml 파일은 아래와 같습니다.
 
 
-'''trigger:
+```
+trigger:
 - main
 
 resources:
@@ -179,7 +180,8 @@ stages:
               --name prd-album-ui \
               --resource-group prd-rg \
               --image _azure container registry login server url_/prd-album-ui:'$(Build.BuildId)'
-          addSpnToEnvironment: true'''
+          addSpnToEnvironment: true
+```
 
 이 yaml 파일에 정의된 대로 Azure Pipeline이 돌아가게 됩니다. trigger로 정한 작업이 일어나게 되면 stage에 정의된 작업들이 자동으로 동작 합니다.   
 Build 스테이지에서 Github에 올린 코드를 이미지화 시켜 Azure Container Registry에 올리고, 이 작업이 끝나고 나면 update_aca 스테이지에서는 Azure Container Apps를 업데이트 시켜 새 버전의 컨테이너를 배포합니다.
