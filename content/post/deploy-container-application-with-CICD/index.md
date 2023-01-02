@@ -11,7 +11,8 @@ tags:
 - CICD
 - Container Apps
 
-title: CICD로 컨테이너 애플리케이션 배포해보자
+title: CI/CD로 컨테이너 애플리케이션 배포해보자
+feature_image: images/coverimg.png
 ---
 
 안녕하세요! 
