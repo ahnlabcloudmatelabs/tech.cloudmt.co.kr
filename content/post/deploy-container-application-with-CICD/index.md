@@ -14,7 +14,7 @@ tags:
 title: CI/CD로 컨테이너 애플리케이션 배포해보자
 ---
 
-안녕하세요! :)
+안녕하세요!
 
 저희는 이번에, "CI/CD로 컨테이너 애플리케이션 배포해보자"라는 시나리오를 가지고 사내 프로젝트를 진행했습니다.   
 저희가 구현하고자 하는 아키텍처를 아래에 소개합니다!   
@@ -75,9 +75,9 @@ Container Apps는 AKS(Azure Kubernetes Service)를 기반으로 구축되었지�
 Azure Container Apps는 아래와 같은 구조로 구성되어 있습니다.
 ![image](images/aca-structure.png)
 Dapr, KEDA, Envoy 프록시와 통합을 포함해서 Azure Kubernetes Service를 기반으로 구축되었습니다.   
-__Dapr__를 통해 API를 제공하는 분산 애플리케이션 런타임으로 마이크로서비스 간 연결을 단순화할 수 있으며, KEDA와 Envoy와 달리 활성화 및 비활성화를 선택할 수 있습니다.   
-__[KEDA](https://keda.sh/docs/2.9/scalers/)__는 HTTP 트래픽, CPU, 메모리 등을 기반으로 스케일링할 수 있는 쿠버네티스 이벤트 기반 오토 스케일러입니다.   
-__Envoy__는 클라우드 네이티브 애플리케이션용으로 설계된 프록시로 Container Apps에선 트래픽 분할과 ingress를 제공하는 역할을 합니다.
+__Dapr__ 를 통해 API를 제공하는 분산 애플리케이션 런타임으로 마이크로서비스 간 연결을 단순화할 수 있으며, KEDA와 Envoy와 달리 활성화 및 비활성화를 선택할 수 있습니다.   
+__[KEDA](https://keda.sh/docs/2.9/scalers/)__ 는 HTTP 트래픽, CPU, 메모리 등을 기반으로 스케일링할 수 있는 쿠버네티스 이벤트 기반 오토 스케일러입니다.   
+__Envoy__ 는 클라우드 네이티브 애플리케이션용으로 설계된 프록시로 Container Apps에선 트래픽 분할과 ingress를 제공하는 역할을 합니다.
 
 이로써 Azure Container Apps에서는 쿠버네티스로 운영하기 위해 Deployment, Service, Ingress 등 복잡한 부분들을 구성할 필요가 없습니다.   
 단지 컨테이너화된 애플리케이션의 원하는 구성을 맞추기 위해 비교적 간단한 Azure CLI 혹은 포털을 통해 구성하면 됩니다.   
@@ -118,7 +118,7 @@ __Envoy__는 클라우드 네이티브 애플리케이션용으로 설계된 프
 6. Azure DevOps 를 통해 CI/CD를구성하기위해 Azure DevOps에 조직 및 프로젝트를 생성합니다. 그리고는 먼저 ACR 및 Azure Subscription에 대한 Service Connection을 생성해야 합니다.
     ![image](images/de-serviceconn.png)
 7. 그리고 본격적으로 CI/CD로 구성하기 위해 Pipeline 탭에서 새로운 Pipeline을 구성합니다.
-    ![image]images/mk-pipline.png)
+    ![image](images/mk-pipline.png)
     ![image](images/mk-gitinte.png)
     - 코드가 있는 GitHub을 선택하고 GitHub 로그인 후에 GitHub 리포지토리와 Azure DevOps를 연동하기 위한 권한 부여 작업을 진행합니다.   
     - Github 리포지토리를 선택하고 Starter pipeline을 선택해 yaml 파일 작성합니다.
