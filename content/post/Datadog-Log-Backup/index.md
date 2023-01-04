@@ -346,8 +346,6 @@ Datadog 솔루션이 어떤 데이터를 수집하고 활용하는지 알게 된
 만들다 보니 이 기능을 구현했으면 어땠을까 하는 아쉬운 부분도 있었습니다.  
 그것은 프로그램을 실행하다가 중간에 오류가 발생하면 실패한 지점에서 다시 작업하는 기능입니다.
 
-이 글을 보시는 독자분들 중에 기가 막힌 아이디어가 있으시면 jeongdo.lee@cloudmt.co.kr 으로 의견 받습니다. 😉
-
 ## 5. 참고자료 📚
 
 - [Datadog Rate Limits](https://docs.Datadoghq.com/api/latest/rate-limits/#rate-limits)

@@ -5,7 +5,7 @@ backend:
   base_url:  https://tech.cloudmt.co.kr
   auth_endpoint: /api/auth
   squash_merges: true
-  open_authoring: true
+  open_authoring: false
 
 publish_mode: editorial_workflow
 media_folder: static/img
@@ -69,6 +69,7 @@ collections:
       - label: "커버 이미지"
         name: "feature_image"
         widget: "image"
+        media_folder: "images"
         required: false
       - label: "카테고리"
         hint: 하나만 선택

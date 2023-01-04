@@ -43,6 +43,8 @@ module.exports = async function (context, req) {
   const code = req.query._code;
   var options = {
     code: code,
+    scope: process.env.SCOPES || "repo,user",
+    redirect_uri: process.env.REDIRECT_URL,
   };
 
   if (oauthProvider === "gitlab") {
