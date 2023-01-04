@@ -16,13 +16,13 @@ title: CI/CD로 컨테이너 애플리케이션 배포해보자
 
 안녕하세요!
 
-저희는 이번에, <span style="background-color:#f5f0ff">"CI/CD로 컨테이너 애플리케이션 배포해보자"</span>라는 시나리오를 가지고 사내 프로젝트를 진행했습니다.   
+저희는 이번에, <span style="background-color:#fff5b1">"CI/CD로 컨테이너 애플리케이션 배포해보자"</span>라는 시나리오를 가지고 사내 프로젝트를 진행했습니다.   
 저희가 구현하고자 하는 아키텍처를 아래에 소개합니다!   
 ![image](images/architecture.png)
 애플리케이션 배포를 위해서 Azure Container Apps 서비스와 이에 대한 CI/CD를 구성하기 위해 Azure DevOps를 사용하였습니다.   
 PaaS인 ACA와 SaaS인 Azure DevOps를 사용하기에 아키텍처는 간단하고, 관리하는데 유용할 거라는 이점을 기대하며 아키텍처링을 진행했습니다.   
 
-그럼 먼저, <span style="background-color:#f5f0ff">Azure DevOps</span>란 어떤 서비스일까요?   
+그럼 먼저, <span style="background-color:#fff5b1">Azure DevOps</span>란 어떤 서비스일까요?   
 
 Azure DevOps는 팀이 작업을 계획하고, 코드 개발에 대해 공동 작업을 수행하고, 애플리케이션을 빌드 및 배포할 수 있도록 하는 개발자 서비스를 제공합니다.    
 개발자, 프로젝트 관리자 및 기여자가 함께 소프트웨어를 개발할 수 있도록 협업 문화 및 툴을 지원합니다. 이를 통해 조직은 기존 보다 더 빠른 속도로 제품을 만들고 개선할 수 있습니다.   
@@ -67,7 +67,7 @@ Azure Pipelines의 경우, 동시에 다른 유형의 대상에 배포해야 하
     - 패키지를 피드에 게시하고 동일한 팀 내, 조직 전체, 공개적으로 공유 가능. 
 
 이러한 CI/CD 툴을 이용하여 저희는 애플리케이션을 Azure Container Apps에 배포하려고 합니다.   
-그럼 <span style="background-color:#f5f0ff">Azure Container Apps</span>는 구체적으로 어떤 서비스일까요?   
+그럼 <span style="background-color:#fff5b1">Azure Container Apps</span>는 구체적으로 어떤 서비스일까요?   
 
 Container Apps는 스케일링을 관리하는 완전 관리형 서버리스 컨테이너 서비스입니다.   
 Container Apps는 AKS(Azure Kubernetes Service)를 기반으로 구축되었지만, 쿠버네티스 API, yaml을 사용 하지 않고도 패키징된 컨테이너를 가져오기만 해서 사용할 수 있습니다. 그래서 직접적인 쿠버네티스 API를 지원하진 않습니다. 같은 AKS 기반이라 할지라도 쿠버네티스에 대한 러닝 커브가 높은 AKS보다는 편리하게 서비스를 운영 및 관리 가능합니다.
@@ -124,7 +124,7 @@ __Envoy__ 는 클라우드 네이티브 애플리케이션용으로 설계된 �
     - Github 리포지토리를 선택하고 Starter pipeline을 선택해 yaml 파일 작성합니다.
   
   현재 파이프라인에서 구성된 yaml 파일은 아래와 같습니다.
-    ```
+  ```
     trigger:
     - main
 
@@ -180,7 +180,7 @@ __Envoy__ 는 클라우드 네이티브 애플리케이션용으로 설계된 �
                   --resource-group prd-rg \
                   --image _azure container registry login server url_/prd-album-ui:'$(Build.BuildId)'
               addSpnToEnvironment: true
-    ```
+  ```
   yaml 파일에 정의된 대로 trigger 동작이 이루어지게 되면 stage의 작업들이 자동으로 실행이 되어 일련의 과정을 통해 Container Apps가 업데이트 됩니다.   
   "Build" stage를 통해서 Github에 올린 코드를 이미지화 시켜 컨테이너 레지스트리에 이미지를 올리고, 이 작업이 끝나면 "update_aca" stage에 인라인스크립트로 작성된 명령어들을 통해 ACA를 배포합니다.
 
