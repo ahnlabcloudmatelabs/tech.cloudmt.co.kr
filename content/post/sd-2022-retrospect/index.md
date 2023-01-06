@@ -4,7 +4,7 @@ title: "생동감있는 서비스개발팀에서 보낸 2022년 격변의 시간
 authors: 
 - jungwoo kim
 categories:
-- Tech
+- Column
 date: "2022-12-31T00:00:00Z"
 #draft: true
 tags:
