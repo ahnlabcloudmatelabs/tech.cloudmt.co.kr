@@ -1,9 +1,10 @@
 ---
 authors:
-- jiyong sung, heewon kim
+- jiyong-sung
 date: "2022-12-26T00:00:00Z"
 categories:
 - Hands on
+feature_image: images/main.png
 
 tags:
 - Azure
