@@ -1,6 +1,6 @@
 ---
 authors:
-- jiyong-sung
+- jiyoung-sung
 date: "2022-12-26T00:00:00Z"
 categories:
 - Hands on
