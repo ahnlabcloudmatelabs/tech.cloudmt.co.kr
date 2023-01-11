@@ -8,7 +8,7 @@ categories:
 tags:
 - Azure
 - PaaS
-feature_image: images/cover.png
+feature_image: images/cover.PNG
 ---
 처음 클라우드를 접하고 학습할 때 IaaS, PaaS, SaaS 설명을 듣게 되신다면  
 IaaS는 머신을 빌려 쓰는거구나?  
