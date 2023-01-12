@@ -4,7 +4,7 @@ authors:
 - jisoo-kim
 date: 2023-01-11T11:22:12+09:00
 categories:
-- Column
+- Tech
 tags:
 - Azure
 - PaaS
