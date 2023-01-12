@@ -452,7 +452,7 @@ title: AWS 멀티리전 환경의 WordPress 웹 사이트 구축하기
 2. Git Clone을 통해 해당 리포지토리에 연결합니다.
 
 ```bash
-git clone [https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01](https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01)
+git clone https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01
 ```
 
 3. 다음 Username과 Password 입력을 요구하면 사전에 IAM에서 생성한 자격 증명 정보를 입력합니다.
@@ -463,14 +463,14 @@ git clone [https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpres
 
 ```bash
 # git remote -v
-origin  [https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01](https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01) (fetch)
-origin  [https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01](https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01) (push)
+origin https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01 (fetch)
+origin https://git-codecommit.ap-northeast-2.amazonaws.com/v1/repos/wordpress-test01 (push)
 ```
 
 5. 배포할 코드를 로컬로 다운로드 및 리포지토리 폴더에 압축을 해제합니다.
 
 ```bash
-wget [https://wordpress.org/latest.tar.gz](https://wordpress.org/latest.tar.gz)
+wget https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz -C wordpress-test01
 ```
 
