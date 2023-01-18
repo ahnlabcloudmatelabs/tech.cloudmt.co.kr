@@ -18,7 +18,7 @@ PaaS는 뭔가 감이 잘 안 올 수 있습니다.
 
 당장 궁금한 걸 해결하고 싶어서 직접 서비스를 써보려고 하는데, 서비스가 만들어지기까지 넣어줘야 하는 설정들이 많아서 뭔가 어렵고, 잘 모르면 실수로 요금이 많이 나올 수 있다는 이야기를 듣곤 두렵기도 하는 심리적인 진입장벽들이 있을 수 있다고 생각했습니다.
 
-그래서 Azure(Microsoft의 클라우드 서비스)의 대표 서비스인 PaaS의 정석, App Service(제품 이름입니다)로 PaaS가 대체 어떻게 생긴 건지 대신 보여드리면서 이해에 도움이 되고자 합니다.
+그래서 Azure(Microsoft의 클라우드 서비스)의 대표 서비스인 PaaS의 정석, AppService(제품 이름입니다)로 PaaS가 대체 어떻게 생긴 건지 대신 보여드리면서 이해에 도움이 되고자 합니다.
 
 ## 런타임
 
@@ -29,14 +29,14 @@ AppService를 만들 때 그림처럼 언어를 고르게 되는데요, AppServi
 
 이때 코드만 짜서 올린다는 말은 말 그대로 마련된 서버에 코드 파일을 올리면 된다는 말인데요, FTP 클라이언트로 그 서버에 파일을 올리는 것이 가장 기본이겠지만, 전형적인 PaaS의 장점들을 잘 갖추고 있는 AppService는 런타임뿐만 아니라 Github, Bitbucket같은 코드리포지토리와의 연동을 지원하고 CI/CD를 위한 Pipeline, Deployment slot같은 DevOps의 배포 전략을 위한 기본 개념까지 모두 지원합니다.
 
-그래서 앱 서비스가 만들어지고 나면 리소스 페이지의 배포 센터라는 탭에서 코드리포지토리와 브랜치를 고를 수 있고,
+그래서 AppService가 만들어지고 나면 리소스 페이지의 배포 센터라는 탭에서 코드리포지토리와 브랜치를 고를 수 있고,
 
 ![](images/image3.PNG)  
 ![](images/image4.PNG)  
 코드리포지토리에서 특정이 된 코드가 방금 리소스를 만들 때 골라놨던 언어의 런타임 위에서 실행이 됩니다. 잠깐의 시간이 지나면 앱이 배포가 됩니다.
 
 ![](images/image5.PNG)  
-앱 서비스의 URL이 생겼고,
+AppService의 URL이 생겼고,
 
 ![](images/image6.PNG)  
 그 URL을 통해 접속이 가능합니다
@@ -50,7 +50,7 @@ AppService를 만들 때 그림처럼 언어를 고르게 되는데요, AppServi
 
 ## 여러가지 기능
 
-PaaS가 서비스를 개발할 때 필요한 플랫폼이라고 해서, 이렇게 앱을 빌드 해주는 것, 끝!이라고 생각하실 수도 있을 것 같은데요, 전형적으로 PaaS서비스의 주요 특징이라고 할 수 있는 기능들이 있습니다. 보안, 로드밸런싱, 오토스케일링.. Azure의 대표 서비스인 App Service에서는 이런 PaaS의 장점인 기능들을 제대로 갖추고 있습니다. 아래 그림은 AppService 리소스 페이지의 탭입니다.
+PaaS가 서비스를 개발할 때 필요한 플랫폼이라고 해서, 이렇게 앱을 빌드 해주는 것, 끝!이라고 생각하실 수도 있을 것 같은데요, 전형적으로 PaaS서비스의 주요 특징이라고 할 수 있는 기능들이 있습니다. 보안, 로드밸런싱, 오토스케일링.. Azure의 대표 서비스인 AppService에서는 이런 PaaS의 장점인 기능들을 제대로 갖추고 있습니다. 아래 그림은 AppService 리소스 페이지의 탭입니다.
 
 ![](images/image1.PNG)  
 
@@ -93,7 +93,7 @@ AppService에서는 배포 슬롯이라는 것을 통해 배포를 관리할 수
 ![](images/image21.PNG)  
 %를 조절하면서 롤아웃을 할 수도 있습니다.
 
-MS 문서 중에 [App Service 배포 모범 사례](https://learn.microsoft.com/ko-kr/azure/app-service/deploy-best-practices)가 있는데요
+MS 문서 중에 [AppService 배포 모범 사례](https://learn.microsoft.com/ko-kr/azure/app-service/deploy-best-practices)가 있는데요
 
 ![](images/image22.png)  
 그림처럼 프로덕션 슬롯을 따로 두고, 
