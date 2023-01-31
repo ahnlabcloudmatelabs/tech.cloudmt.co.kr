@@ -11,7 +11,7 @@ tags:
 - ECS
 - Amazon ECS
 - Spot Ocean
-feature_image: 'img/Untitled 01.png'
+feature_image: 'img/thumbnail.png'
 ShowToc: false
 TocOpen: false
 draft: false
