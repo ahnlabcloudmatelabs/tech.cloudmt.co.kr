@@ -24,7 +24,6 @@ draft: false
 
 이번 시간에는 Amazon ECS를 Spot Ocean으로 마이그레이션하는 방법에 대해 공유하려고 합니다.
 
-<<<<<<< HEAD
 ![Untitled](./img/Ocean.png)
 
 # Spot by NetApp과 Ocean
