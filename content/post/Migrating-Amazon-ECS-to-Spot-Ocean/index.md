@@ -11,7 +11,7 @@ tags:
 - ECS
 - Amazon ECS
 - Spot Ocean
-feature_image: 'img/thumbnail.png'
+feature_image: 'img/Thumbnail.png'
 ShowToc: false
 TocOpen: false
 draft: false
@@ -23,11 +23,13 @@ draft: false
 
 이번 시간에는 Amazon ECS를 Spot Ocean으로 마이그레이션하는 방법에 대해 공유하려고 합니다.
 
+![Untitled](./img/Ocean.jpg)
+
 # Spot by NetApp과 Ocean
 
 먼저 AWS의 다양한 EC2 유형에 대해 살펴볼까요?
 
-온디맨드 인스턴스의 경우 약정 없이 사용한 만큼 비용을 내는 옵션입니다. 만약 24시간 365일 꾸준히 이 용량을 사용해야 한다면 예약 인스턴스(RI)와 Savings Plan과 같은 약정 할인 옵션을 통해 비용을 절감할 수도 있습니다.
+온디맨드 인스턴스의 경우 약정 없이 사용한 만큼 비용을 내는 옵션입니다. 만약 24시간 365일 꾸준히 이 용량을 사용해야 한다면 예약 인스턴스(RI)와 Savings Plans과 같은 약정 할인 옵션을 통해 비용을 절감할 수도 있습니다.
 
 Spot 인스턴스는 AWS에서 남는 자원을 재판매하는 서비스입니다. AWS에서 미사용되는 EC2 인스턴스를 온디맨드보다 대폭 할인된 비용으로 활용할 수 있는 것이지요. 비용 절약성은 확보하지만 배포된 인스턴스가 언제든지 회수될 가능성이 있다는 점에서 가용성을 확보하기 어렵습니다.
 
@@ -35,7 +37,7 @@ Spot by NetApp은 머신러닝 및 분석 알고리즘을 통해 Spot 인스턴�
 
 AWS 계정에서 이미 사용 중인 예약 인스턴스나 Savings Plans이 있다면 이를 먼저 사용하는 것도 가능합니다. 사용되는 순서는 예약 인스턴스(RI), EC2 Instance Saving Plans, Compute Savings Plans, Spot 인스턴스입니다.
 
-Ocean은 Spot by NetApp의 컨테이너용 클라우드 관리형 인프라 자동화 서비스입니다. ECS 클러스터와 Ocean의 통합은 Spot SaaS와 AWS ECS 서비스 간의 API 호출을 통해 실행됩니다. 대시보드에서는 시간 경과에 따라 절감된 비용과 온디맨드 대비 제공받은 할인율까지 한눈에 확인할 수 있습니다. 
+Ocean은 Spot by NetApp의 컨테이너용 클라우드 관리형 인프라 자동화 서비스입니다. ECS 클러스터와 Ocean의 통합은 Spot SaaS와 AWS ECS 서비스 간의 API 호출을 통해 실행됩니다. 대시보드에서 시간 경과에 따라 절감된 비용과 온디맨드 대비 제공받은 할인율까지 한눈에 확인할 수 있습니다. 
 
 ![Untitled](./img/Untitled.png)
 
@@ -57,7 +59,7 @@ Ocean은 클러스터의 요구사항에 맞게 인프라 용량과 크기를 �
 
 ![Untitled](./img/Untitled%202.png)
 
-1. Create Ocean Cluster 페이지가 나타나면 사용 사례 템플릿을 선택해야 합니다. Join an Existing Cluster에서 **Join an Existing ECS Cluster**를 클릭합니다.
+2. Create Ocean Cluster 페이지가 나타나면 사용 사례 템플릿을 선택해야 합니다. Join an Existing Cluster에서 **Join an Existing ECS Cluster**를 클릭합니다.
 
 ![Untitled](./img/Untitled%203.png)
 
@@ -69,18 +71,16 @@ Ocean은 클러스터의 요구사항에 맞게 인프라 용량과 크기를 �
 
 ![Untitled](./img/Untitled%204.png)
 
-1. **NEXT**를 클릭합니다.
+2. **NEXT**를 클릭합니다.
 
-<aside>
+
 💡 만약 다음과 같이 “Cluster Import Failed” 에러가 발생한다면?
-
-</aside>
 
 ![Untitled](./img/Untitled%205.png)
 
 위 에러는 말 그대로 ECS 클러스터에 실행 중인 인스턴스가 없기 때문에 발생합니다.
 
-먼저 노드가 네트워킹을 하고 있는지 확인해야 합니다. ECS는 EC2에 **ECS 컨테이너 에이전트**를 설치 및 관리하며 작동합니다. 따라서 ECS 에이전트를 설치하기 위해서는 반드시 인터넷 통신이 가능해야 합니다. ECS 클러스터 생성 시 Auto assign public IP가 Disabled로 설정되어 있는 것이 위 에러의 원인일 수 있습니다. 이때 Auto assign public IP 항목을 **Use subnet setting**로 변경해야 합니다. 이 부분을 수정하기 위해서는 새로운 버전의 Laucn Configuration을 생성하고 해당 Autoscaling Group의 Launch Configuration을 새로 만든 복사본으로 변경하는 작업이 필요합니다.
+먼저 노드가 네트워킹을 하고 있는지 확인해야 합니다. ECS는 EC2에 **ECS 컨테이너 에이전트**를 설치 및 관리하며 작동합니다. 따라서 ECS 에이전트를 설치하기 위해서는 반드시 인터넷 통신이 가능해야 합니다. ECS 클러스터 생성 시 Auto assign public IP가 Disabled로 설정되어 있는 것이 위 에러의 원인일 수 있습니다. 이때 Auto assign public IP 항목을 **Use subnet setting**로 변경해야 합니다. 이 부분을 수정하기 위해서는 새로운 버전의 Launch Configuration을 생성하고 해당 Autoscaling Group의 Launch Configuration을 새로 만든 복사본으로 변경하는 작업이 필요합니다.
 
 ### 2단계: Compute 설정
 
@@ -102,7 +102,7 @@ Ocean은 클러스터의 요구사항에 맞게 인프라 용량과 크기를 �
     - (선택) 클러스터 리소스의 최대 vCPU와 최대 메모리를 지정합니다.
 - Additional Configuration
     - (선택) Public IP 할당 여부와 Draining Timeout을 지정합니다.
-1. **Next**를 클릭합니다.
+2. **Next**를 클릭합니다.
     
     
 
@@ -162,12 +162,12 @@ Spot 콘솔에서도 새로 생성된 노드에 대한 정보를 확인할 수 �
 
 ![Untitled](./img/Untitled%2016.png)
 
-1. **Update**를 클릭합니다.
-2. 기존 Autoscaling Group의 Group size를 모두 0으로 조정하여 Autoscaling Group을 비활성화하여 마무리합니다. 이제 Ocean이 AWS의 Autoscaling Group을 대신하게 되는 것입니다.
+4. **Update**를 클릭합니다.
+5. 기존 Autoscaling Group의 Group size를 모두 0으로 조정하여 Autoscaling Group을 비활성화하여 마무리합니다. 이제 Ocean이 AWS의 Autoscaling Group을 대신하게 되는 것입니다.
 
 ![Untitled](./img/Untitled%2017.png)
 
-1. **Update**를 클릭합니다.
+6. **Update**를 클릭합니다.
 
 # 마치며
 
