@@ -18,8 +18,6 @@ TocOpen: false
 draft: false
 ---
 
-# Amazon ECS를 Spot Ocean으로 마이그레이션하기
-
 안녕하세요, NBD팀 배지수입니다.
 
 이번 시간에는 Amazon ECS를 Spot Ocean으로 마이그레이션하는 방법에 대해 공유하려고 합니다.
