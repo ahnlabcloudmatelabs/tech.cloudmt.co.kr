@@ -56,7 +56,7 @@ params:
     - post
   mainButtons:
     - name: We Are Hiring!
-      url: https://recruit.cloudmt.co.kr
+      url: https://cmrecruit.notion.site/cmrecruit/63b32ea9e80445dfa839f1577d037ec1
   mainCategories:
     - Hands On
     - Tech
