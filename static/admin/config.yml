@@ -2,6 +2,7 @@ backend:
   name: github
   branch: main
   repo: cloudmatelabs/tech.cloudmt.co.kr
+  site_domain: 91e74f07-1a5e-4c41-9074-81dda853100d #Site ID
   # base_url:  https://tech.cloudmt.co.kr
   # auth_endpoint: /api/auth
   squash_merges: true
