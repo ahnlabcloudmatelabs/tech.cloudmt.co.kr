@@ -3,7 +3,7 @@ backend:
   branch: main
   repo: cloudmatelabs/tech.cloudmt.co.kr
   base_url:  https://tech.cloudmt.co.kr
-  auth_endpoint: /api/auth
+  # auth_endpoint: /api/auth
   squash_merges: true
   open_authoring: false
 
