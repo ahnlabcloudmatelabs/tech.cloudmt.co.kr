@@ -1,7 +1,7 @@
 ---
 title: 번들러 마이그레이션(Webpack to Vite)으로 빌드 속도 높이기
 authors:
-- jinhyueok-yu
+- jinhyeok-yu
 date: "2023-02-23T14:19:47+09:00"
 categories:
 - Tech
