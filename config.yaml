@@ -42,6 +42,11 @@ params:
   nav_title: 👨‍💻TECH BLOG
   copyright: © 2019-Present Cloudmate Co., Ltd.
   utterances: cloudmatelabs/tech.cloudmt.co.kr
+  giscus:
+    repo: cloudmatelabs/tech.cloudmt.co.kr
+    repoId: MDEwOlJlcG9zaXRvcnkzMTYxNjcyNzI=
+    category: Blog Comments
+    categoryId: DIC_kwDOEthUaM4CUi7a
   footLogo: 
     path: /assets/images/CMLOGO_WHITE.png
     link: https://cloudmt.co.kr
