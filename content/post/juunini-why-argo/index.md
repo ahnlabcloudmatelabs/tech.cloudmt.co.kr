@@ -28,15 +28,13 @@ Argo는 2023년 2월 기준
 
 ## 왜 Argo를 선택했는가?
 
-AWS, Azure, GCP 같은 유명한 클라우드 플랫폼의 Kubernetes GitOps 가이드를 보면  
-다들 자사 제품과 함께 아래 그림에 보이는 문어같은 녀석이 표시되어 있습니다.
+AWS, Azure, GCP 같은 유명 클라우드 서비스 제공 업체의 쿠버네티스 GitOps 가이드를 보면 자사 제품과 함께 문어처럼 보이는 녀석이 표시되어 있습니다.
 
 ![argo image](images/argo.webp)
 
 _~~꼴뚜기 왕자님?~~_
 
-각 클라우드 플랫폼사의 쿠버네티스 GitOps 가이드에 언급 될 정도로 사용성이나 안정성에서 인정되었고,  
-CNCF의 Graduated 프로젝트에도 포함이 되어있습니다.
+또한, CNCF의 Graduated 프로젝트에도 포함이 되어 있습니다. 여기저기 안 끼는 곳이 없다는 것은? 사용성과 안정성을 널리 인정받고 있다는 것을 잘 보여주는 것이 아닐까요.
 
 ![cncf graduated 스크린샷](images/cncf.webp)
 
@@ -52,34 +50,32 @@ CI/CD를 구축하는 방법은 여러가지가 있습니다.
 - GitHub Workflows
 - ...
 
-특정 클라우드 플랫폼의 제품을 이용하면 해당 플랫폼에 종속적이 될 수 밖에 없습니다.  
-그런 경우에 다른 플랫폼으로 바꾸고 싶어지면 해당 플랫폼에 맞게 재작성해야 한다는 문제점도 생기게 되죠.
+특정 클라우드 서비스 제공 업체가 제공하는 도구를 이용해 CI/CD를 구축하는 것은 양날의 검과 같습니다. 툴체인 구성이 간편하다는 장점이 있는 반면에 자칫 특정 서비스에 종속되는 잠재적인 문제를 안고 가야 할 수도 있습니다. 가령 특성 서비스로 CI/CD를 구축해 잘 쓰고 있었는데, 회사에서 클라우드 서비스 제공 업체를 다른 곳으로 바꿀 경우 해당 환경에 맞게 다시 구축해야 합니다.
 
-그래서 쿠버네티스 클러스터에 CI/CD를 할 수 있는 도구를 설치해서 사용한다면  
-플랫폼 종속성이 사라지기에 Argo 제품을 이용해 CI/CD를 구축하기로 했습니다.
+종속 걱정 없이 하이브리드 멀티 클라우드 전략에 맞게 CI/CD를 구축하는 가장 확실한 길은 ‘쿠버네티스’ 표준을 따르는 모든 환경에 적용할 수 있는 툴체인을 구성하는 것입니다. 이런 이유로 특정 클라우드 제공 업체의 서비스 종속으로부터 자유로운 Argo를 이용해 CI/CD를 구축하게 되었습니다.
 
 ### Argo vs ...
 
 Argo를 쓴다고 이야기를 하니 주변에서  
-[AirFlow]와 [Flux CD] 등의 대체제를 추천해주셨지만,  
+[AirFlow]와 [Flux CD] 등 다른 대안을 추천하는 분도 있었습니다.
 Argo의 경우에는 [Argo CD]와 [Argo Workflow]로 CI/CD를 모두 지원하기에
 일관성 있게 Argo 제품군으로 통일해서 사용해보기로 헀습니다.
 
 [Jenkins]도 CI/CD가 되지 않느냐 라고 할 수 있지만,  
-Argo의 경우엔 [Argo CD]를 통해 쿠버네티스로 배포된 자원을 모니터링이 가능하기에  
+Argo의 경우엔 [Argo CD]를 통해 쿠버네티스로 배포된 자원까지 모니터링을 할 수 있어
 쿠버네티스 환경에선 Argo 제품이 더 사용하기 좋은 측면이 있습니다.
 
 ---
 
 # 핸즈온
 
-아래의 핸즈온을 따라하시면 Argo를 설치하고 사용해보실 수 있습니다.  
+아래 핸즈온을 따라하면 누구나 쉽게 Argo를 설치해 사용해 볼 수 있습니다.
 핸즈온에서는 Argo로 Blue-Green 배포와 함께 [Ingress Nginx]와 [Cert Manager]를 이용해  
-[Let's Encrypt] 인증서를 발급받아 적용시키는 과정이 함께 들어있습니다.
+[Let's Encrypt] 인증서를 발급받아 적용시키는 과정이 포함되어 있습니다.
 
 ## 설치하기
 
-아래 스크립트를 쉘에 입력하시면 이런 작업이 실행됩니다.
+아래 스크립트를 쉘에 입력하면 다음과 같은 작업이 실행됩니다.
 
 - [Argo CD] 설치
 - [Argo Rollouts] 설치
@@ -91,7 +87,7 @@ Argo의 경우엔 [Argo CD]를 통해 쿠버네티스로 배포된 자원을 모
 - https://localhost:8080 으로 포트포워딩
 - https://localhost:2746 으로 포트포워딩
 
-{{< detail-tag "**이 텍스트를 눌러 코드를 확인하세요**" >}}
+{{< detail-tag "**이 텍스트를 눌러 스크립트를 확인하세요**" >}}
 
 ```sh
 GREEN='\033[0;32m'
@@ -173,14 +169,14 @@ kubectl -n argo port-forward deployment/argo-server 2746:2746 &
 
 {{</ detail-tag >}}
 
-## 코드 레포지토리
+## 코드 리포지토리
 
 아래 파일은 Golang으로 구현한 간단한 웹서버 입니다.  
 웹서버를 빌드해서 컨테이너라이즈 해주는 `Dockerfile`도 함께 포함되어 있죠.  
-아래 파일들을 복사해서 GitHub 레포지토리를 만들어보세요.  
+아래 파일들을 복사해서 GitHub 리포지토리를 만들어보세요.  
 (꼭 GitHub가 아니어도 상관은 없습니다. Git이면 됩니다.)
 
-이 레포지토리는 [Argo Workflows]에서 CI를 위해 사용됩니다.
+이 리포지토리는 [Argo Workflows]에서 CI를 위해 사용됩니다.
 
 {{< detail-tag "**이 텍스트를 눌러 코드를 확인하세요**" >}}
 
@@ -220,13 +216,13 @@ ENTRYPOINT ["/work/server"]
 
 {{</ detail-tag >}}
 
-## GitOps 레포지토리
+## GitOps 리포지토리
 
-Argo CD는 GitOps 도구이기 때문에 Git 레포지토리에 Kustomize를 작성해서  
+Argo CD는 GitOps 도구이기 때문에 Git 리포지토리에 Kustomize를 작성해서  
 CD를 처리하도록 권장하고 있습니다.  
 (혹은 [Helm]을 이용하거나요)
 
-이 레포지토리는 [Argo CD]에서 CD를 위해 사용됩니다.
+이 리포지토리는 [Argo CD]에서 CD를 위해 사용됩니다.
 
 아래의 `_preview` 라고 붙는 부분은 Blue-Green 배포시  
 Green으로 변경하기 전에 미리보기를 제공하는 부분입니다.
@@ -425,12 +421,11 @@ spec:
 
 {{< /detail-tag >}}
 
-위의 코드를 작성하고 Git 레포지토리에 등록한 뒤, Argo CD에 등록하셔야 합니다.
+위의 코드를 작성하고 Git 리포지토리에 등록한 후 Argo CD에 등록해야 합니다.
 
 ![](images/handson1.webp)
 
-처음 Argo CD에 로그인하면 이런 화면이 보일텐데, 거기서 `+NEW APP` 버튼을 클릭하시면  
-아래같은 화면이 오른쪽에서 슬라이드되며 나타날겁니다.
+처음 Argo CD에 로그인하면 위와 같은 화면을 볼 수 있는데, 여기서 +NEW APP 버튼을 클릭하면 아래같은 화면이 오른쪽에서 슬라이드되며 나타날겁니다.
 
 정보를 넣고 `CREATE` 버튼을 클릭하면 앱이 생성됩니다.
 
@@ -442,8 +437,8 @@ spec:
 https://localhost:8080/swagger-ui 로 들어가면 [Argo CD API](https://localhost:8080/swagger-ui)를 볼 수 있는데,  
 여기서 [Sync API](https://localhost:8080/swagger-ui#operation/ApplicationService_Sync)를 호출하면 됩니다.
 
-API를 그냥은 호출할 수 없고, 호출 가능한 토큰이 필요한데, 그건 [Session API](https://localhost:8080/swagger-ui#operation/SessionService_Create)를 호출해서 얻을 수 있습니다.  
-아래와 같이 토큰을 얻은 뒤, [Sync API](https://localhost:8080/swagger-ui#operation/ApplicationService_Sync)를 호출하는 식이죠.
+API를 그냥은 호출할 수 없고, 호출 가능한 토큰이 필요한데, 이는 [Session API](https://localhost:8080/swagger-ui#operation/SessionService_Create)를 호출해서 얻을 수 있습니다.  
+아래와 같이 토큰을 얻은 다음 [Sync API](https://localhost:8080/swagger-ui#operation/ApplicationService_Sync)를 호출하는 식이죠.
 
 ```sh
 PASSWORD="<Your Argo CD Password>"
@@ -464,21 +459,21 @@ curl -k -X POST https://localhost:8080/api/v1/applications/${APP_NAME}/sync -H "
 
 ### Argo Workflows에 CI 구축하기
 
-아래의 배포 스크립트는 이런 과정을 담고 있습니다.
+아래의 배포 스크립트를 실행하면 다음과 같은 과정이 진행됩니다.
 
 - 네임스페이스 생성
 - RBAC를 위한 Role과 ServiceAccount 생성
 - Argo CD 서버를 호출하기 위한 Secret 생성(Env로 쓰기 위해)
 - 컨테이너 레지스트리에 푸시하기 위해 Secret 생성
-- Git이 프라이빗 레포지토리일 경우 SSH 클론을 할 수 있도록 SSH 키를 담는 Secret 생성
+- Git이 프라이빗 리포지토리일 경우 SSH 클론을 할 수 있도록 SSH 키를 담는 Secret 생성
 - https://your.webhook.domain.com 이라는 주소로 POST 요청을 받으면 CI가 실행되도록 EventSource와 Ingress 설정
-- 레포지토리를 클론 후 Dockerfile을 기반으로 컨테이너라이징 후 컨테이너 레지스트리에 푸시하는 Sensor
+- 리포지토리를 클론 후 Dockerfile을 기반으로 컨테이너라이징 후 컨테이너 레지스트리에 푸시하는 Sensor
 
-아래 스크립트를 참고해서 여러분의 상황에 맞게 수정해서 사용하시면 됩니다.  
-[Argo CD]의 주소는 쿠버네티스 내부의 `CLUSTER-IP` 를 넣으시면 됩니다.  
+아래 스크립트를 참고해 각자의 상황에 맞게 수정해 사용하면 됩니다.
+[Argo CD]의 주소는 쿠버네티스 내부의 `CLUSTER-IP` 를 넣으면 됩니다.
 [Argo Workflows]도, [Argo CD]도 전부 쿠버네티스 내부에서 작동하는 도구니까요.
 
-아래 파일을 `ci.yaml` 라고 저장한 뒤, `kubectl apply -f ci.yaml` 이라고 하면 작동합니다.
+아래 파일을 `ci.yaml` 라고 저장한 다음 `kubectl apply -f ci.yaml` 이라고 하면 작동합니다.
 
 {{< detail-tag "**이 텍스트를 눌러 코드를 확인하세요**" >}}
 
@@ -786,26 +781,26 @@ spec:
 
 ### 웹훅 등록하기
 
-GitHub를 기준으로 설명드리자면, 레포지토리의 `Settings` 에 들어가면 `Webhooks` 라는 탭이 있습니다.  
+GitHub를 기준으로 설명하겠습니다. 리포지토리의 `Settings` 에 들어가면 `Webhooks` 라는 탭이 있습니다.  
 여기서 웹훅을 생성해서 URL을 입력하면 됩니다.  
 (위에서 `your.webhook.domain.com` 이라고 된 부분을 여러분의 상황에 맞게 변경하면 됩니다.)
 
 ![](images/webhook.webp)
 
 GitHub이 아니라도 Git을 기반으로 하는 서비스들은 웹훅 설정이 어렵지 않게 비슷하게 되어있을겁니다.  
-코드 레포지토리에 웹훅을 등록하고 push 이벤트를 발생시키면 Argo Workflows에서 CI가 실행이 됩니다.
+코드 리포지토리에 웹훅을 등록하고 push 이벤트를 발생시키면 Argo Workflows에서 CI가 실행이 됩니다.
 
 ### Blue-Green 진행시키기
 
 위의 과정이 제대로 실행되었다면, Argo CD에 Sync까지 되었을텐데,  
-두번 째 부터는 완전히 Sync가 안되고 멈춰있을겁니다.
+두 번째부터는 완전히 Sync가 안되고 멈추어 있을 것입니다.
 
 그럼 앱을 클릭해서 그래프를 보면 `rollout` 이라는 노드가 보일텐데,  
-아래 사진처럼 `Resume`을 누르면 Green으로 배포가 됩니다.
+아래와 같이 `Resume`을 누르면 Green으로 배포가 됩니다.
 
 ![](images/resume.webp)
 
-GitOps 레포지토리에 올렸던 코드를 보면 `autoPromotionEnabled: false` 라는 부분이 있었는데,  
+GitOps 리포지토리에 올렸던 코드를 보면 `autoPromotionEnabled: false` 라는 부분이 있었는데,  
 해당 부분이 Green의 배포를 수동으로 하도록 설정된 부분입니다.
 
 아직 `Resume` 하지 않은 상태에서는 앞에 설정했던 `preview` 서버에서 Green 상태의 배포를 미리 확인할 수 있습니다.  
@@ -817,8 +812,8 @@ Green의 상태를 먼저 확인하고 배포할 수 있도록 되어있는 것�
 
 ## P.S. Argo CD의 컨트리뷰터가 된 이야기
 
-저는 사용하는 도구의 컨트리뷰터가 되는게 가장 빠르게 전문가가 되는 길이라 생각하기 때문에  
-컨트리뷰터가 되는 가장 쉬운 방법 중 하나인 [국제화(i18n)에 기여하기 위해 PR](https://github.com/argoproj/argo-cd/pull/12521)을 올렸었습니다.
+개인적으로 컨트리뷰터가 되는 것이 전문가로 성장하는 지름길이라 생각합니다.
+그래서 컨트리뷰터가 되는 가장 쉬운 방법 중 하나인 [국제화(i18n)에 기여하기 위해 PR](https://github.com/argoproj/argo-cd/pull/12521)을 올렸었습니다.
 
 PR을 올리고 보니, Golang 모듈 테스트에서 에러가 발생해  
 [그걸 고치는 PR](https://github.com/argoproj/argo-cd/pull/12523)을 따로 올렸고, 컨트리뷰터가 되었습니다(?)
