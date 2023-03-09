@@ -28,7 +28,7 @@ Argo는 2023년 2월 기준
 
 ## 왜 Argo를 선택했는가?
 
-AWS, Azure, GCP 같은 유명 클라우드 서비스 제공 업체의 쿠버네티스 GitOps 가이드를 보면 자사 제품과 함께 문어처럼 보이는 녀석이 표시되어 있습니다.
+AWS, Azure, Google Cloud 같은 유명 클라우드 서비스 제공 업체의 쿠버네티스 GitOps 가이드를 보면 자사 제품과 함께 문어처럼 보이는 녀석이 표시되어 있습니다.
 
 ![argo image](images/argo.webp)
 
@@ -46,7 +46,7 @@ CI/CD를 구축하는 방법은 여러가지가 있습니다.
 
 - AWS CodePipeline
 - Azure Pipelines
-- GCP Cloud Build
+- Google Cloud Build
 - GitHub Workflows
 - ...
 
