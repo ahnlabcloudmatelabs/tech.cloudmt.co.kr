@@ -12,7 +12,7 @@ tags:
   - prometheus
   - thanos
   - grafana
-feature_image: "images/cover.webp"
+feature_image: "images/cover.png"
 ---
 
 급하신 분들은 [설치](#설치)로 바로 가시면 됩니다.
@@ -47,7 +47,10 @@ Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, �
 **Open source, highly available Prometheus setup with long term storage capabilities.**  
 라고 소개되어 있습니다.
 
-Prometheus의 Adapter 리스트를 보면 Thanos도 있습니다.
+Prometheus의 Adapter 리스트와 CNCF(Cloud Native Computing Foundation) 프로젝트 리스트를 보면 Thanos도 있습니다.
+
+![](images/CNCF_Thanos.png)
+![](images/cover.webp)
 
 # 설치
 
