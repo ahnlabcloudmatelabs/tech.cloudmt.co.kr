@@ -19,10 +19,10 @@ feature_image: "images/cover.webp"
 
 # Prometheus의 저장소 및 HA 문제
 
-Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, 어디까지나 제공 하는 정도입니다.  
+Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, 어디까지나 '제공'하는 정도입니다.  
 기본적으로는 Adapter를 이용해 Third-party Storage에 저장하도록 안내하고 있죠.
 
-야래 이미지는 [remote-storage-integrations]에서 가져온 이미지입니다.
+아래 이미지는 [remote-storage-integrations]에서 가져온 이미지입니다.
 
 ![](images/remote_integrations.webp)
 
@@ -33,9 +33,9 @@ Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, �
 
 # 언제 Thanos가 필요한가요?
 
-클러우드를 사용하면 보통은 모니터링을 지원하기 때문에 Prometheus를 사용 할 필요가 없습니다.  
+클라우드를 사용하면 보통은 모니터링을 지원하기 때문에 Prometheus를 사용 할 필요가 없습니다.  
 직접 클러스터를 구축하는 경우에도 [Google Cloud의 Anthos](https://cloud.google.com/anthos?hl=ko) 같은걸 이용하면 모니터링이 되기 때문에 직접 모니터링 툴을 세팅 할 필요가 없습니다.  
-(Anthos의 도입이 필요하시다면 저희 회사로 컨설팅 요청 하실 수 있습니다.)
+(Anthos의 도입이 필요하시다면 클라우드메이트로 컨설팅 요청 하실 수 있습니다. 국내 첫 Anthos 사례를 보유하고 있으며, 21년도부터 지금까지 프로젝트를 운영하고 있습니다.)
 
 하지만 보안사항에 의해서나, 클러스터를 직접 운영하고 싶은 경우에는 모니터링을 위해 Prometheus를 사용하게 됩니다.  
 그런 경우에 Prometheus의 메트릭을 장기 저장하고, HA구성을 하기 위해 Thanos를 사용하면 좋습니다.
