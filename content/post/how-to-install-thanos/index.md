@@ -238,10 +238,11 @@ kubectl patch service thanos-minio --namespace monitoring --patch '{"spec": {"ty
 
 ![](images/minio1.webp)
 
-[remote-storage-integrations]: https://prometheus.io/docs/prometheus/latest/storage/#remote-storage-integrations
-[통합할 수 있는 Adapter들을 소개하는 문서]: https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage
-[Argo를 사용해보자]: https://tech.cloudmt.co.kr/2023/02/27/juunini-why-argo/#%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0
-[17900]: https://grafana.com/grafana/dashboards/17900-1-kubernetes-all-in-one-cluster-monitoring-kr-v1-26-0/
-[thanos]: https://thanos.io/
-[^Prometheus HA]: Prometheus에서 제공하는 HA는 모니터링 자체의 HA라기보단, Alertmanager의 HA입니다.
-[^Prometheus scaling]: Prometheus 자체의 [Scaling and Fedarating](https://www.robustperception.io/scaling-and-federating-prometheus/)문서를 제공합니다.
+참고 URL
+- [remote-storage-integrations](https://prometheus.io/docs/prometheus/latest/storage/#remote-storage-integrations)
+- [통합할 수 있는 Adapter들을 소개하는 문서](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage)
+- [Argo를 사용해보자](https://tech.cloudmt.co.kr/2023/02/27/juunini-why-argo/#%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
+- [17900](https://grafana.com/grafana/dashboards/17900-1-kubernetes-all-in-one-cluster-monitoring-kr-v1-26-0/)
+- [thanos](https://thanos.io/)
+- Prometheus HA : Prometheus에서 제공하는 HA는 모니터링 자체의 HA라기보단, Alertmanager의 HA입니다.
+- Prometheus scaling : Prometheus 자체의 [Scaling and Fedarating](https://www.robustperception.io/scaling-and-federating-prometheus/)문서를 제공합니다.
