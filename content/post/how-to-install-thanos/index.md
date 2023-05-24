@@ -22,14 +22,17 @@ feature_image: "images/cover.png"
 Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, 어디까지나 '제공'하는 정도입니다.  
 기본적으로는 Adapter를 이용해 Third-party Storage에 저장하도록 안내하고 있죠.
 
-아래 이미지는 [remote-storage-integrations]에서 가져온 이미지입니다.
+아래 이미지는 [remote-storage-integrations](https://prometheus.io/docs/prometheus/latest/storage/#remote-storage-integrations)에서 가져온 이미지입니다.
 
 ![](images/remote_integrations.webp)
 
-그래서 [통합할 수 있는 Adapter들을 소개하는 문서]도 따로 있습니다.
+그래서 [통합할 수 있는 Adapter들을 소개하는 문서](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage)도 따로 있습니다.
 
 그래서 이번에 소개할 것은 메트릭을 Third-party Storage에 저장하고, HA구성을 도와주는 Thanos 입니다.  
-(물론 Prometheus에서도 HA[^Prometheus HA] 와 Scaling[^Prometheus scaling] 을 제공하긴 합니다.)
+(물론 Prometheus에서도 HA(Prometheus HA) 와 Scaling(Prometheus scaling) 을 제공하긴 합니다.)
+- Prometheus HA : Prometheus에서 제공하는 HA는 모니터링 자체의 HA라기보단, Alertmanager의 HA입니다.
+- Prometheus scaling : Prometheus 자체의 [Scaling and Fedarating](https://www.robustperception.io/scaling-and-federating-prometheus/) 문서를 제공합니다.
+
 
 # 언제 Thanos가 필요한가요?
 
@@ -42,10 +45,8 @@ Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, �
 
 ## Thanos가 뭔가요?
 
-[Thanos]는 Prometheus의 메트릭을 장기 저장하고, HA구성을 도와주는 오픈소스 프로젝트입니다.  
-홈페이지에 들어가보시면 소개 문구에도  
-**Open source, highly available Prometheus setup with long term storage capabilities.**  
-라고 소개되어 있습니다.
+[Thanos](https://thanos.io/)는 Prometheus의 메트릭을 장기 저장하고, HA구성을 도와주는 오픈소스 프로젝트입니다.  
+홈페이지에 들어가보시면 소개 문구에도 **Open source, highly available Prometheus setup with long term storage capabilities.** 라고 소개되어 있습니다.
 
 Prometheus의 Adapter 리스트와 CNCF(Cloud Native Computing Foundation) 프로젝트 리스트를 보면 Thanos도 있습니다.
 
@@ -55,7 +56,7 @@ Prometheus의 Adapter 리스트와 CNCF(Cloud Native Computing Foundation) 프�
 # 설치
 
 > 이 핸즈온에서는 Argo CD를 사용해서 설치합니다.  
-> Argo CD의 설치는 [Argo를 사용해보자]의 설치를 참고해주세요.
+> Argo CD의 설치는 [Argo를 사용해보자](https://tech.cloudmt.co.kr/2023/02/27/juunini-why-argo/#%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)의 설치를 참고해주세요.
 
 ## Thanos 설치
 
@@ -214,7 +215,7 @@ kubectl patch service kube-prometheus-stack-grafana --namespace monitoring --pat
 ![](images/grafana5.webp)
 
 원하시는 대시보드의 ID를 입력하고 `Load` 버튼을 누르시면 됩니다.  
-저의 경우엔 [17900]을 입력했습니다.  
+저의 경우엔 [17900](https://grafana.com/grafana/dashboards/17900-1-kubernetes-all-in-one-cluster-monitoring-kr-v1-26-0/)을 입력했습니다.  
 한국어로 되어있기도 하고 보여주는 지표도 많아서 추천드립니다.
 
 ![](images/grafana6.webp)
@@ -246,6 +247,5 @@ kubectl patch service thanos-minio --namespace monitoring --patch '{"spec": {"ty
 - [통합할 수 있는 Adapter들을 소개하는 문서](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage)
 - [Argo를 사용해보자](https://tech.cloudmt.co.kr/2023/02/27/juunini-why-argo/#%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)
 - [17900](https://grafana.com/grafana/dashboards/17900-1-kubernetes-all-in-one-cluster-monitoring-kr-v1-26-0/)
-- [thanos](https://thanos.io/)
-- Prometheus HA : Prometheus에서 제공하는 HA는 모니터링 자체의 HA라기보단, Alertmanager의 HA입니다.
-- Prometheus scaling : Prometheus 자체의 [Scaling and Fedarating](https://www.robustperception.io/scaling-and-federating-prometheus/)문서를 제공합니다.
+- [Thanos 홈페이지](https://thanos.io/)
+
