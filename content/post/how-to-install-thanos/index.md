@@ -51,7 +51,7 @@ Prometheus도 remote storage에 저장하는 기능을 제공하긴 하지만, �
 Prometheus의 Adapter 리스트와 CNCF(Cloud Native Computing Foundation) 프로젝트 리스트를 보면 Thanos도 있습니다.
 
 ![](images/CNCF_Thanos.webp)
-![](images/cover.webp)
+![](images/thanos.webp)
 
 # 설치
 
