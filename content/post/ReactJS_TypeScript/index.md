@@ -921,10 +921,10 @@ JavaScript를 단독으로 사용하고 계시다면 TypeScript의 도입을 고
 
 
 ##### 참고 자료
-
-> - _TypeScript 공식 사이트 핸드북, [https://www.typescriptlang.org/docs/handbook/intro.html](https://www.typescriptlang.org/docs/handbook/intro.html)_
+> - _TypeScript 공식 Handbook, [https://www.typescriptlang.org/docs/handbook/intro.html](https://www.typescriptlang.org/docs/handbook/intro.html)_
+> - _React 공식 문서, [https://react.dev/](https://react.dev/)_
+> - _DefinitelyTyped, github, useState [https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L918-L932](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L918-L932)_
+> - _DefinitelyTyped, github, useRef [https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L1024-L1062](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L1024-L1062)_
 > - _Jeongkuk Seo, "TypeScript 란", Medium, [https://medium.com/sjk5766/typescript-%EB%9E%80-37b5b6a6f884](https://medium.com/sjk5766/typescript-%EB%9E%80-37b5b6a6f884)_
 > - _devuna, "정적타입 언어 vs. 동적타입 언어 특징 비교하기", 튜나 개발일기, [https://devuna.tistory.com/82](https://devuna.tistory.com/82)_
-> - _React 공식 사이트 문서, https://ko.reactjs.org/docs/_
 > - _velopert, "리액트 프로젝트에서 타입스크립트 사용하기", velog.io, [https://velog.io/@velopert/using-react-with-typescript](https://velog.io/@velopert/using-react-with-typescript)_
-> - _DefinitelyTyped, github, https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts#L1021-L1065_
