@@ -22,7 +22,6 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 
 이번 시간에는 AWS CodeDeploy를 Spot Elastigroup에 연동하는 방법에 대해 공유하려고 합니다.
 
-![](images/image1.png)
 
 # Elastigroup
 
