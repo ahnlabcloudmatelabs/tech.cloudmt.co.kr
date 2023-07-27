@@ -9,7 +9,7 @@ categories:
 tags:
 - snippet
 - code
-feature_image: 'images/cover.webp'
+feature_image: 'images/cover.jpg'
 ---
 
 Snippet은 '코드 조각' 이라는 뜻입니다. 클라우드메이트에서 만든 Snippet 서비스를 소개하려고 합니다. 
