@@ -17,7 +17,6 @@ ShowToc: false # 글 개요 보여줄지 여부
 TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
 ---
-# JavaScript V8 엔진의 asynchronous 알아보기
 
 > 자바스크립트로 프로젝트를 진행하면서 여러가지 api와 통신을 하는 경우가 많았고
 >
@@ -25,7 +24,7 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 >
 > 궁금증이 생기게 되어 알아보게 되었습니다.
 
-자바스크립트 엔진중 가장 많이 사용하는 v8엔진을 기반으로 작성되었습니다. (구글 크롬)
+자바스크립트 엔진중 가장 많이 사용하는 v8엔진을 기반으로 작성되었습니다. (구글 크롬)  
 
 자바스크립트의 비동기 처리는 특정 코드의 연산이 실행되고있지만 결과를 기다리지 않고 다음 코드를 먼저 실행하는 자바스크립트의 특성을 의미합니다.
 
@@ -34,7 +33,7 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 자바스크립트 동작 방식은 아래이미지로 표현이 됩니다.
 ![자바스크립트v8](./images/javascript_v8.png "V8엔진 동작 방식")
 
-**V8엔진**은 크게 두 부분으로 구성됩니다.
+**V8엔진**은 크게 두 부분으로 구성됩니다.  
 
 - 메모리 힙 (Memory Heap) : 메모리 할당이 이루어지는 곳
 - 콜 스택 (call Stack) : 코드가 실행되면서 스택 프레임이 쌓이는곳
@@ -61,9 +60,9 @@ function third() {
 first();
 ```
 
-<center><img src="./images/Call_Stack_1.png" width="25%" height="25%" alt="Call Stack 설명"/></center>
+![Call Stack 설명](images/Call_Stack_1.png)
 
-main() 함수는 함수가 호출되었을때 생성되는 함수입니다. 그림을 보면 third(), seconde(), first(), main() 순으로 Pop되며 main() 함수까지 실행이 완료되면 호출 스택이 지워집니다.
+main() 함수는 함수가 호출되었을때 생성되는 함수입니다. 그림을 보면 third(), seconde(), first(), main() 순으로 Pop되며 main() 함수까지 실행이 완료되면 호출 스택이 지워집니다.  
 위 코드를 실행하면
 
 - 세번째
@@ -74,9 +73,9 @@ main() 함수는 함수가 호출되었을때 생성되는 함수입니다. 그�
 
 ## 자바스크립트 런타임
 
-JS가 실행되는 환경을 런타임이라고 하며 JS엔진은 V8말고도 여러가지가 있습니다.
-구글 크롬이나 Node.js에서 JS코드를 실행하면 V8엔진이 코드를 인터프리팅합니다.
-런타임 환경에는 WebAPI와 EventLoop, Task Queue가 있습니다.
+JS가 실행되는 환경을 런타임이라고 하며 JS엔진은 V8말고도 여러가지가 있습니다.  
+구글 크롬이나 Node.js에서 JS코드를 실행하면 V8엔진이 코드를 인터프리팅합니다.  
+런타임 환경에는 WebAPI와 EventLoop, Task Queue가 있습니다.  
 
 - WebAPI : WebAPI는 브라우저에서 제공되는 API 입니다. setTimeout, Http 요청(ajax) 메소드, DOM 이벤트 등이 WebAPI에 속합니다.
 - Task Queue : 이벤트가 발생한 후 호출되어야 할 콜백 함수들이 대기하고있는 공간입니다. 이벤트 루프가 정해준 순서대로 대기하고 있으며 콜백 큐 라고도 합니다.
@@ -84,7 +83,7 @@ JS가 실행되는 환경을 런타임이라고 하며 JS엔진은 V8말고도 �
 
 ## Task Queue
 
-자바스크립트에서 비동기 호출되는 함수들(setTimeout, ajax 등)은 콜 스택에 쌓이지 않고 WebAPI에서 처리 한 후 테스크 큐로 보내진다.
+자바스크립트에서 비동기 호출되는 함수들(setTimeout, ajax 등)은 콜 스택에 쌓이지 않고 WebAPI에서 처리 한 후 테스크 큐로 보내진다.  
 
 그럼 아래의 코드가 어떤식으로 비동기 처리가 되는지 알아보겠습니다.
 
@@ -98,19 +97,19 @@ setTimeout(() => {
 console.log("종료");
 ```
 
-위 코드를 실행하게 되면 실행하였을때 출력순서를 예측해보면 다음과 같은 순서의 결과값이 나올것이라 생각할 수 있습니다.
+위 코드를 실행하게 되면 실행하였을때 출력순서를 예측해보면 다음과 같은 순서의 결과값이 나올것이라 생각할 수 있습니다.  
 
 - 시작 출력
 - (3초간 대기 후) 실행 중 출력
 - 종료 출력
 
-하지만 실제 결과는
+하지만 실제 결과는  
 
 - 시작 출력
 - 종료 출력
 - (3초간 대기 후) 실행 중 출력
 
-예상과 달리 실제 결과값과 같이 출력이 된 이유는 setTimeout()함수가 비동기 방식으로 실행되기 때문에 3초를 기다렸다가 다음 코드가 실행되는것이 아니라 setTimeout()함수가 실행되고나서 바로 다음 코드가 실행되기 때문입니다.
+예상과 달리 실제 결과값과 같이 출력이 된 이유는 setTimeout()함수가 비동기 방식으로 실행되기 때문에 3초를 기다렸다가 다음 코드가 실행되는것이 아니라 setTimeout()함수가 실행되고나서 바로 다음 코드가 실행되기 때문입니다.  
 
 그렇다면
 
@@ -124,51 +123,42 @@ setTimeout(() => {
 console.log("종료");
 ```
 
-그럼 위 코드는 어떻게 실행될까요?
+그럼 위 코드는 어떻게 실행될까요?  
 
-위 코드도 마찬가지로
+위 코드도 마찬가지로  
 
 - 시작
 - 종료
 - 실행 중
 
-순으로 실행이 됩니다. 시간이 0초 더라도 비동기 함수를 사용했으므로 WebAPI -> 테스크 큐 -> 콜 스택순으로 이동하기 때문입니다.
-여기서 중요한 점은 테스크 큐에 대기하고있는 콜백함수는 콜 스택이 비어져있을 때만 이벤트 루프가 콜 스택으로 콜백 함수를 옮겨줍니다.
-위 코드들이 어떻게 실행되는지 이미지로 한번 확인해보겠습니다.
+순으로 실행이 됩니다. 시간이 0초 더라도 비동기 함수를 사용했으므로 WebAPI -> 테스크 큐 -> 콜 스택순으로 이동하기 때문입니다.  
+여기서 중요한 점은 테스크 큐에 대기하고있는 콜백함수는 콜 스택이 비어져있을 때만 이벤트 루프가 콜 스택으로 콜백 함수를 옮겨줍니다.  
+위 코드들이 어떻게 실행되는지 이미지로 한번 확인해보겠습니다. 
 
-<center><img src="./images/runtime_01.jpg" width="80%" alt="runtime_01"/></center>
+![runtime_01](images/runtime_01.jpg)
+
 1. 함수가 실행되면서 먼저 main()함수가 Call Stack에 쌓이고 console.log("시작)이 Call Stack에 쌓이고. 바로 실행되어 콘솔에 "시작"이 출력됩니다.  
-   <br/><br/>
-<center><img src="./images/runtime_02.jpg" width="80%" alt="runtime_02"/></center>
+  ![runtime_02](images/runtime_02.jpg)
 2. console.log("시작")이 리턴되고 Call Stack에서 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_03.jpg" width="80%" alt="runtime_03"/></center>
+  ![runtime_03](images/runtime_03.jpg)
 3. setTimeout() 함수가 실행이 되면서 Call Stack에 setTimeout함수가 들어가고. setTimeout 함수는 콜백 함수이므로 자바스크립트 엔진이 처리하지 않고 Web API로 전달하여 작업을 요청합니다.
-<br/><br/>
-<center><img src="./images/runtime_04.jpg" width="80%" alt="runtime_04"/></center>
+  ![runtime_04](images/runtime_04.jpg)
 4. Call Stack에서는 setTimeout이 제거되고 Web API가 setTimeout을 처리합니다.
-<br/><br/>
-<center><img src="./images/runtime_05_01.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05_01](images/runtime_05_01.jpg)
 5. console.log("종료") 함수가 실행되며 Call Stack에 쌓이고 실행되어 콘솔에 "종료" 가 출력됩니다.
-<br/><br/>
-<center><img src="./images/runtime_05_02.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05_02](images/runtime_05_02.jpg)
 6. Call Stack에 있던 console.log("종료") 함수가 리턴되며 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_05.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05](images/runtime_05.jpg)
 7. 모든 함수의 실행이 종료되었으므료 main() 함수가 리턴되며 Call Stack에서 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_06.jpg" width="80%" alt="runtime_06"/></center>
+  ![runtime_06](images/runtime_06.jpg)
 8. setTimeout의 시간이 종료되었으면 Task Queue로 CallBack함수를 보내준다.
-<br/><br/>
-<center><img src="./images/runtime_07.jpg" width="80%" alt="runtime_07"/></center>
+  ![runtime_07](images/runtime_07.jpg)
 9. Call Stack가 비어잇으면 Event Loop가 Task Queue에 존재하는 함수를 하나씩 꺼내 Call Stack으로 옮겨준다.
-<br/><br/>
-<center><img src="./images/runtime_08.jpg" width="80%" alt="runtime_08"/></center>
+  ![runtime_08](images/runtime_08.jpg)
 10. Call Stack 함수에 들어간 console.log("실행 중")함수가 실행되고 콘솔창에는 "실행 중"이 출력됩니다.
-<br/><br/>
-<center><img src="./images/runtime_09.jpg" width="80%" alt="runtime_09"/></center>
+  ![runtime_09](images/runtime_09.jpg)
 11.  console.log("실행 중") 함수가 리턴되고 Call Stack에서 제거되고 CallBack함수도 제거됩니다.
-<br/><br/>
+
 
 해당 행위를 반복하며 EventLoop는 Task Queue에 새로운 콜백함수가 들어올때까지 대기합니다.(이러한 반복적인 행동을 틱(tick)이라 합니다.)
 만약 콜 스택에 너무 많은 함수들이 존재한다면 setTimeout에 설정한 시간이 정확하지 않을 수 있습니다.
@@ -176,8 +166,8 @@ console.log("종료");
 # 콜백
 
 자바스크립트가 어떤식으로 비동기 함수를 처리하는지 알아보았습니다.  
-개발을 하다보면 실행순서가 중요한 경우가 있습니다. 예를 들어 api 요청을 보낸 후 응답을 받은 데이터를 이용해야 하는 상황에서 콜백함수를 사용해주면 됩니다.
-콜백함수는 현재 실행되고있는 함수가 끝난 후 실행되는 함수를 의미합니다.
+개발을 하다보면 실행순서가 중요한 경우가 있습니다. 예를 들어 api 요청을 보낸 후 응답을 받은 데이터를 이용해야 하는 상황에서 콜백함수를 사용해주면 됩니다.  
+콜백함수는 현재 실행되고있는 함수가 끝난 후 실행되는 함수를 의미합니다.  
 
 ## 콜백 예시
 
@@ -250,15 +240,15 @@ setTimeout(
 //"Latte"
 ```
 
-한눈에 봐도 가독성이 떨어집니다. 앞으로 알아볼 Promise를 이용하여 콜백 지옥을 피하고 가독성이 좋은 코드로 만들어 보도록 하겠습니다.
+한눈에 봐도 가독성이 떨어집니다. 앞으로 알아볼 Promise를 이용하여 콜백 지옥을 피하고 가독성이 좋은 코드로 만들어 보도록 하겠습니다.  
 
 # 프로미스
 
-콜백 지옥을 피하고 비동기 처리를 쉽게 처리할수 있도록 하기 위하여 ES6(ECMA 2015)부터 프로미스(Promise)가 추가되었습니다.
+콜백 지옥을 피하고 비동기 처리를 쉽게 처리할수 있도록 하기 위하여 ES6(ECMA 2015)부터 프로미스(Promise)가 추가되었습니다.  
 
 ## 프로미스의 3가지 상태(states)
 
-프로미스를 사용할 때 알아야 하는 가장 기본적인 개념이 바로 프로미스의 `상태(states)`입니다. 여기서 말하는 상태란 프로미스의 처리 과정입니다. `new Promise()`로 프로미스를 생성하고 종료될때까지 프로미스는 3가지의 상태를 갖습니다.
+프로미스를 사용할 때 알아야 하는 가장 기본적인 개념이 바로 프로미스의 `상태(states)`입니다. 여기서 말하는 상태란 프로미스의 처리 과정입니다. `new Promise()`로 프로미스를 생성하고 종료될때까지 프로미스는 3가지의 상태를 갖습니다.  
 
 - 대기(pending) : 비동기 처리 로직이 아직 완료되지 않은 상태
 - 이행(fulfilled) : 비동기 처리가 완료되어 프로미스가 결과 값을 반환해준 상태 (완료 상태)
@@ -323,7 +313,8 @@ promise.then().catch((err) => {
 
 실패 상태가 되면 실패 처리의 결과 값을 `catch()`로 받을 수 있습니다.
 
-<center><img src="./images/promise.svg" width="100%" alt="promise"/></center>
+![promise](images/promise.svg)
+
 프로미스의 처리 흐름  <br/><br/>
 
 ### 프로미스 예제
@@ -382,7 +373,7 @@ promise
 //"Latte"
 ```
 
-프로미스를 연결하여 비동기 처리를 순서대로 해주는 것을 `프로미스 체이닝`이라 합니다.
+프로미스를 연결하여 비동기 처리를 순서대로 해주는 것을 `프로미스 체이닝`이라 합니다.  
 위 코드를 더욱 간단하게 바꿔주면
 
 ```javascript
@@ -418,7 +409,7 @@ promise
 ```
 
 위 코드와 같이 반복적인 코드는 함수화 하여 표현하면 더욱 깔끔하게 콜백함수를 관리할 수 있습니다.  
-프로미스의 문법과 프로미스 체이닝을 사용하면 콜백지옥을 좀 더 깔끔하게 관리하고 코드의 가독성을 높일 수 있습니다.
+프로미스의 문법과 프로미스 체이닝을 사용하면 콜백지옥을 좀 더 깔끔하게 관리하고 코드의 가독성을 높일 수 있습니다.  
 
 프로미스의 사용법까지 배웠으니 아래 코드의 실행순서를 알아보도록 하겠습니다.
 
@@ -467,26 +458,27 @@ setTimeout
 
 이전까지는 모든 비동기 처리는 Task Queue에 순서대로 쌓이고 이벤트 루프에 의하여 하나씩 꺼내 콜스택으로 옮겨주고 실행을 하게 된다. 라고 설명을 하였는데 더 알아보니 Task Queue외에도 Microtask Queue와 Animation Frames또한 존재하는 것을 알게되었습니다.
 
-<center><img src="./images/microtask.png" width="100%" alt="promise"/></center>
+![promise](images/microtask.png)
+
 이해를 돕기 위한 사진
 
 ## Microtask Queue
 
-위 코드에서 Promise가 먼저 실행된것을 먼저 설명하자면 Promise는 Microtask Quere를 사용합니다.
-Microtask Queue에는 Promise와 Mutation observer에 등록된 콜백이 들어오게 됩니다.
+위 코드에서 Promise가 먼저 실행된것을 먼저 설명하자면 Promise는 Microtask Quere를 사용합니다.  
+Microtask Queue에는 Promise와 Mutation observer에 등록된 콜백이 들어오게 됩니다.  
 Microtask Queue는 이벤트 루프가 한 번 방문하게되면 MicroTask Queue에 있는 모든 작업을 수행하게 됩니다. 즉, `Microtask Queue가 완전히 비어질 때까지 이벤트 루프는 순회하지 못합니다.(도중에 새로운 작업이 도착하면 새로운 작업도 실행하게 됩니다.)`
 
 ## AnimationFrames
 
-WebAPI인 requestAnimationFrame() 함수를 호출하게 되면 그 안에 등록된 콜백이 Animation Frames에 쌓여집니다. Animation Frames도 Microtask Queue와 마찬가지로 이벤트 루프가 한 번 방문하면 큐 안에 들어있는 '모든' 작업을 수행한 후 순회를 재개합니다.
+WebAPI인 requestAnimationFrame() 함수를 호출하게 되면 그 안에 등록된 콜백이 Animation Frames에 쌓여집니다. Animation Frames도 Microtask Queue와 마찬가지로 이벤트 루프가 한 번 방문하면 큐 안에 들어있는 '모든' 작업을 수행한 후 순회를 재개합니다.  
 `Animation Frames는 보통 애니메이션과 게임 같이 실시간으로 화면에 업데이트 해야하는 경우에 사용합니다.`
 
 ### Queue의 우선 순위
 
-이벤트 루프는 콜 스택에 처리할 작업이 없을 경우 우선 Microtask Queue를 확인합니다.
-microtask Queue에 작업이 존재한다면 작업을 하나씩 꺼내 콜 스택에 넣어줍니다.
-microtask Queue에 존재하는 작업을 모두 처리한 후 AnimationFrames를 확인하여 브라우저 렌더링을 발생 시킵니다. 그 후 task queue에 있는 작업을 하나씩 꺼내 콜 스택에 넣어주고 처리합니다.
-여기서 Animation Frames는 Vsync(60hz)에 맞춰 호출되므로 requestAnimationFrame의 동작시간이 16ms가 넘어가면 task queue가 먼저 호출되기도 합니다.(브라우저마다 다르기도 합니다.)
+이벤트 루프는 콜 스택에 처리할 작업이 없을 경우 우선 Microtask Queue를 확인합니다.  
+microtask Queue에 작업이 존재한다면 작업을 하나씩 꺼내 콜 스택에 넣어줍니다.  
+microtask Queue에 존재하는 작업을 모두 처리한 후 AnimationFrames를 확인하여 브라우저 렌더링을 발생 시킵니다. 그 후 task queue에 있는 작업을 하나씩 꺼내 콜 스택에 넣어주고 처리합니다.  
+여기서 Animation Frames는 Vsync(60hz)에 맞춰 호출되므로 requestAnimationFrame의 동작시간이 16ms가 넘어가면 task queue가 먼저 호출되기도 합니다.(브라우저마다 다르기도 합니다.)  
 
 Task queue, Microtask queue, Animation queue의 실행 순서를 확인해 보도록 하겠습니다.
 
@@ -516,8 +508,8 @@ function test() {
 
 # async/await
 
-async와 await는 ECMAScript 2017(ES8)부터 추가된 기능들 입니다. 비동기 처리 패턴 중 가장 최근에 나온 문법이며, 기존의 Promise보다 가독성이 좋아 많이 사용되고 있습니다.
-async/await는 이해하기 쉽고 사용법도 어렵지 않습니다.
+async와 await는 ECMAScript 2017(ES8)부터 추가된 기능들 입니다. 비동기 처리 패턴 중 가장 최근에 나온 문법이며, 기존의 Promise보다 가독성이 좋아 많이 사용되고 있습니다.  
+async/await는 이해하기 쉽고 사용법도 어렵지 않습니다.  
 
 위에서 보았던 커피리스트를 나열하는 예제를 async/await 문법으로 바꿔보겠습니다.
 
@@ -582,23 +574,12 @@ coffeeMaker();
 
 참고자료 :
 
-https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-https://velog.io/@bigbrothershin/JavaScript-Promise-%EC%83%9D%EC%84%B1%EC%9E%90
-
-https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84
-
-https://joshua1988.github.io/web-development/javascript/js-async-await/
-
-https://ingg.dev/js-work/#async
-
-https://velog.io/@1703979/TIL-19
-
-https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4
-
-https://meetup.toast.com/posts/89
-
-https://joshua1988.github.io/web-development/javascript/js-async-await/#async--await%EB%8A%94-%EB%AD%94%EA%B0%80%EC%9A%94
-
-
-
+- https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise
+- https://velog.io/@bigbrothershin/JavaScript-Promise-%EC%83%9D%EC%84%B1%EC%9E%90
+- https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84
+- https://joshua1988.github.io/web-development/javascript/js-async-await/
+- https://ingg.dev/js-work/#async
+- https://velog.io/@1703979/TIL-19
+- https://velog.io/@yujo/- JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4
+- https://meetup.toast.com/posts/89
+- https://joshua1988.github.io/web-development/javascript/js-async-await/#async--await%EB%8A%94-%EB%AD%94%EA%B0%80%EC%9A%94
