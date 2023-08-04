@@ -17,7 +17,6 @@ ShowToc: false # 글 개요 보여줄지 여부
 TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
 ---
-# JavaScript V8 엔진의 asynchronous 알아보기
 
 > 자바스크립트로 프로젝트를 진행하면서 여러가지 api와 통신을 하는 경우가 많았고
 >
