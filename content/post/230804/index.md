@@ -61,7 +61,7 @@ function third() {
 first();
 ```
 
-<center><img src="./images/Call_Stack_1.png" width="25%" height="25%" alt="Call Stack 설명"/></center>
+![Call Stack 설명](images/Call_Stack_1.png)
 
 main() 함수는 함수가 호출되었을때 생성되는 함수입니다. 그림을 보면 third(), seconde(), first(), main() 순으로 Pop되며 main() 함수까지 실행이 완료되면 호출 스택이 지워집니다.  
 위 코드를 실행하면
@@ -134,41 +134,32 @@ console.log("종료");
 
 순으로 실행이 됩니다. 시간이 0초 더라도 비동기 함수를 사용했으므로 WebAPI -> 테스크 큐 -> 콜 스택순으로 이동하기 때문입니다.  
 여기서 중요한 점은 테스크 큐에 대기하고있는 콜백함수는 콜 스택이 비어져있을 때만 이벤트 루프가 콜 스택으로 콜백 함수를 옮겨줍니다.  
-위 코드들이 어떻게 실행되는지 이미지로 한번 확인해보겠습니다.  
+위 코드들이 어떻게 실행되는지 이미지로 한번 확인해보겠습니다. 
 
-<center><img src="./images/runtime_01.jpg" width="80%" alt="runtime_01"/></center>
+![runtime_01](images/runtime_01.jpg)
+
 1. 함수가 실행되면서 먼저 main()함수가 Call Stack에 쌓이고 console.log("시작)이 Call Stack에 쌓이고. 바로 실행되어 콘솔에 "시작"이 출력됩니다.  
-   <br/><br/>
-<center><img src="./images/runtime_02.jpg" width="80%" alt="runtime_02"/></center>
+  ![runtime_02](images/runtime_02.jpg)
 2. console.log("시작")이 리턴되고 Call Stack에서 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_03.jpg" width="80%" alt="runtime_03"/></center>
+  ![runtime_03](images/runtime_03.jpg)
 3. setTimeout() 함수가 실행이 되면서 Call Stack에 setTimeout함수가 들어가고. setTimeout 함수는 콜백 함수이므로 자바스크립트 엔진이 처리하지 않고 Web API로 전달하여 작업을 요청합니다.
-<br/><br/>
-<center><img src="./images/runtime_04.jpg" width="80%" alt="runtime_04"/></center>
+  ![runtime_04](images/runtime_04.jpg)
 4. Call Stack에서는 setTimeout이 제거되고 Web API가 setTimeout을 처리합니다.
-<br/><br/>
-<center><img src="./images/runtime_05_01.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05_01](images/runtime_05_01.jpg)
 5. console.log("종료") 함수가 실행되며 Call Stack에 쌓이고 실행되어 콘솔에 "종료" 가 출력됩니다.
-<br/><br/>
-<center><img src="./images/runtime_05_02.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05_02](images/runtime_05_02.jpg)
 6. Call Stack에 있던 console.log("종료") 함수가 리턴되며 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_05.jpg" width="80%" alt="runtime_05"/></center>
+  ![runtime_05](images/runtime_05.jpg)
 7. 모든 함수의 실행이 종료되었으므료 main() 함수가 리턴되며 Call Stack에서 제거됩니다.
-<br/><br/>
-<center><img src="./images/runtime_06.jpg" width="80%" alt="runtime_06"/></center>
+  ![runtime_06](images/runtime_06.jpg)
 8. setTimeout의 시간이 종료되었으면 Task Queue로 CallBack함수를 보내준다.
-<br/><br/>
-<center><img src="./images/runtime_07.jpg" width="80%" alt="runtime_07"/></center>
+  ![runtime_07](images/runtime_07.jpg)
 9. Call Stack가 비어잇으면 Event Loop가 Task Queue에 존재하는 함수를 하나씩 꺼내 Call Stack으로 옮겨준다.
-<br/><br/>
-<center><img src="./images/runtime_08.jpg" width="80%" alt="runtime_08"/></center>
+  ![runtime_08](images/runtime_08.jpg)
 10. Call Stack 함수에 들어간 console.log("실행 중")함수가 실행되고 콘솔창에는 "실행 중"이 출력됩니다.
-<br/><br/>
-<center><img src="./images/runtime_09.jpg" width="80%" alt="runtime_09"/></center>
+  ![runtime_09](images/runtime_09.jpg)
 11.  console.log("실행 중") 함수가 리턴되고 Call Stack에서 제거되고 CallBack함수도 제거됩니다.
-<br/><br/>
+
 
 해당 행위를 반복하며 EventLoop는 Task Queue에 새로운 콜백함수가 들어올때까지 대기합니다.(이러한 반복적인 행동을 틱(tick)이라 합니다.)
 만약 콜 스택에 너무 많은 함수들이 존재한다면 setTimeout에 설정한 시간이 정확하지 않을 수 있습니다.
@@ -323,7 +314,8 @@ promise.then().catch((err) => {
 
 실패 상태가 되면 실패 처리의 결과 값을 `catch()`로 받을 수 있습니다.
 
-<center><img src="./images/promise.svg" width="100%" alt="promise"/></center>
+![promise](images/promise.svg)
+
 프로미스의 처리 흐름  <br/><br/>
 
 ### 프로미스 예제
@@ -467,7 +459,8 @@ setTimeout
 
 이전까지는 모든 비동기 처리는 Task Queue에 순서대로 쌓이고 이벤트 루프에 의하여 하나씩 꺼내 콜스택으로 옮겨주고 실행을 하게 된다. 라고 설명을 하였는데 더 알아보니 Task Queue외에도 Microtask Queue와 Animation Frames또한 존재하는 것을 알게되었습니다.
 
-<center><img src="./images/microtask.png" width="100%" alt="promise"/></center>
+![promise](images/microtask.png)
+
 이해를 돕기 위한 사진
 
 ## Microtask Queue
@@ -582,23 +575,12 @@ coffeeMaker();
 
 참고자료 :
 
-https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-https://velog.io/@bigbrothershin/JavaScript-Promise-%EC%83%9D%EC%84%B1%EC%9E%90
-
-https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84
-
-https://joshua1988.github.io/web-development/javascript/js-async-await/
-
-https://ingg.dev/js-work/#async
-
-https://velog.io/@1703979/TIL-19
-
-https://velog.io/@yujo/JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4
-
-https://meetup.toast.com/posts/89
-
-https://joshua1988.github.io/web-development/javascript/js-async-await/#async--await%EB%8A%94-%EB%AD%94%EA%B0%80%EC%9A%94
-
-
-
+- https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise
+- https://velog.io/@bigbrothershin/JavaScript-Promise-%EC%83%9D%EC%84%B1%EC%9E%90
+- https://velog.io/@thms200/Event-Loop-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%A3%A8%ED%94%84
+- https://joshua1988.github.io/web-development/javascript/js-async-await/
+- https://ingg.dev/js-work/#async
+- https://velog.io/@1703979/TIL-19
+- https://velog.io/@yujo/- JS%EC%BD%9C%EB%B0%B1-%EC%A7%80%EC%98%A5%EA%B3%BC-%EB%B9%84%EB%8F%99%EA%B8%B0-%EC%A0%9C%EC%96%B4
+- https://meetup.toast.com/posts/89
+- https://joshua1988.github.io/web-development/javascript/js-async-await/#async--await%EB%8A%94-%EB%AD%94%EA%B0%80%EC%9A%94
