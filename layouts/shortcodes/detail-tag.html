@@ -1,0 +1,6 @@
+<details style="width: 100%">
+  <summary style="cursor: pointer; margin-bottom: 20px">
+    {{ (.Get 0) | markdownify }}
+  </summary>
+  {{ .Inner | markdownify }}
+</details>
