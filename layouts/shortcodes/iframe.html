@@ -1,0 +1,7 @@
+{{- $src := .Get "src" -}}
+{{- $style := .Get "style" -}}
+<iframe
+  frameborder="0"
+  src="{{ $src }}"
+  style='{{ $style | safeCSS }}'
+></iframe>
