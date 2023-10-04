@@ -10,7 +10,7 @@ categories:
 #- Column # 엔지니어가 아니여도 쉽게 읽을 수 있는 글
 # - Mate Story # 클라우드메이트 소식, 일하는 방식 소개 등
 tags:
-- AWS 
+- Azure
 - 컨테이너
 feature_image: 'images/cover.png' # 포스트 커버 이미지 경로 (포스트에 포함된 이미지 중 하나 지정. 필드 제거하면 기본 이미지가 나옵니다.)
 ShowToc: false # 글 개요 보여줄지 여부
