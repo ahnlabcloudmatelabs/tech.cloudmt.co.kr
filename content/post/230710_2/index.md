@@ -25,7 +25,6 @@ draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않�
 
 Blue/Green 배포는 애플리케이션의 운영과 관리를 따로 하는 경우 두 개의 환경을 동시에 유지하고 모니터링하는 데 복잡성이 있는 반면 In-place 배포는 애플리케이션의 새로운 버전을 현재 위치에 배포하므로 배포 과정을 단순화할 수 있습니다. 이번 시간에는 CodeDeploy를 Elastigroup에 연동하고 In-place 방식으로 배포하는 방법을 공유하려고 합니다.
 
-![](images/image1.png)
 ---
 
 먼저 CodeDeploy를 Elastigroup에 연동하고 새로운 버전의 애플리케이션을 In-place 방식으로 배포하기 위해 필요한 전제 조건은 다음과 같습니다.
