@@ -1,7 +1,7 @@
 ---
 title: AKS(Azure Kubernetes Services)에 컨테이너 애플리케이션 배포해 보기
 authors:
-- na # 저자 프로필 페이지 경로 입력
+- taeyun-na # 저자 프로필 페이지 경로 입력
 date: 2023-07-10T14:22:59+09:00
 categories:
 # 아래 4가지 카테고리 중 하나만 선택하여 남겨두고, 나머지는 지우고 글을 계속 작성하세요.
