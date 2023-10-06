@@ -1,5 +1,5 @@
 ---
-feature_image: images/image-002.png
+feature_image: images/cover.png
 authors:
 - jeonghwan kim
 date: "2023-08-31T00:00:00Z"
