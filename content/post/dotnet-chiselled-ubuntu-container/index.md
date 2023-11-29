@@ -49,4 +49,28 @@ slices:
 > 그림 출처: https://github.com/canonical/chisel/blob/main/docs/_static/slice-of-ubuntu.png
 
 # .Net 앱 컨테이너화 하기
-그렇다면 이러한 Chiselled Container 로 .Net 앱을 작은 사이즈의 컨테이너 이미지로 만들어 봅시다. .Net 런타임이나 .Net 실행에 필요한 의존성이 포함된 Chiselled Container가 이미 배포가 되고 있기 때문에, 이를 이용해서 어렵지 않게 컨테이너를 만드실 수 있습니다. 다만 .Net Chiselled Container 이미지에 Shell은 물론 빌드 도구도 포함 되어 있거나 하지는 않기 때문에, .Net SDK가 포함된 다른 컨테이너 이미지에서 빌드를 한 후 런타임 환경인 .Net Chiselled Container 이미지 기반 환경으로 복사 하도록 할 필요가 있습니다. 이를 위해서는 컨테이너 이미지 빌드에 사용하는 Dockerfile에서 Multi-stage build를 정의하면 되겠습니다.
+그렇다면 이러한 Chiselled Container 로 .Net 앱을 작은 사이즈의 컨테이너 이미지로 만들어 봅시다. .Net 런타임이나 .Net 실행에 필요한 의존성이 포함된 Chiselled Container가 이미 배포가 되고 있기 때문에, 이를 이용해서 어렵지 않게 컨테이너를 만드실 수 있습니다. 다만 .Net Chiselled Container 이미지에 Shell은 물론 빌드 도구도 포함 되어 있거나 하지는 않기 때문에, .Net SDK가 포함된 다른 컨테이너 이미지에서 빌드를 한 후 런타임 환경인 .Net Chiselled Container 이미지 기반 환경으로 복사 하도록 할 필요가 있습니다. 이를 위해서는 컨테이너 이미지 빌드에 사용하는 Dockerfile에서 Multi-stage build를 정의하면 되겠습니다. 예를 들어 ASP.NET 앱을 컨테이너화 하는 경우 아래처럼 Dockerfile을 작성할 수 있습니다.
+
+> [GitHub dotnet/dotnet-docker 저장소의 샘플](https://github.com/dotnet/dotnet-docker/blob/main/samples/aspnetapp/Dockerfile.chiseled)을 기반으로 작성 하였습니다.
+```dockerfile
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+WORKDIR /source
+
+# C# 프로젝트 파일 (*.csproj) 복사 및 해당 프로젝트 의존성 복원
+COPY aspnetapp/*.csproj .
+RUN dotnet restore
+
+# 소스코드 복사 및 앱 빌드
+COPY aspnetapp/. .
+RUN dotnet publish --no-restore -o /app
+
+
+# ASP.NET 런타임이 포함된 Chiselled Container 이미지를 최종 런타임 환경으로 쓸 stage로 생성
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled
+WORKDIR /app
+
+# "build" stage 에서 빌드된 파일 복사
+COPY --from=build /app .  
+ENTRYPOINT ["./aspnetapp"]
+```
