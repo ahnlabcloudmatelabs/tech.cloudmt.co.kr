@@ -158,3 +158,66 @@ COPY aspnetapp/. .
 RUN dotnet publish --no-restore -o /app
 
 ```
+이렇게 Chisel CLI로 복사해 온 패키지 조각과 빌드하여 나온 .Net 앱 어셈블리 파일을 최종 stage 에 복사해서 컨테이너 이미지를 완성할 수 있습니다.
+```Dockerfile
+...
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled
+
+WORKDIR /app
+# "build" stage 에서 Chiseled 로 받은 패키지 Slice 파일 복사
+COPY --from=build /rootfs /
+# "build" stage 에서 빌드된 파일 복사
+COPY --from=build /app .  
+ENTRYPOINT ["./aspnetapp"]
+
+```
+
+이렇게 하면 완성된 Dockerfile은 아래와 같습니다. 보시다 싶이 Dockerfile이 꽤 복잡해 지므로, 권장되는 방법 까지는 아니지만 추가적으로 원하는 패키지를 추가해야 하는 경우에는 활용 해 보실 수 있겠습니다.
+```Dockerfile
+# Golang 이미지에서 "chisel" stage 생성 
+FROM golang:1.21 as chisel
+
+# 빌드 결과물 저장할 디렉토리 생성
+RUN mkdir /opt/chisel
+# /opt/chisel 에 Chisel CLI를 빌드 및 설치
+RUN go install /opt/chisel github.com/canonical/chisel/cmd/chisel@latest
+
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+
+# "chisel" stage에서 빌드한 실행 파일을 "build" stage로 복사
+COPY --from=chisel /opt/chisel/chisel /usr/bin/
+
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+
+# "chisel" stage에서 빌드한 실행 파일을 "build" stage로 복사
+COPY --from=chisel /opt/chisel/chisel /usr/bin/
+
+# Chisel CLI로 필요한 패키지의 필요한 Slice 를 /rootfs로 복사 
+# libicu70_libs - libicu70 의 "libs" Slice
+# tzdata_eurasia - tzdata 의 "eurasia" Slice
+# tzdata_zoneinfo-icu - tzdata 의 "zoneinfo-icu" Slice
+RUN mkdir /rootfs \
+    && chisel cut --release ubuntu-22.04 --root /rootfs \
+        libicu70_libs tzdata_eurasia tzdata_zoneinfo-icu
+
+WORKDIR /source
+
+# C# 프로젝트 파일 (*.csproj) 복사 및 해당 프로젝트 의존성 복원
+COPY aspnetapp/*.csproj .
+RUN dotnet restore
+
+# 소스코드 복사 및 앱 빌드
+COPY aspnetapp/. .
+RUN dotnet publish --no-restore -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled
+
+WORKDIR /app
+# "build" stage 에서 Chiseled 로 받은 패키지 Slice 파일 복사
+COPY --from=build /rootfs /
+# "build" stage 에서 빌드된 파일 복사
+COPY --from=build /app .  
+ENTRYPOINT ["./aspnetapp"]
+```
