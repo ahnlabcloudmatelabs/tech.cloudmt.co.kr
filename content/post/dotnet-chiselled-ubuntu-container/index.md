@@ -74,3 +74,87 @@ WORKDIR /app
 COPY --from=build /app .  
 ENTRYPOINT ["./aspnetapp"]
 ```
+
+# `icu`, `tzdata` 패키지가 필요한 경우
+.Net 으로 개발된 앱을 실행할 때 종종 `icu`및 `tzdata`라이브러리가 필요한 경우가 많이 있습니다. [.Net의 Globalization 기능](https://learn.microsoft.com/en-us/dotnet/core/extensions/globalization)을 사용하는 경우 필요한데요. 대표적인 예시로 [SqlClient](https://github.com/dotnet/SqlClient)를 사용할 때 라고 할 수 있겠습니다. [이러한 경우를 위해 `-extra` 버전의 이미지도 있습니다.](https://github.com/dotnet/dotnet-docker/blob/main/documentation/ubuntu-chiseled.md#how-do-i-use-globalization-with-chiseled-images) (예: `mcr.microsoft.com/dotnet/nightly/runtime-deps:8.0-jammy-chiseled-extra`)
+
+[아쉽게도 이러한 `extra` 이미지는, .Net 런타임이 포함된 것을 대상으로는 제공되고 있지 않고, .Net 프로젝트에서 별도로 제공할 계획도 없다고 합니다.](https://github.com/dotnet/dotnet-docker/discussions/4821) 때문에 `icu`및 `tzdata`가 필요한 경우 크게 두가지 방법을 고려해 보실 수 있는데, 하나는 앱을 Self-Contained 방식으로 빌드하여 `extra` 유형의 `runtime-deps` 이미지에 넣어 빌드하는 방법. 나머지 하나는 앞서 잠시 소개한 Chisel CLI로 직접 `icu`와 `tzdata`를 넣는 방법 입니다.
+
+## Self-Contained 방식 빌드
+.Net 앱을 [Self-Contained 방식으로 빌드하면](https://learn.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), 하나의 실행 파일에 런타임까지 모두 자체적으로 포함 되므로 런타임이 없지만 Self-Contained 된 .Net 앱 실행에 필요한 것이 포함된 `extra` 유형의 `runtime-deps`이미지를 활용할 수 있습니다. 앱 빌드 명령과 런타임 stage 이미지 정보만 조금 수정하면 되기 때문에, 여러분의 .Net 프로젝트를 Self-Contained 방식으로 빌드하는데 크게 문제가 없다면 쉽게 선택 해 볼 수 있는 방법이라고 할 수 있습니다.
+
+위에서 보여드린 Dockerfile을 이러한 사항에 맞춰 수정하면 아래와 같이 작성할 수 있겠습니다.
+```dockerfile
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+WORKDIR /source
+
+# C# 프로젝트 파일 (*.csproj) 복사 및 해당 프로젝트 의존성 복원
+COPY aspnetapp/*.csproj .
+RUN dotnet restore
+
+# 소스코드 복사
+COPY aspnetapp/. .
+# 앱 빌드: --self-contained 옵션 넣어서 
+RUN dotnet publish --self-contained --no-restore -o /app
+
+
+# icu, tzdata 가 포함된 extra 유형의 runtime-deps 이미지에서 최종 stage로 생성
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled-extra
+WORKDIR /app
+
+# "build" stage 에서 빌드된 파일 복사
+COPY --from=build /app .  
+ENTRYPOINT ["./aspnetapp"]
+```
+
+## Chisel CLI로 `icu`, `tzdata` 직접 추가
+전자에 비해서는 복잡한 방법이지만, .Net 런타임이 포함된 Chiselled Container 환경에 `icu`, `tzdata`를 추가한 것이 필요하다면, Chisel CLI로 해당 패키지를 직접 추가하는 방법도 있습니다.
+
+이러한 방법으로 Dockerfile을 작성 하려면, 먼저 컨테이너 빌드 중에 임시로 Chisel CLI를 설치 하도록 작성 해야 합니다. 이를 위해 `golang`이미지에서 stage를 따로 생성하여 Chisel CLI를 빌드 하고 이를 .Net SDK가 설치된 stage를 따로 만들어서 복사 해 올 수 있습니다. 이를 Dockerfile로 작성한 것을 보면 아래와 같습니다.
+```Dockerfile
+# Golang 이미지에서 "chisel" stage 생성 
+FROM golang:1.21 as chisel
+
+# 빌드 결과물 저장할 디렉토리 생성
+RUN mkdir /opt/chisel
+# /opt/chisel 에 Chisel CLI를 빌드 및 설치
+RUN go install /opt/chisel github.com/canonical/chisel/cmd/chisel@latest
+
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+
+# "chisel" stage에서 빌드한 실행 파일을 "build" stage로 복사
+COPY --from=chisel /opt/chisel/chisel /usr/bin/
+
+```
+
+그러면 이제 `chisel` 명령으로 원하는 패키지의 원하는 파일만 깎아올 수 있습니다. 예를 들어, [`libicu70`의 Slice 정의 파일](https://github.com/canonical/chisel-releases/blob/ubuntu-22.04/slices/libicu70.yaml)과 [`tzdata`의 Slice 정의 파일](https://github.com/canonical/chisel-releases/blob/ubuntu-22.04/slices/tzdata.yaml)을 참고해서 아래와 같이 작성이 가능합니다.
+
+```Dockerfile
+...
+# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
+
+# "chisel" stage에서 빌드한 실행 파일을 "build" stage로 복사
+COPY --from=chisel /opt/chisel/chisel /usr/bin/
+
+# Chisel CLI로 필요한 패키지의 필요한 Slice 를 /rootfs로 복사 
+# libicu70_libs - libicu70 의 "libs" Slice
+# tzdata_eurasia - tzdata 의 "eurasia" Slice
+# tzdata_zoneinfo-icu - tzdata 의 "zoneinfo-icu" Slice
+RUN mkdir /rootfs \
+    && chisel cut --release ubuntu-22.04 --root /rootfs \
+        libicu70_libs tzdata_eurasia tzdata_zoneinfo-icu
+
+WORKDIR /source
+
+# C# 프로젝트 파일 (*.csproj) 복사 및 해당 프로젝트 의존성 복원
+COPY aspnetapp/*.csproj .
+RUN dotnet restore
+
+# 소스코드 복사 및 앱 빌드
+COPY aspnetapp/. .
+RUN dotnet publish --no-restore -o /app
+
+```
