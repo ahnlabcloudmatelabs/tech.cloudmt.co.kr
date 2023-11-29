@@ -47,3 +47,6 @@ slices:
 
 ![Slice of Ubuntu](./slice-of-ubuntu.png)
 > 그림 출처: https://github.com/canonical/chisel/blob/main/docs/_static/slice-of-ubuntu.png
+
+# .Net 앱 컨테이너화 하기
+그렇다면 이러한 Chiselled Container 로 .Net 앱을 작은 사이즈의 컨테이너 이미지로 만들어 봅시다. .Net 런타임이나 .Net 실행에 필요한 의존성이 포함된 Chiselled Container가 이미 배포가 되고 있기 때문에, 이를 이용해서 어렵지 않게 컨테이너를 만드실 수 있습니다. 다만 .Net Chiselled Container 이미지에 Shell은 물론 빌드 도구도 포함 되어 있거나 하지는 않기 때문에, .Net SDK가 포함된 다른 컨테이너 이미지에서 빌드를 한 후 런타임 환경인 .Net Chiselled Container 이미지 기반 환경으로 복사 하도록 할 필요가 있습니다. 이를 위해서는 컨테이너 이미지 빌드에 사용하는 Dockerfile에서 Multi-stage build를 정의하면 되겠습니다.
