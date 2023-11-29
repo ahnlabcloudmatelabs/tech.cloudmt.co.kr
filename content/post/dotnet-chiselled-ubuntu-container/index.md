@@ -43,3 +43,7 @@ slices:
       certs = [content.read(certs_dir + path) for path in content.list(certs_dir)]
       content.write("/etc/ssl/certs/ca-certificates.crt", "".join(certs))
 ```
+이렇게 Chisel CLI로 패키지 추가 작업을 진행하면, 결론적으로 아래 그림처럼 원하는 데비안 패키지에서 딱 필요한 부분만 "끌로 깎아(Chisel)" 내어다가 컨테이너 이미지를 만드는데 사용하는 형태가 되게 됩니다.
+
+![Slice of Ubuntu](./slice-of-ubuntu.png)
+> 그림 출처: https://github.com/canonical/chisel/blob/main/docs/_static/slice-of-ubuntu.png
