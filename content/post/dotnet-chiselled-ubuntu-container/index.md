@@ -18,7 +18,7 @@ feature_image: 'opening.jpg' # 포스트 커버 이미지 경로 (포스트에 �
 리눅스 배포판중 많이 쓰이는 Ubuntu도 최근 경량 컨테이너 이미지를 출시 했는데요, 바로 Chiselled Ubuntu Container 이미지 입니다. Ubuntu를 개발한 Canonical과 Microsoft과 최근 여러 부분에서 협업을 많이 하다 보니, .Net을 위한 Chiselled Container 이미지도 함께 출시 되었습니다. 때마침 서비스 개발팀의 많은 서비스 백엔드가 .Net 기반이기도 하여서 실제 서비스에 적용 하기도 하였는데요. 이번 포스팅을 통해 Chiselled Container 에 대해 알아보고, 다른 경량 컨테이너 이미지와 무엇이 다른지 그리고 서비스 개발팀에서는 어떻게 적용 했는지에 대해 다뤄 보고자 합니다.
 
 # Chiselled Container란?
-Distroless 컨셉의 컨테이너로, 우분투 기반 환경에서 애플리케이션 실행에 필요한 것만 남겨두고 다른 불필요한 패키지나 구성요소는 모두 제거한 형태의 컨테이너 입니다. 예를 들어 .Net 앱을 Chiselled Container 로 컨테이너화 한다면, .Net 런타임과 빌드해서 나온 애플리케이션 어셈블리 파일과 애플리케이션이 요구하는 라이브러리를 제외한 모든 것을 제거한 컨테이너라고 보면 되겠습니다. 제거 되는 것에는 앱 실행에 굳이 필요하지 않은 `bash`, `cd`, `ls` 같은 명령도 제거가 되고. 컨테이너 이미지 완성 후에는 더 사용하지 않는 패키지 관리자(`apt`, `dpkg`)등도 모두 제거 대상에 포함이 됩니다. 컨테이너에 포함된 패키지라 해도 패키지에서 앱 실행에 굳이 필요하지 않은 부분(매뉴얼, 설정 스크립트, 헤더 파일 등)도 모두 제거가 됩니다. 이렇게 앱 실행에 필요한 것만 남기고, 다른 불필요한 것들은 모두 정리가 되기 때문에, 기존의 일반적인 우분투 혹은 다른 배포판 이미지 기반으로 만들 때에 비하여 훨씬 작은 크기의 컨테이너 이미지를 만들 수 있습니다.
+Distroless 컨셉의 컨테이너로, 우분투 기반 환경에서 애플리케이션 실행에 필요한 것만 남겨두고 다른 불필요한 패키지나 구성요소는 모두 제거한 형태의 컨테이너 입니다. 예를 들어 .Net 앱을 Chiselled Container 로 컨테이너화 한다면, .Net 런타임과 빌드해서 나온 애플리케이션 어셈블리 파일과 애플리케이션이 요구하는 라이브러리를 제외한 모든 것을 제거한 컨테이너라고 보면 되겠습니다. 제거 되는 것에는 앱 실행에 굳이 필요하지 않은 `bash`, `cd`, `ls` 같은 명령도 제거가 되고. 컨테이너 이미지 완성 후에는 더 사용하지 않는 패키지 관리자(`apt`, `dpkg`)등도 모두 제거 대상에 포함이 됩니다. 컨테이너에 포함된 패키지라 해도 패키지에서 앱 실행에 굳이 필요하지 않은 부분(매뉴얼, 설정 스크립트, 헤더 파일 등)도 모두 제거가 됩니다. 이렇게 앱 실행에 필요한 것만 남기고, 다른 불필요한 것들은 모두 정리가 되기 때문에, 기존의 일반적인 우분투 혹은 다른 배포판 이미지 기반으로 만들 때에 비하여 훨씬 작은 크기의 컨테이너 이미지를 만들 수 있습니다. 또한 이러한 컨테이너 내부를 수정할 때 사용 가능한 도구를 삭제 함으로써 컨테이너 대상 보안 공격의 여지 또한 미리 제거 하기 때문에, 보안 측면에서도 더 좋다고 할 수 있겠습니다.
 
 이렇게 불필요한 것을 제거하는 작업을 직접 한다면 아마 꽤나 복잡하고 수고스러운 과정이 될텐데요. Chiselled Container의 경우, [Chisel](https://github.com/canonical/chisel) 이라는 CLI 도구를 활용해서 경량화된 컨테이너 이미지를 만들 때, 포함 시키고자 하는 데비안 패키지의 필요한 부분만 잘라다가 넣을 수 있습니다. Chisel CLI은 컨테이너에 패키지를 추가할 때, 사전에 각 데비안 패키지를 대상으로 만들어진 Slice 정의 파일을 참고하여 설치 작업을 하는데, 각각의 Slice 정의 파일에는 패키지의 어떤 파일을 설치할 지 혹은 설치하지 않을지에 대한 사항이 정의되어 있습니다. 
 
@@ -81,7 +81,7 @@ ENTRYPOINT ["./aspnetapp"]
 [아쉽게도 이러한 `extra` 이미지는, .Net 런타임이 포함된 것을 대상으로는 제공되고 있지 않고, .Net 프로젝트에서 별도로 제공할 계획도 없다고 합니다.](https://github.com/dotnet/dotnet-docker/discussions/4821) 때문에 `icu`및 `tzdata`가 필요한 경우 크게 두가지 방법을 고려해 보실 수 있는데, 하나는 앱을 Self-Contained 방식으로 빌드하여 `extra` 유형의 `runtime-deps` 이미지에 넣어 빌드하는 방법. 나머지 하나는 앞서 잠시 소개한 Chisel CLI로 직접 `icu`와 `tzdata`를 넣는 방법 입니다.
 
 ## Self-Contained 방식 빌드
-.Net 앱을 [Self-Contained 방식으로 빌드하면](https://learn.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), 하나의 실행 파일에 런타임까지 모두 자체적으로 포함 되므로 런타임이 없지만 Self-Contained 된 .Net 앱 실행에 필요한 것이 포함된 `extra` 유형의 `runtime-deps`이미지를 활용할 수 있습니다. 앱 빌드 명령과 런타임 stage 이미지 정보만 조금 수정하면 되기 때문에, 여러분의 .Net 프로젝트를 Self-Contained 방식으로 빌드하는데 크게 문제가 없다면 쉽게 선택 해 볼 수 있는 방법이라고 할 수 있습니다.
+.Net 앱을 [Self-Contained 방식으로 빌드하면](https://learn.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), 하나의 실행 파일에 런타임까지 모두 자체적으로 포함 되므로 런타임이 없지만 Self-Contained 된 .Net 앱 실행에 필요한 것이 포함된 `extra` 유형의 `runtime-deps`이미지를 활용할 수 있습니다. 앱 빌드 명령과 런타임 stage 이미지 정보만 조금 수정하면 되기 때문에, 여러분의 .Net 프로젝트를 Self-Contained 방식으로 빌드하는데 크게 문제가 없다면 쉽게 선택 해 볼 수 있는 방법이라고 할 수 있습니다. 아무래도 쉽게 적용 해 볼 수 있는 방법이다 보니, 저희 팀에서는 이 방법을 몇몇 백엔드 서비스 컨테이너화에 적용하여 활용하고 있습니다.
 
 위에서 보여드린 Dockerfile을 이러한 사항에 맞춰 수정하면 아래와 같이 작성할 수 있겠습니다.
 ```dockerfile
@@ -119,7 +119,7 @@ FROM golang:1.21 as chisel
 # 빌드 결과물 저장할 디렉토리 생성
 RUN mkdir /opt/chisel
 # /opt/chisel 에 Chisel CLI를 빌드 및 설치
-RUN go install /opt/chisel github.com/canonical/chisel/cmd/chisel@latest
+RUN GOBIN=/opt/chisel go install github.com/canonical/chisel/cmd/chisel@latest
 
 # .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
 FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
@@ -180,13 +180,7 @@ FROM golang:1.21 as chisel
 # 빌드 결과물 저장할 디렉토리 생성
 RUN mkdir /opt/chisel
 # /opt/chisel 에 Chisel CLI를 빌드 및 설치
-RUN go install /opt/chisel github.com/canonical/chisel/cmd/chisel@latest
-
-# .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
-FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
-
-# "chisel" stage에서 빌드한 실행 파일을 "build" stage로 복사
-COPY --from=chisel /opt/chisel/chisel /usr/bin/
+RUN GOBIN=/opt/chisel go install github.com/canonical/chisel/cmd/chisel@latest
 
 # .Net SDK 가 설치된 베이스 이미지로 "build" stage 생성 및 해당 stage 에서 앱 빌드 작업 수행
 FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
@@ -221,3 +215,16 @@ COPY --from=build /rootfs /
 COPY --from=build /app .  
 ENTRYPOINT ["./aspnetapp"]
 ```
+
+# 컨테이너 빌드하여 크기 비교 해 보기
+이렇게 작성한 Dockerfile로 컨테이너 이미지를 빌드해서 비교 해 보면, Chisel Container 기반 이미지가 적게는 70mb에서 많게는 120mb정도 더 작은 사이즈임을 알 수 있습니다.
+![](./imagelist.png)
+
+이렇게 지금까지 Chiselled Ubuntu Container에 대해 알아보고, 이를 활용한 .Net 앱 컨테이너화를 하는 방법, 필요에 따라 추가적인 패키지 설치를 위해 Chisel CLI를 활용하는 방법을 알아보고 마지막으로 빌드된 컨테이너 이미지 용량도 비교 해 보았습니다. Chiselled Ubuntu Container와 .Net Chiselled Container는 최근 정식으로 출시(GA)되어 바로 프로덕션 환경에 적용 해 보실 수 있습니다. Chiselled Ubuntu Container컨테이너와 .Net Chiselled Container가 더 궁금하다면, 아래 링크에서 더 자세히 알아보실 수 있습니다.
+
+# 참고 링크
+- [Ubuntu Chiselled + .Net](https://github.com/dotnet/dotnet-docker/blob/main/documentation/ubuntu-chiseled.md)
+- [Chisel CLI](https://github.com/canonical/chisel)
+- [chisel-releases - Chisel CLI 에서 사용하는 Slice 정의 모음](https://github.com/canonical/chisel-releases)
+- [Chiselled Ubuntu Containers (YouTube)](https://www.youtube.com/watch?v=o8NILnbjhQ4)
+- [Canonical announces the general availability of chiselled Ubuntu containers](https://canonical.com/blog/chiselled-ubuntu-ga)
