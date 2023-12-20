@@ -59,8 +59,8 @@ params:
   mainSections:
     - post
   mainButtons:
-    - name: We Are Hiring!
-      url: https://cmrecruit.notion.site/cmrecruit/63b32ea9e80445dfa839f1577d037ec1
+    - name: 🔗새 기술 블로그로 이동
+      url: https://www.cloudmt.co.kr/TechBlog
   mainCategories:
     - Hands On
     - Tech
