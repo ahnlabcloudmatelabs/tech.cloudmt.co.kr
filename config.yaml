@@ -33,6 +33,8 @@ markup:
       attribute:
         block: true
         title: true
+    renderer:
+      unsafe: true
         
 googleAnalytics: UA-146594086-2
 hasCJKLanguage: true
