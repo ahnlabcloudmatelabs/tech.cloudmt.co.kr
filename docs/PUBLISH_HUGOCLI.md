@@ -12,8 +12,8 @@ Mac, Linux 의 경우 Homebrew, Windows 의 경우 Chocolately, Scoop 활용하�
 
 저장소를 복제한 후, 의존성을 받습니다.
 ```bash
-git clone https://github.com/mate365/mate365.github.io.git
-cd mate365.github.io
+https://github.com/cloudmatelabs/tech.cloudmt.co.kr.git
+cd tech.cloudmt.co.kr
 hugo mod get
 ```
 
