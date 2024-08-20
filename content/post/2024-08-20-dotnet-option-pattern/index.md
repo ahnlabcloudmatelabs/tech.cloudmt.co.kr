@@ -15,7 +15,7 @@ TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여�
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
 ---
 
-하나의 어플리케이션이 호스트 되는 환경은 다양하게 구성(Configuration)될 수 있습니다. 흔한 예로 개발 환경과 운영 환경이 나눠지는 경우가 있습니다. 분산되어 있는 어플리케이션들과 통신하기 위해 각 어플리케이션에 대한 호스팅 정보를 구성해야 합니다. 또한 구성 요소를 통해 모듈의 동작 수준을 설정할 수 있습니다. 예를 들어, 서버의 설정 또는 로거의 메시지 출력 수준을 조정할 수 있습니다.
+하나의 어플리케이션이 호스트 되는 환경은 다양하게 구성(Configuration)될 수 있습니다. 흔한 예로 개발 환경과 운영 환경이 나눠지는 경우가 있습니다. 그리고 분산된 어플리케이션들과 통신하기 위해 각 어플리케이션에 대한 호스팅 정보를 구성하는데 사용되기도 합니다. 또한 구성 요소를 통해 서버의 설정이나 로거의 메시지 출력 수준을 조정하는 등 모듈의 동작 수준을 설정할 수 있습니다. 
 
 이러한 경우, 코드와 구성 요소를 분리하여 코드 변경 없이 동작 수준을 조정할 수 있는 방법을 고려해야 합니다.
 
@@ -88,7 +88,7 @@ Console.WriteLine($"CustomConfigurationOptions.Enabled:{options.Enabled}");
 
 # 종속성 주입
 
-종속성 주입 컨테이너를 통해 옵션 패턴을 사용할 수도 있습니다. 옵션 클래스를 종속성 주입 컨테이너에 등록하기 위해서 [Configure](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.optionsconfigurationservicecollectionextensions.configure?view=net-8.0) 메서드를 사용합니다. 위의 코드를 다음과 같이 수정합니다.
+종속성 주입 컨테이너를 통해 옵션 패턴을 사용할 수도 있습니다. 옵션 클래스를 종속성 주입 컨테이너에 등록하기 위해서 [Configure](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.optionsconfigurationservicecollectionextensions.configure?view=net-8.0) 메서드를 사용합니다. program.cs의 코드를 작성합니다
 
 ```csharp
 HostApplicationBuilder builder = new HostApplicationBuilder();
@@ -155,7 +155,7 @@ IOptionSnapshot<TOptions>을 사용하면 애플리케이션 실행 후에도 �
 
 IOptionSnapshot을 사용하는 ScopedService 클래스를 추가합니다
 
-```jsx
+```csharp
 public class ScopedService
 {
     private readonly CustomConfigurationOptions _options;
@@ -210,7 +210,7 @@ optional 매개변수는 true나 false 어느 값으로 설정해도 무방합�
 
 결과를 확인합니다.
 
-```csharp
+```
 IOptionsSnapshot CustomConfigurationOptions.Deadline:00:00:30
 IOptionsSnapshot CustomConfigurationOptions.Enabled:True
 IOptionsSnapshot CustomConfigurationOptions.Retry:2
@@ -270,7 +270,7 @@ private static void IOptionsMonitorService(ServiceProvider serviceProvider)
 
 출력 값을 확인합니다. 동일한 monitorService 인스턴스로 구성 파일의 변경된 내용을 표시할 수 있습니다.
 
-```csharp
+```
 IOptionsMonitor CustomConfigurationOptions.Deadline:00:01:30
 IOptionsMonitor CustomConfigurationOptions.Enabled:True
 IOptionsMonitor CustomConfigurationOptions.Retry:2
