@@ -1,5 +1,5 @@
 ---
-title: .NET OptionPattern
+title: .NET Options pattern
 authors:
 - sanghun-han # 저자 프로필 페이지 경로 입력
 date: 2024-08-20T09:05:32Z
