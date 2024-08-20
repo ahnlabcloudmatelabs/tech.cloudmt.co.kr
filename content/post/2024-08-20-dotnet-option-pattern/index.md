@@ -130,7 +130,7 @@ public class TestService
 }
 ```
 
-종속성 주입 컨테이너를 통해 TestService에 CustomConfigurationOptions가 제공됨을 확인할 수 있습니다. 주입되는 형식이 IOptions<TOptions>임을 확인합니다.
+종속성 주입 컨테이너를 통해 TestService에 CustomConfigurationOptions가 제공됨을 확인할 수 있습니다. TestService는 이제 CustomConfigurationOptions 형식을 통해 필요한 구성 요소를 명시적으로 주입받습니다. 이로 인해 개발자는 다른 구성 요소를 고려할 필요 없이 필요한 구성만을 사용하여 TestService의 로직을 작성할 수 있습니다. 이는 코드의 명확성과 유지보수성을 크게 향상시킵니다.
 
 # Options interfaces
 
