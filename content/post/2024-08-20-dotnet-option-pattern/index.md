@@ -31,7 +31,7 @@ json 파일을 구성 요소로 사용하고 옵션 패턴을 통해 값을 읽�
 
 먼저 사용할 json 파일은 다음과 같습니다.
 
-```json
+```
 {
   "TestSettingValue": "just string value",
   "CustomConfigurationOptions": {
@@ -56,7 +56,6 @@ public class CustomConfigurationOptions
 ```
 
 옵션 패턴에 사용되는 클래스는 다음과 같은 제약 사항을 따라야 합니다
-
 - 인자 없는 퍼블릭 생성자를 사용하는 비 추상 클래스입니다
 - 읽기 쓰기 가능한 퍼블릭 속성을 가지고 있어야 합니다.
 
@@ -288,7 +287,7 @@ MonitorService에 OnChange 메서드를 사용하는 코드를 추가합니다.
 public class MonitorService
 {
     private readonly IOptionsMonitor<CustomConfigurationOptions> _options;
-    ***IDisposable? _disposableOnChanges;***
+    IDisposable? _disposableOnChanges;
 
     public MonitorService(IOptionsMonitor<CustomConfigurationOptions> options)
     {
@@ -296,7 +295,7 @@ public class MonitorService
 
         ///OnChange 함수는 IDisposable 형식을 반환합니다.
         ///메모리 누수를 방지하기 위해서 서비스의 수명이 끝날 때 IDisposable.Dispose를 호출해야 합니다.
-        ***_disposableOnChanges = options.OnChange((opt, str) => { });***
+        _disposableOnChanges = options.OnChange((opt, str) => { });
     }
 
     public void DisplayOption()
@@ -307,7 +306,7 @@ public class MonitorService
         Console.WriteLine($"IOptionsMonitor CustomConfigurationOptions.Level:{_options.CurrentValue.Level}");
     }
 
-    ***public MonitorService ReturnSelf()
+    public MonitorService ReturnSelf()
     {
         return this;
     }
@@ -315,7 +314,7 @@ public class MonitorService
     public void Dispose()
     {
         _disposableOnChanges?.Dispose();
-    }***
+    }
 }
 ```
 
@@ -339,7 +338,7 @@ private static void RequestManyIOptionsMonitorService(ServiceProvider servicePro
 
 동일한 속성을 사용하는 다른 섹션을 appsettings.json에 추가합니다.
 
-```json
+```
 "Options": {
   "Base": {
     "Enabled": true,
@@ -409,7 +408,7 @@ serviceProvider.GetRequiredService<NamedOptionsService>();
 
 appsettings.json 파일에 다음과 같이 섹션을 추가합니다.
 
-```json
+```
 "OptionsValidationSection": {
   "Title": "Just Title",
   "Email": "example@test.com",
