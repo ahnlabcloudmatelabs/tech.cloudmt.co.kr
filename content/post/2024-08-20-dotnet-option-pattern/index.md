@@ -43,7 +43,7 @@ json 파일을 구성 요소로 사용하고 옵션 패턴을 통해 값을 읽�
 }
 ```
 
-옵션 패턴은 IOpions<TOpions> 형식으로 제공됩니다. (IOpions 외에 다른 인터페이스 형식도 사용할 수 있습니다. 다른 인터페이스 형식에 대해서는 [여기](https://www.notion.so/4c13aee3dc6141c89e36fdbc994d1971?pvs=21)에서 설명합니다.)  CustomConfigurationOptions의 값을 사용하는 시나리오를 생각해봅시다. 먼저 CustomConfigurationOptions 클래스를 만듭니다.
+옵션 패턴은 IOptions<TOpions> 형식으로 제공됩니다. (IOptions 외에 다른 인터페이스 형식도 사용할 수 있습니다. 다른 인터페이스 형식에 대해서는 [여기](https://www.notion.so/4c13aee3dc6141c89e36fdbc994d1971?pvs=21)에서 설명합니다.) 먼저 CustomConfigurationOptions의 값을 사용하는 시나리오를 생각해봅시다. 먼저 CustomConfigurationOptions 클래스를 만듭니다.
 
 ```csharp
 public class CustomConfigurationOptions
@@ -199,7 +199,7 @@ serviceProvider.GetRequiredService<TestService>();
 appsettings.json 파일의 내용이 수정되었을 때 자동으로 다시 읽기 위해, program.cs에서 AddJsonFile 메서드 호출 시 추가 인자를 설정합니다.
 
 ```csharp
-~~builder.Configuration.AddJsonFile("appsettings.json");~~
+//builder.Configuration.AddJsonFile("appsettings.json");
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 ```
 
