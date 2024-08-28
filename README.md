@@ -1,7 +1,7 @@
 [![Azure Static Web Apps CI/CD](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml/badge.svg)](https://github.com/cloudmatelabs/tech.cloudmt.co.kr/actions/workflows/azure-static-web-apps-zealous-glacier-05bbacd00.yml)
 
 ![](docs/cmtech.png)
-# 클라우드메이트 기술 블로그
+# 안랩클라우드메이트 기술 블로그
 
 [Hugo](https://gohugo.io)및 [Casper3](https://github.com/jonathanjanssens/hugo-casper3) 테마 기반으로 만든 기술 블로그 입니다.
 
