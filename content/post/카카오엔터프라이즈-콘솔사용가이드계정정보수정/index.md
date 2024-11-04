@@ -10,4 +10,4 @@ tags:
   - Account
 ---
 
-![계정 정보 수정]](https://youtu.be/STR283pdyd0?si=9AidWev2vUQPlMLQ)
+[![계정 정보 수정]](https://youtu.be/STR283pdyd0?si=9AidWev2vUQPlMLQ)
