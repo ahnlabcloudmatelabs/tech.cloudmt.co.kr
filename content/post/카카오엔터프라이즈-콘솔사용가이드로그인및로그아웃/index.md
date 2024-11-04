@@ -5,7 +5,7 @@ authors:
 date: 2024-11-04T13:23:45.862Z
 feature_image: images/cover.png
 categories:
-  - Tech
+  - Hands On
 tags:
   - KaKaOEnterprise
   - Login
