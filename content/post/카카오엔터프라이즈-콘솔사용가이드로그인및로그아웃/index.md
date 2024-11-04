@@ -11,4 +11,4 @@ tags:
   - Logout
 ---
 
-https://youtu.be/oiH2diGGHww?si=zTbouFeEKr7TNcoD
+[![로그인및로그아웃](https://img.youtube.com/vi/oiH2diGGHww/0.jpg)](https://youtu.be/oiH2diGGHww?si=zTbouFeEKr7TNcoD)

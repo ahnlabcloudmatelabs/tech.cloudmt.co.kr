@@ -10,4 +10,4 @@ tags:
   - Console
 ---
 
-https://youtu.be/aXFqVBpu42M?si=j_FMZr77-qBYZEd7
+[![콘솔화면](https://img.youtube.com/vi/aXFqVBpu42M/0.jpg)](https://youtu.be/aXFqVBpu42M?si=j_FMZr77-qBYZEd7)
