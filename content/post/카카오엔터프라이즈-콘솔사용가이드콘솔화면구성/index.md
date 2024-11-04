@@ -2,7 +2,7 @@
 title: 카카오엔터프라이즈 - 콘솔 사용 가이드 콘솔 화면 구성
 authors:
   - Yonguk Kim
-date: "2024-11-04T13:22:45.862Z"
+date: 2024-11-04T13:22:45.862Z
 feature_image: images/cover.png
 categories:
   - Tech
