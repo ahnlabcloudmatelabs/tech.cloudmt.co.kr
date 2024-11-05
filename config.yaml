@@ -47,7 +47,7 @@ params:
     category: Blog Comments
     categoryId: DIC_kwDOEthUaM4CUi7a
   footLogo: 
-    path: /assets/images/CMLOGO_WHITE.png
+    path: /assets/images/ACME_LOGO.png
     link: https://ahnlabcloudmate.com
   assets:
         favicon: /assets/favicon.ico
