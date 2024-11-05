@@ -40,22 +40,22 @@ paginate: 10
 params:
   # description: tech.cloudmr.co.kr
   nav_title: 👨‍💻TECH BLOG
-  copyright: © 2019-Present Cloudmate Co., Ltd.
+  copyright: © 2019-Present AhnLab CloudMate Inc.
   giscus:
-    repo: cloudmatelabs/tech.cloudmt.co.kr
+    repo: ahnlabcloudmatelabs/tech.cloudmt.co.kr
     repoId: MDEwOlJlcG9zaXRvcnkzMTYxNjcyNzI=
     category: Blog Comments
     categoryId: DIC_kwDOEthUaM4CUi7a
   footLogo: 
     path: /assets/images/CMLOGO_WHITE.png
-    link: https://cloudmt.co.kr
+    link: https://ahnlabcloudmate.com
   assets:
         favicon: /assets/favicon.ico
   background: /assets/images/background.png
   default_feature_image: /assets/images/post_cover.png
   DateFormat: 2006. 01. 02.
   facebook: https://fb.me/cloudmatekr
-  github: https://github.com/cloudmatelabs
+  github: https://github.com/ahnlabcloudmatelabs
   mainSections:
     - post
   mainButtons:
