@@ -1,5 +1,5 @@
 baseURL: https://tech.cloudmt.co.kr
-title: 클라우드메이트 기술 블로그🦒
+title: 안랩클라우드메이트 기술 블로그
 theme:
   - github.com/jonathanjanssens/hugo-casper3
 permalinks: 
@@ -59,8 +59,8 @@ params:
   mainSections:
     - post
   mainButtons:
-    - name: 🔗새 기술 블로그로 이동
-      url: https://www.cloudmt.co.kr/TechBlog
+    #- name: 🔗새 기술 블로그로 이동
+    #  url: https://www.cloudmt.co.kr/TechBlog
   mainCategories:
     - Hands On
     - Tech
