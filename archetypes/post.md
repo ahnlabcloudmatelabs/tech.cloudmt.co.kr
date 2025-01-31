@@ -16,6 +16,7 @@ feature_image: 'images/cover.png' # 포스트 커버 이미지 경로 (포스트
 ShowToc: false # 글 개요 보여줄지 여부
 TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
+hideFromMainPage: false # 메인 페이지에서 숨김 여부. true 설정시 블로그 메인 화면에 노출되지 않습니다.
 ---
 
 아래 내용은 마크다운 문법입니다. 확인 후, 모두 지우고 마크다운 문법으로 내용을 작성하세요.
