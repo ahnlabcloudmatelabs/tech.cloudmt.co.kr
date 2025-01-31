@@ -22,7 +22,11 @@
 <main id="site-main" class="site-main outer">
     <div class="inner posts">
         <div class="post-feed">
-            {{ range $index, $element := .Paginator.Pages }}
+            {{ $pages := .Paginator.Pages }}
+            {{ if .Param "isMainPage" }}
+                {{ $pages = where $pages ".Params.hideFromMainPage" "ne" true }}
+            {{ end }}
+            {{ range $index, $element := $pages }}
                 {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) -}}
             {{ end }}
             <div class="paginator">

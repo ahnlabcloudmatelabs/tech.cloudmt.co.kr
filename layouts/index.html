@@ -45,6 +45,7 @@
     <div class="inner posts">
         <div class="post-feed" >
             {{ $pages := where .Paginator.Pages "Type" "in" site.Params.mainSections }}
+            {{ $pages = where $pages ".Params.hideFromMainPage" "ne" true }}
             {{ range $index, $element := $pages }}
                 {{- partial "post-card.html" (dict "context" . "index" $index "home" $.IsHome) . -}}
             {{ end }}

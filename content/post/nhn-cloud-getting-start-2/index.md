@@ -15,6 +15,7 @@ feature_image: 'cover.webp' # 포스트 커버 이미지 경로 (포스트에 �
 ShowToc: false # 글 개요 보여줄지 여부
 TocOpen: false # 글 개요를 보여주는 경우, 펼처서 보여줄지 여부.
 draft: false # 초안 작성 모드. true 설정시 커밋해도 나오지 않습니다.
+hideFromMainPage: true
 ---
 
 {{< youtube src="https://www.youtube.com/embed/imqbLvnSPNY?si=aV6XPVq4RLswcEdi" style="margin-bottom: 40px !important;" >}}
